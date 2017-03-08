@@ -2,7 +2,7 @@
 
 
 
-GameBehaviour::GameBehaviour()
+GameBehaviour::GameBehaviour(std::string name):Behaviours(name)
 {
 }
 

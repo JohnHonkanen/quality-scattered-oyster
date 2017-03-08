@@ -4,7 +4,7 @@ class GameBehaviour :
 	public Behaviours
 {
 public:
-	GameBehaviour();
+	GameBehaviour(std::string name);
 	virtual ~GameBehaviour();
 	virtual void Start();
 	virtual void Update();
