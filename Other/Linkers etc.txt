@@ -1,0 +1,8 @@
+C/C++:
+C:\dev\SDL2-2.0.5\include;C:\dev\glew-2.0.0\include;C:\dev\glm-0.9.8.3\glm;C:\dev\glfw-3.2.1.bin.WIN64\include\GLFW;C:\dev\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)
+
+Linker Gen: 
+C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\SDL2-2.0.5\lib\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)
+
+Linker Input: 
+SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;ILUT.lib;ILU.lib;%(AdditionalDependencies)
