@@ -40,7 +40,8 @@ void GameObject::broadcastMessage(GameBehaviour::BehaviorFuncs func)
 			}
 		}
 		if (GameObject::components[i]->gameObject)
-			GameObject::components[i]->gameObject->broadcastMessage(func);
+			if(GameObject::components[i]->gameObject != this)
+				GameObject::components[i]->gameObject->broadcastMessage(func);
 
 	}
 }
