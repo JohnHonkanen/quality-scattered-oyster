@@ -154,23 +154,31 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Behaviours.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="glfwWindow.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="openGLRenderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Behaviours.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameBehaviour.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="glfwWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="openGLRenderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="minFrag.shader" />

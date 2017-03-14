@@ -22,31 +22,64 @@
     <Filter Include="Source Files\OpenGL">
       <UniqueIdentifier>{7cf9b03e-6818-4178-a0c1-17e9d5735509}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{56efb511-64b9-4f7b-b26f-cb1b66e47aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\GLFW">
+      <UniqueIdentifier>{e3e653f9-f064-4cc9-aa54-c5f356cbd656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{01f87a1d-6626-4d1c-a55b-6dc5b6734b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\GLFW">
+      <UniqueIdentifier>{5685494a-4e5b-43f0-9013-b4a542f4298a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{4bdd93ca-15ee-4018-b3d9-372106c73ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Clock">
+      <UniqueIdentifier>{e9196779-9197-4163-b5f3-f6338978de2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clock">
+      <UniqueIdentifier>{8db435dc-a548-400b-9c01-a1247bb50532}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Behaviours.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameBehaviour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="openGLRenderer.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="glfwWindow.h">
+      <Filter>Header Files\Renderer\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviours.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameBehaviour.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Header Files\Clock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +109,18 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="openGLRenderer.cpp">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="glfwWindow.cpp">
+      <Filter>Source Files\Renderer\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files\Clock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
