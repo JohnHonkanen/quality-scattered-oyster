@@ -16,6 +16,12 @@
     <Filter Include="Header Files\Mesh">
       <UniqueIdentifier>{e435f709-08d3-4ad5-ba88-c47b12fb229a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OpenGL">
+      <UniqueIdentifier>{8b39ed52-2819-43d1-ac4d-b64b3624ecd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OpenGL">
+      <UniqueIdentifier>{7cf9b03e-6818-4178-a0c1-17e9d5735509}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Behaviours.h">
@@ -38,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,5 +74,16 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="minFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="minVertex.shader">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
