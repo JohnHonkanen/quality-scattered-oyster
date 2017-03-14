@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class openGLRenderer: public GraphicsHandler
+class openGLRenderer: public GraphicsHandler // GraphicsHandler = Renderer
 {
 private:
 	Window *window;
@@ -24,6 +24,5 @@ public:
 	void start();
 	void end();
 	void destroy();
-	void draw();
 };
 

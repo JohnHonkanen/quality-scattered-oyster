@@ -1,19 +1,19 @@
-#include "openGLRenderer.h"
+#include "openGLHandler.h"
 
 
 
-openGLRenderer::openGLRenderer(Window *window)
+openGLHandler::openGLHandler(Window *window)
 {
-	openGLRenderer::window = window;
+	openGLHandler::window = window;
 	GraphicsHandler::renderer = nullptr;
 }
 
 
-openGLRenderer::~openGLRenderer()
+openGLHandler::~openGLHandler()
 {
 }
 
-void openGLRenderer::init() {
+void openGLHandler::init() {
 
 	window->init();
 	
@@ -33,15 +33,15 @@ void openGLRenderer::init() {
 	//Set projection to perspective view
 	projection = glm::perspective(glm::radians(45.0f), (GLfloat)window->screenWIDTH / (GLfloat)window->screenHEIGHT, 0.1f, 100.0f);
 
-	openGLRenderer::view.setTransform(view);
-	openGLRenderer::projection.setTransform(projection);
+	openGLHandler::view.setTransform(view);
+	openGLHandler::projection.setTransform(projection);
 
 	// Setup OpenGL options
 	glEnable(GL_BLEND); // Enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void openGLRenderer::start() {
+void openGLHandler::start() {
 
 	// Rendering commands go here
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Color to clear with (Background color of active scene)
@@ -49,8 +49,12 @@ void openGLRenderer::start() {
 
 }
 
-void openGLRenderer::end() {
+void openGLHandler::end() {
 	
 	// Swap the buffers (Update Scene)
 	window->swapBuffers();
+}
+
+void openGLHandler::destroy() {
+	window->destroy();
 }
