@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class openGLRenderer: public GraphicsHandler // GraphicsHandler = Renderer
+class openGLHandler: public GraphicsHandler // GraphicsHandler = Renderer
 {
 private:
 	Window *window;
@@ -17,8 +17,8 @@ private:
 	Transform projection;
 
 public:
-	openGLRenderer(Window *window);
-	virtual ~openGLRenderer();
+	openGLHandler(Window *window);
+	virtual ~openGLHandler();
 
 	void init();
 	void start();

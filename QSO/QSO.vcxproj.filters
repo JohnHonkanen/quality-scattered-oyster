@@ -43,12 +43,12 @@
     <Filter Include="Source Files\Clock">
       <UniqueIdentifier>{8db435dc-a548-400b-9c01-a1247bb50532}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\RenderingStrategy">
+      <UniqueIdentifier>{ed98c493-ce32-4493-879d-2f56dc37f6b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="openGLRenderer.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
@@ -81,6 +81,15 @@
     <ClInclude Include="Clock.h">
       <Filter>Header Files\Clock</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsHandler.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\RenderingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="openGLHandler.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Behaviours.cpp">
@@ -110,9 +119,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="openGLRenderer.cpp">
-      <Filter>Source Files\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
@@ -121,6 +127,15 @@
     </ClCompile>
     <ClCompile Include="Clock.cpp">
       <Filter>Source Files\Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="openGLHandler.cpp">
+      <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

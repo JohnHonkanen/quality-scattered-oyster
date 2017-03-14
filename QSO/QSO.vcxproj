@@ -159,8 +159,10 @@
     <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="glfwWindow.h" />
+    <ClInclude Include="GraphicsHandler.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="openGLRenderer.h" />
+    <ClInclude Include="openGLHandler.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Window.h" />
@@ -173,9 +175,11 @@
     <ClCompile Include="GameBehaviour.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glfwWindow.cpp" />
+    <ClCompile Include="GraphicsHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="openGLRenderer.cpp" />
+    <ClCompile Include="openGLHandler.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />

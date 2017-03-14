@@ -5,7 +5,6 @@
 openGLHandler::openGLHandler(Window *window)
 {
 	openGLHandler::window = window;
-	GraphicsHandler::renderer = nullptr;
 }
 
 

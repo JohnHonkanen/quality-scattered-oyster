@@ -13,7 +13,7 @@ public:
 	Renderer();
 	virtual ~Renderer();
 
-	virtual void renderObject() = 0;
+	virtual void renderObject() = 0; // Handles the draw of the object
 
 	void addView(Transform view);
 	void addProjection(Transform projection);
