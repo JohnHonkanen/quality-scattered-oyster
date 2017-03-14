@@ -2,6 +2,8 @@
 #include "Transform.h"
 #include "Component.h"
 
+std::vector<GameObject*> GameObject::gameObjects;
+
 GameObject::GameObject(std::string name)
 {
 	Object::name = name;
@@ -11,6 +13,37 @@ GameObject::GameObject(std::string name)
 
 GameObject::~GameObject()
 {
+}
+void GameObject::broadcastMessage(GameBehaviour::BehaviorFuncs func)
+{
+	//Go Through our Components
+	for (int i = 0; i <  GameObject::components.size(); i++) {
+
+		GameBehaviour *behaviour = dynamic_cast<GameBehaviour*>(GameObject::components[i]);
+		if (behaviour) {
+			switch (func) {
+			case GameBehaviour::BH_START:
+				behaviour->Start();
+				break;
+			case GameBehaviour::BH_UPDATE:
+				behaviour->Update();
+				break;
+			case GameBehaviour::BH_VISIBLE:
+				behaviour->onBecomeVisible();
+				break;
+			case GameBehaviour::BH_INVISIBLE:
+				behaviour->onBecomeVisible();
+				break;
+			default:
+				/*Throw Error Later*/
+				break;
+			}
+		}
+		if (GameObject::components[i]->gameObject)
+			if(GameObject::components[i]->gameObject != this)
+				GameObject::components[i]->gameObject->broadcastMessage(func);
+
+	}
 }
 
 void GameObject::addComponent(Component * component)
