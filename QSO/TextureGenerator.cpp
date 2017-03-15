@@ -23,7 +23,7 @@ GLuint TextureGenerator::createTexture(const string fileLocation)
 	ilBindImage(image);
 
 	if (ilLoadImage((const ILstring)fileLocation.c_str())) {
-		// cout << "Texture successfully loaded!" << endl;
+		cout << "Texture successfully loaded!" << endl;
 	}
 	else {
 		cout << ilGetError() << endl;
