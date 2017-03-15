@@ -6,6 +6,7 @@
 #include "openGLHandler.h"
 #include "Clock.h"
 #include "TextureManager.h"
+#include "SpriteRenderer.h"
 
 using namespace std;
 
@@ -18,10 +19,10 @@ int main(int argc, char *argv[]) {
 	
 	TextureManager textureManager;
 	
-	textureManager.saveTexture("lava.png", "lava");
+	textureManager.saveTexture("lava.jpg", "lava");
 
 	// Testing Shaders
-	Shader minShaderProgram("minFrag.shader", "minVertex.shader"); // Initialize minShader Programs using selected shaders.
+	Shader minShaderProgram("minVertex.shader", "minFrag.shader"); // Initialize minShader Programs using selected shaders.
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -35,20 +36,26 @@ int main(int argc, char *argv[]) {
 
 	Clock clock;
 	clock.startClock();
-	clock.setDelayInSeconds(5);
-
+	clock.setDelayInSeconds(2);
+ 
 	while (!clock.alarm()) {
 		clock.updateClock();
 		cout << clock.getSeconds() << endl;
 	}
 
-	
+	//Testing Sprite Renderer & Textures
+	Transform transform = Transform();
+
+	SpriteRenderer spriteRenderer("lava.jpg", "lava", &textureManager, &transform, &minShaderProgram);
+	spriteRenderer.init();
+
 	// Game Loop
 	bool flag = true;
 	while (flag) {
 
 		graphicsHandler.start(); // Sets up rendering loop
 
+		spriteRenderer.renderObject();
 
 		graphicsHandler.end(); // Swaps scene buffers
 

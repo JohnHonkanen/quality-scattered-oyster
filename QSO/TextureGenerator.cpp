@@ -13,6 +13,7 @@ TextureGenerator::~TextureGenerator()
 
 GLuint TextureGenerator::createTexture(const string fileLocation)
 {
+	cout << "Try load texture" <<endl;
 	ILuint width;
 	ILuint height;
 

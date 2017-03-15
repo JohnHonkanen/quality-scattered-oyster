@@ -99,14 +99,14 @@
     <ClInclude Include="openGLHandler.h">
       <Filter>Header Files\OpenGL\Handlers</Filter>
     </ClInclude>
-    <ClInclude Include="TextureGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeshGenerator.h">
       <Filter>Header Files\OpenGL\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureGenerator.h">
+      <Filter>Header Files\OpenGL\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\OpenGL\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
