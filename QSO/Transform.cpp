@@ -50,7 +50,7 @@ void Transform::rotate(float angle, vec3 axis, bool inRadians)
 		angle *= DEG_TO_RAD;
 	}
 
-	Transform::transformMatrix = glm::rotate(Transform::transformMatrix,angle, axis);
+	Transform::rotation += angle * axis;
 
 }
 /*
@@ -113,6 +113,10 @@ mat4 Transform::get()
 vec3 Transform::getPosition()
 {
 	return Transform::position;
+}
+vec3 Transform::getRotation()
+{
+	return Transform::rotation;
 }
 /*
 Resets to identity matrix
