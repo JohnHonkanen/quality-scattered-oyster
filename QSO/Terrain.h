@@ -2,6 +2,7 @@
 #include <glm.hpp>
 #include <vector>
 #include <map>
+#include <iostream>
 #include "Component.h"
 
 using namespace glm;
@@ -46,7 +47,7 @@ public:
 
 	void init();
 	const mapData getData();
-	void Destroy();
+	void destroy();
 
 	float gridSize;
 	vec3 position;

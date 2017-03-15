@@ -64,42 +64,73 @@ void Terrain::calculateNormals()
 	//Preallocate memory for normals
 	Terrain::map.normals = new vec3[vCount];
 	//Calculate Triangle Normals
-	for (int i = 0; i < Terrain::map.indexCount;)
-	{
-		int vertex1 = Terrain::map.indices[i++];
-		int vertex2 = Terrain::map.indices[i++];
-		int vertex3 = Terrain::map.indices[i++];
+	for (int i = 1; i < Terrain::map.indexCount;)
+	{		
+		int vertex1, vertex2, vertex3;
+		vec3 point1, point2, point3;
 
-		vec3 point1 = Terrain::map.vertices[vertex1];
-		vec3 point2 = Terrain::map.vertices[vertex2];
-		vec3 point3 = Terrain::map.vertices[vertex3];
+		if (i == Terrain::map.indexCount - 1) {
+			vertex1 = Terrain::map.indices[i - 1];
+			vertex2 = Terrain::map.indices[i++];
 
-		vec3 edge1 = point2 - point1;
-		vec3 edge2 = point3 - point1;
+			vec3 point1 = Terrain::map.vertices[vertex1];
+			vec3 point2 = Terrain::map.vertices[vertex2];
+			vec3 point3 = vec3(Terrain::map.xLength * Terrain::gridSize, 0, Terrain::map.zLength * Terrain::gridSize);;
 
-		vec3 normal = normalize(cross(edge1, edge2));
+			vec3 edge1 = point2 - point1;
+			vec3 edge2 = point3 - point1;
+			vec3 normal = normalize(cross(edge1, edge2));
+			if (normal.x == normal.x) {
+				//Add our Triangle Normal
+				triangleNormals.push_back(normal);
 
-		//Add our Triangle Normal
-		triangleNormals.push_back(normal);
+				//Map our normals to a vector
+				vectorMapping[vertex1].push_back(normal);
+				vectorMapping[vertex2].push_back(normal);
+			}
+		}
+		else {
+			vertex1 = Terrain::map.indices[i - 1];
+			vertex2 = Terrain::map.indices[i++];
+			vertex3 = Terrain::map.indices[i++];
 
-		//Map our normals to a vector
-		vectorMapping[vertex1].push_back(normal);
-		vectorMapping[vertex2].push_back(normal);
-		vectorMapping[vertex3].push_back(normal);
+			vec3 point1 = Terrain::map.vertices[vertex1];
+			vec3 point2 = Terrain::map.vertices[vertex2];
+			vec3 point3 = Terrain::map.vertices[vertex3];
+
+			vec3 edge1 = point2 - point1;
+			vec3 edge2 = point3 - point1;
+
+			vec3 normal = normalize(cross(edge1, edge2));
+			if (normal.x == normal.x) {
+				//Add our Triangle Normal
+				triangleNormals.push_back(normal);
+
+				//Map our normals to a vector
+				vectorMapping[vertex1].push_back(normal);
+				vectorMapping[vertex2].push_back(normal);
+				vectorMapping[vertex3].push_back(normal);
+			}
+		}
 	} 
 	//Calculate Vertex Normals
 	for (int i = 0; i < vCount; i++) {
 		//Get our triangle normal
 		std::vector<vec3> triangleNormals = vectorMapping[i];
-		vec3 normalSum;
+		vec3 normalSum = vec3(0);
 		//Add our normals
 		for (int n = 0; n < triangleNormals.size(); n++) {
 			normalSum += triangleNormals[n];
+			//if(i == 24)
+			//cout << triangleNormals[n].x << "||" << triangleNormals[n].y << "||" << triangleNormals[n].z << endl;
 		}
 		
 		vec3 vertexNormal = normalize(normalSum);
+		//cout << i <<": "<< vertexNormal.x << "||" << vertexNormal.y << "||" << vertexNormal.z << endl;
 		Terrain::map.normals[i] = vertexNormal;
 	}
+
+	delete[] vectorMapping;
 }
 
 void Terrain::buildIndices()
