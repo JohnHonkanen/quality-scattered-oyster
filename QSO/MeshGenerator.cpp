@@ -83,3 +83,6 @@ void MeshGenerator::destroy()
 		glDeleteBuffers(1, &it->second[STORED_VBO]);
 		glDeleteBuffers(1, &it->second[STORED_EBO]);
 	}
+}
+
+
