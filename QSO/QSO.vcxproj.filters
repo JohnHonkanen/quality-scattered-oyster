@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Mesh">
-      <UniqueIdentifier>{e435f709-08d3-4ad5-ba88-c47b12fb229a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\OpenGL">
       <UniqueIdentifier>{8b39ed52-2819-43d1-ac4d-b64b3624ecd0}</UniqueIdentifier>
     </Filter>
