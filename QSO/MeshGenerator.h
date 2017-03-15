@@ -1,7 +1,8 @@
 #pragma once
 
-#include  <GL\glew.h>
+#include <GL\glew.h>
 #include <map>
+#include <iostream>
 
 #define STORED_VAO      0
 #define STORED_VBO      1
@@ -12,7 +13,7 @@ using namespace std;
 class MeshGenerator
 {
 public:
-	static void createMesh(const GLfloat *data, const GLuint *indices, GLuint *VAO, GLuint *VBO, GLuint *EBO);
+	static GLuint createMesh(const GLfloat *data, size_t sizeOfData, const GLuint *indices, size_t sizeOfIndices);
 	static void updateMesh(const GLuint mesh, const unsigned int bufferType, const GLfloat *data, const GLuint size);
 	static void destroy();
 	static map<GLuint, GLuint*> VAOMap;
