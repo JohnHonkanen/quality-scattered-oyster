@@ -8,6 +8,7 @@
 #include "TextureManager.h"
 #include "SpriteRenderer.h"
 #include "Camera.h"
+#include "CubeRenderer.h"
 
 using namespace std;
 
@@ -25,12 +26,22 @@ int main(int argc, char *argv[]) {
 
 	graphicsHandler.init(); // Initialize Rendering Library
 	
+	// Testing Texture Manager
 	TextureManager textureManager;
 	
 	textureManager.saveTexture("lava.jpg", "lava");
 
 	// Testing Shaders
 	Shader minShaderProgram("minVertex.shader", "minFrag.shader"); // Initialize minShader Programs using selected shaders.
+
+	// Testing Cube Renderer
+
+	Transform transform;
+	Material material;
+	material.texture = "lava";
+
+	CubeRenderer cubeRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	cubeRenderer.init();
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -44,34 +55,40 @@ int main(int argc, char *argv[]) {
 
 	Clock clock;
 	clock.startClock();
-	clock.setDelayInSeconds(2);
+	clock.setDelayInSeconds(0);
  
 	while (!clock.alarm()) {
 		clock.updateClock();
 		cout << clock.getSeconds() << endl;
 	}
 
-	//Testing Sprite Renderer & Textures
-	Transform transform = Transform();
-
-	SpriteRenderer spriteRenderer("lava.jpg", "lava", &textureManager, &transform, &minShaderProgram, &playerCamera);
-	spriteRenderer.init();
-
 	// Game Loop
 	bool flag = true;
 	while (flag) {
 
-		graphicsHandler.start(); // Sets up rendering loop
+		frameClock.updateClock(); // Ticks our Frame Clock
+		clock.updateClock(); //Ticks App Clock
 
-		spriteRenderer.renderObject();
+		// Calculates Delta Time
+		currentTime = clock.getMilliseconds();
+		double dt = (currentTime - previousTime) * 0.00001f; //Convert DT to seconds
+
+		//End of DeltaTime
+		if (frameClock.alarm()) {
+			// Update Function
+			// End of Update
+			previousTime = currentTime;
+			graphicsHandler.start();  // Sets up Rendering Loop
+			
+			// Render Function
+			cubeRenderer.renderObject();
+
+			// End of Render
 
 		graphicsHandler.end(); // Swaps scene buffers
-
+		frameClock.resetClock(); // Once frame is done reset to 0
+		}
 	}
-
-	
-
-	cin.get();
 
 	graphicsHandler.destroy();
 

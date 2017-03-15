@@ -157,6 +157,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CubeRenderer.h" />
     <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="glfwWindow.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CubeRenderer.cpp" />
     <ClCompile Include="GameBehaviour.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glfwWindow.cpp" />

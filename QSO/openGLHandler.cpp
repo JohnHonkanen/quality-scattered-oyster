@@ -36,6 +36,7 @@ void openGLHandler::init() {
 	openGLHandler::projection.setTransform(projection);
 
 	// Setup OpenGL options
+	glEnable(GL_DEPTH_TEST); // Enable Z Buffer
 	glEnable(GL_BLEND); // Enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -44,7 +45,7 @@ void openGLHandler::start() {
 
 	// Rendering commands go here
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Color to clear with (Background color of active scene)
-	glClear(GL_COLOR_BUFFER_BIT); // Clear the screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the screen
 
 }
 
