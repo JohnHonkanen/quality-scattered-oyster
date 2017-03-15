@@ -11,6 +11,7 @@
 #include "Transform.h"
 #include "Shader.h"
 #include "MeshGenerator.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -19,12 +20,13 @@ class SpriteRenderer : public Renderer
 private:
 	string fileLocation;
 	string name;
-	GLuint VAO, VBO, EBO; // 2D Mesh for the sprites
+	GLuint VAO; // 2D Mesh for the sprites
 	TextureManager *textureManager;
 	Transform *position; // Origin of the renderObject
 	Shader *program;
+	Camera *camera;
 public:
-	SpriteRenderer(string fileLocation, string name, TextureManager *textureeManager, Transform *position, Shader *program);
+	SpriteRenderer(string fileLocation, string name, TextureManager *textureeManager, Transform *position, Shader *program, Camera *camera);
 	~SpriteRenderer();
 
 	void init();

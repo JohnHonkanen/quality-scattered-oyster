@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 	//Testing Sprite Renderer & Textures
 	Transform transform = Transform();
 
-	SpriteRenderer spriteRenderer("lava.jpg", "lava", &textureManager, &transform, &minShaderProgram);
+	SpriteRenderer spriteRenderer("lava.jpg", "lava", &textureManager, &transform, &minShaderProgram, &playerCamera);
 	spriteRenderer.init();
 
 	// Game Loop
