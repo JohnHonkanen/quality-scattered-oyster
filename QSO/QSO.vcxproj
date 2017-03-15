@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Behaviours.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameBehaviour.h" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Behaviours.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameBehaviour.cpp" />

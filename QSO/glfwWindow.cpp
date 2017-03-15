@@ -2,10 +2,9 @@
 
 
 
-glfwWindow::glfwWindow(GLuint screenWIDTH, GLuint screenHEIGHT)
+glfwWindow::glfwWindow(GLuint screenWIDTH, GLuint screenHEIGHT) : Window(screenWIDTH, screenHEIGHT)
 {
-	glfwWindow::screenWIDTH = screenWIDTH;
-	glfwWindow::screenHEIGHT = screenHEIGHT;
+
 }
 
 

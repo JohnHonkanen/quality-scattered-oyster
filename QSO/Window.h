@@ -5,12 +5,12 @@
 class Window
 {
 public:
-	Window();
+	Window(GLuint screenWIDTH, GLuint screenHEIGHT);
 	virtual ~Window();
 	virtual void init() = 0;
 	virtual void swapBuffers() = 0;
 	virtual void destroy() = 0;
 
-	GLuint screenWIDTH, screenHEIGHT;
+	static GLuint screenWIDTH, screenHEIGHT;
 };
 

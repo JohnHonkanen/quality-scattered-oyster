@@ -7,13 +7,21 @@
 #include "Clock.h"
 #include "TextureManager.h"
 #include "SpriteRenderer.h"
+#include "Camera.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	
+
 	Window *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
+
+	
+	// Setup Camera
+
+	Camera playerCamera;
+	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 100.0f);
+	playerCamera.setView(vec3(0.0f, 0.0f, -10.0f)); // Adjust our Camera back by changing Z value
 
 	graphicsHandler.init(); // Initialize Rendering Library
 	
