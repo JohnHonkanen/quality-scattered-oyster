@@ -164,6 +164,10 @@ int main(int argc, char *argv[]) {
 
 			// Update Function
 			
+			transform.translate(vec3(0, 1 * dt, 0));
+			transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
+			mat4 model = transform.calculateModelMatrix();
+
 			// End of Update
 			previousTime = currentTime;
 			graphicsHandler.start();  // Sets up Rendering Loop
