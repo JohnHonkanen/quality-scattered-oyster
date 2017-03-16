@@ -55,6 +55,24 @@
     <Filter Include="Header Files\Camera">
       <UniqueIdentifier>{974360cc-0490-4739-813f-de404f6fd7b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Inputs">
+      <UniqueIdentifier>{5813ed58-3d9b-47a4-8d2a-c9d18daa3be6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Inputs\Handler">
+      <UniqueIdentifier>{3094f2f1-6181-4ff4-8aac-f51c53b3a61e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Inputs\Keyboard">
+      <UniqueIdentifier>{3708396c-ce8c-491b-a5d0-ab536a8cdc11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Inputs\Mouse">
+      <UniqueIdentifier>{1ecae268-e874-4488-92bf-57eb3135f0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Inputs\Handler\GLFW">
+      <UniqueIdentifier>{927eeb4c-6cde-4d18-ab85-0a71457f4db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Terrain">
+      <UniqueIdentifier>{d11805a8-016c-43d6-b8cb-c19f35bf48d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -115,7 +133,22 @@
       <Filter>Header Files\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CubeRenderer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\RenderingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\Inputs\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardInput.h">
+      <Filter>Header Files\Inputs\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseInput.h">
+      <Filter>Header Files\Inputs\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="glfwInputHandler.h">
+      <Filter>Header Files\Inputs\Handler\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +213,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CubeRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glfwInputHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,7 +6,10 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtc\matrix_transform.hpp>
+#include <glfw3.h>
 
+#include "MouseInput.h"
+#include "KeyboardInput.h"
 class Camera
 {
 private:
@@ -15,6 +18,9 @@ private:
 protected:
 	glm::mat4 view;
 	glm::mat4 projection;
+	float aspectRatio;
+	float zNear;
+	float zFar;
 
 public:
 	
@@ -23,7 +29,8 @@ public:
 		FORWARD,
 		BACKWARD,
 		LEFT,
-		RIGHT
+		RIGHT,
+		NONE,
 	};
 
 	// Camera Attributes
@@ -41,6 +48,7 @@ public:
 	GLfloat MovementSpeed;
 	GLfloat MouseSensitivity;
 	GLfloat Zoom;
+	GLfloat ZoomSensitivity;
 
 	// Default Camera Values
 	const GLfloat YAW = -90.0f;
@@ -48,6 +56,7 @@ public:
 	const GLfloat SPEED = 3.0f;
 	const GLfloat SENSITIVTY = 0.05f;
 	const GLfloat ZOOM = 45.0f;
+	const GLfloat ZOOMSENSITIVTY = 3.0f;
 
 	// Default Constructor
 	Camera();
@@ -64,9 +73,9 @@ public:
 	glm::mat4 GetViewMatrix();
 
 	// Process Camera Key & Mouse Inputs
-	void processCameraMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean clampPitch = true);
-	void processMouseScroll(GLfloat yOffset);
-	void processKeyBoard(Camera_Movement direction, GLfloat deltaTime);
+	void processCameraMouseMovement(MouseInput mouse, float dt, GLboolean clampPitch = true);
+	void processMouseScroll(MouseInput mouse, float dt);
+	void processKeyBoard(KeyboardInput keyboard, GLfloat deltaTime);
 
 	// Set Camera Projection (Perspective/Orthographic) & View
 	void setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar);

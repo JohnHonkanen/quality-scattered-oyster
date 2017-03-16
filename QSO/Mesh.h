@@ -13,5 +13,6 @@ public:
 	Mesh(std::string name);
 	virtual ~Mesh();
 	MeshData mesh;
+
 };
 

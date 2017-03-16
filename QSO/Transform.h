@@ -1,6 +1,8 @@
 #pragma once
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
+#include <glm\gtx\matrix_decompose.hpp>
+#include <glm\gtc\quaternion.hpp>
 #include <iostream>
 #define DEG_TO_RAD 0.0174533
 
@@ -20,15 +22,13 @@ public:
 	void scale(float scaleX, float scaleY, float scaleZ);
 	void scale(vec3 scale);
 	void setTransform(mat4 matrix);
-
-
+	mat4 calculateModelMatrix();
 	mat4 get();
 	vec3 getPosition();
-	vec3 getRotation();
 	void reset();
 private:
-	vec4 position;
-	mat4 transformMatrix;
-	vec3 rotation;
+	mat4 model;
+	mat4 translationMatrix;
+	mat4 rotationMatrix;
+	mat4 scaleMatrix;
 };
-
