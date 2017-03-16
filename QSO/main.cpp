@@ -10,6 +10,8 @@
 #include "Camera.h"
 #include "CubeRenderer.h"
 #include "glfwInputHandler.h"
+#include "Terrain.h"
+#include "Mesh.h"
 
 using namespace std;
 
@@ -19,7 +21,6 @@ glfwInputHandler inputHandler;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void do_movement();
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 	MouseInput* mouse = inputHandler.getMouse();
@@ -40,11 +41,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		if (action == GLFW_PRESS) {
 			keyboard->setKey(key, true);
-			cout << "key pressed" << endl;
+			//cout << "key pressed" << endl;
 		}
 		else if (action == GLFW_RELEASE) {
 			keyboard->setKey(key, false);
-			cout << "key released" << endl;
+			//cout << "key released" << endl;
 		}
 			
 	}
@@ -55,24 +56,22 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 bool firstMouse = true;
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 
+	
 	//Check if this is the first time receiving the mouse input and if so, we first update the initial mouse position
 	// to the new xpos and ypos values; the resuling mouse movement will then use the entered mouse's position
 	// coordinates to calculate it's offset. - Helps avoid large offsets and movement jump when mouse enters the 
 	// program display for the first time. 
-
 	MouseInput* mouse = inputHandler.getMouse();
 	if (firstMouse) {
 		mouse->setPosition(vec2(xpos, ypos));
 		firstMouse = false;
 	}
-
 	//Calcualate the offset movement between the last and current frames.
 	vec2 mousePosition = mouse->getPosition();
 	GLfloat xOffset = xpos - mousePosition.x;
 	GLfloat yOffset = mousePosition.y - ypos; //Reverse since y-coordinates go from bottom to left
 	mouse->setOffset(vec2(xOffset, yOffset));
 	mouse->setPosition(vec2(xpos, ypos));
-
 }
 
 int main(int argc, char *argv[]) {
@@ -94,7 +93,7 @@ int main(int argc, char *argv[]) {
 
 	// Setup Camera
 
-	Camera playerCamera;
+	Camera playerCamera (vec3(0,0,10.0f), vec3(0,1,0), 0.0f, 0.0f);
 	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 100.0f);
 	playerCamera.setView(vec3(0.0f, 0.0f, -10.0f)); // Adjust our Camera back by changing Z value
 	
@@ -114,7 +113,15 @@ int main(int argc, char *argv[]) {
 
 	CubeRenderer cubeRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
 	cubeRenderer.init();
-
+	/*Terrain terrain("Terrain", 10,10, 10);
+	terrain.init();
+	mapData data = terrain.getData();
+	Mesh mesh("Terrain Mesh");
+	mesh.mesh.VAO = MeshGenerator::createMesh(glm::value_ptr(*data.vertices), sizeof(data.vertices), data.indices, sizeof(data.indices));
+	cubeRenderer.VAO = mesh.mesh.VAO;
+	printf("VAO %i\n", mesh.mesh.VAO);
+	printf("NIndces %i\n", data.indexCount);
+	printf("NVerts %i\n", data.vertexCount);*/
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -134,10 +141,10 @@ int main(int argc, char *argv[]) {
 
 		//Checks and calls events
 		inputHandler.pollEvent();
-		if (inputHandler.keyPressed(GLFW_KEY_F)) {
+		/*if (inputHandler.keyPressed(GLFW_KEY_F)) {
 			cout << "F" << endl;
 		}
-		cout << inputHandler.getMouse()->getPosition().x << endl;
+		cout << inputHandler.getMouse()->getPosition().x << endl;*/
 		//do_movement();
 
 		frameClock.updateClock(); // Ticks our Frame Clock
@@ -151,6 +158,12 @@ int main(int argc, char *argv[]) {
 		//End of DeltaTime
 		if (frameClock.alarm()) {
 
+			playerCamera.processMouseScroll(*inputHandler.getMouse(), dt);
+			playerCamera.processCameraMouseMovement(*inputHandler.getMouse(), dt);
+			playerCamera.processKeyBoard(*inputHandler.getKeyboard(), dt);
+			
+			playerCamera.GetViewMatrix();
+			inputHandler.getMouse()->setLastPosition(inputHandler.getMouse()->getPosition());
 			// Process Inputs
 
 			// Camera controls
@@ -159,16 +172,16 @@ int main(int argc, char *argv[]) {
 
 			// Update Function
 			
-			transform.translate(vec3(0, 1 * dt, 0));
-			transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
-			mat4 model = transform.calculateModelMatrix();
+			//transform.translate(vec3(0, 1 * dt, 0));
+			//transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
+			//mat4 model = transform.calculateModelMatrix();
 
-			// End of Update
-			transform.translate(vec3(0,1*dt,0));
-			transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
-			vec3 position = transform.getPosition();
-			printf("%f,%f,%f\n", position.x, position.y, position.z);
-			transform.calculateModelMatrix();
+			//// End of Update
+			//transform.translate(vec3(0,1*dt,0));
+			//transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
+			//vec3 position = transform.getPosition();
+			//printf("%f,%f,%f\n", position.x, position.y, position.z);
+			//transform.calculateModelMatrix();
 			
 			graphicsHandler.start();  // Sets up Rendering Loop
 			

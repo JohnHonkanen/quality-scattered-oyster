@@ -1,7 +1,6 @@
 #include "Terrain.h"
 
 
-
 Terrain::Terrain(std::string name, const int xLength, const int zLength, float gridSize):Component(name)
 {
 	Terrain::map.xLength = xLength;
@@ -48,7 +47,7 @@ void Terrain::buildVertices()
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
-			map.vertices[vertex] = vec3(x * Terrain::gridSize, 0, z* Terrain::gridSize); //Y is reserved for heightmap
+			map.vertices[vertex] = vec3(x * Terrain::gridSize, 0, -z* Terrain::gridSize); //Y is reserved for heightmap
 			vertex++;
 		}
 	}
@@ -142,7 +141,7 @@ void Terrain::buildIndices()
 
 	//Calculates number of indices
 	Terrain::map.indexCount = (verticesPerStrip*numberOfStrips) + numberOfDegens;
-	Terrain::map.indices = new int[Terrain::map.indexCount]();
+	Terrain::map.indices = new GLuint[Terrain::map.indexCount]();
 	int offset = 0;
 	for (int z = 0; z < Terrain::map.zLength-1; z++) {
 		if (z > 0) {

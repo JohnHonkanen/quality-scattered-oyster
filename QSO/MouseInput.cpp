@@ -16,9 +16,19 @@ void MouseInput::setPosition(vec2 position)
 	MouseInput::position = position;
 }
 
+void MouseInput::setLastPosition(vec2 position)
+{
+	MouseInput::lastPosition = position;
+}
+
 vec2 MouseInput::getPosition()
 {
 	return MouseInput::position;
+}
+
+vec2 MouseInput::getLastPosition()
+{
+	return MouseInput::lastPosition;
 }
 
 void MouseInput::setOffset(vec2 offSet)

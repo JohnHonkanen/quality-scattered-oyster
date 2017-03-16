@@ -1,5 +1,6 @@
 #pragma once
-#include <glm.hpp>
+#include <GL\glew.h>
+#include <glm\glm.hpp>
 #include <vector>
 #include <map>
 #include <iostream>
@@ -11,7 +12,7 @@ struct mapData {
 	vec3 *vertices;
 	vec3 *normals;
 	vec3 *uv;
-	int *indices;
+	GLuint *indices;
 
 	int zLength;
 	int xLength;

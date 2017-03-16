@@ -70,6 +70,9 @@
     <Filter Include="Header Files\Inputs\Handler\GLFW">
       <UniqueIdentifier>{927eeb4c-6cde-4d18-ab85-0a71457f4db9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Terrain">
+      <UniqueIdentifier>{d11805a8-016c-43d6-b8cb-c19f35bf48d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="glfwInputHandler.h">
       <Filter>Header Files\Inputs\Handler\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,18 +227,18 @@
     <ClCompile Include="glfwInputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="minFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="minVertex.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="lightingPhong.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="lightingPhong.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
