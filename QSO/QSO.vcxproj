@@ -160,9 +160,13 @@
     <ClInclude Include="CubeRenderer.h" />
     <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="glfwInputHandler.h" />
     <ClInclude Include="glfwWindow.h" />
     <ClInclude Include="GraphicsHandler.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="MeshGenerator.h" />
+    <ClInclude Include="MouseInput.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="openGLHandler.h" />
     <ClInclude Include="Renderer.h" />
@@ -182,10 +186,14 @@
     <ClCompile Include="CubeRenderer.cpp" />
     <ClCompile Include="GameBehaviour.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="glfwInputHandler.cpp" />
     <ClCompile Include="glfwWindow.cpp" />
     <ClCompile Include="GraphicsHandler.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="KeyboardInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshGenerator.cpp" />
+    <ClCompile Include="MouseInput.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="openGLHandler.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -197,6 +205,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="lightingPhong.frag" />
+    <None Include="lightingPhong.vert" />
     <None Include="minFrag.shader" />
     <None Include="minVertex.shader" />
   </ItemGroup>
