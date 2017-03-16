@@ -55,12 +55,6 @@ int main(int argc, char *argv[]) {
 
 	Clock clock;
 	clock.startClock();
-	clock.setDelayInSeconds(0);
- 
-	while (!clock.alarm()) {
-		clock.updateClock();
-		cout << clock.getSeconds() << endl;
-	}
 
 	// Game Loop
 	bool flag = true;
@@ -70,14 +64,21 @@ int main(int argc, char *argv[]) {
 		clock.updateClock(); //Ticks App Clock
 
 		// Calculates Delta Time
+		
 		currentTime = clock.getMilliseconds();
-		double dt = (currentTime - previousTime) * 0.00001f; //Convert DT to seconds
+		double dt = (currentTime - previousTime) * 0.001f; //Convert DT to seconds
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {
+			printf("Delta Time: %d", dt);
 			// Update Function
 			// End of Update
-			previousTime = currentTime;
+			transform.translate(vec3(0,1*dt,0));
+			transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
+			vec3 position = transform.getPosition();
+			printf("%f,%f,%f\n", position.x, position.y, position.z);
+			transform.calculateModelMatrix();
+			
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
@@ -87,6 +88,7 @@ int main(int argc, char *argv[]) {
 
 		graphicsHandler.end(); // Swaps scene buffers
 		frameClock.resetClock(); // Once frame is done reset to 0
+		previousTime = currentTime;
 		}
 	}
 
