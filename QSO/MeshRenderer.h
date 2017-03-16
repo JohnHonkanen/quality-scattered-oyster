@@ -11,8 +11,8 @@
 #include "TextureManager.h"
 #include "Transform.h"
 #include "Shader.h"
-#include "MeshGenerator.h"
 #include "Camera.h"
+#include "Mesh.h"
 
 struct Material {
 	string texture;
@@ -31,6 +31,7 @@ private:
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
 	Camera *camera;
+	Mesh mesh;
 
 public:
 	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
