@@ -15,6 +15,11 @@
 
 using namespace std;
 
+struct cube {
+	Mesh mesh[6];
+
+};
+
 glfwInputHandler inputHandler;
 
 // Function prototypes
@@ -110,9 +115,70 @@ int main(int argc, char *argv[]) {
 	Transform transform;
 	Material material;
 	material.texture = "lava";
+	Mesh cube("Cube");
+	cube.mesh.vertexCount = 8;
+	cube.mesh.indexCount = 36;
+	cube.mesh.vertices = new GLfloat[cube.mesh.vertexCount * 3]{
+		
+		//Front Face
+		-0.5f, -0.5f, 0.5f,  // 0
+		 0.5f, -0.5f, 0.5f,  // 1
+		 0.5f, 0.5f, 0.5f,   // 2
+		-0.5f, 0.5f, 0.5f,   // 3
 
-	MeshRenderer MeshRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
-	MeshRenderer.init();
+		//Back Face
+		-0.5f, -0.5f, -0.5f, // 4
+		 0.5f, -0.5f, -0.5f, // 5
+		 0.5f, 0.5f, -0.5f,  // 6
+		-0.5f, 0.5f, -0.5f   // 7
+	};
+
+	cube.mesh.indices = new GLuint[cube.mesh.indexCount]{
+		
+			//front
+			0, 1, 2,
+			2, 3, 0,
+
+			//top
+			1, 5, 6,
+			6, 2, 1,
+
+			// back
+			7, 6, 5,
+			5, 4, 7,
+
+			// bottom
+			4, 0, 3,
+			3, 7, 4,
+
+			// left
+			4, 5, 1,
+			1, 0, 4,
+
+			// right
+			3, 2, 6,
+			6, 7, 3,
+	};
+
+	cube.mesh.uv = new GLfloat[cube.mesh.vertexCount * 2]{
+		
+		0.0f, 0.0f,
+		0.0f, 1.0f,
+		1.0f, 1.0f,
+		1.0f, 0.0f,
+
+		1.0f, 0.0f,
+		1.0f, 1.0f,
+		0.0f, 1.0f,
+		0.0f, 0.0f
+		
+		
+		
+	};
+
+	cube.generateMesh();
+	MeshRenderer MeshRenderer(&cube, material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -127,16 +193,12 @@ int main(int argc, char *argv[]) {
 	clock.startClock();
 
 	KeyboardInput* keyboard = inputHandler.getKeyboard();
+
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
 
 		//Checks and calls events
 		inputHandler.pollEvent();
-		/*if (inputHandler.keyPressed(GLFW_KEY_F)) {
-			cout << "F" << endl;
-		}
-		cout << inputHandler.getMouse()->getPosition().x << endl;*/
-		//do_movement();
 
 		frameClock.updateClock(); // Ticks our Frame Clock
 		clock.updateClock(); //Ticks App Clock
@@ -149,23 +211,22 @@ int main(int argc, char *argv[]) {
 		//End of DeltaTime
 		if (frameClock.alarm()) {
 
+			// Process Inputs & Camera controls
+
 			playerCamera.processMouseScroll(*inputHandler.getMouse(), dt);
 			playerCamera.processCameraMouseMovement(*inputHandler.getMouse(), dt);
 			playerCamera.processKeyBoard(*inputHandler.getKeyboard(), dt);
 			
 			playerCamera.GetViewMatrix();
 			inputHandler.getMouse()->setLastPosition(inputHandler.getMouse()->getPosition());
-			// Process Inputs
-
-			// Camera controls
 
 			// End of Process Inputs
 
 			// Update Function
 			
 			//transform.translate(vec3(0, 1 * dt, 0));
-			//transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
-			//mat4 model = transform.calculateModelMatrix();
+			transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
+			mat4 model = transform.calculateModelMatrix();
 
 			//// End of Update
 			//transform.translate(vec3(0,1*dt,0));
@@ -178,6 +239,7 @@ int main(int argc, char *argv[]) {
 			
 			// Render Function
 			MeshRenderer.renderObject();
+
 			//MeshRenderer2.renderObject();
 
 			// End of Render

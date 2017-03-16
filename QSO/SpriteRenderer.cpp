@@ -33,7 +33,7 @@ void SpriteRenderer::init() {
 		1, 2, 3  // Second Triangle
 	};
 
-	SpriteRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
+	//SpriteRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
 
 }
 

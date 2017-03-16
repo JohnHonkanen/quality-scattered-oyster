@@ -1,13 +1,13 @@
 #include "MeshRenderer.h"
 
-
-MeshRenderer::MeshRenderer(Material material, TextureManager * textureManager, Transform * transform, Shader * program, Camera * camera)
+MeshRenderer::MeshRenderer(Mesh *mesh, Material material, TextureManager * textureManager, Transform * transform, Shader * program, Camera * camera)
 {
 	MeshRenderer::material = material;
 	MeshRenderer::textureManager = textureManager;
 	MeshRenderer::transform = transform;
 	MeshRenderer::program = program;
 	MeshRenderer::camera = camera;
+	MeshRenderer::mesh = mesh;
 }
 
 MeshRenderer::~MeshRenderer()
@@ -103,7 +103,7 @@ void MeshRenderer::init()
 	};
 
 	//Create Indices
-	MeshRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
+	//MeshRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
 }
 
 
@@ -129,9 +129,10 @@ void MeshRenderer::renderObject()
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 	glUniform1i(glGetUniformLocation(program->program, "ourTexture"), 0);
 
-
-	//Draw Container
-	glBindVertexArray(VAO);
+	//Draw Prefabs
+	glBindVertexArray(mesh->glObjects.VAO);
+	glLineWidth(5.0f);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	//Pass to Shader
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -139,6 +140,8 @@ void MeshRenderer::renderObject()
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	glUniform1f(alphaLoc, 1.0f);
 
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	//glDrawArrays(GL_TRIANGLES, 0, 8);
+	glDrawElements(GL_TRIANGLES, mesh->mesh.indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+	
 }

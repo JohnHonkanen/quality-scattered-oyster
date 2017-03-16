@@ -1,11 +1,31 @@
 #pragma once
-#include "Component.h"
+
 #include <GL\glew.h>
-struct MeshData {
+
+#include "Component.h"
+
+
+class MeshGenerator;
+
+struct glData {
 	GLuint VAO;
 	GLuint VBO;
 	GLuint EBO;
+
 };
+
+struct MeshData {
+
+	GLfloat *vertices;
+	GLfloat *normals;
+	GLfloat *color;
+	GLfloat *uv;
+	GLuint *indices;
+
+	GLuint vertexCount;
+	GLuint indexCount;
+};
+
 class Mesh :
 	public Component
 {
@@ -14,5 +34,13 @@ public:
 	virtual ~Mesh();
 	MeshData mesh;
 
+	glData glObjects;
+
+	//void setData(GLuint vertexCount, GLuint indexCount, GLfloat *vertices, GLfloat *normals, GLfloat *color, GLfloat *uv, GLuint indices);
+	//void setData(GLuint vertexCount, GLuint indexCount, GLfloat *vertices, GLuint indices, GLfloat *normals, GLfloat *uv);
+	void setData(GLuint vertexCount, GLuint indexCount, GLfloat *vertices, GLuint indices);
+	//void init();
+
+	void generateMesh();
 };
 

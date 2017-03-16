@@ -12,6 +12,7 @@
 #include "Transform.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "MeshGenerator.h"
 #include "Mesh.h"
 
 struct Material {
@@ -26,15 +27,14 @@ class MeshRenderer : public Renderer
 {
 private:
 	Material material;
-	GLuint VAO; // 2D Mesh for the sprite
 	TextureManager *textureManager;
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
 	Camera *camera;
-	Mesh mesh;
+	Mesh *mesh;
 
 public:
-	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
+	MeshRenderer(Mesh *mesh, Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
 	virtual ~MeshRenderer();
 
 	void init();
