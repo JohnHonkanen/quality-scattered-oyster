@@ -19,6 +19,7 @@ public:
 	void init();
 	void swapBuffers();
 	void destroy();
+	GLFWwindow *getWindow();
 
 };
 

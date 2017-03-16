@@ -48,3 +48,8 @@ void glfwWindow::destroy() {
 	//Terminate & Clean up glfw resources before application exit
 	glfwTerminate();
 }
+
+GLFWwindow *glfwWindow::getWindow()
+{
+	return glfwWindow::window;
+}
