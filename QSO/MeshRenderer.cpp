@@ -1,20 +1,20 @@
-#include "CubeRenderer.h"
+#include "MeshRenderer.h"
 
 
-CubeRenderer::CubeRenderer(Material material, TextureManager * textureManager, Transform * transform, Shader * program, Camera * camera)
+MeshRenderer::MeshRenderer(Material material, TextureManager * textureManager, Transform * transform, Shader * program, Camera * camera)
 {
-	CubeRenderer::material = material;
-	CubeRenderer::textureManager = textureManager;
-	CubeRenderer::transform = transform;
-	CubeRenderer::program = program;
-	CubeRenderer::camera = camera;
+	MeshRenderer::material = material;
+	MeshRenderer::textureManager = textureManager;
+	MeshRenderer::transform = transform;
+	MeshRenderer::program = program;
+	MeshRenderer::camera = camera;
 }
 
-CubeRenderer::~CubeRenderer()
+MeshRenderer::~MeshRenderer()
 {
 }
 
-void CubeRenderer::init()
+void MeshRenderer::init()
 {
 	//Create data for Cube
 
@@ -30,6 +30,7 @@ void CubeRenderer::init()
 	//	0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,	//6
 	//	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,	//7
 	//};
+
 	GLfloat data[] = {
 		// Positions           // Normals           // Texture Coords
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
@@ -102,29 +103,29 @@ void CubeRenderer::init()
 	};
 
 	//Create Indices
-	CubeRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
+	MeshRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
 }
 
 
-void CubeRenderer::renderObject()
+void MeshRenderer::renderObject()
 {
 	/*Draw Cube*/
 	/*Use Material*/
 
-	CubeRenderer::program->Use();
+	MeshRenderer::program->Use();
 
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
 	mat4 model = transform->get();
 
 	//Get matrix's uniform location, get and set matrix
-	GLuint modelLoc = glGetUniformLocation(CubeRenderer::program->program, "model");
-	GLuint viewLoc = glGetUniformLocation(CubeRenderer::program->program, "view");
-	GLuint projectionLoc = glGetUniformLocation(CubeRenderer::program->program, "projection");
-	GLuint alphaLoc = glGetUniformLocation(CubeRenderer::program->program, "ourAlpha");
+	GLuint modelLoc = glGetUniformLocation(MeshRenderer::program->program, "model");
+	GLuint viewLoc = glGetUniformLocation(MeshRenderer::program->program, "view");
+	GLuint projectionLoc = glGetUniformLocation(MeshRenderer::program->program, "projection");
+	GLuint alphaLoc = glGetUniformLocation(MeshRenderer::program->program, "ourAlpha");
 
 	//glBindTexture call will bind that texture to the currently active texture unit.
-	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(CubeRenderer::material.texture));
+	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.texture));
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 	glUniform1i(glGetUniformLocation(program->program, "ourTexture"), 0);
 

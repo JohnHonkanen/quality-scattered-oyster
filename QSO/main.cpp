@@ -8,7 +8,7 @@
 #include "TextureManager.h"
 #include "SpriteRenderer.h"
 #include "Camera.h"
-#include "CubeRenderer.h"
+#include "MeshRenderer.h"
 #include "glfwInputHandler.h"
 #include "Terrain.h"
 #include "Mesh.h"
@@ -111,8 +111,8 @@ int main(int argc, char *argv[]) {
 	Material material;
 	material.texture = "lava";
 
-	CubeRenderer cubeRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
-	cubeRenderer.init();
+	MeshRenderer MeshRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	MeshRenderer.init();
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -177,8 +177,8 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			cubeRenderer.renderObject();
-			//cubeRenderer2.renderObject();
+			MeshRenderer.renderObject();
+			//MeshRenderer2.renderObject();
 
 			// End of Render
 

@@ -22,7 +22,7 @@ struct Material {
 	float shininess;
 };
 
-class CubeRenderer : public Renderer
+class MeshRenderer : public Renderer
 {
 private:
 	Material material;
@@ -33,8 +33,8 @@ private:
 	Camera *camera;
 
 public:
-	CubeRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
-	virtual ~CubeRenderer();
+	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
+	virtual ~MeshRenderer();
 
 	void init();
 	void renderObject();
