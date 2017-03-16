@@ -113,7 +113,7 @@ void Camera::processMouseScroll(MouseInput mouse, float dt)
 
 	//yOffset value represents the amount we scrolled vertically
 	Camera::Zoom -= yOffset * dt * Camera::ZoomSensitivity;
-	printf("Mouse Zoom: %f \n", Camera::Zoom);
+	//printf("Mouse Zoom: %f \n", Camera::Zoom);
 
 	// Clamp the FOV to contain between 1.0f and 45.0f
 	Camera::Zoom = clamp(Camera::Zoom, 2.0f, 44.0f);
@@ -153,7 +153,7 @@ void Camera::processKeyBoard(KeyboardInput keyboard, GLfloat deltaTime)
 	}
 
 	// Make sure the user stays at the ground level by setting the y position to 0 and keep the camera at ground level (xz plane)
-	Camera::Position.y = 0.0f;
+	Camera::Position.y = 3.0f;
 }
 
 void Camera::setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar)

@@ -26,7 +26,7 @@ class CubeRenderer : public Renderer
 {
 private:
 	Material material;
-
+	GLuint VAO; // 2D Mesh for the sprite
 	TextureManager *textureManager;
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
@@ -37,7 +37,6 @@ public:
 	virtual ~CubeRenderer();
 
 	void init();
-	void renderObject();	
-	GLuint VAO; // 2D Mesh for the sprite
+	void renderObject();
 };
 

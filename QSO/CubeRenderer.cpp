@@ -138,6 +138,6 @@ void CubeRenderer::renderObject()
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	glUniform1f(alphaLoc, 1.0f);
 
-	glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }

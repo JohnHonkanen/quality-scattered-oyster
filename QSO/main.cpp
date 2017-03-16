@@ -113,15 +113,6 @@ int main(int argc, char *argv[]) {
 
 	CubeRenderer cubeRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
 	cubeRenderer.init();
-	/*Terrain terrain("Terrain", 10,10, 10);
-	terrain.init();
-	mapData data = terrain.getData();
-	Mesh mesh("Terrain Mesh");
-	mesh.mesh.VAO = MeshGenerator::createMesh(glm::value_ptr(*data.vertices), sizeof(data.vertices), data.indices, sizeof(data.indices));
-	cubeRenderer.VAO = mesh.mesh.VAO;
-	printf("VAO %i\n", mesh.mesh.VAO);
-	printf("NIndces %i\n", data.indexCount);
-	printf("NVerts %i\n", data.vertexCount);*/
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -187,6 +178,7 @@ int main(int argc, char *argv[]) {
 			
 			// Render Function
 			cubeRenderer.renderObject();
+			//cubeRenderer2.renderObject();
 
 			// End of Render
 
