@@ -157,7 +157,7 @@
       <Filter>Header Files\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Polygon.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OpenGL\Polygons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
