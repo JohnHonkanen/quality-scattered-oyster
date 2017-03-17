@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 
 	// Testing Terrain Triangle Strips
 
-	Terrain terrain("terrain", 10, 10, 1.0f);
+	Terrain terrain("terrain", 50, 50, 1.0f);
 	terrain.init();
 	Mesh terrainMesh = Mesh("terrain");
 	mapData terrainData = terrain.getData();
@@ -130,6 +130,7 @@ int main(int argc, char *argv[]) {
 	terrainMesh.mesh.normals = (GLfloat*)terrainData.normals;
 	terrainMesh.mesh.indexCount = terrainData.indexCount;
 	terrainMesh.mesh.vertexCount = terrainData.vertexCount;
+	terrainMesh.mesh.mode = GL_TRIANGLE_STRIP;
 	terrainMesh.generateMesh();
 
 	// Set Frame Rate

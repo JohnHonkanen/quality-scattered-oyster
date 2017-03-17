@@ -24,6 +24,7 @@ struct MeshData {
 
 	GLuint vertexCount;
 	GLuint indexCount;
+	GLenum mode;
 };
 
 class Mesh :

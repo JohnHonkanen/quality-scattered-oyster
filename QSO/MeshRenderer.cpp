@@ -141,7 +141,7 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	glUniform1f(alphaLoc, 1.0f);
 
 	//glDrawArrays(GL_TRIANGLES, 0, 8);
-	glDrawElements(GL_TRIANGLES, mesh->mesh.indexCount, GL_UNSIGNED_INT, 0);
+	glDrawElements(mesh->mesh.mode, mesh->mesh.indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	
 }
@@ -181,7 +181,7 @@ void MeshRenderer::renderObject(Polygon * polygon)
 		glUniform1f(alphaLoc, 1.0f);
 
 		//glDrawArrays(GL_TRIANGLES, 0, 8);
-		glDrawElements(GL_TRIANGLES, polygon->mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
+		glDrawElements(polygon->mesh[i]->mesh.mode, polygon->mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 }
