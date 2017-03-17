@@ -6,9 +6,11 @@
 
 #include "Mesh.h"
 
-#define STORED_VAO      0
-#define STORED_VBO      1
-#define STORED_EBO      2
+#define STORED_VERTEX       0
+#define STORED_COLOR        1
+#define STORED_UV           2
+#define STORED_NORMAL		3
+#define STORED_INDEX		4
 
 using namespace std;
 

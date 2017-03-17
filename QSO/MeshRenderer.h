@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "MeshGenerator.h"
 #include "Mesh.h"
+#include "Polygon.h"
 
 struct Material {
 	string texture;
@@ -34,10 +35,12 @@ private:
 	Mesh *mesh;
 
 public:
-	MeshRenderer(Mesh *mesh, Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
+	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
 	virtual ~MeshRenderer();
 
 	void init();
+	void renderObject(Mesh *mesh);
+	void renderObject(Polygon *polygon);
 	void renderObject();
 };
 

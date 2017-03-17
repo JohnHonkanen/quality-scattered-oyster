@@ -12,13 +12,9 @@
 #include "glfwInputHandler.h"
 #include "Terrain.h"
 #include "Mesh.h"
+#include "Polygon.h"
 
 using namespace std;
-
-struct cube {
-	Mesh mesh[6];
-
-};
 
 glfwInputHandler inputHandler;
 
@@ -115,69 +111,10 @@ int main(int argc, char *argv[]) {
 	Transform transform;
 	Material material;
 	material.texture = "lava";
-	Mesh cube("Cube");
-	cube.mesh.vertexCount = 8;
-	cube.mesh.indexCount = 36;
-	cube.mesh.vertices = new GLfloat[cube.mesh.vertexCount * 3]{
-		
-		//Front Face
-		-0.5f, -0.5f, 0.5f,  // 0
-		 0.5f, -0.5f, 0.5f,  // 1
-		 0.5f, 0.5f, 0.5f,   // 2
-		-0.5f, 0.5f, 0.5f,   // 3
-
-		//Back Face
-		-0.5f, -0.5f, -0.5f, // 4
-		 0.5f, -0.5f, -0.5f, // 5
-		 0.5f, 0.5f, -0.5f,  // 6
-		-0.5f, 0.5f, -0.5f   // 7
-	};
-
-	cube.mesh.indices = new GLuint[cube.mesh.indexCount]{
-		
-			//front
-			0, 1, 2,
-			2, 3, 0,
-
-			//top
-			1, 5, 6,
-			6, 2, 1,
-
-			// back
-			7, 6, 5,
-			5, 4, 7,
-
-			// bottom
-			4, 0, 3,
-			3, 7, 4,
-
-			// left
-			4, 5, 1,
-			1, 0, 4,
-
-			// right
-			3, 2, 6,
-			6, 7, 3,
-	};
-
-	cube.mesh.uv = new GLfloat[cube.mesh.vertexCount * 2]{
-		
-		0.0f, 0.0f,
-		0.0f, 1.0f,
-		1.0f, 1.0f,
-		1.0f, 0.0f,
-
-		1.0f, 0.0f,
-		1.0f, 1.0f,
-		0.0f, 1.0f,
-		0.0f, 0.0f
-		
-		
-		
-	};
-
-	cube.generateMesh();
-	MeshRenderer MeshRenderer(&cube, material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	
+	MeshRenderer MeshRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	Polygon cube;
+	cube.init();
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -225,8 +162,8 @@ int main(int argc, char *argv[]) {
 			// Update Function
 			
 			//transform.translate(vec3(0, 1 * dt, 0));
-			transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
-			mat4 model = transform.calculateModelMatrix();
+			//transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
+			//mat4 model = transform.calculateModelMatrix();
 
 			//// End of Update
 			//transform.translate(vec3(0,1*dt,0));
@@ -238,7 +175,7 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer.renderObject();
+			MeshRenderer.renderObject(&cube);
 
 			//MeshRenderer2.renderObject();
 
@@ -249,7 +186,7 @@ int main(int argc, char *argv[]) {
 		previousTime = currentTime;
 		}
 	}
-
+	MeshGenerator::destroy();
 	graphicsHandler.destroy();
 
 	return 0;
