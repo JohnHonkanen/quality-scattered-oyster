@@ -11,10 +11,19 @@
 
 using namespace std;
 
+enum layout_Location {
+	POSITION = 0,
+	COLOR = 1,
+	UV = 2,
+	NORMAL = 3,
+};
+
 class Shader
 {
 public:
+	
 	GLuint program;
+
 	Shader(const char *vertexPath, const char *fragmentPath); // Find, Initialize, Logs and Checks Shader for error
 	void Use();
 };

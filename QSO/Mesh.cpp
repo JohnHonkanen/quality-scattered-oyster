@@ -16,6 +16,14 @@ Mesh::~Mesh()
 {
 }
 
+void Mesh::setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLfloat * normals, GLfloat * color, GLfloat * uv, GLuint indices)
+{
+}
+
+void Mesh::setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLuint indices, GLfloat * normals, GLfloat * uv)
+{
+}
+
 void Mesh::setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLuint indices)
 {
 

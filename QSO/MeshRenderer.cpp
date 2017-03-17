@@ -16,94 +16,7 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::init()
 {
-	//Create data for Cube
 
-	//GLfloat data[] = {
-	//	// Positions           // Normals           // Texture Coords
-	//	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,	//0
-	//	0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,	//1
-	//	0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,	//2
-	//	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,	//3
-
-	//	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,	//4
-	//	0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,	//5
-	//	0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,	//6
-	//	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,	//7
-	//};
-
-	GLfloat data[] = {
-		// Positions           // Normals           // Texture Coords
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-		0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
-		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
-		0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
-
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-		0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-		0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-		0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-		0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-		0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
-		0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
-	};
-
-
-	//GLuint indices[] = {
-	//	// front
-	//	0, 1, 2,
-	//	2, 3, 0,
-	//	// top
-	//	1, 5, 6,
-	//	6, 2, 1,
-	//	// back
-	//	7, 6, 5,
-	//	5, 4, 7,
-	//	// bottom
-	//	4, 0, 3,
-	//	3, 7, 4,
-	//	// left
-	//	4, 5, 1,
-	//	1, 0, 4,
-	//	// right
-	//	3, 2, 6,
-	//	6, 7, 3,
-	//};
-
-	GLuint indices[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22
-		, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35
-	};
-
-	//Create Indices
-	//MeshRenderer::VAO = MeshGenerator::createMesh(data, sizeof(data), indices, sizeof(indices));
 }
 
 
@@ -124,10 +37,29 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	GLuint projectionLoc = glGetUniformLocation(MeshRenderer::program->program, "projection");
 	GLuint alphaLoc = glGetUniformLocation(MeshRenderer::program->program, "ourAlpha");
 
+	
+
 	//glBindTexture call will bind that texture to the currently active texture unit.
 	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.texture));
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
-	glUniform1i(glGetUniformLocation(program->program, "ourTexture"), 0);
+	
+	if (MeshRenderer::material.diffuse != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
+	}
+
+	if (MeshRenderer::material.color != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
+	}
+
+	if (MeshRenderer::material.specular != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.specular"), UV);
+		//glUniform3f(glGetUniformLocation(program->program, "material.specular"), 0.5f, 0.5f, 0.5f);
+
+	}
+
+	if (MeshRenderer::material.emission != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.emission"), NORMAL);
+	}
 
 	//Draw Prefabs
 	glBindVertexArray(mesh->glObjects.VAO);

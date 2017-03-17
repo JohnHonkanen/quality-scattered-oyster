@@ -100,37 +100,43 @@ int main(int argc, char *argv[]) {
 	
 	// Testing Texture Manager
 	TextureManager textureManager;
-	
-	textureManager.saveTexture("lava.jpg", "lava");
+	textureManager.saveTexture("lava.jpg", "lava_1");
+	textureManager.saveTextureMap("container2.png", "container"); // For diffusion Map
+	textureManager.saveTextureMap("container2_specular.png", "container_specular"); // For specular Map
+	textureManager.saveTextureMap("lava.jpg", "lava_2"); // For emission Map
 
-	// Testing Shaders
-	Shader minShaderProgram("minVertex.shader", "minFrag.shader"); // Initialize minShader Programs using selected shaders.
+	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
+
+	Shader minShaderProgram("minVert.shader", "minFrag.shader");
+	Shader lightingShaderProgram("lightingVert.shader", "lightingFrag.shader");
+	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 
 	// Testing Cube Renderer
 
-	Transform transform;
+	Transform cubePos;
+	Transform lampPos;
 	Material material;
-	material.texture = "lava";
+	Material material2;
+
+	// Material 1
+	material.texture = "lava_1";
+	
+	// Material 2
+	material2.diffuse = "container";
+	material2.specular = "cotainer_specular";
+	material2.emission = "lava_2";
 	
 	//Mesh Objects
-	MeshRenderer MeshRenderer1(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer2(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
-	
+	MeshRenderer MeshRenderer1(material, &textureManager, &cubePos, &lightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer2(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
+
+
+	// Cube
 	Polygon cube;
+	Polygon lamp;
+
 	cube.init();
-
-	// Testing Terrain Triangle Strips
-
-	Terrain terrain("terrain", 10, 10, 1.0f);
-	terrain.init();
-	Mesh terrainMesh = Mesh("terrain");
-	mapData terrainData = terrain.getData();
-	terrainMesh.mesh.vertices = (GLfloat*)terrainData.vertices;
-	terrainMesh.mesh.indices = terrainData.indices;
-	terrainMesh.mesh.normals = (GLfloat*)terrainData.normals;
-	terrainMesh.mesh.indexCount = terrainData.indexCount;
-	terrainMesh.mesh.vertexCount = terrainData.vertexCount;
-	terrainMesh.generateMesh();
+	lamp.init();
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -146,6 +152,13 @@ int main(int argc, char *argv[]) {
 	clock.startClock();
 
 	KeyboardInput* keyboard = inputHandler.getKeyboard();
+
+	lampPos.translate(vec3(1.2f * 3,0, 2.0f*3));
+	//vec3 position = lampPos.getPosition();
+	//printf("%f,%f,%f\n", position.x, position.y, position.z);
+	mat4 model = lampPos.calculateModelMatrix();
+
+	cubePos.scale(vec3(3));
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -178,23 +191,21 @@ int main(int argc, char *argv[]) {
 
 			// Update Function
 			
-			//transform.translate(vec3(0, 1 * dt, 0));
-			//transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
-			//mat4 model = transform.calculateModelMatrix();
+			cubePos.translate(vec3(0, 0 * dt, 0));
+			cubePos.rotate(45.0f*dt, vec3(1, 1, 0), false);
+			model = cubePos.calculateModelMatrix();
 
 			//// End of Update
-			//transform.translate(vec3(0,1*dt,0));
-			//transform.rotate(45.0f*dt, vec3(0, 1, 1), false);
-			//vec3 position = transform.getPosition();
-			//printf("%f,%f,%f\n", position.x, position.y, position.z);
-			//transform.calculateModelMatrix();
 			
+
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(&terrainMesh); 
+			MeshRenderer1.renderObject(&cube); 
+			MeshRenderer2.renderObject(&lamp);
+			
 
-			MeshRenderer2.renderObject(&cube);
+			//MeshRenderer2.renderObject(&cube);
 
 			// End of Render
 

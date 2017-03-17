@@ -76,6 +76,21 @@
     <Filter Include="Header Files\OpenGL\Polygons">
       <UniqueIdentifier>{82d1b598-e11c-418b-96f1-381504aff125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{9ccfd08f-f580-4b95-bc41-118d8b2bc041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Light">
+      <UniqueIdentifier>{958e086d-2b50-4631-a411-65e091afa057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting">
+      <UniqueIdentifier>{39377287-4a77-4464-b618-e1aa284864fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lamp">
+      <UniqueIdentifier>{dfea3a22-74be-4d5a-87d5-750923caa7d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Minimal">
+      <UniqueIdentifier>{897e2bd4-5dd5-4aaf-9e1c-54bc92a9ccbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -247,11 +262,23 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="minFrag.shader">
-      <Filter>Resource Files</Filter>
+    <None Include="lightingFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting</Filter>
     </None>
-    <None Include="minVertex.shader">
-      <Filter>Resource Files</Filter>
+    <None Include="lightingVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting</Filter>
+    </None>
+    <None Include="minVert.shader">
+      <Filter>Resource Files\Shaders\Minimal</Filter>
+    </None>
+    <None Include="minFrag.shader">
+      <Filter>Resource Files\Shaders\Minimal</Filter>
+    </None>
+    <None Include="lampVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lamp</Filter>
+    </None>
+    <None Include="lampFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lamp</Filter>
     </None>
   </ItemGroup>
 </Project>

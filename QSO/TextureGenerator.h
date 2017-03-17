@@ -15,5 +15,6 @@ public:
 	virtual ~TextureGenerator();
 
 	static GLuint createTexture(const string fileLocation);
+	static GLuint createTextureMap(const string fileLocation, GLint min, GLint max);
 };
 

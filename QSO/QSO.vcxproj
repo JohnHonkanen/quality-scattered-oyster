@@ -211,8 +211,12 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="lampFrag.shader" />
+    <None Include="lampVert.shader" />
+    <None Include="lightingFrag.shader" />
+    <None Include="lightingVert.shader" />
     <None Include="minFrag.shader" />
-    <None Include="minVertex.shader" />
+    <None Include="minVert.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

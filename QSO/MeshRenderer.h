@@ -21,7 +21,9 @@ struct Material {
 	string diffuse;
 	string specular;
 	string emission;
+	string color;
 	float shininess;
+	
 };
 
 class MeshRenderer : public Renderer

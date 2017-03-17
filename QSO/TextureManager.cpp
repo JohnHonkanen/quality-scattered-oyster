@@ -15,6 +15,12 @@ void TextureManager::saveTexture(const string fileLocation, const string texture
 	textures.insert(texturePair);
 }
 
+void TextureManager::saveTextureMap(const string fileLocation, const string textureName, GLint min, GLint max)
+{
+	pair<string, GLuint>texturePair = pair<string, GLuint>(textureName, TextureGenerator::createTextureMap(fileLocation, min, max));
+	textures.insert(texturePair);
+}
+
 void TextureManager::deleteTexture(const string textureName) {
 	glDeleteTextures(1, &textures[textureName]);
 }
