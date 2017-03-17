@@ -76,8 +76,9 @@ glm::mat4 Camera::GetViewMatrix()
 // Process the input received from the mouse input system. Expects the offset value in both the x and y direction.
 void Camera::processCameraMouseMovement(MouseInput mouse, float dt,GLboolean clampPitch)
 {
-	if (mouse.getPosition() == mouse.getLastPosition())
+	if (mouse.getPosition() == mouse.getLastPosition()) {
 		return;
+	}
 
 	vec2 offset = mouse.getOffset();
 	//printf("Mouse Position (%f,%f)\n", offset.x, offset.y);
@@ -109,6 +110,10 @@ void Camera::processCameraMouseMovement(MouseInput mouse, float dt,GLboolean cla
 // Process input received from a mouse scroll-wheel event. Only requries input on the vertical wheel-axis.
 void Camera::processMouseScroll(MouseInput mouse, float dt)
 {
+	/*if (mouse.getScrollOffset() == mouse.getLastScrollOffset()) {
+		return;
+	}*/
+
 	float yOffset = mouse.getScrollOffset().y;
 
 	//yOffset value represents the amount we scrolled vertically

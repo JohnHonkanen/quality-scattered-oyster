@@ -11,6 +11,7 @@ private:
 	vec2 lastPosition;
 	vec2 offSet;
 	vec2 scrollOffset;
+	vec2 lastScrollOffset;
 public:
 	MouseInput();
 	~MouseInput();
@@ -22,6 +23,9 @@ public:
 	void setOffset(vec2 offSet);
 	vec2 getOffset();
 	void setScrollOffset(vec2 offSet);
+	void setLastScrollOffset(vec2 scrollOffset);
 	vec2 getScrollOffset();
+	vec2 getLastScrollOffset();
+
 };
 

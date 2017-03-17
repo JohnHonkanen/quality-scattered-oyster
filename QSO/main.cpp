@@ -112,9 +112,25 @@ int main(int argc, char *argv[]) {
 	Material material;
 	material.texture = "lava";
 	
-	MeshRenderer MeshRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	//Mesh Objects
+	MeshRenderer MeshRenderer1(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer2(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	
 	Polygon cube;
 	cube.init();
+
+	// Testing Terrain Triangle Strips
+
+	Terrain terrain("terrain", 10, 10, 1.0f);
+	terrain.init();
+	Mesh terrainMesh = Mesh("terrain");
+	mapData terrainData = terrain.getData();
+	terrainMesh.mesh.vertices = (GLfloat*)terrainData.vertices;
+	terrainMesh.mesh.indices = terrainData.indices;
+	terrainMesh.mesh.normals = (GLfloat*)terrainData.normals;
+	terrainMesh.mesh.indexCount = terrainData.indexCount;
+	terrainMesh.mesh.vertexCount = terrainData.vertexCount;
+	terrainMesh.generateMesh();
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -156,6 +172,7 @@ int main(int argc, char *argv[]) {
 			
 			playerCamera.GetViewMatrix();
 			inputHandler.getMouse()->setLastPosition(inputHandler.getMouse()->getPosition());
+			inputHandler.getMouse()->setLastScrollOffset(inputHandler.getMouse()->getScrollOffset());
 
 			// End of Process Inputs
 
@@ -175,9 +192,9 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer.renderObject(&cube);
+			MeshRenderer1.renderObject(&terrainMesh); 
 
-			//MeshRenderer2.renderObject();
+			MeshRenderer2.renderObject(&cube);
 
 			// End of Render
 
