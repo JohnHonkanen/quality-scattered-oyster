@@ -74,7 +74,7 @@ void Terrain::calculateNormals()
 
 			vec3 point1 = Terrain::map.vertices[vertex1];
 			vec3 point2 = Terrain::map.vertices[vertex2];
-			vec3 point3 = vec3(Terrain::map.xLength * Terrain::gridSize, 0, Terrain::map.zLength * Terrain::gridSize);;
+			vec3 point3 = vec3(Terrain::map.xLength * Terrain::gridSize, 0, Terrain::map.zLength * Terrain::gridSize);
 
 			vec3 edge1 = point2 - point1;
 			vec3 edge2 = point3 - point1;

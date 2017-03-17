@@ -16,27 +16,27 @@ void Polygon::init()
 	GLfloat polygonLength = 1.0f;
 
 	mesh[0] = new Mesh("leftFace");
-	buildFace(mesh[0], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), false);
+	buildFace(mesh[0], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(-1.0f, 0.0f, 0.0f), false);
 		
 	mesh[1] = new Mesh("rightFace");
-	buildFace(mesh[1], vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), true);
+	buildFace(mesh[1], vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), true);
 
 	mesh[2] = new Mesh("bottomFace");
-	buildFace(mesh[2], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), false);
+	buildFace(mesh[2], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, -1.0f, 0.0f), false);
 
 	mesh[3] = new Mesh("topFace");
-	buildFace(mesh[3], vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), true);
+	buildFace(mesh[3], vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), true);
 
 	mesh[4] = new Mesh("bottomFace");
-	buildFace(mesh[4], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), true);
+	buildFace(mesh[4], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, -1.0f), true);
 
 	mesh[5] = new Mesh("frontFace");
-	buildFace(mesh[5], vec3(0.0f, 0.0f, 1.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), false);
+	buildFace(mesh[5], vec3(0.0f, 0.0f, 1.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), false);
 
 
 }
 
-void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reverse)
+void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, vec3 normals, bool reverse)
 {
 	GLfloat vertex[12];
 	vertex[0] = corner.x;
@@ -57,6 +57,14 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 	vertex[9] = cVertex.x;
 	vertex[10] = cVertex.y;
 	vertex[11] = cVertex.z;
+
+	GLfloat normal[12]{
+		normals.x, normals.y, normals.z,
+		normals.x, normals.y, normals.z,
+
+		normals.x, normals.y, normals.z,
+		normals.x, normals.y, normals.z
+	};
 
 	GLfloat uv[8] = {
 		1.0f, 1.0f,
@@ -83,6 +91,7 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 		mesh->mesh.indices = index;
 	}
 
+	mesh->mesh.normals = normal;
 	mesh->mesh.vertices = vertex;
 	mesh->mesh.uv = uv;
 	mesh->mesh.indexCount = 6;

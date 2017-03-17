@@ -88,7 +88,6 @@ GLuint MeshGenerator::createMesh(MeshData data)
 	
 	// TexCoord attribute
 	if (data.uv != nullptr) {
-		printf("have uv \n");
 		glGenBuffers(1, &uvBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
 		glBufferData(GL_ARRAY_BUFFER, 2 * data.vertexCount*sizeof(GLfloat), data.uv, GL_STATIC_DRAW);
@@ -99,6 +98,7 @@ GLuint MeshGenerator::createMesh(MeshData data)
 
 	// Normals attribute
 	if (data.normals != nullptr) {
+		printf("have normal \n");
 		glGenBuffers(1, &normalBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
 		glBufferData(GL_ARRAY_BUFFER, 3 * data.vertexCount*sizeof(GLfloat), data.normals, GL_STATIC_DRAW);

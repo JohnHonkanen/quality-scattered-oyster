@@ -100,8 +100,8 @@ int main(int argc, char *argv[]) {
 	
 	// Testing Texture Manager
 	TextureManager textureManager;
-	textureManager.saveTexture("lava.jpg", "lava_1");
-	textureManager.saveTextureMap("container2.png", "container"); // For diffusion Map
+	textureManager.saveTexture("container.jpg", "container_1");
+	textureManager.saveTextureMap("container2.png", "container_2"); // For diffusion Map
 	textureManager.saveTextureMap("container2_specular.png", "container_specular"); // For specular Map
 	textureManager.saveTextureMap("lava.jpg", "lava_2"); // For emission Map
 
@@ -113,29 +113,33 @@ int main(int argc, char *argv[]) {
 
 	// Testing Cube Renderer
 
-	Transform cubePos;
+	Transform cube1Pos;
+	Transform cube2Pos;
 	Transform lampPos;
 	Material material;
 	Material material2;
 
 	// Material 1
-	material.texture = "lava_1";
+	material.texture = "container_1";
 	
 	// Material 2
-	material2.diffuse = "container";
-	material2.specular = "cotainer_specular";
-	material2.emission = "lava_2";
+	material2.diffuse = "container_2";
+	//material2.specular = "cotainer_specular";
+	//material2.emission = "lava_2";
 	
 	//Mesh Objects
-	MeshRenderer MeshRenderer1(material, &textureManager, &cubePos, &lightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer2(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer2(material2, &textureManager, &cube2Pos, &lightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
 
-
-	// Cube
-	Polygon cube;
+	// Create Polygons
+	Polygon cube1;
+	Polygon cube2;
 	Polygon lamp;
 
-	cube.init();
+	// Init Polygons
+	cube1.init();
+	cube2.init();
 	lamp.init();
 
 	// Set Frame Rate
@@ -153,12 +157,27 @@ int main(int argc, char *argv[]) {
 
 	KeyboardInput* keyboard = inputHandler.getKeyboard();
 
-	lampPos.translate(vec3(1.2f * 3,0, 2.0f*3));
-	//vec3 position = lampPos.getPosition();
-	//printf("%f,%f,%f\n", position.x, position.y, position.z);
-	mat4 model = lampPos.calculateModelMatrix();
+	// Initial Polygon Position, size and rotation
 
-	cubePos.scale(vec3(3));
+	/* 
+	Use to debug position of polygon:
+
+	vec3 position = lampPos.getPosition();
+	printf("%f,%f,%f\n", position.x, position.y, position.z);
+
+	*/
+
+	mat4 model;
+	lampPos.translate(vec3(0));
+	//lampPos.rotate(45.0f, vec3(-1.0f, 0.0f, 1.0f), false);
+	lampPos.calculateModelMatrix();
+
+	cube1Pos.translate(vec3(-6.0f, 0.0f, 0.0f));
+	cube1Pos.scale(vec3(3));
+
+	cube2Pos.translate(vec3(6.0f, 0.0f, 0.0f));
+	cube2Pos.scale(vec3(3));
+	
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -191,18 +210,25 @@ int main(int argc, char *argv[]) {
 
 			// Update Function
 			
-			cubePos.translate(vec3(0, 0 * dt, 0));
-			cubePos.rotate(45.0f*dt, vec3(1, 1, 0), false);
-			model = cubePos.calculateModelMatrix();
+			//cube1Pos.translate(vec3(0, 0 * dt, 0));
+			cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
+			model = cube1Pos.calculateModelMatrix();
 
+			//cube2Pos.translate(vec3(0, 0 * dt, 0));
+			cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			model = cube2Pos.calculateModelMatrix();
+
+			lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
+			model = lampPos.calculateModelMatrix();
 			//// End of Update
 			
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(&cube); 
-			MeshRenderer2.renderObject(&lamp);
+			MeshRenderer1.renderObject(&cube1); 
+			MeshRenderer2.renderObject(&cube2);
+			MeshRenderer3.renderObject(&lamp);
 			
 
 			//MeshRenderer2.renderObject(&cube);
