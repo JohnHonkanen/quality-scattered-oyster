@@ -46,7 +46,17 @@ void MouseInput::setScrollOffset(vec2 offSet)
 	MouseInput::scrollOffset = offSet;
 }
 
+void MouseInput::setLastScrollOffset(vec2 scrollOffset)
+{
+	MouseInput::lastScrollOffset = scrollOffset;
+}
+
 vec2 MouseInput::getScrollOffset()
 {
 	return MouseInput::scrollOffset;
+}
+
+vec2 MouseInput::getLastScrollOffset()
+{
+	return MouseInput::lastScrollOffset;
 }

@@ -11,8 +11,10 @@
 #include "TextureManager.h"
 #include "Transform.h"
 #include "Shader.h"
-#include "MeshGenerator.h"
 #include "Camera.h"
+#include "MeshGenerator.h"
+#include "Mesh.h"
+#include "Polygon.h"
 
 struct Material {
 	string texture;
@@ -22,21 +24,23 @@ struct Material {
 	float shininess;
 };
 
-class CubeRenderer : public Renderer
+class MeshRenderer : public Renderer
 {
 private:
 	Material material;
-	GLuint VAO; // 2D Mesh for the sprite
 	TextureManager *textureManager;
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
 	Camera *camera;
+	Mesh *mesh;
 
 public:
-	CubeRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
-	virtual ~CubeRenderer();
+	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
+	virtual ~MeshRenderer();
 
 	void init();
+	void renderObject(Mesh *mesh);
+	void renderObject(Polygon *polygon);
 	void renderObject();
 };
 

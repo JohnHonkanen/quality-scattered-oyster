@@ -8,10 +8,11 @@
 #include "TextureManager.h"
 #include "SpriteRenderer.h"
 #include "Camera.h"
-#include "CubeRenderer.h"
+#include "MeshRenderer.h"
 #include "glfwInputHandler.h"
 #include "Terrain.h"
 #include "Mesh.h"
+#include "Polygon.h"
 
 using namespace std;
 
@@ -110,9 +111,27 @@ int main(int argc, char *argv[]) {
 	Transform transform;
 	Material material;
 	material.texture = "lava";
+	
+	//Mesh Objects
+	MeshRenderer MeshRenderer1(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer2(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
+	
+	Polygon cube;
+	cube.init();
 
-	CubeRenderer cubeRenderer(material, &textureManager, &transform, &minShaderProgram, &playerCamera);
-	cubeRenderer.init();
+	// Testing Terrain Triangle Strips
+
+	Terrain terrain("terrain", 10, 10, 1.0f);
+	terrain.init();
+	Mesh terrainMesh = Mesh("terrain");
+	mapData terrainData = terrain.getData();
+	terrainMesh.mesh.vertices = (GLfloat*)terrainData.vertices;
+	terrainMesh.mesh.indices = terrainData.indices;
+	terrainMesh.mesh.normals = (GLfloat*)terrainData.normals;
+	terrainMesh.mesh.indexCount = terrainData.indexCount;
+	terrainMesh.mesh.vertexCount = terrainData.vertexCount;
+	terrainMesh.generateMesh();
+
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -127,16 +146,12 @@ int main(int argc, char *argv[]) {
 	clock.startClock();
 
 	KeyboardInput* keyboard = inputHandler.getKeyboard();
+
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
 
 		//Checks and calls events
 		inputHandler.pollEvent();
-		/*if (inputHandler.keyPressed(GLFW_KEY_F)) {
-			cout << "F" << endl;
-		}
-		cout << inputHandler.getMouse()->getPosition().x << endl;*/
-		//do_movement();
 
 		frameClock.updateClock(); // Ticks our Frame Clock
 		clock.updateClock(); //Ticks App Clock
@@ -149,15 +164,15 @@ int main(int argc, char *argv[]) {
 		//End of DeltaTime
 		if (frameClock.alarm()) {
 
+			// Process Inputs & Camera controls
+
 			playerCamera.processMouseScroll(*inputHandler.getMouse(), dt);
 			playerCamera.processCameraMouseMovement(*inputHandler.getMouse(), dt);
 			playerCamera.processKeyBoard(*inputHandler.getKeyboard(), dt);
 			
 			playerCamera.GetViewMatrix();
 			inputHandler.getMouse()->setLastPosition(inputHandler.getMouse()->getPosition());
-			// Process Inputs
-
-			// Camera controls
+			inputHandler.getMouse()->setLastScrollOffset(inputHandler.getMouse()->getScrollOffset());
 
 			// End of Process Inputs
 
@@ -177,8 +192,9 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			cubeRenderer.renderObject();
-			//cubeRenderer2.renderObject();
+			MeshRenderer1.renderObject(&terrainMesh); 
+
+			MeshRenderer2.renderObject(&cube);
 
 			// End of Render
 
@@ -187,7 +203,7 @@ int main(int argc, char *argv[]) {
 		previousTime = currentTime;
 		}
 	}
-
+	MeshGenerator::destroy();
 	graphicsHandler.destroy();
 
 	return 0;
