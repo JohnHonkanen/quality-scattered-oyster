@@ -98,7 +98,6 @@ GLuint MeshGenerator::createMesh(MeshData data)
 
 	// Normals attribute
 	if (data.normals != nullptr) {
-		printf("have normal \n");
 		glGenBuffers(1, &normalBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
 		glBufferData(GL_ARRAY_BUFFER, 3 * data.vertexCount*sizeof(GLfloat), data.normals, GL_STATIC_DRAW);

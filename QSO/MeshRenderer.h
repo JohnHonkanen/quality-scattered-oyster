@@ -17,7 +17,7 @@
 #include "Polygon.h"
 
 struct Material {
-	string texture;
+	string uv;
 	string diffuse;
 	string specular;
 	string emission;

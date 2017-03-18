@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
 	Shader minShaderProgram("minVert.shader", "minFrag.shader");
-	Shader lightingShaderProgram("lightingVert.shader", "lightingFrag.shader");
+	Shader minlightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 
 	// Testing Cube Renderer
@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 	Material material2;
 
 	// Material 1
-	material.texture = "awesomeface";
+	material.uv= "awesomeface";
 	
 	// Material 2
 	material2.diffuse = "container_2";
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
 	
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer2(material2, &textureManager, &cube2Pos, &lightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minlightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
 
 	// Create Polygons
@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 1.0f, 0.0f));
+	lampPos.translate(vec3(15.0f, 0.0f, 0.0f));
 	//lampPos.rotate(45.0f, vec3(-1.0f, 0.0f, 1.0f), false);
 	lampPos.calculateModelMatrix();
 
@@ -214,7 +214,7 @@ int main(int argc, char *argv[]) {
 			//cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
 			model = cube1Pos.calculateModelMatrix();
 
-			cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			//cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
 			model = cube2Pos.calculateModelMatrix();
 
 			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
