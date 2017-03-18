@@ -118,8 +118,11 @@ void MeshRenderer::renderObject(Polygon * polygon)
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 0.0f, 1.0f); // Also set light's color (white)
+	glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+	
 
 	if (MeshRenderer::material.diffuse != "") {
 		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);

@@ -63,6 +63,10 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 
 	vec3 v1Normal = cross((vertex2 - vertex1), (vertex3 - vertex1));
 
+	if (!reverse) {
+		v1Normal = -v1Normal;
+	}
+
 	GLfloat normal[12]{
 		v1Normal.x, v1Normal.y, v1Normal.z,
 		v1Normal.x, v1Normal.y, v1Normal.z,
