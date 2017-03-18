@@ -37,7 +37,7 @@ public:
 
 	glData glObjects;
 
-	void setData(GLuint vertexCount, GLuint indexCount, GLfloat *vertices, GLfloat *normals, GLfloat *color, GLfloat *uv, GLuint indices);
+	void setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLuint indices, GLfloat * normals, GLfloat * uv, GLfloat * color);
 	void setData(GLuint vertexCount, GLuint indexCount, GLfloat *vertices, GLuint indices, GLfloat *normals, GLfloat *uv);
 	void setData(GLuint vertexCount, GLuint indexCount, GLfloat *vertices, GLuint indices);
 	//void init();

@@ -192,7 +192,7 @@ void MeshRenderer::renderObject(Polygon * polygon)
 	for (int i = 0; i < 6; i++) {
 		//Draw Prefabs
 		glBindVertexArray(polygon->mesh[i]->glObjects.VAO);
-		glLineWidth(5.0f);
+		//glLineWidth(5.0f);
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		// Pass to Shader
