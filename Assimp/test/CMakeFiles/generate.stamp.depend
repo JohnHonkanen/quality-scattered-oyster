@@ -1,0 +1,25 @@
+# CMake generation dependency list for this directory.
+C:/dev/assimp-3.3.1/test/CMakeLists.txt
+C:/dev/assimp-3.3.1/cmake-modules/AddGTest.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindThreads.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckLibraryExists.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckSymbolExists.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/ExternalProject.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindGit.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindGit.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/RepositoryInfo.txt.in
+D:/_dev/cmake/share/cmake-3.7/Modules/FindGit.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/test/gtest/tmp/gtest-cfgcmd.txt.in

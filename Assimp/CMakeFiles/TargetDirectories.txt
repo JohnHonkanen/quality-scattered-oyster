@@ -1,0 +1,16 @@
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/UpdateAssimpLibsDebugSymbolsAndDLLs.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/uninstall.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/INSTALL.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/ALL_BUILD.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/ZERO_CHECK.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/contrib/zlib/CMakeFiles/zlibstatic.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/contrib/zlib/CMakeFiles/INSTALL.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/contrib/zlib/CMakeFiles/ALL_BUILD.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/code/CMakeFiles/assimp.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/code/CMakeFiles/INSTALL.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/tools/assimp_cmd/CMakeFiles/INSTALL.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/test/CMakeFiles/gtest.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/test/CMakeFiles/INSTALL.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/test/CMakeFiles/unit.dir
+D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/test/headercheck/CMakeFiles/INSTALL.dir

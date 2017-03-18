@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\81bd4bd9f88949cff77413b54fe809cd\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{FC7A78B2-E3CE-3D47-B19C-123EC731DD4B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

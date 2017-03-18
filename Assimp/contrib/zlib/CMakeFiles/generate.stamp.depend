@@ -1,0 +1,10 @@
+# CMake generation dependency list for this directory.
+C:/dev/assimp-3.3.1/contrib/zlib/CMakeLists.txt
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckTypeSize.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckIncludeFileCXX.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckFunctionExists.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+D:/_dev/cmake/share/cmake-3.7/Modules/CheckCSourceCompiles.cmake
+C:/dev/assimp-3.3.1/contrib/zlib/zlib.pc.cmakein
+C:/dev/assimp-3.3.1/contrib/zlib/zconf.h.cmakein

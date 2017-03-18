@@ -1,0 +1,55 @@
+
+{
+	"sources" : 
+	[
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/test/CMakeFiles/gtest"
+		},
+		
+		{
+			"file" : "C:/dev/assimp-3.3.1/test/CMakeLists.txt"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/9577ff4a66bbaed2843f473e73b8e7f5/gtest.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/4618586ce6cc8fb4ca8ca66bea8d216e/gtest-complete.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-install.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-mkdir.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-download.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-update.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-patch.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-configure.rule"
+		},
+		
+		{
+			"file" : "D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/1e080e5bd5710b05fdc409ce2ea33ddd/gtest-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : [ "gtest" ],
+		"name" : "gtest"
+	}
+}

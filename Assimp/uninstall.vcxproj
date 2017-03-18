@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{FC508317-EA97-3907-9178-0E93F34C090D}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>uninstall</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\assimp-3.3.1\.;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp;C:\dev\assimp-3.3.1\include;C:\dev\assimp-3.3.1\contrib\zlib;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\assimp-3.3.1\.;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp;C:\dev\assimp-3.3.1\include;C:\dev\assimp-3.3.1\contrib\zlib;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\assimp-3.3.1\.;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp;C:\dev\assimp-3.3.1\include;C:\dev\assimp-3.3.1\contrib\zlib;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\assimp-3.3.1\.;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp;C:\dev\assimp-3.3.1\include;C:\dev\assimp-3.3.1\contrib\zlib;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\dev\assimp-3.3.1\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/dev/assimp-3.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -HC:/dev/assimp-3.3.1 -BD:/UWS/08_Real_TIme_3d/code/QSO/Assimp --check-stamp-file D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/assimp-3.3.1/CMakeLists.txt;C:\dev\assimp-3.3.1\CMakeLists.txt;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCCompiler.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCXXCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeRCCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;C:\dev\assimp-3.3.1\revision.h.in;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\dev\assimp-3.3.1\cmake-modules\PrecompiledHeader.cmake;C:\dev\assimp-3.3.1\cmake-modules\cmake_uninstall.cmake.in;C:\dev\assimp-3.3.1\assimp-config.cmake.in;C:\dev\assimp-3.3.1\assimp-config-version.cmake.in;C:\dev\assimp-3.3.1\cmake-modules\FindDirectX.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindZLIB.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckTypeSize.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;C:\dev\assimp-3.3.1\assimp.pc.in;C:\dev\assimp-3.3.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/dev/assimp-3.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -HC:/dev/assimp-3.3.1 -BD:/UWS/08_Real_TIme_3d/code/QSO/Assimp --check-stamp-file D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/assimp-3.3.1/CMakeLists.txt;C:\dev\assimp-3.3.1\CMakeLists.txt;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCCompiler.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCXXCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeRCCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;C:\dev\assimp-3.3.1\revision.h.in;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\dev\assimp-3.3.1\cmake-modules\PrecompiledHeader.cmake;C:\dev\assimp-3.3.1\cmake-modules\cmake_uninstall.cmake.in;C:\dev\assimp-3.3.1\assimp-config.cmake.in;C:\dev\assimp-3.3.1\assimp-config-version.cmake.in;C:\dev\assimp-3.3.1\cmake-modules\FindDirectX.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindZLIB.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckTypeSize.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;C:\dev\assimp-3.3.1\assimp.pc.in;C:\dev\assimp-3.3.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/dev/assimp-3.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -HC:/dev/assimp-3.3.1 -BD:/UWS/08_Real_TIme_3d/code/QSO/Assimp --check-stamp-file D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/dev/assimp-3.3.1/CMakeLists.txt;C:\dev\assimp-3.3.1\CMakeLists.txt;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCCompiler.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCXXCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeRCCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;C:\dev\assimp-3.3.1\revision.h.in;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\dev\assimp-3.3.1\cmake-modules\PrecompiledHeader.cmake;C:\dev\assimp-3.3.1\cmake-modules\cmake_uninstall.cmake.in;C:\dev\assimp-3.3.1\assimp-config.cmake.in;C:\dev\assimp-3.3.1\assimp-config-version.cmake.in;C:\dev\assimp-3.3.1\cmake-modules\FindDirectX.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindZLIB.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckTypeSize.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;C:\dev\assimp-3.3.1\assimp.pc.in;C:\dev\assimp-3.3.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/dev/assimp-3.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -HC:/dev/assimp-3.3.1 -BD:/UWS/08_Real_TIme_3d/code/QSO/Assimp --check-stamp-file D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/dev/assimp-3.3.1/CMakeLists.txt;C:\dev\assimp-3.3.1\CMakeLists.txt;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCCompiler.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeCXXCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\3.7.2\CMakeRCCompiler.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;C:\dev\assimp-3.3.1\revision.h.in;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;C:\dev\assimp-3.3.1\cmake-modules\PrecompiledHeader.cmake;C:\dev\assimp-3.3.1\cmake-modules\cmake_uninstall.cmake.in;C:\dev\assimp-3.3.1\assimp-config.cmake.in;C:\dev\assimp-3.3.1\assimp-config-version.cmake.in;C:\dev\assimp-3.3.1\cmake-modules\FindDirectX.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindZLIB.cmake;C:\dev\assimp-3.3.1\cmake-modules\FindPkgMacros.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPkgConfig.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckTypeSize.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;D:\_dev\cmake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;C:\dev\assimp-3.3.1\assimp.pc.in;C:\dev\assimp-3.3.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\85a686d7140b9cd9ed0d34e4a10fd3b3\uninstall.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -P D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/cmake_uninstall.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/85a686d7140b9cd9ed0d34e4a10fd3b3/uninstall.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\uninstall</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -P D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/cmake_uninstall.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/85a686d7140b9cd9ed0d34e4a10fd3b3/uninstall.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\uninstall</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -P D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/cmake_uninstall.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/85a686d7140b9cd9ed0d34e4a10fd3b3/uninstall.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\uninstall</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\_dev\cmake\bin\cmake.exe -P D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/cmake_uninstall.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/CMakeFiles/85a686d7140b9cd9ed0d34e4a10fd3b3/uninstall.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\uninstall</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\UWS\08_Real_TIme_3d\code\QSO\Assimp\CMakeFiles\uninstall" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:/UWS/08_Real_TIme_3d/code/QSO/Assimp/ZERO_CHECK.vcxproj">
+      <Project>E3B487B7-C640-3712-AEC8-FA8DFAAA19AC</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
