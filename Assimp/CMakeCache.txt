@@ -360,8 +360,17 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
 
+//Path to a file.
+DirectX_D3D11_INCLUDE_DIR:PATH=C:/Program Files (x86)/Windows Kits/8.1/Include/um
+
 //Path to a library.
-DirectX_D3DCOMPILER_LIBRARY:FILEPATH=DirectX_D3DCOMPILER_LIBRARY-NOTFOUND
+DirectX_D3D11_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/d3d11.lib
+
+//Path to a library.
+DirectX_D3DCOMPILER_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/d3dcompiler.lib
+
+//Path to a library.
+DirectX_D3DX11_LIBRARY:FILEPATH=DirectX_D3DX11_LIBRARY-NOTFOUND
 
 //Path to a library.
 DirectX_D3DX9_LIBRARY:FILEPATH=DirectX_D3DX9_LIBRARY-NOTFOUND
@@ -370,16 +379,16 @@ DirectX_D3DX9_LIBRARY:FILEPATH=DirectX_D3DX9_LIBRARY-NOTFOUND
 DirectX_DXERR_LIBRARY:FILEPATH=DirectX_DXERR_LIBRARY-NOTFOUND
 
 //Path to a library.
-DirectX_DXGI_LIBRARY:FILEPATH=DirectX_DXGI_LIBRARY-NOTFOUND
+DirectX_DXGI_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/dxgi.lib
 
 //Path to a library.
-DirectX_DXGUID_LIBRARY:FILEPATH=DirectX_DXGUID_LIBRARY-NOTFOUND
+DirectX_DXGUID_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/dxguid.lib
 
 //x
-DirectX_INCLUDE_DIR:PATH=DirectX_INCLUDE_DIR-NOTFOUND
+DirectX_INCLUDE_DIR:PATH=C:/Program Files (x86)/Windows Kits/8.1/Include/shared
 
 //x
-DirectX_LIBRARY:FILEPATH=DirectX_LIBRARY-NOTFOUND
+DirectX_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/d3d9.lib
 
 //Single output directory for building all executables.
 EXECUTABLE_OUTPUT_PATH:PATH=
@@ -536,8 +545,14 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DirectX_D3D11_INCLUDE_DIR
+DirectX_D3D11_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DirectX_D3D11_LIBRARY
+DirectX_D3D11_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DirectX_D3DCOMPILER_LIBRARY
 DirectX_D3DCOMPILER_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DirectX_D3DX11_LIBRARY
+DirectX_D3DX11_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DirectX_D3DX9_LIBRARY
 DirectX_D3DX9_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DirectX_DXERR_LIBRARY
