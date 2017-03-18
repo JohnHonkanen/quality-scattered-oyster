@@ -15,6 +15,7 @@
 #include "MeshGenerator.h"
 #include "Mesh.h"
 #include "Polygon.h"
+#include "Cube.h"
 
 struct Material {
 	string uv;

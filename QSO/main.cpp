@@ -13,6 +13,7 @@
 #include "Terrain.h"
 #include "Mesh.h"
 #include "Polygon.h"
+#include "Cube.h"
 
 using namespace std;
 
@@ -136,11 +137,13 @@ int main(int argc, char *argv[]) {
 	// Create Polygons
 	Polygon cube1;
 	Polygon cube2;
+	Cube cube3;
 	Polygon lamp;
 
 	// Init Polygons
 	cube1.init();
 	cube2.init();
+	cube3.init(cube3);
 	lamp.init();
 
 	// Set Frame Rate
@@ -214,7 +217,7 @@ int main(int argc, char *argv[]) {
 			//cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
 			model = cube1Pos.calculateModelMatrix();
 
-			//cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
 			model = cube2Pos.calculateModelMatrix();
 
 			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
