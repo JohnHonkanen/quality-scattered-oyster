@@ -69,6 +69,7 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 
 		v1Normal.x, v1Normal.y, v1Normal.z,
 		v1Normal.x, v1Normal.y, v1Normal.z
+
 	};
 
 	GLfloat uv[8] = {

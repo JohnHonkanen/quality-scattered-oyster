@@ -102,7 +102,7 @@ GLuint MeshGenerator::createMesh(MeshData data)
 		glGenBuffers(1, &normalBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
 		glBufferData(GL_ARRAY_BUFFER, 3 * data.vertexCount*sizeof(GLfloat), data.normals, GL_STATIC_DRAW);
-		glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0); //3 * sizeof(GLfloat)
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0); //3 * sizeof(GLfloat)
 		glEnableVertexAttribArray(3); // Set location in shader
 		meshBuffers[STORED_NORMAL] = normalBuffer;
 	}

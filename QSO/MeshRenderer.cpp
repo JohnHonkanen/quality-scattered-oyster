@@ -113,6 +113,26 @@ void MeshRenderer::renderObject(Polygon * polygon)
 
 	MeshRenderer::program->Use();
 
+	vec3 lightPos(0.0f, 3.0f, 0.0f);
+
+	//Set Light Matrix's uniform location
+	GLint lightDirLoc = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
+	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
+	
+	// Set Light Properties
+
+	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "light.position");
+	glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+
+	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "light.ambient"), 0.2f, 0.2f, 0.2f);
+	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "light.diffuse"), 0.5f, 0.5f, 0.5f);
+	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "light.specular"), 1.0f, 1.0f, 1.0f);
+
+	//Set Material Properties
+
+	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "material.specular"), 0.5f, 0.5f, 0.5f);
+	glUniform1f(glGetUniformLocation(MeshRenderer::program->program, "material.shininess"), 64.0f);
+
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
 	mat4 model = transform->get();
@@ -123,15 +143,17 @@ void MeshRenderer::renderObject(Polygon * polygon)
 	GLuint projectionLoc = glGetUniformLocation(MeshRenderer::program->program, "projection");
 	GLuint alphaLoc = glGetUniformLocation(MeshRenderer::program->program, "ourAlpha");
 
+	//Pass to Shader
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	glUniform1f(alphaLoc, 1.0f);
+
 	//glBindTexture call will bind that texture to the currently active texture unit.
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.texture));
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
-	glUniform1i(glGetUniformLocation(program->program, "ourTexture"), 0);
-
-	//Set Light Matrix's uniform location
-	GLint lightDirLoc = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
-	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
+	glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
 
 
 	//glBindTexture call will bind that texture to the currently active texture unit.
@@ -140,11 +162,10 @@ void MeshRenderer::renderObject(Polygon * polygon)
 
 	if (MeshRenderer::material.diffuse != "") {
 		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
-
+		
 		//Bind Diffuse map
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
-		
 	}
 
 	if (MeshRenderer::material.color != "") {
@@ -157,7 +178,6 @@ void MeshRenderer::renderObject(Polygon * polygon)
 		//Bind Specular map
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
-
 	}
 
 	if (MeshRenderer::material.emission != "") {
@@ -168,30 +188,6 @@ void MeshRenderer::renderObject(Polygon * polygon)
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
 	}
 
-	printf("material texture: %s \n", material.diffuse.c_str());
-	//Pass to Shader
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-	glUniform1f(alphaLoc, 1.0f);
-
-	vec3 lightPos(0.0f, 1.0f, 0.0f);
-
-	// Set Light Properties
-	glUniform3f(lightDirLoc, lightPos.x, lightPos.y, lightPos.z);
-	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "light.ambient"), 0.2f, 0.2f, 0.2f);
-	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "light.diffuse"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "light.specular"), 1.0f, 1.0f, 1.0f);
-
-	//Set Material Properties
-
-	glUniform3f(glGetUniformLocation(MeshRenderer::program->program, "material.specular"), 0.5f, 0.5f, 0.5f);
-	glUniform1f(glGetUniformLocation(MeshRenderer::program->program, "material.shininess"), 64.0f);
-
-	// Pass to Shader
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-	glUniform1f(alphaLoc, 1.0f);
 
 	for (int i = 0; i < 6; i++) {
 		//Draw Prefabs
@@ -206,6 +202,7 @@ void MeshRenderer::renderObject(Polygon * polygon)
 		glDrawElements(polygon->mesh[i]->mesh.mode, polygon->mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
+	glBindVertexArray(0);
 }
 
 void MeshRenderer::renderObject()

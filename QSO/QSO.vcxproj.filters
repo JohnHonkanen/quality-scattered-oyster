@@ -91,6 +91,12 @@
     <Filter Include="Resource Files\Shaders\Minimal">
       <UniqueIdentifier>{897e2bd4-5dd5-4aaf-9e1c-54bc92a9ccbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps">
+      <UniqueIdentifier>{c294dd0c-1dc8-4b71-9421-7afb0da6b0fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Basic">
+      <UniqueIdentifier>{a23cbab8-8a41-45d3-891c-82d484d16369}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -262,12 +268,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lightingFrag.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting</Filter>
-    </None>
-    <None Include="lightingVert.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting</Filter>
-    </None>
     <None Include="minVert.shader">
       <Filter>Resource Files\Shaders\Minimal</Filter>
     </None>
@@ -279,6 +279,18 @@
     </None>
     <None Include="lampFrag.shader">
       <Filter>Resource Files\Shaders\Light\Lamp</Filter>
+    </None>
+    <None Include="lightingFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps</Filter>
+    </None>
+    <None Include="lightingVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps</Filter>
+    </None>
+    <None Include="minLightingVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Basic</Filter>
+    </None>
+    <None Include="minLightingFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Basic</Filter>
     </None>
   </ItemGroup>
 </Project>
