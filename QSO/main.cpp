@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "Shader.h"
 #include "Window.h"
 #include "glfwWindow.h"

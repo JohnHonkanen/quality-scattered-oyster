@@ -11,8 +11,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletDynamics", "Bullet\sr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearMath", "Bullet\src\LinearMath\LinearMath.vcxproj", "{4493EDF2-B4A7-3885-B6B1-C1128A2AD078}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "assimp", "Assimp\code\assimp.vcxproj", "{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -77,18 +75,6 @@ Global
 		{4493EDF2-B4A7-3885-B6B1-C1128A2AD078}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
 		{4493EDF2-B4A7-3885-B6B1-C1128A2AD078}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
 		{4493EDF2-B4A7-3885-B6B1-C1128A2AD078}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.Debug|x64.ActiveCfg = Debug|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.Debug|x64.Build.0 = Debug|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.Debug|x86.ActiveCfg = Debug|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.Release|x64.ActiveCfg = Release|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.Release|x64.Build.0 = Release|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.Release|x86.ActiveCfg = Release|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
-		{AD495288-DD52-3AC4-85E3-FAA75FE9D09C}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
