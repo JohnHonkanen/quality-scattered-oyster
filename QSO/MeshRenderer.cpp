@@ -101,7 +101,7 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	//glDrawArrays(GL_TRIANGLES, 0, 8);
-	glDrawElements(GL_TRIANGLES, mesh->mesh.indexCount, GL_UNSIGNED_INT, 0);
+	glDrawElements(mesh->mesh.mode, mesh->mesh.indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	
 }
@@ -203,7 +203,7 @@ void MeshRenderer::renderObject(Polygon * polygon)
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
 		//glDrawArrays(GL_TRIANGLES, 0, 8);
-		glDrawElements(GL_TRIANGLES, polygon->mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
+		glDrawElements(polygon->mesh[i]->mesh.mode, polygon->mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 }
