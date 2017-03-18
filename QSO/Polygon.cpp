@@ -16,27 +16,25 @@ void Polygon::init()
 	GLfloat polygonLength = 1.0f;
 
 	mesh[0] = new Mesh("leftFace");
-	buildFace(mesh[0], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(-1.0f, 0.0f, 0.0f), false);
+	buildFace(mesh[0], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), false);
 		
 	mesh[1] = new Mesh("rightFace");
-	buildFace(mesh[1], vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), true);
+	buildFace(mesh[1], vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), true);
 
 	mesh[2] = new Mesh("bottomFace");
-	buildFace(mesh[2], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, -1.0f, 0.0f), false);
+	buildFace(mesh[2], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), false);
 
 	mesh[3] = new Mesh("topFace");
-	buildFace(mesh[3], vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), true);
+	buildFace(mesh[3], vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), true);
 
 	mesh[4] = new Mesh("bottomFace");
-	buildFace(mesh[4], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, -1.0f), true);
+	buildFace(mesh[4], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), true);
 
 	mesh[5] = new Mesh("frontFace");
-	buildFace(mesh[5], vec3(0.0f, 0.0f, 1.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), false);
-
-
+	buildFace(mesh[5], vec3(0.0f, 0.0f, 1.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), false);
 }
 
-void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, vec3 normals, bool reverse)
+void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reverse)
 {
 	GLfloat vertex[12];
 	vertex[0] = corner.x;
@@ -58,12 +56,19 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, vec3 norm
 	vertex[10] = cVertex.y;
 	vertex[11] = cVertex.z;
 
-	GLfloat normal[12]{
-		normals.x, normals.y, normals.z,
-		normals.x, normals.y, normals.z,
+	vec3 vertex1(vertex[0], vertex[1], vertex[2]);
+	vec3 vertex2(vertex[3], vertex[4], vertex[5]);
+	vec3 vertex3(vertex[6], vertex[7], vertex[8]);
+	vec3 vertex4(vertex[9], vertex[10], vertex[11]);
 
-		normals.x, normals.y, normals.z,
-		normals.x, normals.y, normals.z
+	vec3 v1Normal = cross((vertex2 - vertex1), (vertex3 - vertex1));
+
+	GLfloat normal[12]{
+		v1Normal.x, v1Normal.y, v1Normal.z,
+		v1Normal.x, v1Normal.y, v1Normal.z,
+
+		v1Normal.x, v1Normal.y, v1Normal.z,
+		v1Normal.x, v1Normal.y, v1Normal.z
 	};
 
 	GLfloat uv[8] = {
@@ -100,3 +105,4 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, vec3 norm
 	
 	
 }
+

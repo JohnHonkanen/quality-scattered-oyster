@@ -101,6 +101,7 @@ int main(int argc, char *argv[]) {
 	// Testing Texture Manager
 	TextureManager textureManager;
 	textureManager.saveTexture("container.jpg", "container_1");
+	textureManager.saveTexture("awesomeface.png", "awesomeface");
 	textureManager.saveTextureMap("container2.png", "container_2"); // For diffusion Map
 	textureManager.saveTextureMap("container2_specular.png", "container_specular"); // For specular Map
 	textureManager.saveTextureMap("lava.jpg", "lava_2"); // For emission Map
@@ -120,12 +121,12 @@ int main(int argc, char *argv[]) {
 	Material material2;
 
 	// Material 1
-	material.texture = "container_1";
+	material.texture = "awesomeface";
 	
 	// Material 2
 	material2.diffuse = "container_2";
-	//material2.specular = "cotainer_specular";
-	//material2.emission = "lava_2";
+	material2.specular = "cotainer_specular";
+	material2.emission = "lava_2";
 	
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
@@ -168,7 +169,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.translate(vec3(0));
+	lampPos.translate(vec3(0.0f, 1.0f, 0.0f));
 	//lampPos.rotate(45.0f, vec3(-1.0f, 0.0f, 1.0f), false);
 	lampPos.calculateModelMatrix();
 
@@ -210,16 +211,15 @@ int main(int argc, char *argv[]) {
 
 			// Update Function
 			
-			//cube1Pos.translate(vec3(0, 0 * dt, 0));
-			cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
+			//cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
 			model = cube1Pos.calculateModelMatrix();
 
-			//cube2Pos.translate(vec3(0, 0 * dt, 0));
 			cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
 			model = cube2Pos.calculateModelMatrix();
 
-			lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
+			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
 			model = lampPos.calculateModelMatrix();
+
 			//// End of Update
 			
 
