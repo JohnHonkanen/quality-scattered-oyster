@@ -121,9 +121,11 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
 	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos");
+	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 0.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
 	
 
 	if (MeshRenderer::material.diffuse != "") {

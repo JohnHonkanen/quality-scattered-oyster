@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.translate(vec3(15.0f, 0.0f, 0.0f));
+	lampPos.translate(vec3(15.0f, 6.0f, 0.0f));
 	//lampPos.rotate(45.0f, vec3(-1.0f, 0.0f, 1.0f), false);
 	lampPos.calculateModelMatrix();
 
@@ -182,10 +182,10 @@ int main(int argc, char *argv[]) {
 	cube1Pos.scale(vec3(3));
 
 	cube2Pos.translate(vec3(5.0f, 0.0f, 0.0f));
-	cube2Pos.scale(vec3(3));
+	cube2Pos.scale(vec3(1));
 
-	cube3Pos.translate(vec3(25.0f, 0.0f, 0.0f));
-	cube3Pos.scale(vec3(3));
+	cube3Pos.translate(vec3(35.0f, 0.0f, 0.0f));
+	cube3Pos.scale(vec3(8));
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
