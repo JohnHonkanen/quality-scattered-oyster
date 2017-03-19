@@ -113,6 +113,7 @@ int main(int argc, char *argv[]) {
 	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
 	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");
 	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
+	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 
 	// Testing Cube Renderer
@@ -122,17 +123,35 @@ int main(int argc, char *argv[]) {
 	Transform cube3Pos;
 	Transform cube4Pos;
 	Transform cube5Pos;
-	Transform lampPos;
+	Transform cube6Pos;
+	Transform cube7Pos;
+	Transform cube8Pos;
+	Transform lampPos; 
 	Material material;
-	Material material2;
+	Material mapD;
+	Material mapDS;
+	Material mapDSE;
+	Material mapE;
 
 	// Material 1
 	material.uv = "container_1";
 	
-	// Material 2
-	material2.diffuse = "container_2";
-	//material2.specular = "cotainer_specular";
-	//material2.emission = "lava_2";
+	// Material with Diffuse Map
+	mapD.diffuse = "container_2";
+
+	// Material with Diffuse/Specular Map
+	mapDS.diffuse = "container_2";
+	mapDS.specular = "cotainer_specular";
+
+	// Material with Diff/Spec/Emi Map
+	mapE.emission = "lava_2";
+
+	// Material with Emission Map
+	mapDSE.diffuse = "container_2";
+	mapDSE.specular = "cotainer_specular";
+	mapDSE.emission = "lava_2";
+
+	
 
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
@@ -140,7 +159,10 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer6(material2, &textureManager, &cube5Pos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer7(mapDS, &textureManager, &cube6Pos, &simpleLightingMapShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -148,6 +170,9 @@ int main(int argc, char *argv[]) {
 	Cube cube3;
 	Cube cube4;
 	Cube cube5;
+	Cube cube6;
+	Cube cube7;
+	Cube cube8;
 	Polygon lamp;
 
 	// Init Polygons
@@ -156,6 +181,9 @@ int main(int argc, char *argv[]) {
 	cube3.init();
 	cube4.init();
 	cube5.init();
+	cube6.init();
+	cube7.init();
+	cube8.init();
 	lamp.init();
 
 	// Set Frame Rate
@@ -184,8 +212,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.setPosition(vec3(0.0f, 0.0f, 0.0f));
-	lampPos.translate(vec3(15.0f, 10.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
 	cube1Pos.translate(vec3(-6.0f, 0.0f, 0.0f));
@@ -202,6 +229,19 @@ int main(int argc, char *argv[]) {
 
 	cube5Pos.translate(vec3(15.0f, 0.0f, -20.0f));
 	cube5Pos.scale(vec3(8));
+
+	cube6Pos.translate(vec3(5.0f, 0.0f, -20.0f));
+	cube6Pos.scale(vec3(8));
+	model = cube6Pos.calculateModelMatrix();
+
+	cube7Pos.translate(vec3(-5.0f, 0.0f, -20.0f));
+	cube7Pos.scale(vec3(8));
+	model = cube7Pos.calculateModelMatrix();
+
+	cube8Pos.translate(vec3(-15.0f, 0.0f, -20.0f));
+	cube8Pos.scale(vec3(8));
+	model = cube8Pos.calculateModelMatrix();
+	
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -253,6 +293,9 @@ int main(int argc, char *argv[]) {
 			cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
 			model = cube5Pos.calculateModelMatrix();
 
+			
+
+
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
@@ -262,6 +305,10 @@ int main(int argc, char *argv[]) {
 			MeshRenderer4.renderObject(&cube3);
 			MeshRenderer5.renderObject(&cube4);
 			MeshRenderer6.renderObject(&cube5);
+			MeshRenderer7.renderObject(&cube6);
+			MeshRenderer8.renderObject(&cube7);
+			MeshRenderer9.renderObject(&cube8);
+
 
 			//MeshRenderer2.renderObject(&cube);
 

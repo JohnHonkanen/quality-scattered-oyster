@@ -225,6 +225,8 @@
     <None Include="minLightingFrag.shader" />
     <None Include="minLightingVert.shader" />
     <None Include="minVert.shader" />
+    <None Include="simpleLightingMapFrag.shader" />
+    <None Include="simpleLightingMapVert.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

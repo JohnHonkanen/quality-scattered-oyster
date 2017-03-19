@@ -120,8 +120,8 @@ void MeshRenderer::renderObject(Shape *shape)
 	Transform lampPos;
 
 	mat4 model;
-	lampPos.setPosition(vec3(0.0f, 0.0f, 0.0f));
-	lampPos.translate(vec3(15.0f, 10.0f, 0.0f));
+	//lampPos.setPosition(vec3(0.0f, 0.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 	model = lampPos.calculateModelMatrix();
 
@@ -182,7 +182,6 @@ void MeshRenderer::renderObject(Shape *shape)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
 		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
-		//cout << "material.diffuse: " <<  MeshRenderer::material.diffuse <<endl;
 	}
 
 	if (MeshRenderer::material.specular != "") {

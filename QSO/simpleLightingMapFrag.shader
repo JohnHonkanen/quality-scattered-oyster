@@ -3,7 +3,6 @@
 struct Material {
 	sampler2D diffuse;
 	sampler2D specular;
-	sampler2D emission;
 	float shininess;
 };
 
@@ -44,10 +43,7 @@ void main()
 																			  // The higher the shininess value of an object, the more it properly reflects the light instead of scattering it around. 
 	vec3 specular = light.specular * spec * vec3(texture(material.specular, UV));
 
-	//Emission
-	vec3 emission = vec3(texture(material.emission, UV));
-
-	vec3 result = (ambient + diffuse + specular + emission);
+	vec3 result = (ambient + diffuse + specular);
 
 	color = vec4(result, 1.0f);
 

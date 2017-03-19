@@ -103,6 +103,12 @@
     <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps">
       <UniqueIdentifier>{130f3b5a-6489-4b65-bc7d-d4ffeb1a317d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff Map">
+      <UniqueIdentifier>{60c6870d-2078-4763-81d8-c3afa6d8cbfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff/Emission Map">
+      <UniqueIdentifier>{e3391ff4-cefd-45ab-93d3-208d99c37467}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -310,11 +316,17 @@
     <None Include="matLightingFrag.shader">
       <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Material</Filter>
     </None>
-    <None Include="lightingMapFrag.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps</Filter>
+    <None Include="simpleLightingMapVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff Map</Filter>
+    </None>
+    <None Include="simpleLightingMapFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff Map</Filter>
     </None>
     <None Include="lightingMapVert.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps</Filter>
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff/Emission Map</Filter>
+    </None>
+    <None Include="lightingMapFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff/Emission Map</Filter>
     </None>
   </ItemGroup>
 </Project>
