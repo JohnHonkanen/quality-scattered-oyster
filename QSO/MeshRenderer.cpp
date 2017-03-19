@@ -115,7 +115,7 @@ void MeshRenderer::renderObject(Shape *shape)
 
 	MeshRenderer::program->Use();
 
-	vec3 lightPos(15.0f, 0.0f, 0.0f);
+	vec3 lightPos(15.0f, 10.0f, 0.0f);
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
@@ -143,37 +143,6 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
 
-
-	if (MeshRenderer::material.diffuse != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
-
-		//Bind Diffuse map
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
-	}
-
-	if (MeshRenderer::material.specular != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
-
-		//Bind Specular map
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
-	}
-
-
-	if (MeshRenderer::material.color != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
-	}
-
-
-	if (MeshRenderer::material.emission != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
-
-		//Bind Emission map
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
-	}
-
 	// Create camera transformations
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
@@ -197,20 +166,49 @@ void MeshRenderer::renderObject(Shape *shape)
 	//glBindTexture call will bind that texture to the currently active texture unit.
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.uv));
-	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 	glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
+	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
+
+	if (MeshRenderer::material.diffuse != "") {
+		//Bind Diffuse map
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
+		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
+		//cout << "material.diffuse: " <<  MeshRenderer::material.diffuse <<endl;
+	}
+
+	if (MeshRenderer::material.specular != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
+
+		//Bind Specular map
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
+		glUniform1i(glGetUniformLocation(program->program, "material.specuarl"), 1);
+	}
+
+
+	if (MeshRenderer::material.color != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
+	}
+
+
+	if (MeshRenderer::material.emission != "") {
+		glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
+
+		//Bind Emission map
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
+	}
 	
 
 	for (int i = 0; i < numberOfMeshs; i++) {
 		//Draw Prefabs
 		glBindVertexArray(mesh[i]->glObjects.VAO);
-		printf("VAO %i \n", mesh[i]->glObjects.VAO);
 
 		// Pass to Shader
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
 		glDrawElements(mesh[i]->mesh.mode, mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
-		printf("Mesh %i \n", mesh);
 		glBindVertexArray(0);
 	}
 }

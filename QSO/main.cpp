@@ -112,6 +112,7 @@ int main(int argc, char *argv[]) {
 	Shader minShaderProgram("minVert.shader", "minFrag.shader");
 	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
 	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");
+	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 
 	// Testing Cube Renderer
@@ -120,18 +121,18 @@ int main(int argc, char *argv[]) {
 	Transform cube2Pos;
 	Transform cube3Pos;
 	Transform cube4Pos;
-	//Transform cube5Pos;
+	Transform cube5Pos;
 	Transform lampPos;
 	Material material;
 	Material material2;
 
 	// Material 1
-	material.uv = "awesomeface";
+	material.uv = "container_1";
 	
 	// Material 2
 	material2.diffuse = "container_2";
-	material2.specular = "cotainer_specular";
-	material2.emission = "lava_2";
+	//material2.specular = "cotainer_specular";
+	//material2.emission = "lava_2";
 
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
@@ -139,7 +140,7 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
-	//MeshRenderer MeshRenderer6(material, &textureManager, &cube5Pos, &minLightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer6(material2, &textureManager, &cube5Pos, &lightingMapShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -154,7 +155,7 @@ int main(int argc, char *argv[]) {
 	cube2.init();
 	cube3.init();
 	cube4.init();
-	//cube5.init();
+	cube5.init();
 	lamp.init();
 
 	// Set Frame Rate
@@ -183,8 +184,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.translate(vec3(15.0f, 6.0f, 0.0f));
-	//lampPos.rotate(45.0f, vec3(-1.0f, 0.0f, 1.0f), false);
+	lampPos.translate(vec3(15.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
 	cube1Pos.translate(vec3(-6.0f, 0.0f, 0.0f));
@@ -199,8 +199,8 @@ int main(int argc, char *argv[]) {
 	cube4Pos.translate(vec3(15.0f, 0.0f, 20.0f));
 	cube4Pos.scale(vec3(8));
 
-	//cube5Pos.translate(vec3(35.0f, 0.0f, 0.0f));
-	//cube5Pos.scale(vec3(8));
+	cube5Pos.translate(vec3(15.0f, 0.0f, -20.0f));
+	cube5Pos.scale(vec3(8));
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -212,9 +212,9 @@ int main(int argc, char *argv[]) {
 		clock.updateClock(); //Ticks App Clock
 
 		// Calculates Delta Time
-		
+		previousTime = currentTime;
 		currentTime = clock.getMilliseconds();
-		double dt = (currentTime - previousTime) * 0.001f; //Convert DT to seconds
+		double dt = (currentTime - previousTime) * 0.01f; //Convert DT to seconds
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {
@@ -249,8 +249,8 @@ int main(int argc, char *argv[]) {
 			cube4Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
 			model = cube4Pos.calculateModelMatrix();
 
-			/*cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube5Pos.calculateModelMatrix();*/
+			cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			model = cube5Pos.calculateModelMatrix();
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
@@ -260,7 +260,7 @@ int main(int argc, char *argv[]) {
 			MeshRenderer3.renderObject(&lamp);
 			MeshRenderer4.renderObject(&cube3);
 			MeshRenderer5.renderObject(&cube4);
-			//MeshRenderer6.renderObject(&cube5);
+			MeshRenderer6.renderObject(&cube5);
 
 			//MeshRenderer2.renderObject(&cube);
 
@@ -268,7 +268,6 @@ int main(int argc, char *argv[]) {
 
 		graphicsHandler.end(); // Swaps scene buffers
 		frameClock.resetClock(); // Once frame is done reset to 0
-		previousTime = currentTime;
 		}
 	}
 	MeshGenerator::destroy();

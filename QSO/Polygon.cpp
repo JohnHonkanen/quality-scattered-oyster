@@ -76,6 +76,9 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 	}
 
 	// Need to check if top/bottom and get correct normals
+	if (mesh->toString() == "topFace" || mesh->toString() == "bottomFace") {
+	//	v1Normal = -v1Normal;
+	}
 
 	GLfloat normal[12]{
 		v1Normal.x, v1Normal.y, v1Normal.z,
@@ -117,6 +120,6 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 	mesh->mesh.indexCount = 6;
 	mesh->mesh.vertexCount = 6;
 	mesh->generateMesh();
-	printf("VAO2 %i \n", mesh->glObjects.VAO);
+	//printf("VAO2 %i \n", mesh->glObjects.VAO);
 	
 }

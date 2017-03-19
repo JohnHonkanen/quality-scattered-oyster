@@ -100,6 +100,9 @@
     <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Material">
       <UniqueIdentifier>{da7e2596-9b53-4bad-8d1e-29e2023db0ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps">
+      <UniqueIdentifier>{130f3b5a-6489-4b65-bc7d-d4ffeb1a317d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -306,6 +309,12 @@
     </None>
     <None Include="matLightingFrag.shader">
       <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Material</Filter>
+    </None>
+    <None Include="lightingMapFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps</Filter>
+    </None>
+    <None Include="lightingMapVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps</Filter>
     </None>
   </ItemGroup>
 </Project>
