@@ -75,6 +75,8 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 		v1Normal = -v1Normal;
 	}
 
+	// Need to check if top/bottom and get correct normals
+
 	GLfloat normal[12]{
 		v1Normal.x, v1Normal.y, v1Normal.z,
 		v1Normal.x, v1Normal.y, v1Normal.z,
