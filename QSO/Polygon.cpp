@@ -15,23 +15,31 @@ void Polygon::init()
 {
 	GLfloat polygonLength = 1.0f;
 
-	mesh[0] = new Mesh("leftFace");
-	buildFace(mesh[0], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), false);
+	Mesh* mesh0 = new Mesh("leftFace");
+	buildFace(mesh0, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), false);
 		
-	mesh[1] = new Mesh("rightFace");
-	buildFace(mesh[1], vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), true);
+	Mesh* mesh1 = new Mesh("rightFace");
+	buildFace(mesh1, vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), true);
 
-	mesh[2] = new Mesh("bottomFace");
-	buildFace(mesh[2], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), false);
+	Mesh* mesh2 = new Mesh("bottomFace");
+	buildFace(mesh2, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), false);
 
-	mesh[3] = new Mesh("topFace");
-	buildFace(mesh[3], vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), true);
+	Mesh* mesh3 = new Mesh("topFace");
+	buildFace(mesh3, vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), vec3(1.0f, 0.0f, 0.0f), true);
 
-	mesh[4] = new Mesh("bottomFace");
-	buildFace(mesh[4], vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), true);
+	Mesh* mesh4 = new Mesh("bottomFace");
+	buildFace(mesh4, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), true);
 
-	mesh[5] = new Mesh("frontFace");
-	buildFace(mesh[5], vec3(0.0f, 0.0f, 1.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), false);
+	Mesh* mesh5 = new Mesh("frontFace");
+	buildFace(mesh5, vec3(0.0f, 0.0f, 1.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), false);
+
+	Shape::numberOfMeshs = 6;
+	Shape::meshes.push_back(mesh0);
+	Shape::meshes.push_back(mesh1);
+	Shape::meshes.push_back(mesh2);
+	Shape::meshes.push_back(mesh3);
+	Shape::meshes.push_back(mesh4);
+	Shape::meshes.push_back(mesh5);
 }
 
 void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reverse)
@@ -107,7 +115,6 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 	mesh->mesh.indexCount = 6;
 	mesh->mesh.vertexCount = 6;
 	mesh->generateMesh();
-	
+	printf("VAO2 %i \n", mesh->glObjects.VAO);
 	
 }
-

@@ -11,55 +11,55 @@ Cube::~Cube()
 {
 }
 
-void Cube::init(Mesh * mesh)
+void Cube::buildCube()
 {
 
-	GLfloat vertex[] = {
-		-0.5f, -0.5f, -0.5f, 
-		0.5f, -0.5f, -0.5f, 
+	GLfloat vertex[108] = {
+		-0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f, -0.5f,
 		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,  
-		-0.5f,  0.5f, -0.5f, 
-		-0.5f, -0.5f, -0.5f, 
+		0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
 
-		-0.5f, -0.5f,  0.5f,  
-		0.5f, -0.5f,  0.5f, 
+		-0.5f, -0.5f,  0.5f,
+		0.5f, -0.5f,  0.5f,
 		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f, 
-		-0.5f,  0.5f,  0.5f, 
+		0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
 		-0.5f, -0.5f,  0.5f,
 
-		-0.5f,  0.5f,  0.5f, 
-		-0.5f,  0.5f, -0.5f, 
-		-0.5f, -0.5f, -0.5f,  
-		-0.5f, -0.5f, -0.5f,  
-		-0.5f, -0.5f,  0.5f, 
-		-0.5f,  0.5f,  0.5f,  
+		-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
 
-		0.5f,  0.5f,  0.5f,  
-		0.5f,  0.5f, -0.5f, 
-		0.5f, -0.5f, -0.5f, 
-		0.5f, -0.5f, -0.5f, 
-		0.5f, -0.5f,  0.5f,  
+		0.5f,  0.5f,  0.5f,
+		0.5f,  0.5f, -0.5f,
+		0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f,  0.5f,
 		0.5f,  0.5f,  0.5f,
 
-		-0.5f, -0.5f, -0.5f,  
-		0.5f, -0.5f, -0.5f,  
-		0.5f, -0.5f,  0.5f,  
-		0.5f, -0.5f,  0.5f,  
-		-0.5f, -0.5f,  0.5f, 
-		-0.5f, -0.5f, -0.5f,  
+		-0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f, -0.5f,
+		0.5f, -0.5f,  0.5f,
+		0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,
 
-		-0.5f,  0.5f, -0.5f,  
-		0.5f,  0.5f, -0.5f,  
-		0.5f,  0.5f,  0.5f, 
-		0.5f,  0.5f,  0.5f,  
-		-0.5f,  0.5f,  0.5f,  
+		-0.5f,  0.5f, -0.5f,
+		0.5f,  0.5f, -0.5f,
+		0.5f,  0.5f,  0.5f,
+		0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
 		-0.5f,  0.5f, -0.5f
 
 	};
 
-	GLfloat normal[]{
+	GLfloat normal[108]{
 		0.0f,  0.0f, -1.0f,
 		0.0f,  0.0f, -1.0f,
 		0.0f,  0.0f, -1.0f,
@@ -94,16 +94,16 @@ void Cube::init(Mesh * mesh)
 		0.0f, -1.0f,  0.0f,
 		0.0f, -1.0f,  0.0f,
 		0.0f, -1.0f,  0.0f,
-		
+
 		0.0f,  1.0f,  0.0f,
 		0.0f,  1.0f,  0.0f,
 		0.0f,  1.0f,  0.0f,
 		0.0f,  1.0f,  0.0f,
 		0.0f,  1.0f,  0.0f,
-		0.0f,  1.0f,  0.0f,
+		0.0f,  1.0f,  0.0f
 	};
 
-	GLfloat uv[]{
+	GLfloat uv[72]{
 		0.0f, 0.0f,
 		1.0f, 0.0f,
 		1.0f, 1.0f,
@@ -147,12 +147,29 @@ void Cube::init(Mesh * mesh)
 		0.0f, 1.0f
 	};
 
+	GLuint indices[36];
+	
+	for (int i = 0; i < 36; i++) {
+		indices[i] = i;
+	}
+
+
+	Mesh *mesh = new Mesh("cube");
+
 	mesh->mesh.normals = normal;
 	mesh->mesh.vertices = vertex;
+	mesh->mesh.indices = indices;
 	mesh->mesh.uv = uv;
-	mesh->mesh.indexCount = 54;
-	mesh->mesh.vertexCount = 54;
+	mesh->mesh.indexCount = 36;
+	mesh->mesh.vertexCount = 36;
 	mesh->generateMesh();
 
+	Shape::meshes.push_back(mesh);
 
+}
+
+void Cube::init()
+{
+	Shape::numberOfMeshs = 1;
+	buildCube();
 }

@@ -14,8 +14,7 @@
 #include "Camera.h"
 #include "MeshGenerator.h"
 #include "Mesh.h"
-#include "Polygon.h"
-#include "Cube.h"
+#include "Shape.h"
 
 struct Material {
 	string uv;
@@ -35,7 +34,6 @@ private:
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
 	Camera *camera;
-	Mesh *mesh;
 
 public:
 	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
@@ -43,7 +41,7 @@ public:
 
 	void init();
 	void renderObject(Mesh *mesh);
-	void renderObject(Polygon *polygon);
+	void renderObject(Shape *shape);
 	void renderObject();
 };
 

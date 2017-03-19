@@ -31,6 +31,7 @@ class Mesh :
 	public Component
 {
 public:
+	Mesh();
 	Mesh(std::string name);
 	virtual ~Mesh();
 	MeshData mesh;

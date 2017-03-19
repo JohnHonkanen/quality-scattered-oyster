@@ -2,6 +2,11 @@
 #include "MeshGenerator.h"
 
 
+Mesh::Mesh() : Component("")
+{
+
+}
+
 Mesh::Mesh(std::string name): Component(name)
 {
 	Mesh::mesh.vertices = nullptr;

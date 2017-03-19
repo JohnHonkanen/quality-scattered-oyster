@@ -1,14 +1,15 @@
 #pragma once
 
 #include "Mesh.h"
+#include "Shape.h"
 
-class Polygon
+class Polygon : public Shape
 {
 public:
 	Polygon();
 	virtual ~Polygon();
 
-	Mesh *mesh[6];
+	
 	void init();
 
 	void buildFace(Mesh *mesh, vec3 corner, vec3 up, vec3 right, bool reverse);

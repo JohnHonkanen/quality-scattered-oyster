@@ -1,14 +1,15 @@
 #pragma once
 
 #include "Mesh.h"
+#include "Shape.h"
 
-class Cube
+class Cube : public Shape
 {
 public:
 	Cube();
 	virtual ~Cube();
 
-	Mesh *mesh[6];
-	void init(Mesh * mesh);
+	void init();
+	void buildCube();
 };
 

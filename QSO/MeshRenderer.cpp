@@ -106,10 +106,12 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	
 }
 
-void MeshRenderer::renderObject(Polygon * polygon)
+void MeshRenderer::renderObject(Shape *shape)
 {
 	/*Draw Cube*/
 	/*Use Material*/
+	int numberOfMeshs;
+	vector<Mesh*> mesh = shape->getMesh(numberOfMeshs);
 
 	MeshRenderer::program->Use();
 
@@ -154,23 +156,25 @@ void MeshRenderer::renderObject(Polygon * polygon)
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
 	}
 
-
 	// Create camera transformations
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
 	mat4 model = transform->get();
+	mat3 normalMatrix = transpose(inverse(mat3(model)));
 
 	// Get matrix's uniform location, get and set matrix
 	GLuint modelLoc = glGetUniformLocation(MeshRenderer::program->program, "model");
 	GLuint viewLoc = glGetUniformLocation(MeshRenderer::program->program, "view");
 	GLuint projectionLoc = glGetUniformLocation(MeshRenderer::program->program, "projection");
 	GLuint alphaLoc = glGetUniformLocation(MeshRenderer::program->program, "ourAlpha");
+	GLuint normalMatrixLoc = glGetUniformLocation(MeshRenderer::program->program, "normalMatrix");
 
 	// Pass to Shader
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 	glUniform1f(alphaLoc, 1.0f);
+	glUniformMatrix3fv(normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normalMatrix));
 
 	//glBindTexture call will bind that texture to the currently active texture unit.
 	glActiveTexture(GL_TEXTURE0);
@@ -179,17 +183,18 @@ void MeshRenderer::renderObject(Polygon * polygon)
 	glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
 	
 
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < numberOfMeshs; i++) {
 		//Draw Prefabs
-		glBindVertexArray(polygon->mesh[i]->glObjects.VAO);
+		glBindVertexArray(mesh[i]->glObjects.VAO);
+		printf("VAO %i \n", mesh[i]->glObjects.VAO);
 
 		// Pass to Shader
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
-		glDrawElements(polygon->mesh[i]->mesh.mode, polygon->mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
+		glDrawElements(mesh[i]->mesh.mode, mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
+		printf("Mesh %i \n", mesh);
 		glBindVertexArray(0);
 	}
-	glBindVertexArray(0);
 }
 
 void MeshRenderer::renderObject()

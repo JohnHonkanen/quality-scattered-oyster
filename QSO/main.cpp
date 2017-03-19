@@ -117,22 +117,24 @@ int main(int argc, char *argv[]) {
 
 	Transform cube1Pos;
 	Transform cube2Pos;
+	Transform cube3Pos;
 	Transform lampPos;
 	Material material;
 	Material material2;
 
 	// Material 1
-	material.uv= "awesomeface";
+	material.uv = "awesomeface";
 	
 	// Material 2
 	material2.diffuse = "container_2";
 	material2.specular = "cotainer_specular";
 	material2.emission = "lava_2";
-	
+
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minlightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minlightingShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -143,7 +145,7 @@ int main(int argc, char *argv[]) {
 	// Init Polygons
 	cube1.init();
 	cube2.init();
-	cube3.init(cube3);
+	cube3.init();
 	lamp.init();
 
 	// Set Frame Rate
@@ -179,9 +181,11 @@ int main(int argc, char *argv[]) {
 	cube1Pos.translate(vec3(-6.0f, 0.0f, 0.0f));
 	cube1Pos.scale(vec3(3));
 
-	cube2Pos.translate(vec3(6.0f, 0.0f, 0.0f));
+	cube2Pos.translate(vec3(5.0f, 0.0f, 0.0f));
 	cube2Pos.scale(vec3(3));
-	
+
+	cube3Pos.translate(vec3(25.0f, 0.0f, 0.0f));
+	cube3Pos.scale(vec3(3));
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -223,6 +227,8 @@ int main(int argc, char *argv[]) {
 			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
 			model = lampPos.calculateModelMatrix();
 
+			cube3Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			model = cube3Pos.calculateModelMatrix();
 			//// End of Update
 			
 
@@ -232,7 +238,7 @@ int main(int argc, char *argv[]) {
 			MeshRenderer1.renderObject(&cube1); 
 			MeshRenderer2.renderObject(&cube2);
 			MeshRenderer3.renderObject(&lamp);
-			
+			MeshRenderer4.renderObject(&cube3);
 
 			//MeshRenderer2.renderObject(&cube);
 
