@@ -28,7 +28,6 @@ uniform vec3 viewPos;
 void main()
 {
 	// Ambient 
-	float ambientStrength = 0.1f;
 	vec3 ambient = light.ambient * vec3(texture(material.diffuse, UV));
 
 	// Diffuse

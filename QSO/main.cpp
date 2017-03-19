@@ -127,6 +127,7 @@ int main(int argc, char *argv[]) {
 	Transform cube7Pos;
 	Transform cube8Pos;
 	Transform lampPos; 
+	Transform terrainPos;
 	Material material;
 	Material mapD;
 	Material mapDS;
@@ -138,20 +139,31 @@ int main(int argc, char *argv[]) {
 	
 	// Material with Diffuse Map
 	mapD.diffuse = "container_2";
-
+	
 	// Material with Diffuse/Specular Map
 	mapDS.diffuse = "container_2";
-	mapDS.specular = "cotainer_specular";
+	mapDS.specular = "container_specular";
 
 	// Material with Diff/Spec/Emi Map
 	mapE.emission = "lava_2";
 
 	// Material with Emission Map
 	mapDSE.diffuse = "container_2";
-	mapDSE.specular = "cotainer_specular";
+	mapDSE.specular = "container_specular";
 	mapDSE.emission = "lava_2";
+	// Testing Terrain Triangle Strips
 
-	
+	Terrain terrain("terrain", 500, 500, 1.0f);
+	terrain.init();
+	Mesh terrainMesh = Mesh("terrain");
+	mapData terrainData = terrain.getData();
+	terrainMesh.mesh.vertices = (GLfloat*)terrainData.vertices;
+	terrainMesh.mesh.indices = terrainData.indices;
+	terrainMesh.mesh.normals = (GLfloat*)terrainData.normals;
+	terrainMesh.mesh.indexCount = terrainData.indexCount;
+	terrainMesh.mesh.vertexCount = terrainData.vertexCount;
+	terrainMesh.mesh.mode = GL_TRIANGLE_STRIP;
+	terrainMesh.generateMesh();
 
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
@@ -159,10 +171,11 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &simpleLightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer7(mapDS, &textureManager, &cube6Pos, &simpleLightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -174,7 +187,6 @@ int main(int argc, char *argv[]) {
 	Cube cube7;
 	Cube cube8;
 	Polygon lamp;
-
 	// Init Polygons
 	cube1.init();
 	cube2.init();
@@ -215,7 +227,7 @@ int main(int argc, char *argv[]) {
 	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
-	cube1Pos.translate(vec3(-6.0f, 0.0f, 0.0f));
+	cube1Pos.translate(vec3(0.0f, 0.0f, 0.0f));
 	cube1Pos.scale(vec3(3));
 
 	cube2Pos.translate(vec3(5.0f, 0.0f, 0.0f));
@@ -230,7 +242,7 @@ int main(int argc, char *argv[]) {
 	cube5Pos.translate(vec3(15.0f, 0.0f, -20.0f));
 	cube5Pos.scale(vec3(8));
 
-	cube6Pos.translate(vec3(5.0f, 0.0f, -20.0f));
+	cube6Pos.translate(vec3(0.0f, 0.0f, 20.0f));
 	cube6Pos.scale(vec3(8));
 	model = cube6Pos.calculateModelMatrix();
 
@@ -241,7 +253,9 @@ int main(int argc, char *argv[]) {
 	cube8Pos.translate(vec3(-15.0f, 0.0f, -20.0f));
 	cube8Pos.scale(vec3(8));
 	model = cube8Pos.calculateModelMatrix();
-	
+
+	terrainPos.translate(vec3(-terrainData.xLength / 2, -5.0f, terrainData.zLength / 2));
+	model = terrainPos.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -293,7 +307,8 @@ int main(int argc, char *argv[]) {
 			cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
 			model = cube5Pos.calculateModelMatrix();
 
-			
+			cube6Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
+			model = cube6Pos.calculateModelMatrix();
 
 
 			graphicsHandler.start();  // Sets up Rendering Loop
@@ -309,6 +324,7 @@ int main(int argc, char *argv[]) {
 			MeshRenderer8.renderObject(&cube7);
 			MeshRenderer9.renderObject(&cube8);
 
+			terrainRenderer.renderObject(&terrainMesh);
 
 			//MeshRenderer2.renderObject(&cube);
 
