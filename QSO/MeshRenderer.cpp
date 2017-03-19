@@ -115,7 +115,15 @@ void MeshRenderer::renderObject(Shape *shape)
 
 	MeshRenderer::program->Use();
 
-	vec3 lightPos(15.0f, 10.0f, 0.0f);
+	//vec3 lightPos(0.0f, 0.0f, 0.0f); // Light translation not applied
+
+	Transform lampPos;
+
+	mat4 model;
+	lampPos.setPosition(vec3(0.0f, 0.0f, 0.0f));
+	lampPos.translate(vec3(15.0f, 10.0f, 0.0f));
+	lampPos.calculateModelMatrix();
+	model = lampPos.calculateModelMatrix();
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
@@ -131,7 +139,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 0.0f, 1.0f); // Also set light's color (white)
-	glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
 	// Set Material Properties
 	glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
@@ -146,7 +154,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	// Create camera transformations
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
-	mat4 model = transform->get();
+	model = transform->get();
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
 
 	// Get matrix's uniform location, get and set matrix
@@ -178,12 +186,12 @@ void MeshRenderer::renderObject(Shape *shape)
 	}
 
 	if (MeshRenderer::material.specular != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
+		
 
 		//Bind Specular map
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
-		glUniform1i(glGetUniformLocation(program->program, "material.specuarl"), 1);
+		glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
 	}
 
 
@@ -193,11 +201,11 @@ void MeshRenderer::renderObject(Shape *shape)
 
 
 	if (MeshRenderer::material.emission != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
 
 		//Bind Emission map
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
+		glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
 	}
 	
 

@@ -184,6 +184,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
+	lampPos.setPosition(vec3(0.0f, 0.0f, 0.0f));
 	lampPos.translate(vec3(15.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
