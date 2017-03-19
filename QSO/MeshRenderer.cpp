@@ -126,15 +126,23 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
 	GLint matSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "material.specular");
 	GLint matShineLoc = glGetUniformLocation(MeshRenderer::program->program, "material.shininess");
+	GLint lightAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "light.ambient");
+	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
+	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 0.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
 	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
+	// Set Material Properties
 	glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(matDiffuseLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(matSpecularLoc, 0.5f, 0.5f, 0.5f);
 	glUniform1f(matShineLoc, 32.0f);
-	
+	// Set Light Properties
+	glUniform3f(lightAmbientLoc, 0.2f, 0.2f, 0.2f);
+	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
+	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
+
 
 	if (MeshRenderer::material.diffuse != "") {
 		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
