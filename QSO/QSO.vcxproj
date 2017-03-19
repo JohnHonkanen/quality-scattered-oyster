@@ -217,8 +217,8 @@
   <ItemGroup>
     <None Include="lampFrag.shader" />
     <None Include="lampVert.shader" />
-    <None Include="lightingFrag.shader" />
-    <None Include="lightingVert.shader" />
+    <None Include="matLightingFrag.shader" />
+    <None Include="matLightingVert.shader" />
     <None Include="minFrag.shader" />
     <None Include="minLightingFrag.shader" />
     <None Include="minLightingVert.shader" />

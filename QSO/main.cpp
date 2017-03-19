@@ -110,7 +110,8 @@ int main(int argc, char *argv[]) {
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
 	Shader minShaderProgram("minVert.shader", "minFrag.shader");
-	Shader minlightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
+	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
+	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 
 	// Testing Cube Renderer
@@ -118,6 +119,8 @@ int main(int argc, char *argv[]) {
 	Transform cube1Pos;
 	Transform cube2Pos;
 	Transform cube3Pos;
+	Transform cube4Pos;
+	//Transform cube5Pos;
 	Transform lampPos;
 	Material material;
 	Material material2;
@@ -132,20 +135,26 @@ int main(int argc, char *argv[]) {
 
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minlightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minlightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
+	//MeshRenderer MeshRenderer6(material, &textureManager, &cube5Pos, &minLightingShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
 	Polygon cube2;
 	Cube cube3;
+	Cube cube4;
+	Cube cube5;
 	Polygon lamp;
 
 	// Init Polygons
 	cube1.init();
 	cube2.init();
 	cube3.init();
+	cube4.init();
+	//cube5.init();
 	lamp.init();
 
 	// Set Frame Rate
@@ -186,6 +195,12 @@ int main(int argc, char *argv[]) {
 
 	cube3Pos.translate(vec3(35.0f, 0.0f, 0.0f));
 	cube3Pos.scale(vec3(8));
+
+	cube4Pos.translate(vec3(15.0f, 0.0f, 20.0f));
+	cube4Pos.scale(vec3(8));
+
+	//cube5Pos.translate(vec3(35.0f, 0.0f, 0.0f));
+	//cube5Pos.scale(vec3(8));
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -231,6 +246,11 @@ int main(int argc, char *argv[]) {
 			model = cube3Pos.calculateModelMatrix();
 			//// End of Update
 			
+			cube4Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			model = cube4Pos.calculateModelMatrix();
+
+			/*cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
+			model = cube5Pos.calculateModelMatrix();*/
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
@@ -239,6 +259,8 @@ int main(int argc, char *argv[]) {
 			MeshRenderer2.renderObject(&cube2);
 			MeshRenderer3.renderObject(&lamp);
 			MeshRenderer4.renderObject(&cube3);
+			MeshRenderer5.renderObject(&cube4);
+			//MeshRenderer6.renderObject(&cube5);
 
 			//MeshRenderer2.renderObject(&cube);
 
