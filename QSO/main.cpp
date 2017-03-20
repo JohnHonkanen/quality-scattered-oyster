@@ -116,6 +116,7 @@ int main(int argc, char *argv[]) {
 	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
 	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");
 	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
+	Shader lightingMapShaderProgram2("lightingMapVert.shader", "lightingMapFrag.shader");
 	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader");
@@ -178,13 +179,13 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &HSVShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &simpleLightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer7(mapDS, &textureManager, &cube6Pos, &simpleLightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
-	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram2, &playerCamera);
 	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &directionalLightShaderProgram, &playerCamera);
 	MeshRenderer attenuatedLightRenderer(mapE, &textureManager, &attenuatedLightPos, &attenuatedLightingShaderProgram, &playerCamera);
 

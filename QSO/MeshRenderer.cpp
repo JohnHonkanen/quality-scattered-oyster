@@ -198,8 +198,8 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform1f(lightQuadraticPos, 0.032f);
 	// Set HSV properties
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
-	glUniform1f(hueShiftLoc, hueshift);
-	glUniform1f(satBoostLoc, 2.0f);
+	glUniform1f(hueShiftLoc, 0.0f);
+	glUniform1f(satBoostLoc, hueshift);
 
 	hueshift += 0.0005f;
 
