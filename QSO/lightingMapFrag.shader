@@ -8,7 +8,8 @@ struct Material {
 };
 
 struct Light {
-	vec3 position;
+	//vec3 position;
+	vec3 direction;
 
 	vec3 ambient;
 	vec3 diffuse;
@@ -32,7 +33,7 @@ void main()
 
 	// Diffuse
 	vec3 norm = normalize(Normal); // Normalize the normal
-	vec3 lightDir = normalize(light.position - FragPos); // Normalize the resulting direction vector
+	vec3 lightDir = normalize(light.direction - FragPos); // Normalize the resulting direction vector
 	float diff = max(dot(norm, lightDir), 0.0); // Use Max to avoid dot product going negative when vector is greater than 90 degrees.
 	vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, UV));
 

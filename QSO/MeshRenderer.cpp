@@ -25,16 +25,20 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	
 	MeshRenderer::program->Use();
 
-	Transform lampPos;
+	//Transform lampPos;
+	Transform sunPos;
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
-	lampPos.calculateModelMatrix();
+	/*lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
+	lampPos.calculateModelMatrix();*/
+
+	sunPos.translate(vec3(100.0f, 100.0f, 0.0f));
+	sunPos.calculateModelMatrix();
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos");
+	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos"); 
 	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
 	GLint matAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "material.ambient");
 	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
@@ -43,9 +47,10 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	GLint lightAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "light.ambient");
 	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
 	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
+	GLint lightDirPos = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
-	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
+	
 	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
 	// Set Material Properties
 	glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
@@ -56,6 +61,7 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	glUniform3f(lightAmbientLoc, 0.2f, 0.2f, 0.2f);
 	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(lightDirPos, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
 
 	// Create camera transformations
 	mat4 view = camera->getView();
@@ -131,15 +137,19 @@ void MeshRenderer::renderObject(Shape *shape)
 	MeshRenderer::program->Use();
 
 	Transform lampPos;
+	Transform sunPos;
 
 	mat4 model;
 	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
+	sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
+	sunPos.calculateModelMatrix();
+
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos");
+	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos"); // Depreciated Code soon. May need deleting
 	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
 	GLint matAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "material.ambient");
 	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
@@ -148,6 +158,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint lightAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "light.ambient");
 	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
 	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
+	GLint lightDirPos = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
@@ -161,6 +172,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightAmbientLoc, 0.2f, 0.2f, 0.2f);
 	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(lightDirPos, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
 
 	// Create camera transformations
 	mat4 view = camera->getView();

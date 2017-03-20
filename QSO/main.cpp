@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 	// Setup Camera
 
 	Camera playerCamera (vec3(0,0,10.0f), vec3(0,1,0), 0.0f, 0.0f);
-	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 100.0f);
+	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 200.0f);
 	playerCamera.setView(vec3(0.0f, 0.0f, -10.0f)); // Adjust our Camera back by changing Z value
 	
 	// Testing Texture Manager
@@ -131,14 +131,16 @@ int main(int argc, char *argv[]) {
 	Transform cube8Pos;
 	Transform lampPos; 
 	Transform terrainPos;
+	Transform sunPos;
 	Material material;
 	Material mapD;
 	Material mapDS;
 	Material mapDSE;
 	Material mapE;
+	
 
 	// Material 1
-	material.uv = "container_1";
+	material.uv = "awesomeface";
 	
 	// Material with Diffuse Map
 	mapD.diffuse = "container_2";
@@ -179,6 +181,7 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram, &playerCamera);
+	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &lampShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -190,6 +193,8 @@ int main(int argc, char *argv[]) {
 	Cube cube7;
 	Cube cube8;
 	Polygon lamp;
+	Polygon sun;
+
 	// Init Polygons
 	cube1.init();
 	cube2.init();
@@ -200,6 +205,7 @@ int main(int argc, char *argv[]) {
 	cube7.init();
 	cube8.init();
 	lamp.init();
+	sun.init();
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -247,18 +253,22 @@ int main(int argc, char *argv[]) {
 
 	cube6Pos.translate(vec3(0.0f, 0.0f, 20.0f));
 	cube6Pos.scale(vec3(8));
-	model = cube6Pos.calculateModelMatrix();
+	cube6Pos.calculateModelMatrix();
 
 	cube7Pos.translate(vec3(-5.0f, 0.0f, -20.0f));
 	cube7Pos.scale(vec3(8));
-	model = cube7Pos.calculateModelMatrix();
+	cube7Pos.calculateModelMatrix();
 
 	cube8Pos.translate(vec3(-15.0f, 0.0f, -20.0f));
 	cube8Pos.scale(vec3(8));
-	model = cube8Pos.calculateModelMatrix();
+	cube8Pos.calculateModelMatrix();
 
 	terrainPos.translate(vec3(-terrainData.xLength / 2, -5.0f, terrainData.zLength / 2));
-	model = terrainPos.calculateModelMatrix();
+	terrainPos.calculateModelMatrix();
+
+	sunPos.translate(vec3(100.0f, 100.0f, 0.0f));
+	sunPos.scale(10);
+	sunPos.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -326,6 +336,7 @@ int main(int argc, char *argv[]) {
 			MeshRenderer7.renderObject(&cube6);
 			MeshRenderer8.renderObject(&cube7);
 			MeshRenderer9.renderObject(&cube8);
+			sunRenderer.renderObject(&sun);
 
 			terrainRenderer.renderObject(&terrainMesh);
 
