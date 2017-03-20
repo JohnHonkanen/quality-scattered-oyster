@@ -119,6 +119,7 @@ int main(int argc, char *argv[]) {
 	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader");
+	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader");
 
 	// Testing Cube Renderer
 
@@ -131,6 +132,7 @@ int main(int argc, char *argv[]) {
 	Transform cube7Pos;
 	Transform cube8Pos;
 	Transform lampPos; 
+	Transform attenuatedLightPos;
 	Transform terrainPos;
 	Transform sunPos;
 	Material material;
@@ -183,6 +185,7 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &directionalLightShaderProgram, &playerCamera);
+	MeshRenderer attenuatedLightRenderer(mapE, &textureManager, &attenuatedLightPos, &attenuatedLightingShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -195,6 +198,7 @@ int main(int argc, char *argv[]) {
 	Cube cube8;
 	Polygon lamp;
 	Polygon sun;
+	Cube attenuatedLight;
 
 	// Init Polygons
 	cube1.init();
@@ -207,6 +211,7 @@ int main(int argc, char *argv[]) {
 	cube8.init();
 	lamp.init();
 	sun.init();
+	attenuatedLight.init();
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -271,6 +276,10 @@ int main(int argc, char *argv[]) {
 	sunPos.scale(10);
 	sunPos.calculateModelMatrix();
 
+	attenuatedLightPos.translate(vec3(100.0f, 100.0f, 0.0f));
+	attenuatedLightPos.scale(10);
+	attenuatedLightPos.calculateModelMatrix();
+
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
 
@@ -330,15 +339,15 @@ int main(int argc, char *argv[]) {
 			// Render Function
 			MeshRenderer1.renderObject(&cube1); 
 			MeshRenderer2.renderObject(&cube2);
-			MeshRenderer3.renderObject(&lamp);
+			//MeshRenderer3.renderObject(&lamp);
 			MeshRenderer4.renderObject(&cube3);
 			MeshRenderer5.renderObject(&cube4);
 			MeshRenderer6.renderObject(&cube5);
 			MeshRenderer7.renderObject(&cube6);
 			MeshRenderer8.renderObject(&cube7);
 			MeshRenderer9.renderObject(&cube8);
-			sunRenderer.renderObject(&sun);
-
+			//sunRenderer.renderObject(&sun);
+			attenuatedLightRenderer.renderObject(&attenuatedLight);
 			terrainRenderer.renderObject(&terrainMesh);
 
 			//MeshRenderer2.renderObject(&cube);

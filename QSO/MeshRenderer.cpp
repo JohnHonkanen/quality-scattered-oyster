@@ -38,7 +38,7 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos"); 
+	GLint lightPositionLoc = glGetUniformLocation(MeshRenderer::program->program, "light.position"); 
 	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
 	GLint matAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "material.ambient");
 	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
@@ -48,10 +48,13 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
 	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
 	GLint lightDirPos = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
+	GLint lightConstantPos = glGetUniformLocation(MeshRenderer::program->program, "light.constant");
+	GLint lightLinearPos = glGetUniformLocation(MeshRenderer::program->program, "light.linear");
+	GLint lightQuadraticPos = glGetUniformLocation(MeshRenderer::program->program, "light.quadratic");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
-	
 	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
+	glUniform3f(lightPositionLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
 	// Set Material Properties
 	glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(matDiffuseLoc, 1.0f, 0.5f, 0.31f);
@@ -62,6 +65,10 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(lightDirPos, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
+	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
+	glUniform1f(lightConstantPos, 1.0f);
+	glUniform1f(lightLinearPos, 0.09f);
+	glUniform1f(lightQuadraticPos, 0.032);
 
 	// Create camera transformations
 	mat4 view = camera->getView();
@@ -150,6 +157,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
 	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos"); // Depreciated Code soon. May need deleting
+	GLint lightPositionLoc = glGetUniformLocation(MeshRenderer::program->program, "light.position");
 	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
 	GLint matAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "material.ambient");
 	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
@@ -159,6 +167,9 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
 	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
 	GLint lightDirPos = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
+	GLint lightConstantPos = glGetUniformLocation(MeshRenderer::program->program, "light.constant");
+	GLint lightLinearPos = glGetUniformLocation(MeshRenderer::program->program, "light.linear");
+	GLint lightQuadraticPos = glGetUniformLocation(MeshRenderer::program->program, "light.quadratic");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
@@ -173,6 +184,11 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(lightDirPos, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
+	glUniform3f(lightPositionLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
+	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
+	glUniform1f(lightConstantPos, 1.0f);
+	glUniform1f(lightLinearPos, 0.09f);
+	glUniform1f(lightQuadraticPos, 0.032);
 
 	// Create camera transformations
 	mat4 view = camera->getView();

@@ -112,6 +112,12 @@
     <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes">
       <UniqueIdentifier>{0ee20f79-d30d-431d-bfca-6fb387059c77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Attenuation">
+      <UniqueIdentifier>{263c485a-1bde-48aa-8e20-7547fd03f4f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Directional">
+      <UniqueIdentifier>{f10711ec-f5be-4cbd-9817-b6669bda9784}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -332,10 +338,16 @@
       <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff/Emission Map</Filter>
     </None>
     <None Include="directionalLightingVert.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes</Filter>
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Directional</Filter>
     </None>
     <None Include="directionalLightingFrag.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes</Filter>
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Directional</Filter>
+    </None>
+    <None Include="attenuatedLightingVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Attenuation</Filter>
+    </None>
+    <None Include="attenuatedLightingFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Attenuation</Filter>
     </None>
   </ItemGroup>
 </Project>

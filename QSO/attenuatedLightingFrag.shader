@@ -12,6 +12,10 @@ struct Light {
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 in vec3 FragPos;
@@ -42,6 +46,15 @@ void main()
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess); // last signature of float spec is the shininess value of the highlight which is a raise to the power of #. 
 																			  // The higher the shininess value of an object, the more it properly reflects the light instead of scattering it around. 
 	vec3 specular = light.specular * spec * vec3(texture(material.specular, UV));
+
+	// Attenuation
+
+	float distance = length(light.position - FragPos);
+	float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
+	ambient *= attenuation;
+	diffuse *= attenuation;
+	specular *= attenuation;
 
 	vec3 result = (ambient + diffuse + specular);
 
