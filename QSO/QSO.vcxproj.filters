@@ -118,6 +118,9 @@
     <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Directional">
       <UniqueIdentifier>{f10711ec-f5be-4cbd-9817-b6669bda9784}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\HSV">
+      <UniqueIdentifier>{ba91b8e1-8af1-402c-921f-f74c16a7ffa0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -348,6 +351,12 @@
     </None>
     <None Include="attenuatedLightingFrag.shader">
       <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\Attenuation</Filter>
+    </None>
+    <None Include="HSVFrag.shader">
+      <Filter>Resource Files\Shaders\HSV</Filter>
+    </None>
+    <None Include="HSVVert.shader">
+      <Filter>Resource Files\Shaders\HSV</Filter>
     </None>
   </ItemGroup>
 </Project>

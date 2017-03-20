@@ -134,6 +134,8 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	
 }
 
+
+float hueshift = 0.0f;
 void MeshRenderer::renderObject(Shape *shape)
 {
 	/*Draw Cube*/
@@ -170,7 +172,12 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint lightConstantPos = glGetUniformLocation(MeshRenderer::program->program, "light.constant");
 	GLint lightLinearPos = glGetUniformLocation(MeshRenderer::program->program, "light.linear");
 	GLint lightQuadraticPos = glGetUniformLocation(MeshRenderer::program->program, "light.quadratic");
-	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
+	GLint ourImageLoc = glGetUniformLocation(MeshRenderer::program->program, "ourImage"); 
+	GLint hueShiftLoc = glGetUniformLocation(MeshRenderer::program->program, "hueShift");
+	GLint satBoostLoc = glGetUniformLocation(MeshRenderer::program->program, "satBoost");
+	
+
+	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
@@ -188,7 +195,15 @@ void MeshRenderer::renderObject(Shape *shape)
 	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
 	glUniform1f(lightConstantPos, 1.0f);
 	glUniform1f(lightLinearPos, 0.09f);
-	glUniform1f(lightQuadraticPos, 0.032);
+	glUniform1f(lightQuadraticPos, 0.032f);
+	// Set HSV properties
+	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
+	glUniform1f(hueShiftLoc, hueshift);
+	glUniform1f(satBoostLoc, 2.0f);
+
+	hueshift += 0.0005f;
+
+
 
 	// Create camera transformations
 	mat4 view = camera->getView();

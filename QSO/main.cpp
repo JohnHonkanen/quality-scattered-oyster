@@ -120,6 +120,7 @@ int main(int argc, char *argv[]) {
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
 	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader");
 	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader");
+	Shader HSVShaderProgram("HSVVert.shader", "HSVFrag.shader");
 
 	// Testing Cube Renderer
 
@@ -177,7 +178,7 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &HSVShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &simpleLightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer7(mapDS, &textureManager, &cube6Pos, &simpleLightingMapShaderProgram, &playerCamera);
@@ -337,7 +338,6 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(&cube1); 
 			MeshRenderer2.renderObject(&cube2);
 			MeshRenderer3.renderObject(&lamp);
 			MeshRenderer4.renderObject(&cube3);
@@ -349,13 +349,14 @@ int main(int argc, char *argv[]) {
 			sunRenderer.renderObject(&sun);
 			attenuatedLightRenderer.renderObject(&attenuatedLight);
 			terrainRenderer.renderObject(&terrainMesh);
+			MeshRenderer1.renderObject(&cube1); 
 
 			//MeshRenderer2.renderObject(&cube);
 
 			// End of Render
 
-		graphicsHandler.end(); // Swaps scene buffers
-		frameClock.resetClock(); // Once frame is done reset to 0
+			graphicsHandler.end(); // Swaps scene buffers
+			frameClock.resetClock(); // Once frame is done reset to 0
 		}
 	}
 	MeshGenerator::destroy();

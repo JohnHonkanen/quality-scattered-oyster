@@ -70,11 +70,11 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 	vec3 vertex4(vertex[9], vertex[10], vertex[11]);
 
 	vec3 v1Normal = cross((vertex2 - vertex1), (vertex3 - vertex1));
-
+	
 	if (!reverse) {
 		v1Normal = -v1Normal;
 	}
-
+	
 	// Need to check if top/bottom and get correct normals
 	if (mesh->toString() == "topFace" || mesh->toString() == "bottomFace") {
 	//	v1Normal = -v1Normal;
