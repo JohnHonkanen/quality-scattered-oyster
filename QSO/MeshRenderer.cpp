@@ -147,7 +147,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	Transform sunPos;
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 25.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
 	sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
@@ -183,7 +183,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightAmbientLoc, 0.2f, 0.2f, 0.2f);
 	glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
-	glUniform3f(lightDirPos, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
+	glUniform3f(lightDirPos, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	glUniform3f(lightPositionLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
 	glUniform1f(lightConstantPos, 1.0f);

@@ -239,13 +239,13 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 25.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
-	cube1Pos.translate(vec3(0.0f, 0.0f, 0.0f));
-	cube1Pos.scale(vec3(3));
+	cube1Pos.translate(vec3(-15.0f, 0.0f, 0.0f));
+	cube1Pos.scale(vec3(5));
 
-	cube2Pos.translate(vec3(5.0f, 0.0f, 0.0f));
+	cube2Pos.translate(vec3(0.0f, 0.0f, 0.0f));
 	cube2Pos.scale(vec3(1));
 
 	cube3Pos.translate(vec3(35.0f, 0.0f, 0.0f));
@@ -276,7 +276,7 @@ int main(int argc, char *argv[]) {
 	sunPos.scale(10);
 	sunPos.calculateModelMatrix();
 
-	attenuatedLightPos.translate(vec3(100.0f, 100.0f, 0.0f));
+	attenuatedLightPos.translate(vec3(-100.0f, 10.0f, 0.0f));
 	attenuatedLightPos.scale(10);
 	attenuatedLightPos.calculateModelMatrix();
 
@@ -339,14 +339,14 @@ int main(int argc, char *argv[]) {
 			// Render Function
 			MeshRenderer1.renderObject(&cube1); 
 			MeshRenderer2.renderObject(&cube2);
-			//MeshRenderer3.renderObject(&lamp);
+			MeshRenderer3.renderObject(&lamp);
 			MeshRenderer4.renderObject(&cube3);
 			MeshRenderer5.renderObject(&cube4);
 			MeshRenderer6.renderObject(&cube5);
 			MeshRenderer7.renderObject(&cube6);
 			MeshRenderer8.renderObject(&cube7);
 			MeshRenderer9.renderObject(&cube8);
-			//sunRenderer.renderObject(&sun);
+			sunRenderer.renderObject(&sun);
 			attenuatedLightRenderer.renderObject(&attenuatedLight);
 			terrainRenderer.renderObject(&terrainMesh);
 
