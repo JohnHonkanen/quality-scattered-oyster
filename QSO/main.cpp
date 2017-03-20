@@ -118,6 +118,7 @@ int main(int argc, char *argv[]) {
 	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
 	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader");
 	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
+	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader");
 
 	// Testing Cube Renderer
 
@@ -181,7 +182,7 @@ int main(int argc, char *argv[]) {
 	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
 	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram, &playerCamera);
-	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &lampShaderProgram, &playerCamera);
+	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &directionalLightShaderProgram, &playerCamera);
 
 	// Create Polygons
 	Polygon cube1;

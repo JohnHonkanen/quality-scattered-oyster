@@ -215,6 +215,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="directionalLightingFrag.shader" />
+    <None Include="directionalLightingVert.shader" />
     <None Include="lampFrag.shader" />
     <None Include="lampVert.shader" />
     <None Include="lightingMapFrag.shader" />

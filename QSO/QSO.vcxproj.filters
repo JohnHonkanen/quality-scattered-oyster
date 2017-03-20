@@ -109,6 +109,9 @@
     <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff/Emission Map">
       <UniqueIdentifier>{e3391ff4-cefd-45ab-93d3-208d99c37467}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes">
+      <UniqueIdentifier>{0ee20f79-d30d-431d-bfca-6fb387059c77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -327,6 +330,12 @@
     </None>
     <None Include="lightingMapFrag.shader">
       <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\Maps\Spec/Diff/Emission Map</Filter>
+    </None>
+    <None Include="directionalLightingVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes</Filter>
+    </None>
+    <None Include="directionalLightingFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes</Filter>
     </None>
   </ItemGroup>
 </Project>
