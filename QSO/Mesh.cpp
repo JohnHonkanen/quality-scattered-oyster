@@ -9,12 +9,12 @@ Mesh::Mesh() : Component("")
 
 Mesh::Mesh(std::string name): Component(name)
 {
-	Mesh::mesh.vertices = nullptr;
-	Mesh::mesh.indices = nullptr;
-	Mesh::mesh.color = nullptr;
-	Mesh::mesh.uv = nullptr;
-	Mesh::mesh.normals = nullptr;
-	Mesh::mesh.mode = GL_TRIANGLES; // Default Mode
+	Mesh::data.vertices = nullptr;
+	Mesh::data.indices = nullptr;
+	Mesh::data.color = nullptr;
+	Mesh::data.uv = nullptr;
+	Mesh::data.normals = nullptr;
+	Mesh::data.mode = GL_TRIANGLES; // Default Mode
 }
 
 
@@ -22,20 +22,19 @@ Mesh::~Mesh()
 {
 }
 
-void Mesh::setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLuint indices, GLfloat * normals, GLfloat * uv, GLfloat * color)
+void Mesh::setupMesh()
 {
+	VAO = MeshGenerator::createMesh(data);
 }
 
-void Mesh::setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLuint indices, GLfloat * normals, GLfloat * uv)
+void Mesh::drawMesh()
 {
+	glBindVertexArray(VAO);
+	glDrawElements(data.mode,data.indexCount, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
 
-void Mesh::setData(GLuint vertexCount, GLuint indexCount, GLfloat * vertices, GLuint indices)
+const GLuint Mesh::getVAO()
 {
-
-}
-
-void Mesh::generateMesh()
-{
-	glObjects.VAO = MeshGenerator::createMesh(mesh);
+	return VAO;
 }

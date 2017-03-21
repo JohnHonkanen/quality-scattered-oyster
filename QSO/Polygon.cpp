@@ -110,7 +110,7 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 			2, 3, 0
 		};
 
-		mesh->mesh.indices = index;
+		mesh->data.indices = index;
 	}
 	else {
 		GLuint index[6] = {
@@ -118,15 +118,15 @@ void Polygon::buildFace(Mesh * mesh, vec3 corner, vec3 up, vec3 right, bool reve
 			3, 2, 0
 		};
 
-		mesh->mesh.indices = index;
+		mesh->data.indices = index;
 	}
 
-	mesh->mesh.normals = normal;
-	mesh->mesh.vertices = vertex;
-	mesh->mesh.uv = uv;
-	mesh->mesh.indexCount = 6;
-	mesh->mesh.vertexCount = 6;
-	mesh->generateMesh();
+	mesh->data.normals = normal;
+	mesh->data.vertices = vertex;
+	mesh->data.uv = uv;
+	mesh->data.indexCount = 6;
+	mesh->data.vertexCount = 6;
+	mesh->setupMesh();
 	//printf("VAO2 %i \n", mesh->glObjects.VAO);
 	
 }

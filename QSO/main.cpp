@@ -158,13 +158,13 @@ int main(int argc, char *argv[]) {
 	terrain.init();
 	Mesh terrainMesh = Mesh("terrain");
 	mapData terrainData = terrain.getData();
-	terrainMesh.mesh.vertices = (GLfloat*)terrainData.vertices;
-	terrainMesh.mesh.indices = terrainData.indices;
-	terrainMesh.mesh.normals = (GLfloat*)terrainData.normals;
-	terrainMesh.mesh.indexCount = terrainData.indexCount;
-	terrainMesh.mesh.vertexCount = terrainData.vertexCount;
-	terrainMesh.mesh.mode = GL_TRIANGLE_STRIP;
-	terrainMesh.generateMesh();
+	terrainMesh.data.vertices = (GLfloat*)terrainData.vertices;
+	terrainMesh.data.indices = terrainData.indices;
+	terrainMesh.data.normals = (GLfloat*)terrainData.normals;
+	terrainMesh.data.indexCount = terrainData.indexCount;
+	terrainMesh.data.vertexCount = terrainData.vertexCount;
+	terrainMesh.data.mode = GL_TRIANGLE_STRIP;
+	terrainMesh.setupMesh();
 
 	//Mesh Objects
 	MeshRenderer MeshRenderer1(&cube1Pos, &minShaderProgram);

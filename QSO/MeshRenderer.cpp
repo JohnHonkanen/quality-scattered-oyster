@@ -121,13 +121,7 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	//}
 
 	//Draw Prefabs
-	glBindVertexArray(mesh->glObjects.VAO);
-	glLineWidth(5.0f);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-	//glDrawArrays(GL_TRIANGLES, 0, 8);
-	glDrawElements(mesh->mesh.mode, mesh->mesh.indexCount, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
+	mesh->drawMesh();
 	
 }
 
@@ -258,12 +252,6 @@ void MeshRenderer::renderObject(Shape *shape)
 
 	for (int i = 0; i < numberOfMeshs; i++) {
 		//Draw Prefabs
-		glBindVertexArray(mesh[i]->glObjects.VAO);
-
-		// Pass to Shader
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		
-		glDrawElements(mesh[i]->mesh.mode, mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+		mesh[i]->drawMesh();
 	}
 }

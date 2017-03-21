@@ -163,13 +163,13 @@ void Cube::buildCube()
 
 	Mesh *mesh = new Mesh("cube");
 
-	mesh->mesh.normals = normal;
-	mesh->mesh.vertices = vertex;
-	mesh->mesh.indices = indices;
-	mesh->mesh.uv = uv;
-	mesh->mesh.indexCount = 36;
-	mesh->mesh.vertexCount = 36;
-	mesh->generateMesh();
+	mesh->data.normals = normal;
+	mesh->data.vertices = vertex;
+	mesh->data.indices = indices;
+	mesh->data.uv = uv;
+	mesh->data.indexCount = 36;
+	mesh->data.vertexCount = 36;
+	mesh->setupMesh();
 
 	Shape::meshes.push_back(mesh);
 
