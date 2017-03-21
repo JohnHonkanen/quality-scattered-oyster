@@ -10,7 +10,7 @@
 #include "Clock.h"
 #include "TextureManager.h"
 #include "Camera.h"
-#include "MeshRenderer.h"
+#include "GLRenderer.h"
 #include "glfwInputHandler.h"
 #include "Terrain.h"
 #include "Mesh.h"
@@ -112,15 +112,6 @@ int main(int argc, char *argv[]) {
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
 	Shader minShaderProgram("minVert.shader", "minFrag.shader");
-	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
-	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");
-	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
-	Shader lightingMapShaderProgram2("lightingMapVert.shader", "lightingMapFrag.shader");
-	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader");
-	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
-	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader");
-	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader");
-	Shader HSVShaderProgram("HSVVert.shader", "HSVFrag.shader");
 
 	// Testing Cube Renderer
 
@@ -128,31 +119,6 @@ int main(int argc, char *argv[]) {
 	Transform cube2Pos;
 	Transform lampPos; 
 	Transform terrainPos;
-	Material material;
-	Material mapD;
-	Material mapDS;
-	Material mapDSE;
-	Material mapE;
-	
-
-	// Material 1
-	material.uv = "awesomeface";
-	
-	// Material with Diffuse Map
-	mapD.diffuse = "container_2";
-	
-	// Material with Diffuse/Specular Map
-	mapDS.diffuse = "container_2";
-	mapDS.specular = "container_specular";
-
-	// Material with Diff/Spec/Emi Map
-	mapE.emission = "lava_2";
-
-	// Material with Emission Map
-	mapDSE.diffuse = "container_2";
-	mapDSE.specular = "container_specular";
-	mapDSE.emission = "lava_2";
-	// Testing Terrain Triangle Strips
 
 	Terrain terrain("terrain", 10, 10, 1.0f);
 	terrain.init();
@@ -167,14 +133,8 @@ int main(int argc, char *argv[]) {
 	terrainMesh.setupMesh();
 
 	//Mesh Objects
-	MeshRenderer MeshRenderer1(&cube1Pos, &minShaderProgram);
+	GLRenderer MeshRenderer1(&minShaderProgram);
 	MeshRenderer1.setCamera(&playerCamera);
-	MeshRenderer MeshRenderer2(&cube2Pos, &minShaderProgram);
-	MeshRenderer2.setCamera(&playerCamera);
-	MeshRenderer MeshRenderer3(&lampPos, &minShaderProgram);
-	MeshRenderer3.setCamera(&playerCamera);
-	MeshRenderer terrainRenderer(&terrainPos, &minShaderProgram);
-	terrainRenderer.setCamera(&playerCamera);
 
 	// Create Polygons
 	Cube cube1(&textureManager, "container_1");
@@ -264,10 +224,10 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(&cube1);
-			MeshRenderer2.renderObject(&cube2);
-			MeshRenderer3.renderObject(&lamp);
-			terrainRenderer.renderObject(&terrainMesh);
+			MeshRenderer1.renderObject(&cube1, cube1Pos);
+			MeshRenderer1.renderObject(&cube2, cube2Pos);
+			MeshRenderer1.renderObject(&lamp, lampPos);
+			MeshRenderer1.renderObject(&terrainMesh, terrainPos);
 			
 
 			//MeshRenderer2.renderObject(&cube);

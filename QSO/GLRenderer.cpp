@@ -1,26 +1,25 @@
-#include "MeshRenderer.h"
+#include "GLRenderer.h"
 
-MeshRenderer::MeshRenderer(Transform * transform, Shader * program)
+GLRenderer::GLRenderer(Shader * program)
 {
-	MeshRenderer::transform = transform;
-	MeshRenderer::program = program;
-	//MeshRenderer::mesh = mesh;
+	GLRenderer::program = program;
+	//GLRenderer::mesh = mesh;
 }
 
-MeshRenderer::~MeshRenderer()
+GLRenderer::~GLRenderer()
 {
 }
 
-void MeshRenderer::init()
+void GLRenderer::init()
 {
 
 }
 
 
-void MeshRenderer::renderObject(Mesh *mesh)
+void GLRenderer::renderObject(Mesh *mesh, Transform transform)
 {
 	
-	MeshRenderer::program->Use();
+	GLRenderer::program->Use();
 
 	//Transform lampPos;
 	Transform sunPos;
@@ -33,21 +32,21 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	sunPos.calculateModelMatrix();
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
-	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
-	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
-	GLint lightPositionLoc = glGetUniformLocation(MeshRenderer::program->program, "light.position"); 
-	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
-	GLint matAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "material.ambient");
-	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
-	GLint matSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "material.specular");
-	GLint matShineLoc = glGetUniformLocation(MeshRenderer::program->program, "material.shininess");
-	GLint lightAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "light.ambient");
-	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
-	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
-	GLint lightDirPos = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
-	GLint lightConstantPos = glGetUniformLocation(MeshRenderer::program->program, "light.constant");
-	GLint lightLinearPos = glGetUniformLocation(MeshRenderer::program->program, "light.linear");
-	GLint lightQuadraticPos = glGetUniformLocation(MeshRenderer::program->program, "light.quadratic");
+	GLint objectColorLoc = glGetUniformLocation(GLRenderer::program->program, "objectColor");
+	GLint lightColorLoc = glGetUniformLocation(GLRenderer::program->program, "lightColor");
+	GLint lightPositionLoc = glGetUniformLocation(GLRenderer::program->program, "light.position"); 
+	GLint viewPosLoc = glGetUniformLocation(GLRenderer::program->program, "viewPos");
+	GLint matAmbientLoc = glGetUniformLocation(GLRenderer::program->program, "material.ambient");
+	GLint matDiffuseLoc = glGetUniformLocation(GLRenderer::program->program, "material.diffuse");
+	GLint matSpecularLoc = glGetUniformLocation(GLRenderer::program->program, "material.specular");
+	GLint matShineLoc = glGetUniformLocation(GLRenderer::program->program, "material.shininess");
+	GLint lightAmbientLoc = glGetUniformLocation(GLRenderer::program->program, "light.ambient");
+	GLint lightDiffuseLoc = glGetUniformLocation(GLRenderer::program->program, "light.diffuse");
+	GLint lightSpecularLoc = glGetUniformLocation(GLRenderer::program->program, "light.specular");
+	GLint lightDirPos = glGetUniformLocation(GLRenderer::program->program, "light.direction");
+	GLint lightConstantPos = glGetUniformLocation(GLRenderer::program->program, "light.constant");
+	GLint lightLinearPos = glGetUniformLocation(GLRenderer::program->program, "light.linear");
+	GLint lightQuadraticPos = glGetUniformLocation(GLRenderer::program->program, "light.quadratic");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.5f);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
@@ -70,15 +69,15 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	// Create camera transformations
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
-	model = transform->get();
+	model = transform.get();
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
 
 	// Get matrix's uniform location, get and set matrix
-	GLuint modelLoc = glGetUniformLocation(MeshRenderer::program->program, "model");
-	GLuint viewLoc = glGetUniformLocation(MeshRenderer::program->program, "view");
-	GLuint projectionLoc = glGetUniformLocation(MeshRenderer::program->program, "projection");
-	GLuint alphaLoc = glGetUniformLocation(MeshRenderer::program->program, "ourAlpha");
-	GLuint normalMatrixLoc = glGetUniformLocation(MeshRenderer::program->program, "normalMatrix");
+	GLuint modelLoc = glGetUniformLocation(GLRenderer::program->program, "model");
+	GLuint viewLoc = glGetUniformLocation(GLRenderer::program->program, "view");
+	GLuint projectionLoc = glGetUniformLocation(GLRenderer::program->program, "projection");
+	GLuint alphaLoc = glGetUniformLocation(GLRenderer::program->program, "ourAlpha");
+	GLuint normalMatrixLoc = glGetUniformLocation(GLRenderer::program->program, "normalMatrix");
 
 	// Pass to Shader
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -89,34 +88,34 @@ void MeshRenderer::renderObject(Mesh *mesh)
 
 	////glBindTexture call will bind that texture to the currently active texture unit.
 	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.uv));
+	//glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.uv));
 	//glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
 	////By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 
-	//if (MeshRenderer::material.diffuse != "") {
+	//if (GLRenderer::material.diffuse != "") {
 	//	//Bind Diffuse map
 	//	glActiveTexture(GL_TEXTURE0);
-	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.diffuse));
 	//	glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
 	//}
 
-	//if (MeshRenderer::material.color != "") {
+	//if (GLRenderer::material.color != "") {
 	//	glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
 	//}
 
-	//if (MeshRenderer::material.emission != "") {
+	//if (GLRenderer::material.emission != "") {
 
 	//	//Bind Emission map
 	//	glActiveTexture(GL_TEXTURE2);
-	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.emission));
 	//	glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
 	//}
 
-	//if (MeshRenderer::material.specular != "") {
+	//if (GLRenderer::material.specular != "") {
 
 	//	//Bind Specular map
 	//	glActiveTexture(GL_TEXTURE3);
-	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.specular));
 	//	glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
 	//}
 
@@ -127,14 +126,14 @@ void MeshRenderer::renderObject(Mesh *mesh)
 
 
 float hueshift = 0.0f;
-void MeshRenderer::renderObject(Shape *shape)
+void GLRenderer::renderObject(Shape *shape, Transform transform)
 {
 	/*Draw Cube*/
 	/*Use Material*/
 	int numberOfMeshs;
 	vector<Mesh*> mesh = shape->getMesh(numberOfMeshs);
 
-	MeshRenderer::program->Use();
+	GLRenderer::program->Use();
 
 	Transform lampPos;
 	Transform sunPos;
@@ -147,25 +146,25 @@ void MeshRenderer::renderObject(Shape *shape)
 	sunPos.calculateModelMatrix();
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
-	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
-	GLint lightColorLoc = glGetUniformLocation(MeshRenderer::program->program, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(MeshRenderer::program->program, "lightPos"); // Depreciated Code soon. May need deleting
-	GLint lightPositionLoc = glGetUniformLocation(MeshRenderer::program->program, "light.position");
-	GLint viewPosLoc = glGetUniformLocation(MeshRenderer::program->program, "viewPos");
-	GLint matAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "material.ambient");
-	GLint matDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "material.diffuse");
-	GLint matSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "material.specular");
-	GLint matShineLoc = glGetUniformLocation(MeshRenderer::program->program, "material.shininess");
-	GLint lightAmbientLoc = glGetUniformLocation(MeshRenderer::program->program, "light.ambient");
-	GLint lightDiffuseLoc = glGetUniformLocation(MeshRenderer::program->program, "light.diffuse");
-	GLint lightSpecularLoc = glGetUniformLocation(MeshRenderer::program->program, "light.specular");
-	GLint lightDirPos = glGetUniformLocation(MeshRenderer::program->program, "light.direction");
-	GLint lightConstantPos = glGetUniformLocation(MeshRenderer::program->program, "light.constant");
-	GLint lightLinearPos = glGetUniformLocation(MeshRenderer::program->program, "light.linear");
-	GLint lightQuadraticPos = glGetUniformLocation(MeshRenderer::program->program, "light.quadratic");
-	GLint ourImageLoc = glGetUniformLocation(MeshRenderer::program->program, "ourImage"); 
-	GLint hueShiftLoc = glGetUniformLocation(MeshRenderer::program->program, "hueShift");
-	GLint satBoostLoc = glGetUniformLocation(MeshRenderer::program->program, "satBoost");
+	GLint objectColorLoc = glGetUniformLocation(GLRenderer::program->program, "objectColor");
+	GLint lightColorLoc = glGetUniformLocation(GLRenderer::program->program, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(GLRenderer::program->program, "lightPos"); // Depreciated Code soon. May need deleting
+	GLint lightPositionLoc = glGetUniformLocation(GLRenderer::program->program, "light.position");
+	GLint viewPosLoc = glGetUniformLocation(GLRenderer::program->program, "viewPos");
+	GLint matAmbientLoc = glGetUniformLocation(GLRenderer::program->program, "material.ambient");
+	GLint matDiffuseLoc = glGetUniformLocation(GLRenderer::program->program, "material.diffuse");
+	GLint matSpecularLoc = glGetUniformLocation(GLRenderer::program->program, "material.specular");
+	GLint matShineLoc = glGetUniformLocation(GLRenderer::program->program, "material.shininess");
+	GLint lightAmbientLoc = glGetUniformLocation(GLRenderer::program->program, "light.ambient");
+	GLint lightDiffuseLoc = glGetUniformLocation(GLRenderer::program->program, "light.diffuse");
+	GLint lightSpecularLoc = glGetUniformLocation(GLRenderer::program->program, "light.specular");
+	GLint lightDirPos = glGetUniformLocation(GLRenderer::program->program, "light.direction");
+	GLint lightConstantPos = glGetUniformLocation(GLRenderer::program->program, "light.constant");
+	GLint lightLinearPos = glGetUniformLocation(GLRenderer::program->program, "light.linear");
+	GLint lightQuadraticPos = glGetUniformLocation(GLRenderer::program->program, "light.quadratic");
+	GLint ourImageLoc = glGetUniformLocation(GLRenderer::program->program, "ourImage"); 
+	GLint hueShiftLoc = glGetUniformLocation(GLRenderer::program->program, "hueShift");
+	GLint satBoostLoc = glGetUniformLocation(GLRenderer::program->program, "satBoost");
 	
 
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
@@ -199,15 +198,15 @@ void MeshRenderer::renderObject(Shape *shape)
 	// Create camera transformations
 	mat4 view = camera->getView();
 	mat4 projection = camera->getProjection();
-	model = transform->get();
+	model = transform.get();
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
 
 	// Get matrix's uniform location, get and set matrix
-	GLuint modelLoc = glGetUniformLocation(MeshRenderer::program->program, "model");
-	GLuint viewLoc = glGetUniformLocation(MeshRenderer::program->program, "view");
-	GLuint projectionLoc = glGetUniformLocation(MeshRenderer::program->program, "projection");
-	GLuint alphaLoc = glGetUniformLocation(MeshRenderer::program->program, "ourAlpha");
-	GLuint normalMatrixLoc = glGetUniformLocation(MeshRenderer::program->program, "normalMatrix");
+	GLuint modelLoc = glGetUniformLocation(GLRenderer::program->program, "model");
+	GLuint viewLoc = glGetUniformLocation(GLRenderer::program->program, "view");
+	GLuint projectionLoc = glGetUniformLocation(GLRenderer::program->program, "projection");
+	GLuint alphaLoc = glGetUniformLocation(GLRenderer::program->program, "ourAlpha");
+	GLuint normalMatrixLoc = glGetUniformLocation(GLRenderer::program->program, "normalMatrix");
 
 	// Pass to Shader
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -222,30 +221,30 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 
-	//if (MeshRenderer::material.diffuse != "") {
+	//if (GLRenderer::material.diffuse != "") {
 	//	//Bind Diffuse map
 	//	glActiveTexture(GL_TEXTURE0);
-	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.diffuse));
 	//	glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
 	//}
 
-	//if (MeshRenderer::material.color != "") {
+	//if (GLRenderer::material.color != "") {
 	//	glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
 	//}
 
-	//if (MeshRenderer::material.emission != "") {
+	//if (GLRenderer::material.emission != "") {
 
 	//	//Bind Emission map
 	//	glActiveTexture(GL_TEXTURE2);
-	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.emission));
 	//	glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
 	//}
 
-	//if (MeshRenderer::material.specular != "") {
+	//if (GLRenderer::material.specular != "") {
 
 	//	//Bind Specular map
 	//	glActiveTexture(GL_TEXTURE3);
-	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(GLRenderer::material.specular));
 	//	glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
 	//}
 

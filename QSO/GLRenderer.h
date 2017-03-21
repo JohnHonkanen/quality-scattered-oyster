@@ -26,17 +26,16 @@ struct Material {
 	
 };
 
-class MeshRenderer : public Renderer
+class GLRenderer : public Renderer
 {
 private:
-	Transform *transform; //Origin of the renderObject
 	Shader *program;
 public:
-	MeshRenderer(Transform *transform, Shader *program);
-	virtual ~MeshRenderer();
+	GLRenderer(Shader *program);
+	virtual ~GLRenderer();
 
 	void init();
-	void renderObject(Mesh *mesh);
-	void renderObject(Shape *shape);
+	void renderObject(Mesh *mesh, Transform transform);
+	void renderObject(Shape *shape, Transform transform);
 };
 

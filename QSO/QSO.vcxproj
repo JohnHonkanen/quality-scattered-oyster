@@ -167,7 +167,7 @@
     <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshGenerator.h" />
-    <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="MouseInput.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="openGLHandler.h" />
@@ -198,7 +198,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshGenerator.cpp" />
-    <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="MouseInput.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="openGLHandler.cpp" />
