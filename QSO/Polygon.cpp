@@ -2,8 +2,15 @@
 
 
 
-Polygon::Polygon()
+void Polygon::createMesh()
 {
+	init();
+}
+
+Polygon::Polygon(TextureManager *textureManager, string textureName) : Shape(textureManager)
+{
+	Shape::textureName = textureName;
+	createMesh();
 }
 
 

@@ -64,9 +64,6 @@
     <Filter Include="Header Files\Terrain">
       <UniqueIdentifier>{d11805a8-016c-43d6-b8cb-c19f35bf48d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\OpenGL\Polygons">
-      <UniqueIdentifier>{82d1b598-e11c-418b-96f1-381504aff125}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Window">
       <UniqueIdentifier>{56efb511-64b9-4f7b-b26f-cb1b66e47aaa}</UniqueIdentifier>
     </Filter>
@@ -75,6 +72,9 @@
     </Filter>
     <Filter Include="Header Files\Renderers">
       <UniqueIdentifier>{ed98c493-ce32-4493-879d-2f56dc37f6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OpenGL\Shapes">
+      <UniqueIdentifier>{82d1b598-e11c-418b-96f1-381504aff125}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,14 +153,14 @@
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\OpenGL\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="Polygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OpenGL\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>Header Files\OpenGL\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OpenGL\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

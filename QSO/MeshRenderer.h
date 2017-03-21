@@ -29,12 +29,10 @@ struct Material {
 class MeshRenderer : public Renderer
 {
 private:
-	Material material;
-	TextureManager *textureManager;
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
 public:
-	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program);
+	MeshRenderer(Transform *transform, Shader *program);
 	virtual ~MeshRenderer();
 
 	void init();

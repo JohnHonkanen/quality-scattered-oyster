@@ -1,9 +1,7 @@
 #include "MeshRenderer.h"
 
-MeshRenderer::MeshRenderer(Material material, TextureManager * textureManager, Transform * transform, Shader * program)
+MeshRenderer::MeshRenderer(Transform * transform, Shader * program)
 {
-	MeshRenderer::material = material;
-	MeshRenderer::textureManager = textureManager;
 	MeshRenderer::transform = transform;
 	MeshRenderer::program = program;
 	//MeshRenderer::mesh = mesh;
@@ -89,38 +87,38 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	glUniform1f(alphaLoc, 1.0f);
 	glUniformMatrix3fv(normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normalMatrix));
 
-	//glBindTexture call will bind that texture to the currently active texture unit.
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.uv));
-	glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
-	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
+	////glBindTexture call will bind that texture to the currently active texture unit.
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.uv));
+	//glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
+	////By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 
-	if (MeshRenderer::material.diffuse != "") {
-		//Bind Diffuse map
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
-		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
-	}
+	//if (MeshRenderer::material.diffuse != "") {
+	//	//Bind Diffuse map
+	//	glActiveTexture(GL_TEXTURE0);
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
+	//	glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
+	//}
 
-	if (MeshRenderer::material.color != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
-	}
+	//if (MeshRenderer::material.color != "") {
+	//	glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
+	//}
 
-	if (MeshRenderer::material.emission != "") {
+	//if (MeshRenderer::material.emission != "") {
 
-		//Bind Emission map
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
-		glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
-	}
+	//	//Bind Emission map
+	//	glActiveTexture(GL_TEXTURE2);
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
+	//	glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
+	//}
 
-	if (MeshRenderer::material.specular != "") {
+	//if (MeshRenderer::material.specular != "") {
 
-		//Bind Specular map
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
-		glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
-	}
+	//	//Bind Specular map
+	//	glActiveTexture(GL_TEXTURE3);
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
+	//	glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
+	//}
 
 	//Draw Prefabs
 	glBindVertexArray(mesh->glObjects.VAO);
@@ -226,36 +224,36 @@ void MeshRenderer::renderObject(Shape *shape)
 
 	//glBindTexture call will bind that texture to the currently active texture unit.
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.uv));
+	glBindTexture(GL_TEXTURE_2D, shape->getTexture());
 	glUniform1i(glGetUniformLocation(program->program, "ourUV"), 0);
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
 
-	if (MeshRenderer::material.diffuse != "") {
-		//Bind Diffuse map
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
-		glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
-	}
+	//if (MeshRenderer::material.diffuse != "") {
+	//	//Bind Diffuse map
+	//	glActiveTexture(GL_TEXTURE0);
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.diffuse));
+	//	glUniform1i(glGetUniformLocation(program->program, "material.diffuse"), POSITION);
+	//}
 
-	if (MeshRenderer::material.color != "") {
-		glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
-	}
+	//if (MeshRenderer::material.color != "") {
+	//	glUniform1i(glGetUniformLocation(program->program, "material.color"), COLOR);
+	//}
 
-	if (MeshRenderer::material.emission != "") {
+	//if (MeshRenderer::material.emission != "") {
 
-		//Bind Emission map
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
-		glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
-	}
+	//	//Bind Emission map
+	//	glActiveTexture(GL_TEXTURE2);
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.emission));
+	//	glUniform1i(glGetUniformLocation(program->program, "material.emission"), UV);
+	//}
 
-	if (MeshRenderer::material.specular != "") {
+	//if (MeshRenderer::material.specular != "") {
 
-		//Bind Specular map
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
-		glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
-	}
+	//	//Bind Specular map
+	//	glActiveTexture(GL_TEXTURE3);
+	//	glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(MeshRenderer::material.specular));
+	//	glUniform1i(glGetUniformLocation(program->program, "material.specular"), NORMAL);
+	//}
 
 
 	for (int i = 0; i < numberOfMeshs; i++) {

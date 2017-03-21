@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-
+#include "TextureManager.h"
 #include "Mesh.h"
 
 using namespace std;
@@ -9,13 +9,16 @@ using namespace std;
 class Shape
 {
 protected:
+	virtual void createMesh() = 0;
 	int numberOfMeshs;
 	vector<Mesh*> meshes;
+	string textureName;
+	TextureManager *textureManager;
 public:
-	Shape();
+	Shape(TextureManager *textureManager);
 	virtual ~Shape();
-	virtual void init() = 0;
 	vector<Mesh*> getMesh(int &numMeshs);
+	GLuint getTexture();
 	
 };
 

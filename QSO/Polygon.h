@@ -5,8 +5,10 @@
 
 class Polygon : public Shape
 {
+private:
+	void createMesh();
 public:
-	Polygon();
+	Polygon(TextureManager *textureManager, string textureName);
 	virtual ~Polygon();
 
 	

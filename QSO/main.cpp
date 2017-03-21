@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
 	mapDSE.emission = "lava_2";
 	// Testing Terrain Triangle Strips
 
-	Terrain terrain("terrain", 500, 500, 1.0f);
+	Terrain terrain("terrain", 10, 10, 1.0f);
 	terrain.init();
 	Mesh terrainMesh = Mesh("terrain");
 	mapData terrainData = terrain.getData();
@@ -167,40 +167,19 @@ int main(int argc, char *argv[]) {
 	terrainMesh.generateMesh();
 
 	//Mesh Objects
-	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram);
+	MeshRenderer MeshRenderer1(&cube1Pos, &minShaderProgram);
 	MeshRenderer1.setCamera(&playerCamera);
-	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram);
+	MeshRenderer MeshRenderer2(&cube2Pos, &minShaderProgram);
 	MeshRenderer2.setCamera(&playerCamera);
-	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram);
+	MeshRenderer MeshRenderer3(&lampPos, &minShaderProgram);
 	MeshRenderer3.setCamera(&playerCamera);
-	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram2);
+	MeshRenderer terrainRenderer(&terrainPos, &minShaderProgram);
 	terrainRenderer.setCamera(&playerCamera);
 
 	// Create Polygons
-	Polygon cube1;
-	Polygon cube2;
-	Cube cube3;
-	Cube cube4;
-	Cube cube5;
-	Cube cube6;
-	Cube cube7;
-	Cube cube8;
-	Polygon lamp;
-	Polygon sun;
-	Cube attenuatedLight;
-
-	// Init Polygons
-	cube1.init();
-	cube2.init();
-	cube3.init();
-	cube4.init();
-	cube5.init();
-	cube6.init();
-	cube7.init();
-	cube8.init();
-	lamp.init();
-	sun.init();
-	attenuatedLight.init();
+	Cube cube1(&textureManager, "container_1");
+	Polygon cube2(&textureManager, "container_specular");
+	Polygon lamp(&textureManager, "lava_2");
 
 	// Set Frame Rate
 	Clock frameClock;
@@ -228,7 +207,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 25.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 5.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
 	cube1Pos.translate(vec3(-15.0f, 0.0f, 0.0f));

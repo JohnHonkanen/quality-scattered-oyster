@@ -2,8 +2,15 @@
 
 
 
-Cube::Cube()
+void Cube::createMesh()
 {
+	init();
+}
+
+Cube::Cube(TextureManager *textureManager,string textureName): Shape(textureManager)
+{
+	Shape::textureName = textureName;
+	createMesh();
 }
 
 

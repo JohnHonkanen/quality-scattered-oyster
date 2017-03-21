@@ -5,8 +5,10 @@
 
 class Cube : public Shape
 {
+private:
+	void createMesh();
 public:
-	Cube();
+	Cube(TextureManager *textureManager, string textureName);
 	virtual ~Cube();
 
 	void init();
