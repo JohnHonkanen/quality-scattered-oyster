@@ -33,15 +33,12 @@ private:
 	TextureManager *textureManager;
 	Transform *transform; //Origin of the renderObject
 	Shader *program;
-	Camera *camera;
-
 public:
-	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program, Camera *camera);
+	MeshRenderer(Material material, TextureManager *textureManager, Transform *transform, Shader *program);
 	virtual ~MeshRenderer();
 
 	void init();
 	void renderObject(Mesh *mesh);
 	void renderObject(Shape *shape);
-	void renderObject();
 };
 

@@ -9,7 +9,6 @@
 #include "openGLHandler.h"
 #include "Clock.h"
 #include "TextureManager.h"
-#include "SpriteRenderer.h"
 #include "Camera.h"
 #include "MeshRenderer.h"
 #include "glfwInputHandler.h"
@@ -127,16 +126,8 @@ int main(int argc, char *argv[]) {
 
 	Transform cube1Pos;
 	Transform cube2Pos;
-	Transform cube3Pos;
-	Transform cube4Pos;
-	Transform cube5Pos;
-	Transform cube6Pos;
-	Transform cube7Pos;
-	Transform cube8Pos;
 	Transform lampPos; 
-	Transform attenuatedLightPos;
 	Transform terrainPos;
-	Transform sunPos;
 	Material material;
 	Material mapD;
 	Material mapDS;
@@ -176,18 +167,14 @@ int main(int argc, char *argv[]) {
 	terrainMesh.generateMesh();
 
 	//Mesh Objects
-	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &simpleLightingMapShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer7(mapDS, &textureManager, &cube6Pos, &simpleLightingMapShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
-	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram2, &playerCamera);
-	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &directionalLightShaderProgram, &playerCamera);
-	MeshRenderer attenuatedLightRenderer(mapE, &textureManager, &attenuatedLightPos, &attenuatedLightingShaderProgram, &playerCamera);
+	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram);
+	MeshRenderer1.setCamera(&playerCamera);
+	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram);
+	MeshRenderer2.setCamera(&playerCamera);
+	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram);
+	MeshRenderer3.setCamera(&playerCamera);
+	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram2);
+	terrainRenderer.setCamera(&playerCamera);
 
 	// Create Polygons
 	Polygon cube1;
@@ -250,37 +237,9 @@ int main(int argc, char *argv[]) {
 	cube2Pos.translate(vec3(0.0f, 0.0f, 0.0f));
 	cube2Pos.scale(vec3(1));
 
-	cube3Pos.translate(vec3(35.0f, 0.0f, 0.0f));
-	cube3Pos.scale(vec3(8));
-
-	cube4Pos.translate(vec3(15.0f, 0.0f, 20.0f));
-	cube4Pos.scale(vec3(8));
-
-	cube5Pos.translate(vec3(15.0f, 0.0f, -20.0f));
-	cube5Pos.scale(vec3(8));
-
-	cube6Pos.translate(vec3(0.0f, 0.0f, 20.0f));
-	cube6Pos.scale(vec3(8));
-	cube6Pos.calculateModelMatrix();
-
-	cube7Pos.translate(vec3(-5.0f, 0.0f, -20.0f));
-	cube7Pos.scale(vec3(8));
-	cube7Pos.calculateModelMatrix();
-
-	cube8Pos.translate(vec3(-15.0f, 0.0f, -20.0f));
-	cube8Pos.scale(vec3(8));
-	cube8Pos.calculateModelMatrix();
 
 	terrainPos.translate(vec3(-terrainData.xLength / 2, -5.0f, terrainData.zLength / 2));
 	terrainPos.calculateModelMatrix();
-
-	sunPos.translate(vec3(100.0f, 100.0f, 0.0f));
-	sunPos.scale(10);
-	sunPos.calculateModelMatrix();
-
-	attenuatedLightPos.translate(vec3(-100.0f, 10.0f, 0.0f));
-	attenuatedLightPos.scale(10);
-	attenuatedLightPos.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -322,35 +281,15 @@ int main(int argc, char *argv[]) {
 			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
 			model = lampPos.calculateModelMatrix();
 
-			cube3Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube3Pos.calculateModelMatrix();
-			//// End of Update
-			
-			cube4Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube4Pos.calculateModelMatrix();
-
-			cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube5Pos.calculateModelMatrix();
-
-			cube6Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
-			model = cube6Pos.calculateModelMatrix();
-
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
+			MeshRenderer1.renderObject(&cube1);
 			MeshRenderer2.renderObject(&cube2);
 			MeshRenderer3.renderObject(&lamp);
-			MeshRenderer4.renderObject(&cube3);
-			MeshRenderer5.renderObject(&cube4);
-			MeshRenderer6.renderObject(&cube5);
-			MeshRenderer7.renderObject(&cube6);
-			MeshRenderer8.renderObject(&cube7);
-			MeshRenderer9.renderObject(&cube8);
-			sunRenderer.renderObject(&sun);
-			attenuatedLightRenderer.renderObject(&attenuatedLight);
 			terrainRenderer.renderObject(&terrainMesh);
-			MeshRenderer1.renderObject(&cube1); 
+			
 
 			//MeshRenderer2.renderObject(&cube);
 

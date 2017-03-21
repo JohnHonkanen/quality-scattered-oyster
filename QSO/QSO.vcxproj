@@ -175,7 +175,6 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
-    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextureGenerator.h" />
     <ClInclude Include="TextureManager.h" />
@@ -207,7 +206,6 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextureGenerator.cpp" />
     <ClCompile Include="TextureManager.cpp" />

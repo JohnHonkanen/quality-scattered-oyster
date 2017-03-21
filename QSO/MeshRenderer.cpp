@@ -1,12 +1,11 @@
 #include "MeshRenderer.h"
 
-MeshRenderer::MeshRenderer(Material material, TextureManager * textureManager, Transform * transform, Shader * program, Camera * camera)
+MeshRenderer::MeshRenderer(Material material, TextureManager * textureManager, Transform * transform, Shader * program)
 {
 	MeshRenderer::material = material;
 	MeshRenderer::textureManager = textureManager;
 	MeshRenderer::transform = transform;
 	MeshRenderer::program = program;
-	MeshRenderer::camera = camera;
 	//MeshRenderer::mesh = mesh;
 }
 
@@ -269,8 +268,4 @@ void MeshRenderer::renderObject(Shape *shape)
 		glDrawElements(mesh[i]->mesh.mode, mesh[i]->mesh.indexCount, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
-}
-
-void MeshRenderer::renderObject()
-{
 }
