@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
-#include "Component.h"
+#include "Shape.h"
 
 using namespace glm;
 
@@ -34,18 +34,18 @@ struct mapData {
 };
 
 class Terrain :
-	public Component
+	public Shape
 {
 private:
+	void createMesh();
 	void buildVertices();
 	void calculateNormals();
 	void buildIndices();
 
 	mapData map;
 public:
-	Terrain(std::string name, int xLength, int zLength, float gridSize);
+	Terrain(TextureManager *textureManager, std::string name, int xLength, int zLength, float gridSize);
 	virtual ~Terrain();
-
 	void init();
 	const mapData getData();
 	void destroy();

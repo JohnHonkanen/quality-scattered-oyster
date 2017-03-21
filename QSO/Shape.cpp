@@ -2,7 +2,7 @@
 
 
 
-Shape::Shape(TextureManager *textureManager)
+Shape::Shape(TextureManager *textureManager) :Component("")
 {
 	Shape::textureManager = textureManager;
 }

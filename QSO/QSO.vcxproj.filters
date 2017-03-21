@@ -144,9 +144,6 @@
     <ClInclude Include="glfwInputHandler.h">
       <Filter>Header Files\Inputs\Handler\GLFW</Filter>
     </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\OpenGL\Mesh</Filter>
     </ClInclude>
@@ -161,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="GLRenderer.h">
       <Filter>Header Files\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\OpenGL\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

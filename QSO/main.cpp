@@ -120,18 +120,6 @@ int main(int argc, char *argv[]) {
 	Transform lampPos; 
 	Transform terrainPos;
 
-	Terrain terrain("terrain", 10, 10, 1.0f);
-	terrain.init();
-	Mesh terrainMesh = Mesh("terrain");
-	mapData terrainData = terrain.getData();
-	terrainMesh.data.vertices = (GLfloat*)terrainData.vertices;
-	terrainMesh.data.indices = terrainData.indices;
-	terrainMesh.data.normals = (GLfloat*)terrainData.normals;
-	terrainMesh.data.indexCount = terrainData.indexCount;
-	terrainMesh.data.vertexCount = terrainData.vertexCount;
-	terrainMesh.data.mode = GL_TRIANGLE_STRIP;
-	terrainMesh.setupMesh();
-
 	//Mesh Objects
 	GLRenderer MeshRenderer1(&minShaderProgram);
 	MeshRenderer1.setCamera(&playerCamera);
@@ -140,7 +128,8 @@ int main(int argc, char *argv[]) {
 	Cube cube1(&textureManager, "container_1");
 	Polygon cube2(&textureManager, "container_specular");
 	Polygon lamp(&textureManager, "lava_2");
-
+	Terrain terrain(&textureManager, "terrain", 10, 10, 1.0f);
+	mapData terrainData = terrain.getData();
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -227,7 +216,7 @@ int main(int argc, char *argv[]) {
 			MeshRenderer1.renderObject(&cube1, cube1Pos);
 			MeshRenderer1.renderObject(&cube2, cube2Pos);
 			MeshRenderer1.renderObject(&lamp, lampPos);
-			MeshRenderer1.renderObject(&terrainMesh, terrainPos);
+			MeshRenderer1.renderObject(&terrain, terrainPos);
 			
 
 			//MeshRenderer2.renderObject(&cube);
