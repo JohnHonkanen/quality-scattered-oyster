@@ -175,7 +175,9 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint ourImageLoc = glGetUniformLocation(MeshRenderer::program->program, "ourImage"); 
 	GLint hueShiftLoc = glGetUniformLocation(MeshRenderer::program->program, "hueShift");
 	GLint satBoostLoc = glGetUniformLocation(MeshRenderer::program->program, "satBoost");
-	
+	GLint lightSpotLoc = glGetUniformLocation(MeshRenderer::program->program, "light.spotPosition");
+	GLint lightSpotdirLoc = glGetUniformLocation(MeshRenderer::program->program, "light.spotDirection");
+	GLint lightSpotCutOffLoc = glGetUniformLocation(MeshRenderer::program->program, "light.cutOff");
 
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
@@ -197,12 +199,17 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform1f(lightConstantPos, 1.0f); 
 	glUniform1f(lightLinearPos, 0.022f);
 	glUniform1f(lightQuadraticPos, 0.0019f);
-	// Set HSV properties
+	// Set HSV Properties
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
 	glUniform1f(hueShiftLoc, hueshift);
 	glUniform1f(satBoostLoc, 1.0f);
-
 	hueshift += 0.0005f;
+	// Set Spotlight Properties
+	glUniform3f(lightSpotLoc, camera->Position.x, camera->Position.y, camera->Position.z);
+	glUniform3f(lightSpotdirLoc, camera->Front.x, camera->Front.y, camera->Front.z);
+	glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
+
+	
 
 
 

@@ -121,6 +121,7 @@ int main(int argc, char *argv[]) {
 	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader"); // Directional Light
 	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader"); // Attenuated Lighting
 	Shader HSVShaderProgram("HSVVert.shader", "HSVFrag.shader"); // Only HSV with color
+	Shader spotLightShaderProgram("spotlightVert.shader", "spotlightFrag.shader"); // Spotlight with attenuation
 
 	// Testing Cube Renderer
 
@@ -130,6 +131,7 @@ int main(int argc, char *argv[]) {
 	Transform attenuatedObject25Pos;
 	Transform attenuatedObject50Pos;
 	Transform attenuatedObject75Pos;
+	Transform spotlightedObject100Pos;
 	Transform terrainPos;
 	Transform sunPos;
 	Material material;
@@ -180,7 +182,8 @@ int main(int argc, char *argv[]) {
 	MeshRenderer attenuatedObjectRenderer25(mapDSE, &textureManager, &attenuatedObject25Pos, &attenuatedLightingShaderProgram, &playerCamera);
 	MeshRenderer attenuatedObjectRenderer50(mapDSE, &textureManager, &attenuatedObject50Pos, &attenuatedLightingShaderProgram, &playerCamera);
 	MeshRenderer attenuatedObjectRenderer75(mapDSE, &textureManager, &attenuatedObject75Pos, &attenuatedLightingShaderProgram, &playerCamera);
-	
+	MeshRenderer spotlightedObjectRenderer100(mapDSE, &textureManager, &spotlightedObject100Pos, &spotLightShaderProgram, &playerCamera);
+
 	// Terrain
 	MeshRenderer terrainRenderer(mapE, &textureManager, &terrainPos, &attenuatedLightingShaderProgram, &playerCamera);
 
@@ -233,6 +236,10 @@ int main(int argc, char *argv[]) {
 	attenuatedObject75Pos.scale(3);
 	attenuatedObject75Pos.calculateModelMatrix();
 
+	spotlightedObject100Pos.translate(vec3(-100.0f, 5.0f, 0.0f));
+	spotlightedObject100Pos.scale(3);
+	spotlightedObject100Pos.calculateModelMatrix();
+
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
 
@@ -280,6 +287,7 @@ int main(int argc, char *argv[]) {
 			attenuatedObjectRenderer25.renderObject(&attenuatedLight);
 			attenuatedObjectRenderer50.renderObject(&attenuatedLight);
 			attenuatedObjectRenderer75.renderObject(&attenuatedLight);
+			spotlightedObjectRenderer100.renderObject(&attenuatedLight);
 
 			terrainRenderer.renderObject(&terrainMesh);
 

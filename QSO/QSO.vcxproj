@@ -219,6 +219,8 @@
     <None Include="attenuatedLightingVert.shader" />
     <None Include="directionalLightingFrag.shader" />
     <None Include="directionalLightingVert.shader" />
+    <None Include="spotlightFrag.shader" />
+    <None Include="spotlightVert.shader" />
     <None Include="HSVFrag.shader" />
     <None Include="HSVVert.shader" />
     <None Include="lampFrag.shader" />
