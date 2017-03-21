@@ -22,6 +22,11 @@ Mesh::~Mesh()
 {
 }
 
+void Mesh::destroy()
+{
+	delete this;
+}
+
 void Mesh::setupMesh()
 {
 	VAO = MeshGenerator::createMesh(data);

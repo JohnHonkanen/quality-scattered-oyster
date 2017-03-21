@@ -28,7 +28,7 @@ public:
 	Mesh();
 	Mesh(std::string name);
 	virtual ~Mesh();
-
+	void destroy();
 	void setupMesh();
 	void drawMesh();
 

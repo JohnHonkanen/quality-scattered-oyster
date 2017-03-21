@@ -16,6 +16,7 @@
 #include "Mesh.h"
 #include "Polygon.h"
 #include "Cube.h"
+#include "GameObject.h"
 
 using namespace std;
 
@@ -113,23 +114,15 @@ int main(int argc, char *argv[]) {
 
 	Shader minShaderProgram("minVert.shader", "minFrag.shader");
 
-	// Testing Cube Renderer
-
-	Transform cube1Pos;
-	Transform cube2Pos;
-	Transform lampPos; 
-	Transform terrainPos;
-
 	//Mesh Objects
 	GLRenderer MeshRenderer1(&minShaderProgram);
 	MeshRenderer1.setCamera(&playerCamera);
 
-	// Create Polygons
 	Cube cube1(&textureManager, "container_1");
-	Polygon cube2(&textureManager, "container_specular");
-	Polygon lamp(&textureManager, "lava_2");
-	Terrain terrain(&textureManager, "terrain", 10, 10, 1.0f);
-	mapData terrainData = terrain.getData();
+	GameObject cube("cube");
+	cube.addComponent(&cube1);
+	// Create Polygons
+	
 	// Set Frame Rate
 	Clock frameClock;
 	frameClock.startClock();
@@ -155,19 +148,9 @@ int main(int argc, char *argv[]) {
 
 	*/
 
-	mat4 model;
-	lampPos.translate(vec3(0.0f, 5.0f, 0.0f));
-	lampPos.calculateModelMatrix();
+	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
+	cube.transform.scale(vec3(5));
 
-	cube1Pos.translate(vec3(-15.0f, 0.0f, 0.0f));
-	cube1Pos.scale(vec3(5));
-
-	cube2Pos.translate(vec3(0.0f, 0.0f, 0.0f));
-	cube2Pos.scale(vec3(1));
-
-
-	terrainPos.translate(vec3(-terrainData.xLength / 2, -5.0f, terrainData.zLength / 2));
-	terrainPos.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -199,28 +182,13 @@ int main(int argc, char *argv[]) {
 			// End of Process Inputs
 
 			// Update Function
-			
-			//cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
-			model = cube1Pos.calculateModelMatrix();
-
-			cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube2Pos.calculateModelMatrix();
-
-			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
-			model = lampPos.calculateModelMatrix();
-
+			cube.transform.calculateModelMatrix();
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(&cube1, cube1Pos);
-			MeshRenderer1.renderObject(&cube2, cube2Pos);
-			MeshRenderer1.renderObject(&lamp, lampPos);
-			MeshRenderer1.renderObject(&terrain, terrainPos);
+			MeshRenderer1.renderObject(cube.getComponent<Shape>(), cube.transform);
 			
-
-			//MeshRenderer2.renderObject(&cube);
-
 			// End of Render
 
 			graphicsHandler.end(); // Swaps scene buffers
@@ -228,6 +196,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	MeshGenerator::destroy();
+	cube.destroy();
 	graphicsHandler.destroy();
 
 	return 0;

@@ -18,6 +18,7 @@ protected:
 public:
 	Shape(TextureManager *textureManager);
 	virtual ~Shape();
+	void destroy();
 	vector<Mesh*> getMesh(int &numMeshs);
 	GLuint getTexture();
 	
