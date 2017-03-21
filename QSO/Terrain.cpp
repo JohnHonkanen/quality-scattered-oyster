@@ -47,7 +47,7 @@ void Terrain::buildVertices()
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
-			map.vertices[vertex] = vec3(x * Terrain::gridSize, rand()%2-1, -z* Terrain::gridSize); //Y is reserved for heightmap
+			map.vertices[vertex] = vec3(x * Terrain::gridSize, 0, -z* Terrain::gridSize); //Y is reserved for heightmap  rand()%2-1
 			vertex++;
 		}
 	}

@@ -32,7 +32,7 @@ Camera::Camera()
 // Constructor with Vectors
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f))
 {
-	position = glm::vec3(0.0f, 0.0f, 10.0f);
+	position = glm::vec3(0.0f, 0.0f, 5.0f);
 	up = glm::vec3(0.0f, 1.0f, 0.0f);
 	yaw = YAW;
 	pitch = PITCH;

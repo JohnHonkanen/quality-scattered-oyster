@@ -112,27 +112,19 @@ int main(int argc, char *argv[]) {
 
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
-	Shader minShaderProgram("minVert.shader", "minFrag.shader");
-	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader");
-	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");
-	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
-	Shader lightingMapShaderProgram2("lightingMapVert.shader", "lightingMapFrag.shader");
-	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader");
-	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader"); 
-	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader");
-	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader");
-	Shader HSVShaderProgram("HSVVert.shader", "HSVFrag.shader");
+	Shader minShaderProgram("minVert.shader", "minFrag.shader"); // Simple Shader with color & texture, no Lighting effects
+	Shader minLightingShaderProgram("minLightingVert.shader", "minLightingFrag.shader"); // Phong only
+	Shader matLightingShaderProgram("matLightingVert.shader", "matLightingFrag.shader");  // Phong + Material (Color), no texture
+	Shader lightingMapShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader"); // Phong + Spec + Diffuse + Emission Map + HSV
+	Shader simpleLightingMapShaderProgram("simpleLightingMapVert.shader", "simpleLightingMapFrag.shader"); // Phong + Spec + Diffuse Map
+	Shader lampShaderProgram("lampVert.shader", "lampFrag.shader");  // Simple Lamp
+	Shader directionalLightShaderProgram("directionalLightingVert.shader", "directionalLightingFrag.shader"); // Directional Light
+	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader"); // Attenuated Lighting
+	Shader HSVShaderProgram("HSVVert.shader", "HSVFrag.shader"); // Only HSV with color
 
 	// Testing Cube Renderer
 
 	Transform cube1Pos;
-	Transform cube2Pos;
-	Transform cube3Pos;
-	Transform cube4Pos;
-	Transform cube5Pos;
-	Transform cube6Pos;
-	Transform cube7Pos;
-	Transform cube8Pos;
 	Transform lampPos; 
 	Transform attenuatedLightPos;
 	Transform terrainPos;
@@ -163,7 +155,7 @@ int main(int argc, char *argv[]) {
 	mapDSE.emission = "lava_2";
 	// Testing Terrain Triangle Strips
 
-	Terrain terrain("terrain", 500, 500, 1.0f);
+	Terrain terrain("terrain", 100, 100, 1.0f);
 	terrain.init();
 	Mesh terrainMesh = Mesh("terrain");
 	mapData terrainData = terrain.getData();
@@ -176,43 +168,16 @@ int main(int argc, char *argv[]) {
 	terrainMesh.generateMesh();
 
 	//Mesh Objects
-	MeshRenderer MeshRenderer1(material, &textureManager, &cube1Pos, &minShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer2(material, &textureManager, &cube2Pos, &minLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer3(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer4(material, &textureManager, &cube3Pos, &minLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer5(material, &textureManager, &cube4Pos, &matLightingShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer6(mapD, &textureManager, &cube5Pos, &simpleLightingMapShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer7(mapDS, &textureManager, &cube6Pos, &simpleLightingMapShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer8(mapE, &textureManager, &cube7Pos, &lightingMapShaderProgram, &playerCamera);
-	MeshRenderer MeshRenderer9(mapDSE, &textureManager, &cube8Pos, &lightingMapShaderProgram, &playerCamera);
-	MeshRenderer terrainRenderer(mapDSE, &textureManager, &terrainPos, &lightingMapShaderProgram2, &playerCamera);
-	MeshRenderer sunRenderer(material, &textureManager, &sunPos, &directionalLightShaderProgram, &playerCamera);
-	MeshRenderer attenuatedLightRenderer(mapE, &textureManager, &attenuatedLightPos, &attenuatedLightingShaderProgram, &playerCamera);
+	MeshRenderer testLampRenderer(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
+	MeshRenderer attenuatedLightRenderer(mapDSE, &textureManager, &attenuatedLightPos, &directionalLightShaderProgram, &playerCamera);
+	MeshRenderer terrainRenderer(mapE, &textureManager, &terrainPos, &attenuatedLightingShaderProgram, &playerCamera);
 
 	// Create Polygons
-	Polygon cube1;
-	Polygon cube2;
-	Cube cube3;
-	Cube cube4;
-	Cube cube5;
-	Cube cube6;
-	Cube cube7;
-	Cube cube8;
 	Polygon lamp;
-	Polygon sun;
 	Cube attenuatedLight;
 
 	// Init Polygons
-	cube1.init();
-	cube2.init();
-	cube3.init();
-	cube4.init();
-	cube5.init();
-	cube6.init();
-	cube7.init();
-	cube8.init();
 	lamp.init();
-	sun.init();
 	attenuatedLight.init();
 
 	// Set Frame Rate
@@ -232,54 +197,16 @@ int main(int argc, char *argv[]) {
 
 	// Initial Polygon Position, size and rotation
 
-	/* 
-	Use to debug position of polygon:
-
-	vec3 position = lampPos.getPosition();
-	printf("%f,%f,%f\n", position.x, position.y, position.z);
-
-	*/
-
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 25.0f, 0.0f));
+	lampPos.translate(vec3(5.0f, 10.0f, 0.0f));
+	lampPos.scale(3);
 	lampPos.calculateModelMatrix();
-
-	cube1Pos.translate(vec3(-15.0f, 0.0f, 0.0f));
-	cube1Pos.scale(vec3(5));
-
-	cube2Pos.translate(vec3(0.0f, 0.0f, 0.0f));
-	cube2Pos.scale(vec3(1));
-
-	cube3Pos.translate(vec3(35.0f, 0.0f, 0.0f));
-	cube3Pos.scale(vec3(8));
-
-	cube4Pos.translate(vec3(15.0f, 0.0f, 20.0f));
-	cube4Pos.scale(vec3(8));
-
-	cube5Pos.translate(vec3(15.0f, 0.0f, -20.0f));
-	cube5Pos.scale(vec3(8));
-
-	cube6Pos.translate(vec3(0.0f, 0.0f, 20.0f));
-	cube6Pos.scale(vec3(8));
-	cube6Pos.calculateModelMatrix();
-
-	cube7Pos.translate(vec3(-5.0f, 0.0f, -20.0f));
-	cube7Pos.scale(vec3(8));
-	cube7Pos.calculateModelMatrix();
-
-	cube8Pos.translate(vec3(-15.0f, 0.0f, -20.0f));
-	cube8Pos.scale(vec3(8));
-	cube8Pos.calculateModelMatrix();
 
 	terrainPos.translate(vec3(-terrainData.xLength / 2, -5.0f, terrainData.zLength / 2));
 	terrainPos.calculateModelMatrix();
 
-	sunPos.translate(vec3(100.0f, 100.0f, 0.0f));
-	sunPos.scale(10);
-	sunPos.calculateModelMatrix();
-
-	attenuatedLightPos.translate(vec3(-100.0f, 10.0f, 0.0f));
-	attenuatedLightPos.scale(10);
+	attenuatedLightPos.translate(vec3(-15.0f, 5.0f, 0.0f));
+	attenuatedLightPos.scale(3);
 	attenuatedLightPos.calculateModelMatrix();
 
 	// Game Loop
@@ -312,47 +239,20 @@ int main(int argc, char *argv[]) {
 			// End of Process Inputs
 
 			// Update Function
-			
-			//cube1Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
-			model = cube1Pos.calculateModelMatrix();
-
-			cube2Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube2Pos.calculateModelMatrix();
 
 			//lampPos.rotate(45.0f*dt, vec3(0.0f, 1.0f, 0.0f), false);
 			model = lampPos.calculateModelMatrix();
 
-			cube3Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube3Pos.calculateModelMatrix();
+
 			//// End of Update
-			
-			cube4Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube4Pos.calculateModelMatrix();
-
-			cube5Pos.rotate(-45.0f*dt, vec3(0, 1, 0), false);
-			model = cube5Pos.calculateModelMatrix();
-
-			cube6Pos.rotate(45.0f*dt, vec3(0, 1, 0), false);
-			model = cube6Pos.calculateModelMatrix();
-
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer2.renderObject(&cube2);
-			MeshRenderer3.renderObject(&lamp);
-			MeshRenderer4.renderObject(&cube3);
-			MeshRenderer5.renderObject(&cube4);
-			MeshRenderer6.renderObject(&cube5);
-			MeshRenderer7.renderObject(&cube6);
-			MeshRenderer8.renderObject(&cube7);
-			MeshRenderer9.renderObject(&cube8);
-			sunRenderer.renderObject(&sun);
+
+			testLampRenderer.renderObject(&lamp);
 			attenuatedLightRenderer.renderObject(&attenuatedLight);
 			terrainRenderer.renderObject(&terrainMesh);
-			MeshRenderer1.renderObject(&cube1); 
-
-			//MeshRenderer2.renderObject(&cube);
 
 			// End of Render
 

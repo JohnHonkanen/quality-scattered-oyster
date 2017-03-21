@@ -19,12 +19,6 @@
     <Filter Include="Source Files\OpenGL">
       <UniqueIdentifier>{7cf9b03e-6818-4178-a0c1-17e9d5735509}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Renderer">
-      <UniqueIdentifier>{56efb511-64b9-4f7b-b26f-cb1b66e47aaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Renderer\GLFW">
-      <UniqueIdentifier>{e3e653f9-f064-4cc9-aa54-c5f356cbd656}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Renderer">
       <UniqueIdentifier>{01f87a1d-6626-4d1c-a55b-6dc5b6734b8e}</UniqueIdentifier>
     </Filter>
@@ -39,9 +33,6 @@
     </Filter>
     <Filter Include="Source Files\Clock">
       <UniqueIdentifier>{8db435dc-a548-400b-9c01-a1247bb50532}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\RenderingStrategy">
-      <UniqueIdentifier>{ed98c493-ce32-4493-879d-2f56dc37f6b8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\OpenGL\Texture">
       <UniqueIdentifier>{92740a97-ac01-40b5-bc13-7c6e0275a896}</UniqueIdentifier>
@@ -121,13 +112,22 @@
     <Filter Include="Resource Files\Shaders\HSV">
       <UniqueIdentifier>{ba91b8e1-8af1-402c-921f-f74c16a7ffa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{56efb511-64b9-4f7b-b26f-cb1b66e47aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Window\GLFW">
+      <UniqueIdentifier>{e3e653f9-f064-4cc9-aa54-c5f356cbd656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{ed98c493-ce32-4493-879d-2f56dc37f6b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
-      <Filter>Header Files\Renderer</Filter>
+      <Filter>Header Files\Window</Filter>
     </ClInclude>
     <ClInclude Include="glfwWindow.h">
-      <Filter>Header Files\Renderer\GLFW</Filter>
+      <Filter>Header Files\Window\GLFW</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Header Files\Core</Filter>
@@ -154,10 +154,10 @@
       <Filter>Header Files\Clock</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Header Files\RenderingStrategy</Filter>
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\RenderingStrategy</Filter>
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\OpenGL\Handlers</Filter>
@@ -196,7 +196,7 @@
       <Filter>Header Files\Terrain</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderer.h">
-      <Filter>Header Files\RenderingStrategy</Filter>
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\OpenGL\Mesh</Filter>
