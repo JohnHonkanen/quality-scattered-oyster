@@ -194,9 +194,9 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightPositionLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
 	// These values are distance: 50
-	glUniform1f(lightConstantPos, 1.0f);
-	glUniform1f(lightLinearPos, 0.09f);
-	glUniform1f(lightQuadraticPos, 0.032f);
+	glUniform1f(lightConstantPos, 1.0f); 
+	glUniform1f(lightLinearPos, 0.022f);
+	glUniform1f(lightQuadraticPos, 0.0019f);
 	// Set HSV properties
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
 	glUniform1f(hueShiftLoc, hueshift);

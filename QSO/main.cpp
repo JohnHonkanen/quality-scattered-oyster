@@ -176,10 +176,10 @@ int main(int argc, char *argv[]) {
 	MeshRenderer testLampRenderer(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
 
 	// Attenuated Objects
-	MeshRenderer attenuatedObjectRenderer0(mapDSE, &textureManager, &attenuatedObject0Pos, &directionalLightShaderProgram, &playerCamera);
-	MeshRenderer attenuatedObjectRenderer25(mapDSE, &textureManager, &attenuatedObject25Pos, &directionalLightShaderProgram, &playerCamera);
-	MeshRenderer attenuatedObjectRenderer50(mapDSE, &textureManager, &attenuatedObject50Pos, &directionalLightShaderProgram, &playerCamera);
-	MeshRenderer attenuatedObjectRenderer75(mapDSE, &textureManager, &attenuatedObject75Pos, &directionalLightShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer0(mapDSE, &textureManager, &attenuatedObject0Pos, &attenuatedLightingShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer25(mapDSE, &textureManager, &attenuatedObject25Pos, &attenuatedLightingShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer50(mapDSE, &textureManager, &attenuatedObject50Pos, &attenuatedLightingShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer75(mapDSE, &textureManager, &attenuatedObject75Pos, &attenuatedLightingShaderProgram, &playerCamera);
 	
 	// Terrain
 	MeshRenderer terrainRenderer(mapE, &textureManager, &terrainPos, &attenuatedLightingShaderProgram, &playerCamera);
