@@ -126,7 +126,10 @@ int main(int argc, char *argv[]) {
 
 	Transform cube1Pos;
 	Transform lampPos; 
-	Transform attenuatedLightPos;
+	Transform attenuatedObject0Pos;
+	Transform attenuatedObject25Pos;
+	Transform attenuatedObject50Pos;
+	Transform attenuatedObject75Pos;
 	Transform terrainPos;
 	Transform sunPos;
 	Material material;
@@ -168,8 +171,17 @@ int main(int argc, char *argv[]) {
 	terrainMesh.generateMesh();
 
 	//Mesh Objects
+
+	// Lamps
 	MeshRenderer testLampRenderer(material, &textureManager, &lampPos, &lampShaderProgram, &playerCamera);
-	MeshRenderer attenuatedLightRenderer(mapDSE, &textureManager, &attenuatedLightPos, &directionalLightShaderProgram, &playerCamera);
+
+	// Attenuated Objects
+	MeshRenderer attenuatedObjectRenderer0(mapDSE, &textureManager, &attenuatedObject0Pos, &directionalLightShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer25(mapDSE, &textureManager, &attenuatedObject25Pos, &directionalLightShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer50(mapDSE, &textureManager, &attenuatedObject50Pos, &directionalLightShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer75(mapDSE, &textureManager, &attenuatedObject75Pos, &directionalLightShaderProgram, &playerCamera);
+	
+	// Terrain
 	MeshRenderer terrainRenderer(mapE, &textureManager, &terrainPos, &attenuatedLightingShaderProgram, &playerCamera);
 
 	// Create Polygons
@@ -198,16 +210,28 @@ int main(int argc, char *argv[]) {
 	// Initial Polygon Position, size and rotation
 
 	mat4 model;
-	lampPos.translate(vec3(5.0f, 10.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.scale(3);
 	lampPos.calculateModelMatrix();
 
 	terrainPos.translate(vec3(-terrainData.xLength / 2, -5.0f, terrainData.zLength / 2));
 	terrainPos.calculateModelMatrix();
 
-	attenuatedLightPos.translate(vec3(-15.0f, 5.0f, 0.0f));
-	attenuatedLightPos.scale(3);
-	attenuatedLightPos.calculateModelMatrix();
+	attenuatedObject0Pos.translate(vec3(0.0f, 0.0f, 0.0f));
+	attenuatedObject0Pos.scale(3);
+	attenuatedObject0Pos.calculateModelMatrix();
+
+	attenuatedObject25Pos.translate(vec3(-25.0f, 5.0f, 0.0f));
+	attenuatedObject25Pos.scale(3);
+	attenuatedObject25Pos.calculateModelMatrix();
+
+	attenuatedObject50Pos.translate(vec3(-50.0f, 5.0f, 0.0f));
+	attenuatedObject50Pos.scale(3);
+	attenuatedObject50Pos.calculateModelMatrix();
+
+	attenuatedObject75Pos.translate(vec3(-75.0f, 5.0f, 0.0f));
+	attenuatedObject75Pos.scale(3);
+	attenuatedObject75Pos.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -251,7 +275,12 @@ int main(int argc, char *argv[]) {
 			// Render Function
 
 			testLampRenderer.renderObject(&lamp);
-			attenuatedLightRenderer.renderObject(&attenuatedLight);
+
+			attenuatedObjectRenderer0.renderObject(&attenuatedLight);
+			attenuatedObjectRenderer25.renderObject(&attenuatedLight);
+			attenuatedObjectRenderer50.renderObject(&attenuatedLight);
+			attenuatedObjectRenderer75.renderObject(&attenuatedLight);
+
 			terrainRenderer.renderObject(&terrainMesh);
 
 			// End of Render
