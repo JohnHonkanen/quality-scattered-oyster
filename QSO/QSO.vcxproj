@@ -153,7 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="AssimpModel.h" />
+    <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="Behaviours.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
@@ -170,6 +170,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshGenerator.h" />
     <ClInclude Include="GLRenderer.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="MouseInput.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="openGLHandler.h" />
@@ -186,7 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="AssimpModel.cpp" />
+    <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="Behaviours.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshGenerator.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="MouseInput.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="openGLHandler.cpp" />

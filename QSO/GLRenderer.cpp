@@ -81,8 +81,8 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 	glUniform1f(lightQuadraticPos, 0.032f);
 	// Set HSV properties
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
-	glUniform1f(hueShiftLoc, 0.0f);
-	glUniform1f(satBoostLoc, hueshift);
+	glUniform1f(hueShiftLoc, hueshift);
+	glUniform1f(satBoostLoc, 1.0f);
 
 	hueshift += 0.0005f;
 

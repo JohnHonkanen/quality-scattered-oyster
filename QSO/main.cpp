@@ -18,6 +18,7 @@
 #include "Cube.h"
 #include "GameObject.h"
 #include "Skybox.h"
+#include "Model.h"
 
 using namespace std;
 
@@ -122,6 +123,7 @@ int main(int argc, char *argv[]) {
 
 	Cube *cube1 = new Cube("Cube");
 	Skybox *skyBoxCube = new Skybox("skyBox");
+	Model *nanoSuite = new Model("nanoSuit", "models/LowPolyTree/lowpolytree.obj");
 	Material *material = new Material("BaseMaterial", ShaderProgram);
 	material->diffuseMap = "container2.png";
 	material->specularMap = "container2_specular.png";
@@ -144,6 +146,9 @@ int main(int argc, char *argv[]) {
 	skyBox.addComponent(skyBoxCube);
 	skyBox.addComponent(skyboxMaterial);
 
+	GameObject model("nanoSuit");
+	model.addComponent(nanoSuite);
+	model.addComponent(material);
 
 	// Create Polygons
 	
@@ -214,8 +219,7 @@ int main(int argc, char *argv[]) {
 			// Render Function
 			glRenderer.renderObject(cube.getComponent<Shape>(), cube.transform, cube.getComponent<Material>());
 			glRenderer.renderObject(skyBox.getComponent<Shape>(), skyBox.transform, skyBox.getComponent<Material>());
-			
-			
+			glRenderer.renderObject(model.getComponent<Shape>(), model.transform, model.getComponent<Material>());
 			
 			// End of Render
 

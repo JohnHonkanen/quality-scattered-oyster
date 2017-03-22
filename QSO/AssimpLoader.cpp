@@ -1,61 +1,61 @@
-#include "AssimpModel.h"
+#include "AssimpLoader.h"
 
-void AssimpModel::init()
+vector<Mesh*> AssimpLoader::meshes;
+string AssimpLoader::directory;
+
+vector<Mesh*> AssimpLoader::loadModel(string path)
 {
-	//Shape::numberOfMeshs = 1;
-	buildModel();
-}
+	// Clears all mesh data
+	AssimpLoader::meshes.clear();
 
-void AssimpModel::buildModel()
-{
-
-}
-
-void AssimpModel::loadModel(string path)
-{
+	// Import Assimp
 	Assimp::Importer import;
+
 	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
-	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)	//If there was a problem:
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)	// Detect if there's a problem
 	{
-		cout << "ERROR::ASSIMP::" << import.GetErrorString() << endl;	//Output an error.
-		return;
+		cout << "ERROR::ASSIMP::" << import.GetErrorString() << endl;	// Output an error.
+		return vector<Mesh*>();
 	}
-	this->directory = path.substr(0, path.find_last_of('/'));
+	AssimpLoader::directory = path.substr(0, path.find_last_of('/'));
 
-	this->processNode(scene->mRootNode, scene);
+	return AssimpLoader::processNode(scene->mRootNode, scene);
 }
 
-void AssimpModel::processNode(aiNode * node, const aiScene * scene)
+vector<Mesh*> AssimpLoader::processNode(aiNode * node, const aiScene * scene)
 {
 	// Process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* meshes = scene->mMeshes[node->mMeshes[i]];
-		//AssimpModel::meshes.push_back(AssimpModel::processMesh(meshes, scene));
+		AssimpLoader::meshes.push_back(AssimpLoader::processMesh(meshes, scene));
 	}
+
 	// Then do the same for each of its children
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 	{
-		this->processNode(node->mChildren[i], scene);
+		AssimpLoader::processNode(node->mChildren[i], scene);
 	}
+
+	return AssimpLoader::meshes;
 }
 
-Mesh* AssimpModel::processMesh(aiMesh* meshes, const aiScene* scene)
+Mesh* AssimpLoader::processMesh(aiMesh* meshes, const aiScene* scene)
 {
 	int meshType = 3;
 	//Vertex vertices;
 	int numVerts = meshes->mNumVertices;
-	int numIndeces = meshType * meshes->mNumFaces;
+	int numIndices = meshes->mNumFaces;
 	GLfloat* normals = new GLfloat[3*numVerts];
 	GLfloat* postition = new GLfloat[3*numVerts];
 	GLfloat* texCoords = new GLfloat[2*numVerts];
 	
-	GLuint* indices = new GLuint[numIndeces];
+	vector<GLuint>indices;
 	//vector<Texture> textures;
 
 	float divedThree = 1 / 3.0f;
-	for (GLuint i = 0; i < 3 * numVerts; i + 3)
+	for (GLuint i = 0; i < 3 * numVerts; i += 3)
 	{
 		int aiIndex = (int)((i+2)*divedThree);
 		//Vertex vertex;
@@ -74,7 +74,7 @@ Mesh* AssimpModel::processMesh(aiMesh* meshes, const aiScene* scene)
 		
 	}
 
-	for (GLuint i = 0; i < 2 * numVerts; i + 2)
+	for (GLuint i = 0; i < 2 * numVerts; i += 2)
 	{
 		int aiIndex = (int)((i + 1)*0.5f);
 		//Texture Coordinates:
@@ -94,38 +94,42 @@ Mesh* AssimpModel::processMesh(aiMesh* meshes, const aiScene* scene)
 	}
 
 	// Process indices
-	for (GLuint i = 0; i < numIndeces; i + 3)
+	for (GLuint i = 0; i < numIndices; i++)
 	{
 		aiFace face = meshes->mFaces[i];
 	
 		for (GLuint j = 0; j < face.mNumIndices; j++)
-			indices[i + j] = face.mIndices[j];
+			indices.push_back(face.mIndices[j]);
 	}
 	/*
 		// Process material
 		if (mesh->mMaterialIndex >= 0)
 		{
 			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-			vector<Texture> diffuseMaps = this->loadMaterialTextures(material,
+			vector<Texture> diffuseMaps = AssimpLoader::loadMaterialTextures(material,
 				aiTextureType_DIFFUSE, "texture_diffuse");
 			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-			vector<Texture> specularMaps = this->loadMaterialTextures(material,
+			vector<Texture> specularMaps = AssimpLoader::loadMaterialTextures(material,
 				aiTextureType_SPECULAR, "texture_specular");
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		}
 */
 	
-		Mesh *mesh = new Mesh("NotACube");
+	GLuint *tIndices = new GLuint[indices.size()];
+	
+	for (int i = 0; i < indices.size(); i++) {
+		tIndices[i] = indices[i];
+	}
 
-		mesh->data.normals = normals;
-		mesh->data.vertices = postition;
-		mesh->data.indices = indices;
-		mesh->data.uv = texCoords;
-		mesh->data.indexCount = numIndeces;
-		mesh->data.vertexCount = numVerts;
-		mesh->setupMesh();
+	Mesh *mesh = new Mesh("assimpModel");
 
-		Shape::meshes.push_back(mesh);
-	//return Mesh(vertices, indices, textures);
+	mesh->data.normals = normals;
+	mesh->data.vertices = postition;
+	mesh->data.indices = tIndices;
+	mesh->data.uv = texCoords;
+	mesh->data.indexCount = indices.size();
+	mesh->data.vertexCount = numVerts;
+	mesh->setupMesh();
+
 	return mesh;
 }
