@@ -13,6 +13,6 @@ public:
 
 	void init();
 	void buildCube();
-	void buildCubeMap();
+	/*void buildCubeMap();*/
 };
 

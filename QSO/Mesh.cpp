@@ -34,8 +34,15 @@ void Mesh::setupMesh()
 
 void Mesh::drawMesh()
 {
-	glBindVertexArray(VAO);
-	glDrawElements(data.mode,data.indexCount, GL_UNSIGNED_INT, 0);
+	
+
+	if (data.indices != nullptr) {
+		glDrawElements(data.mode, data.indexCount, GL_UNSIGNED_INT, 0);
+	}
+	else {
+		glDrawArrays(data.mode, 0, 36);
+	}
+	
 	glBindVertexArray(0);
 }
 

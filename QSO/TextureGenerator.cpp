@@ -133,3 +133,53 @@ GLuint TextureGenerator::createTextureMap(const string fileLocation, GLint min, 
 
 	return textureID;
 }
+
+GLuint TextureGenerator::createCubeMap(const vector<string> faces)
+{
+
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	for (GLuint i = 0; i < faces.size(); i++) {
+		cout << "Try load cubemap texture" << i << endl;
+		ILuint width;
+		ILuint height;
+
+		ILuint image;
+
+		//Generate and Bind texture to the image loader
+		ilGenImages(1, &image);
+		ilBindImage(image);
+
+		if (ilLoadImage((const ILstring)faces[i].c_str())) {
+			cout << "Cubemap Texture " << faces[i] << " successfully loaded!" << endl;
+		}
+		else {
+			cout << ilGetError() << endl;
+			cout << "Failed to load image at: " << faces[i] << endl;
+		}
+
+		// Convert image to usable image type
+		ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
+
+		width = ilGetInteger(IL_IMAGE_WIDTH);
+		height = ilGetInteger(IL_IMAGE_HEIGHT);
+
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, ilGetData());
+
+		// Unbind and De-allocate memory
+		ilDeleteImages(1, &image); // Deletes image
+	}
+	// Set cubemap parameters
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	
+	// De-allocate memory
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+	return textureID;
+}

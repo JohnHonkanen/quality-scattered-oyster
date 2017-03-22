@@ -1,7 +1,12 @@
 #pragma once
 #include <GL\glew.h>
+#include <vector>
+
 #include "Component.h"
 #include "Shader.h"
+
+using namespace std;
+
 class Material :
 	public Component
 {
@@ -12,5 +17,9 @@ public:
 	string diffuseMap;
 	string specularMap;
 	string emissionMap;
+
+	bool isCubMap = false;
+
+	vector<string> cubeMaps;
 };
 

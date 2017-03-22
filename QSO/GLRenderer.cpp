@@ -16,6 +16,10 @@ void GLRenderer::init()
 float hueshift = 0.0f;
 void GLRenderer::renderObject(Shape *shape, Transform transform, Material *material)
 {
+	if (material->isCubMap) {
+		glDepthMask(GL_FALSE);
+	}
+
 	/*Draw Cube*/
 	/*Use Material*/
 	int numberOfMeshs;
@@ -86,6 +90,10 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 
 	// Create camera transformations
 	mat4 view = camera->getView();
+	if (material->isCubMap){
+		view = mat4(mat3(view));
+	}
+
 	mat4 projection = camera->getProjection();
 	model = transform.get();
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
@@ -133,10 +141,21 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->specularMap));
 		glUniform1i(glGetUniformLocation(shader.program, "material.specular"), NORMAL);
 	}
-
-
+	
 	for (int i = 0; i < numberOfMeshs; i++) {
 		//Draw Prefabs
+		glBindVertexArray(mesh[i]->getVAO());
+
+		if (material->isCubMap) {
+			if (material->cubeMaps[0] != "") {
+				glActiveTexture(GL_TEXTURE0);
+				GLint skyBoxLoc = glGetUniformLocation(shader.program, "skybox");
+				glUniform1i(skyBoxLoc, 0);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, textureManager->getCubeMap(material->cubeMaps));
+			}
+		}
+
 		mesh[i]->drawMesh();
 	}
+	glDepthMask(GL_TRUE);
 }

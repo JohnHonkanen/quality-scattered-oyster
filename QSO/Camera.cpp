@@ -158,7 +158,7 @@ void Camera::processKeyBoard(KeyboardInput keyboard, GLfloat deltaTime)
 	}
 
 	// Make sure the user stays at the ground level by setting the y position to 0 and keep the camera at ground level (xz plane)
-	Camera::Position.y = 10.0f;
+	Camera::Position.y = 0.0f;
 }
 
 void Camera::setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar)
