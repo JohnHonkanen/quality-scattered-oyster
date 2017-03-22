@@ -11,5 +11,6 @@ public:
 
 	void init();
 	void buildCube();
+	void buildCubeMap();
 };
 
