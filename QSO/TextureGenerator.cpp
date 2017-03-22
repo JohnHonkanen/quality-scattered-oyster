@@ -139,9 +139,9 @@ GLuint TextureGenerator::createCubeMap(const vector<string> faces)
 
 	GLuint textureID;
 	glGenTextures(1, &textureID);
-	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-	for (int i = 0; i < faces.size(); i++) {
+	for (GLuint i = 0; i < faces.size(); i++) {
 		cout << "Try load cubemap texture" << i << endl;
 		ILuint width;
 		ILuint height;
@@ -161,7 +161,7 @@ GLuint TextureGenerator::createCubeMap(const vector<string> faces)
 		}
 
 		// Convert image to usable image type
-		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+		ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
 
 		width = ilGetInteger(IL_IMAGE_WIDTH);
 		height = ilGetInteger(IL_IMAGE_HEIGHT);

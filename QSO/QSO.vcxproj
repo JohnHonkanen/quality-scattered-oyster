@@ -176,6 +176,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextureGenerator.h" />
     <ClInclude Include="TextureManager.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextureGenerator.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -221,6 +223,8 @@
     <None Include="directionalLightingVert.shader" />
     <None Include="multiLightFrag.shader" />
     <None Include="multiLightVert.shader" />
+    <None Include="skyboxFrag.shader" />
+    <None Include="skyboxVert.shader" />
     <None Include="spotlightFrag.shader" />
     <None Include="spotlightVert.shader" />
     <None Include="HSVFrag.shader" />

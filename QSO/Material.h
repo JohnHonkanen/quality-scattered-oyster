@@ -17,7 +17,9 @@ public:
 	string diffuseMap;
 	string specularMap;
 	string emissionMap;
-	
+
+	bool isCubMap = false;
+
 	vector<string> cubeMaps;
 };
 

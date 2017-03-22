@@ -17,6 +17,7 @@
 #include "Polygon.h"
 #include "Cube.h"
 #include "GameObject.h"
+#include "Skybox.h"
 
 using namespace std;
 
@@ -113,19 +114,37 @@ int main(int argc, char *argv[]) {
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
 	Shader ShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
+	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader");
 
 	//Mesh Objects
-	GLRenderer MeshRenderer1;
-	MeshRenderer1.setCamera(&playerCamera);
+	GLRenderer glRenderer;
+	glRenderer.setCamera(&playerCamera);
 
 	Cube *cube1 = new Cube("Cube");
+	Skybox *skyBoxCube = new Skybox("skyBox");
 	Material *material = new Material("BaseMaterial", ShaderProgram);
 	material->diffuseMap = "container2.png";
 	material->specularMap = "container2_specular.png";
 	material->emissionMap = "lava.jpg";
+	
+	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
+	skyboxMaterial->isCubMap = true;
+	skyboxMaterial->cubeMaps.push_back("right.jpg");
+	skyboxMaterial->cubeMaps.push_back("left.jpg");
+	skyboxMaterial->cubeMaps.push_back("top.jpg");
+	skyboxMaterial->cubeMaps.push_back("bottom.jpg");
+	skyboxMaterial->cubeMaps.push_back("back.jpg");
+	skyboxMaterial->cubeMaps.push_back("front.jpg");
+	
 	GameObject cube("cube");
 	cube.addComponent(cube1);
 	cube.addComponent(material);
+
+	GameObject skyBox("skyBox");
+	skyBox.addComponent(skyBoxCube);
+	skyBox.addComponent(skyboxMaterial);
+
+
 	// Create Polygons
 	
 	// Set Frame Rate
@@ -154,8 +173,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
-	cube.transform.scale(vec3(5));
-
+	cube.transform.scale(vec3(1));
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -187,12 +205,16 @@ int main(int argc, char *argv[]) {
 			// End of Process Inputs
 
 			// Update Function
+			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
+			
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(cube.getComponent<Shape>(), cube.transform, cube.getComponent<Material>());
+			glRenderer.renderObject(skyBox.getComponent<Shape>(), skyBox.transform, skyBox.getComponent<Material>());
+			glRenderer.renderObject(cube.getComponent<Shape>(), cube.transform, cube.getComponent<Material>());
+			
 			
 			// End of Render
 

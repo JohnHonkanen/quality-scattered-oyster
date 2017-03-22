@@ -168,6 +168,9 @@
     <ClInclude Include="Terrain.h">
       <Filter>Header Files\OpenGL\Shapes\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Header Files\OpenGL\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Behaviours.cpp">
@@ -260,31 +263,82 @@
     <ClCompile Include="Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="minFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="attenuatedLightingFrag.shader" />
-    <None Include="attenuatedLightingVert.shader" />
-    <None Include="directionalLightingFrag.shader" />
-    <None Include="directionalLightingVert.shader" />
-    <None Include="HSVFrag.shader" />
-    <None Include="HSVVert.shader" />
-    <None Include="lampFrag.shader" />
-    <None Include="lampVert.shader" />
-    <None Include="lightingMapFrag.shader" />
-    <None Include="lightingMapVert.shader" />
-    <None Include="matLightingFrag.shader" />
-    <None Include="matLightingVert.shader" />
-    <None Include="minLightingFrag.shader" />
-    <None Include="minLightingVert.shader" />
-    <None Include="minVert.shader" />
-    <None Include="simpleLightingMapFrag.shader" />
-    <None Include="simpleLightingMapVert.shader" />
-    <None Include="multiLightFrag.shader" />
-    <None Include="multiLightVert.shader" />
-    <None Include="spotlightFrag.shader" />
-    <None Include="spotlightVert.shader" />
+    <None Include="attenuatedLightingFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="attenuatedLightingVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="directionalLightingFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="directionalLightingVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="HSVFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="HSVVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lampFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lampVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lightingMapFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lightingMapVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="matLightingFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="matLightingVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="minLightingFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="minLightingVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="minVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="multiLightFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="multiLightVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="simpleLightingMapFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="simpleLightingMapVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="spotlightFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="spotlightVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skyboxFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skyboxVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
