@@ -12,9 +12,9 @@
 using namespace std;
 
 struct Vertex {
-	glm::vec3 Position;
-	glm::vec3 Normal;
-	glm::vec2 TexCoords;
+	GLfloat* Position;
+	GLfloat* Normal;
+	GLfloat* TexCoords;
 };
 
 struct Texture {
@@ -26,15 +26,17 @@ class AssimpModel : public Shape
 {
 public:
 
-	void loadModel(string path);
+	void init();
+	void buildModel();
 
-	//void Draw(Shader shader);
 private:
 
 	vector<Mesh> meshes;
 	string directory;
 
+	void loadModel(string path);
+
 	void processNode(aiNode* node, const aiScene* scene);
-	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
-	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
+	Mesh* processMesh(aiMesh* mesh, const aiScene* scene);
+	//vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
 };
