@@ -1,21 +1,22 @@
 #pragma once
 
 #include <vector>
-
+#include "Component.h"
+#include "TextureManager.h"
 #include "Mesh.h"
 
 using namespace std;
 
-class Shape
+class Shape : public Component
 {
 protected:
+	virtual void createMesh() = 0;
 	int numberOfMeshs;
 	vector<Mesh*> meshes;
 public:
-	Shape();
+	Shape(string name);
 	virtual ~Shape();
-	virtual void init() = 0;
-	vector<Mesh*> getMesh(int &numMeshs);
-	
+	void destroy();
+	vector<Mesh*> getMesh(int &numMeshs);	
 };
 

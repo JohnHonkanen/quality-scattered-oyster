@@ -1,5 +1,9 @@
 #include "Shader.h"
 
+Shader::Shader()
+{
+}
+
 Shader::Shader(const char * vertexPath, const char * fragmentPath)
 {
 	// 1. Retrieve the vertex/fragment source code from destination file path.

@@ -5,8 +5,10 @@
 
 class Cube : public Shape
 {
+private:
+	void createMesh();
 public:
-	Cube();
+	Cube(string name);
 	virtual ~Cube();
 
 	void init();

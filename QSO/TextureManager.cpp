@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 
+TextureManager *TextureManager::inst;
 TextureManager::TextureManager()
 {
 }
@@ -9,10 +10,13 @@ TextureManager::~TextureManager()
 {
 }
 
-void TextureManager::saveTexture(const string fileLocation, const string textureName)
+TextureManager *TextureManager::instance()
 {
-	pair<string, GLuint>texturePair = pair<string, GLuint>(textureName, TextureGenerator::createTexture(fileLocation));
-	textures.insert(texturePair);
+	if (TextureManager::inst != nullptr)
+		return TextureManager::inst;
+
+	TextureManager::inst = new TextureManager();
+	return TextureManager::inst;
 }
 
 void TextureManager::saveTextureMap(const string fileLocation, const string textureName, GLint min, GLint max)
@@ -31,8 +35,18 @@ void TextureManager::destroy() {
 	for (it; it == textures.end(); it++) {
 		deleteTexture(it->first);
 	}
+	delete this;
 }
 
 GLuint TextureManager::getTexture(const string textureName) {
-	return textures[textureName];
+	GLuint texture;
+	map<string, GLuint>::iterator it = textures.find(textureName);
+	if (it != textures.end()) {
+		texture = it->second;
+	}
+	else {
+		TextureManager::saveTextureMap(textureName, textureName);
+		texture = textures[textureName];
+	}
+	return texture;
 }
