@@ -178,6 +178,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint lightSpotLoc = glGetUniformLocation(MeshRenderer::program->program, "light.spotPosition");
 	GLint lightSpotdirLoc = glGetUniformLocation(MeshRenderer::program->program, "light.spotDirection");
 	GLint lightSpotCutOffLoc = glGetUniformLocation(MeshRenderer::program->program, "light.cutOff");
+	GLint lightSpotOuterCutOffLoc = glGetUniformLocation(MeshRenderer::program->program, "light.outerCutOff");
 
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
@@ -208,7 +209,7 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightSpotLoc, camera->Position.x, camera->Position.y, camera->Position.z);
 	glUniform3f(lightSpotdirLoc, camera->Front.x, camera->Front.y, camera->Front.z);
 	glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
-
+	glUniform1f(lightSpotOuterCutOffLoc, glm::cos(glm::radians(17.5f)));
 	
 
 
