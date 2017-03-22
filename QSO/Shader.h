@@ -23,7 +23,7 @@ class Shader
 public:
 	
 	GLuint program;
-
+	Shader();
 	Shader(const char *vertexPath, const char *fragmentPath); // Find, Initialize, Logs and Checks Shader for error
 	void Use();
 };

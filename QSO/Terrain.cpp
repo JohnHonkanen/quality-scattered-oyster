@@ -1,7 +1,7 @@
 #include "Terrain.h"
 
 
-Terrain::Terrain(std::string name, const int xLength, const int zLength, float gridSize):Component(name)
+Terrain::Terrain(std::string name, const int xLength, const int zLength, float gridSize):Shape(name)
 {
 	Terrain::map.xLength = xLength;
 	Terrain::map.zLength = zLength;
@@ -13,12 +13,13 @@ Terrain::Terrain(std::string name, const int xLength, const int zLength, float g
 	for (int i = 0; i < z; i++) {
 		Terrain::map.heightmap[i] = new float[x];
 	}
+
+	createMesh();
 }
 
 
 Terrain::~Terrain()
 {
-
 }
 
 void Terrain::init()
@@ -37,6 +38,23 @@ void Terrain::destroy()
 {
 	Terrain::map.destroy();
 	delete this;
+}
+
+void Terrain::createMesh()
+{
+	init();
+
+	Mesh *mesh = new Mesh("terrainMesh");
+	mesh->data.normals = (GLfloat *) map.normals;
+	mesh->data.vertices = (GLfloat *) map.vertices;
+	mesh->data.uv = (GLfloat *) map.uv;
+	mesh->data.indices = map.indices;
+	mesh->data.indexCount = map.indexCount;
+	mesh->data.vertexCount = map.vertexCount;
+	mesh->data.mode = GL_TRIANGLE_STRIP;
+	mesh->setupMesh();
+	Shape::numberOfMeshs = 1;
+	Shape::meshes.push_back(mesh);
 }
 
 void Terrain::buildVertices()
