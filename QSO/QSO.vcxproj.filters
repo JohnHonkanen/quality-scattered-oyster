@@ -79,21 +79,6 @@
     <Filter Include="Header Files\OpenGL\Material">
       <UniqueIdentifier>{b28d2ec5-f238-4ee7-b3d5-0f78ab59e34d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Window">
-      <UniqueIdentifier>{56efb511-64b9-4f7b-b26f-cb1b66e47aaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Window\GLFW">
-      <UniqueIdentifier>{e3e653f9-f064-4cc9-aa54-c5f356cbd656}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Renderer">
-      <UniqueIdentifier>{ed98c493-ce32-4493-879d-2f56dc37f6b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\SpotLighting">
-      <UniqueIdentifier>{07d75b37-1c0b-49bb-8d4a-71b5ff6fd400}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Shaders\Light\Lighting\Multi-Lighting">
-      <UniqueIdentifier>{d04bacd7-4388-4bd9-a3bd-c1ad30be2016}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -127,14 +112,7 @@
       <Filter>Header Files\Clock</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-<<<<<<< HEAD
-      <Filter>Header Files\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Renderer</Filter>
-=======
       <Filter>Header Files\Renderers</Filter>
->>>>>>> 19af742eafb3c17a8106b65e37a2cedcc9e4b006
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\OpenGL\Handlers</Filter>
@@ -169,15 +147,6 @@
     <ClInclude Include="glfwInputHandler.h">
       <Filter>Header Files\Inputs\Handler\GLFW</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\Terrain</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>Header Files\Renderer</Filter>
-    </ClInclude>
-=======
->>>>>>> 19af742eafb3c17a8106b65e37a2cedcc9e4b006
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\OpenGL\Mesh</Filter>
     </ClInclude>
@@ -296,20 +265,6 @@
     <None Include="minFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
-<<<<<<< HEAD
-    <None Include="spotlightFrag.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\SpotLighting</Filter>
-    </None>
-    <None Include="spotlightVert.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\SpotLighting</Filter>
-    </None>
-    <None Include="multiLightVert.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Multi-Lighting</Filter>
-    </None>
-    <None Include="multiLightFrag.shader">
-      <Filter>Resource Files\Shaders\Light\Lighting\Multi-Lighting</Filter>
-    </None>
-=======
     <None Include="attenuatedLightingFrag.shader" />
     <None Include="attenuatedLightingVert.shader" />
     <None Include="directionalLightingFrag.shader" />
@@ -327,6 +282,5 @@
     <None Include="minVert.shader" />
     <None Include="simpleLightingMapFrag.shader" />
     <None Include="simpleLightingMapVert.shader" />
->>>>>>> 19af742eafb3c17a8106b65e37a2cedcc9e4b006
   </ItemGroup>
 </Project>
