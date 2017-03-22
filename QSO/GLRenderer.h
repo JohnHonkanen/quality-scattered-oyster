@@ -25,5 +25,7 @@ public:
 
 	void init();
 	void renderObject(Shape *shape, Transform transform, Material *material);
+	
+
 };
 

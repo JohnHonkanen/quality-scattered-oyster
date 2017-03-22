@@ -61,9 +61,6 @@
     <Filter Include="Header Files\Inputs\Handler\GLFW">
       <UniqueIdentifier>{927eeb4c-6cde-4d18-ab85-0a71457f4db9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Terrain">
-      <UniqueIdentifier>{d11805a8-016c-43d6-b8cb-c19f35bf48d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Window">
       <UniqueIdentifier>{56efb511-64b9-4f7b-b26f-cb1b66e47aaa}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     </Filter>
     <Filter Include="Header Files\OpenGL\Material">
       <UniqueIdentifier>{b28d2ec5-f238-4ee7-b3d5-0f78ab59e34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OpenGL\Shapes\Terrain">
+      <UniqueIdentifier>{d11805a8-016c-43d6-b8cb-c19f35bf48d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,11 +162,11 @@
     <ClInclude Include="GLRenderer.h">
       <Filter>Header Files\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\OpenGL\Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files\OpenGL\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\OpenGL\Shapes\Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,5 +282,9 @@
     <None Include="minVert.shader" />
     <None Include="simpleLightingMapFrag.shader" />
     <None Include="simpleLightingMapVert.shader" />
+    <None Include="multiLightFrag.shader" />
+    <None Include="multiLightVert.shader" />
+    <None Include="spotlightFrag.shader" />
+    <None Include="spotlightVert.shader" />
   </ItemGroup>
 </Project>

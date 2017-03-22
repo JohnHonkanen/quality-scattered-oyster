@@ -134,6 +134,9 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 		glUniform1i(glGetUniformLocation(shader.program, "material.specular"), NORMAL);
 	}
 
+	//if (material->cubeMaps[0] != "") {
+	//	glBindTexture(GL_TEXTURE_CUBE_MAP, textureManager->getTexture(material->cubeMaps[0]));
+	//}
 
 	for (int i = 0; i < numberOfMeshs; i++) {
 		//Draw Prefabs

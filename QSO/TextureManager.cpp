@@ -29,6 +29,12 @@ void TextureManager::deleteTexture(const string textureName) {
 	glDeleteTextures(1, &textures[textureName]);
 }
 
+void TextureManager::saveCubeMap(vector<string> faces, const string cubeMapName)
+{
+	pair<string, GLuint>texturePair = pair<string, GLuint>(cubeMapName, TextureGenerator::createCubeMap(faces));
+	textures.insert(texturePair);
+}
+
 void TextureManager::destroy() {
 	map<string, GLuint>::iterator it = textures.begin();
 
@@ -47,6 +53,21 @@ GLuint TextureManager::getTexture(const string textureName) {
 	else {
 		TextureManager::saveTextureMap(textureName, textureName);
 		texture = textures[textureName];
+	}
+	return texture;
+}
+
+GLuint TextureManager::getCubeMap(const vector<string> faces)
+{
+	GLuint texture;
+
+	map<string, GLuint>::iterator it = textures.find(faces[0]);
+	if (it != textures.end()) {
+		texture = it->second;
+	}
+	else {
+		TextureManager::saveCubeMap(faces, faces[0]);
+		texture = textures[faces[0]];
 	}
 	return texture;
 }
