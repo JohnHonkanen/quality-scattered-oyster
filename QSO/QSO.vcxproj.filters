@@ -168,6 +168,9 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files\OpenGL\Material</Filter>
     </ClInclude>
+    <ClInclude Include="AssimpModel.h">
+      <Filter>Header Files\OpenGL\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Behaviours.cpp">
@@ -260,6 +263,9 @@
     <ClCompile Include="Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AssimpModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="minFrag.shader">
@@ -282,5 +288,9 @@
     <None Include="minVert.shader" />
     <None Include="simpleLightingMapFrag.shader" />
     <None Include="simpleLightingMapVert.shader" />
+    <None Include="multiLightFrag.shader" />
+    <None Include="multiLightVert.shader" />
+    <None Include="spotlightFrag.shader" />
+    <None Include="spotlightVert.shader" />
   </ItemGroup>
 </Project>
