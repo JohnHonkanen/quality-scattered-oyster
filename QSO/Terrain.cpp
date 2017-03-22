@@ -1,7 +1,7 @@
 #include "Terrain.h"
 
 
-Terrain::Terrain(TextureManager *textureManager, std::string name, const int xLength, const int zLength, float gridSize) : Shape(textureManager)
+Terrain::Terrain(std::string name, const int xLength, const int zLength, float gridSize):Shape(name)
 {
 	Terrain::map.xLength = xLength;
 	Terrain::map.zLength = zLength;

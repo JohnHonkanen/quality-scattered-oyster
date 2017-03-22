@@ -7,9 +7,8 @@ void Polygon::createMesh()
 	init();
 }
 
-Polygon::Polygon(TextureManager *textureManager, string textureName) : Shape(textureManager)
+Polygon::Polygon(string name):Shape(name)
 {
-	Shape::textureName = textureName;
 	createMesh();
 }
 

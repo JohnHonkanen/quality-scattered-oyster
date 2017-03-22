@@ -76,6 +76,9 @@
     <Filter Include="Header Files\OpenGL\Shapes">
       <UniqueIdentifier>{82d1b598-e11c-418b-96f1-381504aff125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OpenGL\Material">
+      <UniqueIdentifier>{b28d2ec5-f238-4ee7-b3d5-0f78ab59e34d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -161,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Header Files\OpenGL\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\OpenGL\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +255,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

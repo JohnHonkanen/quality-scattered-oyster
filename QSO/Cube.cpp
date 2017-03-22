@@ -7,9 +7,8 @@ void Cube::createMesh()
 	init();
 }
 
-Cube::Cube(TextureManager *textureManager,string textureName): Shape(textureManager)
+Cube::Cube(string name):Shape(name)
 {
-	Shape::textureName = textureName;
 	createMesh();
 }
 

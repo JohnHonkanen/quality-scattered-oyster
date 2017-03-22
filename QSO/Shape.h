@@ -13,14 +13,10 @@ protected:
 	virtual void createMesh() = 0;
 	int numberOfMeshs;
 	vector<Mesh*> meshes;
-	string textureName;
-	TextureManager *textureManager;
 public:
-	Shape(TextureManager *textureManager);
+	Shape(string name);
 	virtual ~Shape();
 	void destroy();
-	vector<Mesh*> getMesh(int &numMeshs);
-	GLuint getTexture();
-	
+	vector<Mesh*> getMesh(int &numMeshs);	
 };
 

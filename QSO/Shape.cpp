@@ -2,9 +2,8 @@
 
 
 
-Shape::Shape(TextureManager *textureManager) :Component("")
+Shape::Shape(string name) :Component(name)
 {
-	Shape::textureManager = textureManager;
 }
 
 
@@ -23,9 +22,4 @@ vector<Mesh*> Shape::getMesh(int & numMeshs)
 {
 	numMeshs = Shape::numberOfMeshs;
 	return Shape::meshes;
-}
-
-GLuint Shape::getTexture()
-{
-	return textureManager->getTexture(textureName);
 }

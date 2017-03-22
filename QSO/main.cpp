@@ -103,24 +103,29 @@ int main(int argc, char *argv[]) {
 	playerCamera.setView(vec3(0.0f, 0.0f, -10.0f)); // Adjust our Camera back by changing Z value
 	
 	// Testing Texture Manager
-	TextureManager textureManager;
-	textureManager.saveTexture("container.jpg", "container_1");
-	textureManager.saveTexture("awesomeface.png", "awesomeface");
-	textureManager.saveTextureMap("container2.png", "container_2"); // For diffusion Map
-	textureManager.saveTextureMap("container2_specular.png", "container_specular"); // For specular Map
-	textureManager.saveTextureMap("lava.jpg", "lava_2"); // For emission Map
+	TextureManager *textureManager = TextureManager::instance();
+	//textureManager.saveTexture("container.jpg", "container_1");
+	//textureManager.saveTexture("awesomeface.png", "awesomeface");
+	//textureManager.saveTextureMap("container2.png", "container_2"); // For diffusion Map
+	//textureManager.saveTextureMap("container2_specular.png", "container_specular"); // For specular Map
+	//textureManager.saveTextureMap("lava.jpg", "lava_2"); // For emission Map
 
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
-	Shader minShaderProgram("minVert.shader", "minFrag.shader");
+	Shader ShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
 
 	//Mesh Objects
-	GLRenderer MeshRenderer1(&minShaderProgram);
+	GLRenderer MeshRenderer1;
 	MeshRenderer1.setCamera(&playerCamera);
 
-	Cube cube1(&textureManager, "container_1");
+	Cube *cube1 = new Cube("Cube");
+	Material *material = new Material("BaseMaterial", ShaderProgram);
+	material->diffuseMap = "container2.png";
+	material->specularMap = "container2_specular.png";
+	material->emissionMap = "lava.jpg";
 	GameObject cube("cube");
-	cube.addComponent(&cube1);
+	cube.addComponent(cube1);
+	cube.addComponent(material);
 	// Create Polygons
 	
 	// Set Frame Rate
@@ -187,7 +192,7 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			MeshRenderer1.renderObject(cube.getComponent<Shape>(), cube.transform);
+			MeshRenderer1.renderObject(cube.getComponent<Shape>(), cube.transform, cube.getComponent<Material>());
 			
 			// End of Render
 
@@ -196,6 +201,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	MeshGenerator::destroy();
+	TextureManager::instance()->destroy();
 	cube.destroy();
 	graphicsHandler.destroy();
 

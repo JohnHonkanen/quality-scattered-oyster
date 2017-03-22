@@ -15,27 +15,15 @@
 #include "MeshGenerator.h"
 #include "Mesh.h"
 #include "Shape.h"
-
-struct Material {
-	string uv;
-	string diffuse;
-	string specular;
-	string emission;
-	string color;
-	float shininess;
-	
-};
+#include "Material.h"
 
 class GLRenderer : public Renderer
 {
-private:
-	Shader *program;
 public:
-	GLRenderer(Shader *program);
+	GLRenderer();
 	virtual ~GLRenderer();
 
 	void init();
-	void renderObject(Mesh *mesh, Transform transform);
-	void renderObject(Shape *shape, Transform transform);
+	void renderObject(Shape *shape, Transform transform, Material *material);
 };
 

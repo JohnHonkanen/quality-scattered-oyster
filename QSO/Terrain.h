@@ -44,7 +44,7 @@ private:
 
 	mapData map;
 public:
-	Terrain(TextureManager *textureManager, std::string name, int xLength, int zLength, float gridSize);
+	Terrain(std::string name, int xLength, int zLength, float gridSize);
 	virtual ~Terrain();
 	void init();
 	const mapData getData();

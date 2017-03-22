@@ -8,7 +8,7 @@ class Polygon : public Shape
 private:
 	void createMesh();
 public:
-	Polygon(TextureManager *textureManager, string textureName);
+	Polygon(string name);
 	virtual ~Polygon();
 
 	
