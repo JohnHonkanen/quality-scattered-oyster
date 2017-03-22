@@ -124,6 +124,9 @@
     <Filter Include="Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\SpotLighting">
       <UniqueIdentifier>{07d75b37-1c0b-49bb-8d4a-71b5ff6fd400}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Light\Lighting\Multi-Lighting">
+      <UniqueIdentifier>{d04bacd7-4388-4bd9-a3bd-c1ad30be2016}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -366,6 +369,12 @@
     </None>
     <None Include="spotlightVert.shader">
       <Filter>Resource Files\Shaders\Light\Lighting\Lighting Maps\LightTypes\SpotLighting</Filter>
+    </None>
+    <None Include="multiLightVert.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Multi-Lighting</Filter>
+    </None>
+    <None Include="multiLightFrag.shader">
+      <Filter>Resource Files\Shaders\Light\Lighting\Multi-Lighting</Filter>
     </None>
   </ItemGroup>
 </Project>

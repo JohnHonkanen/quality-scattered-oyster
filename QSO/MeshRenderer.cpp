@@ -25,12 +25,12 @@ void MeshRenderer::renderObject(Mesh *mesh)
 	
 	MeshRenderer::program->Use();
 
-	//Transform lampPos;
+	Transform lampPos;
 	Transform sunPos;
 
 	mat4 model;
-	/*lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
-	lampPos.calculateModelMatrix();*/
+	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
+	lampPos.calculateModelMatrix();
 
 	sunPos.translate(vec3(100.0f, 100.0f, 0.0f));
 	sunPos.calculateModelMatrix();
@@ -152,8 +152,8 @@ void MeshRenderer::renderObject(Shape *shape)
 	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
-	//sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
-	//sunPos.calculateModelMatrix();
+	sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
+	sunPos.calculateModelMatrix();
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(MeshRenderer::program->program, "objectColor");
@@ -179,6 +179,32 @@ void MeshRenderer::renderObject(Shape *shape)
 	GLint lightSpotdirLoc = glGetUniformLocation(MeshRenderer::program->program, "light.spotDirection");
 	GLint lightSpotCutOffLoc = glGetUniformLocation(MeshRenderer::program->program, "light.cutOff");
 	GLint lightSpotOuterCutOffLoc = glGetUniformLocation(MeshRenderer::program->program, "light.outerCutOff");
+
+	// Multi-light - dirLight
+	GLint dirLightLoc = glGetUniformLocation(MeshRenderer::program->program, "dirLight.direction");
+	GLint ambientDirLightLoc = glGetUniformLocation(MeshRenderer::program->program, "dirLight.ambient");
+	GLint diffuseDirLightLoc = glGetUniformLocation(MeshRenderer::program->program, "dirLight.diffuse");
+	GLint specularDirLightLoc = glGetUniformLocation(MeshRenderer::program->program, "dirLight.specular");
+	// Multi-light - pointLight
+	GLint pointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.direction");
+	GLint ambientPointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.ambient");
+	GLint diffusePointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.diffuse");
+	GLint specularPointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.specular");
+	GLint constantPointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.constant");
+	GLint linearPointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.linear");
+	GLint quadraticPointLightLoc = glGetUniformLocation(MeshRenderer::program->program, "pointLight.quadratic");
+	// Multi-light - spotLight
+	GLint spotLightPositionLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.position");
+	GLint spotLightDirectionLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.direction");
+	GLint ambientSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.ambient");
+	GLint diffuseSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.diffuse");
+	GLint specularSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.specular");
+	GLint constantSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.constant");
+	GLint linearSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.linear");
+	GLint quadraticSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.quadratic");
+	GLint cutOffSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.cutOff");
+	GLint outerCutOffSpotLightLoc = glGetUniformLocation(MeshRenderer::program->program, "spotLight.outerCutOff");
+
 
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
@@ -210,9 +236,31 @@ void MeshRenderer::renderObject(Shape *shape)
 	glUniform3f(lightSpotdirLoc, camera->Front.x, camera->Front.y, camera->Front.z);
 	glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
 	glUniform1f(lightSpotOuterCutOffLoc, glm::cos(glm::radians(17.5f)));
-	
 
-
+	// Set Directional Light Properties for multi-light
+	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
+	glUniform3f(ambientDirLightLoc, 0.0f, 0.0f, 0.0f);
+	glUniform3f(diffuseDirLightLoc, 0.0f, 0.0f, 0.0f); // Darken the light a bit to fit the scene
+	glUniform3f(specularDirLightLoc, 1.0f, 1.0f, 1.0f);
+	// Set Point Light Properties for multi-light
+	glUniform3f(pointLightLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
+	glUniform3f(ambientPointLightLoc, 0.2f, 0.2f, 0.2f);
+	glUniform3f(diffusePointLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform3f(specularPointLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform1f(constantPointLightLoc, 1.0f);
+	glUniform1f(linearPointLightLoc, 0.022f);
+	glUniform1f(quadraticPointLightLoc, 0.0019f);
+	// Set Spot Light Properties for multi-light
+	glUniform3f(spotLightPositionLoc, camera->Position.x, camera->Position.y, camera->Position.z);
+	glUniform3f(spotLightDirectionLoc, camera->Front.x, camera->Front.y, camera->Front.z);
+	glUniform3f(ambientSpotLightLoc, 0.2f, 0.2f, 0.2f);
+	glUniform3f(diffuseSpotLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform3f(specularSpotLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform1f(constantSpotLightLoc, 1.0f);
+	glUniform1f(linearSpotLightLoc, 0.022f);
+	glUniform1f(quadraticSpotLightLoc, 0.0019f);
+	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f)));
+	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f)));
 
 	// Create camera transformations
 	mat4 view = camera->getView();

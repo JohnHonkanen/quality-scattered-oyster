@@ -122,6 +122,7 @@ int main(int argc, char *argv[]) {
 	Shader attenuatedLightingShaderProgram("attenuatedLightingVert.shader", "attenuatedLightingFrag.shader"); // Attenuated Lighting
 	Shader HSVShaderProgram("HSVVert.shader", "HSVFrag.shader"); // Only HSV with color
 	Shader spotLightShaderProgram("spotlightVert.shader", "spotlightFrag.shader"); // Spotlight with attenuation
+	Shader multiLightShaderProgram("multiLightVert.shader", "multiLightFrag.shader"); // Spotlight with attenuation, HSV, Directional Light and Point Light
 
 	// Testing Cube Renderer
 
@@ -179,10 +180,10 @@ int main(int argc, char *argv[]) {
 
 	// Attenuated Objects
 	MeshRenderer attenuatedObjectRenderer0(mapDSE, &textureManager, &attenuatedObject0Pos, &attenuatedLightingShaderProgram, &playerCamera);
-	MeshRenderer attenuatedObjectRenderer25(mapDSE, &textureManager, &attenuatedObject25Pos, &attenuatedLightingShaderProgram, &playerCamera);
+	MeshRenderer attenuatedObjectRenderer25(mapDSE, &textureManager, &attenuatedObject25Pos, &multiLightShaderProgram, &playerCamera);
 	MeshRenderer attenuatedObjectRenderer50(mapDSE, &textureManager, &attenuatedObject50Pos, &attenuatedLightingShaderProgram, &playerCamera);
 	MeshRenderer attenuatedObjectRenderer75(mapDSE, &textureManager, &attenuatedObject75Pos, &attenuatedLightingShaderProgram, &playerCamera);
-	MeshRenderer spotlightedObjectRenderer100(mapDSE, &textureManager, &spotlightedObject100Pos, &spotLightShaderProgram, &playerCamera);
+	MeshRenderer spotlightedObjectRenderer100(mapDSE, &textureManager, &spotlightedObject100Pos, &multiLightShaderProgram, &playerCamera);
 
 	// Terrain
 	MeshRenderer terrainRenderer(mapE, &textureManager, &terrainPos, &attenuatedLightingShaderProgram, &playerCamera);
