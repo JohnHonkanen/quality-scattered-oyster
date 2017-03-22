@@ -17,7 +17,7 @@ float hueshift = 0.0f;
 void GLRenderer::renderObject(Shape *shape, Transform transform, Material *material)
 {
 	if (material->isCubMap) {
-		glDepthMask(GL_FALSE);
+		glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
 	}
 
 	/*Draw Cube*/
@@ -157,5 +157,7 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 
 		mesh[i]->drawMesh();
 	}
-	glDepthMask(GL_TRUE);
+	if (material->isCubMap) {
+		glDepthFunc(GL_LESS); // Set depth function back to default
+	}
 }

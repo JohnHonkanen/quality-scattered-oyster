@@ -212,8 +212,9 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			glRenderer.renderObject(skyBox.getComponent<Shape>(), skyBox.transform, skyBox.getComponent<Material>());
 			glRenderer.renderObject(cube.getComponent<Shape>(), cube.transform, cube.getComponent<Material>());
+			glRenderer.renderObject(skyBox.getComponent<Shape>(), skyBox.transform, skyBox.getComponent<Material>());
+			
 			
 			
 			// End of Render

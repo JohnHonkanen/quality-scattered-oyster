@@ -32,7 +32,7 @@ void AssimpModel::processNode(aiNode * node, const aiScene * scene)
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* meshes = scene->mMeshes[node->mMeshes[i]];
-		AssimpModel::meshes.push_back(AssimpModel::processMesh(meshes, scene));
+		//AssimpModel::meshes.push_back(AssimpModel::processMesh(meshes, scene));
 	}
 	// Then do the same for each of its children
 	for (GLuint i = 0; i < node->mNumChildren; i++)
