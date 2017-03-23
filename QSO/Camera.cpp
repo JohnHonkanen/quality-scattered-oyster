@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "GameObject.h"
 
 // Currently, temp camera, needs upgrade.
 
@@ -64,7 +65,7 @@ Camera::~Camera()
 glm::mat4 Camera::GetViewMatrix()
 {
 	// For reference: glm::lookAt(eye, at, up)
-	mat4 view = glm::lookAt( Camera::Position, Camera::Position + Camera::Front, Camera::Up);
+	mat4 view = glm::lookAt( Camera::Position, Camera::At, Camera::Up);
 	vec3 at = Camera::Position + Camera::Front;
 	/*printf("Eye: (%f,%f,%f)\n", Camera::Position.x, Camera::Position.y, Camera::Position.z);
 	printf("At: (%f,%f,%f)\n", at.x, at.y, at.z);
@@ -130,6 +131,7 @@ void Camera::processMouseScroll(MouseInput mouse, float dt)
 // Process input received the keyboard. Accepts input parameters in the form of camera defined ENUM to abstract it from windowing systems.
 void Camera::processKeyBoard(KeyboardInput keyboard, GLfloat deltaTime)
 {
+	GameObject *player = GameObject::find("tree1");
 	Camera_Movement direction = NONE;
 	if (keyboard.keyPressed(GLFW_KEY_W))
 		direction = FORWARD;
@@ -142,23 +144,30 @@ void Camera::processKeyBoard(KeyboardInput keyboard, GLfloat deltaTime)
 
 	GLfloat velocity = MovementSpeed * deltaTime;
 	if (direction == FORWARD) {
-		Camera::Position += Front * velocity;
+		player->transform.translate(-Front *velocity);
+		//Camera::Position += Front * velocity;
 	}
 
 	if (direction == BACKWARD) {
-		Camera::Position -= Camera::Front * velocity;
+		player->transform.translate(Front *velocity);
+		//Camera::Position -= Camera::Front * velocity;
 	}
 
 	if (direction == LEFT) {
-		Camera::Position -= Camera::Right * velocity;
+		player->transform.translate(Right *velocity);
+		player->transform.rotate(1.0f, vec3(0,1,0), false);
+		//Camera::Position -= Camera::Right * velocity;
 	}
 
 	if (direction == RIGHT) {
-		Camera::Position += Camera::Right * velocity;
+		player->transform.translate(-Right *velocity);
+		//Camera::Position += Camera::Right * velocity;
 	}
 
+	Camera::Position.x = player->transform.getPosition().x;
+	Camera::Position.y = player->transform.getPosition().y + 30.0f;
+	Camera::Position.z = player->transform.getPosition().z - 60.0f;
 	// Make sure the user stays at the ground level by setting the y position to 0 and keep the camera at ground level (xz plane)
-	Camera::Position.y = 0.0f;
 }
 
 void Camera::setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar)

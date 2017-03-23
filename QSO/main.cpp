@@ -48,11 +48,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		if (action == GLFW_PRESS) {
 			keyboard->setKey(key, true);
-			//cout << "key pressed" << endl;
+			cout << "key pressed " << key << endl;
 		}
 		else if (action == GLFW_RELEASE) {
 			keyboard->setKey(key, false);
-			//cout << "key released" << endl;
+			cout << "key released" << endl;
 		}
 			
 	}
@@ -205,7 +205,7 @@ int main(int argc, char *argv[]) {
 
 	//tree.transform.rotate(-90.0f, vec3(1.0f, 0.0f, 0.0f), false);
 
-	//terrainOBJ.transform.translate(vec3(-terrain->getData().xLength / 2, 0.0f, -terrain->getData().zLength / 2));
+	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength / 2, 0.0f, terrain->getData().zLength / 2));
 	terrainOBJ.transform.calculateModelMatrix();
 
 	// Game Loop
@@ -238,6 +238,8 @@ int main(int argc, char *argv[]) {
 			// End of Process Inputs
 
 			// Update Function
+
+			playerCamera.At = tree.transform.getPosition();
 			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
 			tree.transform.calculateModelMatrix();
