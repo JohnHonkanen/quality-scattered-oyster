@@ -116,27 +116,46 @@ int main(int argc, char *argv[]) {
 
 	Shader ShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
 	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader");
-
+	Shader modelShader("modelVert.shader", "modelFrag.shader");
 	//Mesh Objects
 	GLRenderer glRenderer;
 	glRenderer.setCamera(&playerCamera);
 
 	Cube *cube1 = new Cube("Cube");
 	Skybox *skyBoxCube = new Skybox("skyBox");
-	Model *nanoSuite = new Model("nanoSuit", "models/LowPolyTree/lowpolytree.obj");
+	Terrain *terrain = new Terrain("terrain", 100, 100, 1.0f);
+	Model *treeModel1 = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", ShaderProgram);
-	material->diffuseMap = "container2.png";
-	material->specularMap = "container2_specular.png";
-	material->emissionMap = "lava.jpg";
+	material->addTexture("container2.png", DIFFUSE);
+	material->addTexture("container2_specular.png", SPECULAR);
+	material->addTexture("lava.jpg", EMISSION);
 	
 	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
 	skyboxMaterial->isCubMap = true;
+	/*skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_rt.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_lf.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_up.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_dn.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_bk.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_ft.tga");*/
+
+	/*skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_rt.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_lf.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_up.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_dn.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_bk.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_ft.tga");*/
+
 	skyboxMaterial->cubeMaps.push_back("right.jpg");
 	skyboxMaterial->cubeMaps.push_back("left.jpg");
 	skyboxMaterial->cubeMaps.push_back("top.jpg");
 	skyboxMaterial->cubeMaps.push_back("bottom.jpg");
 	skyboxMaterial->cubeMaps.push_back("back.jpg");
 	skyboxMaterial->cubeMaps.push_back("front.jpg");
+	
+	Material *modelMat = new Material("modelMat", modelShader);
+	
+	
 	
 	GameObject cube("cube");
 	cube.addComponent(cube1);
@@ -146,9 +165,13 @@ int main(int argc, char *argv[]) {
 	skyBox.addComponent(skyBoxCube);
 	skyBox.addComponent(skyboxMaterial);
 
-	GameObject model("nanoSuit");
-	model.addComponent(nanoSuite);
-	model.addComponent(material);
+	GameObject tree("tree1");
+	tree.addComponent(treeModel1);
+	tree.addComponent(modelMat);
+
+	GameObject terrainOBJ("terrain");
+	terrainOBJ.addComponent(terrain);
+	terrainOBJ.addComponent(material);
 
 	// Create Polygons
 	
@@ -179,6 +202,11 @@ int main(int argc, char *argv[]) {
 
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
 	cube.transform.scale(vec3(1));
+
+	//tree.transform.rotate(-90.0f, vec3(1.0f, 0.0f, 0.0f), false);
+
+	//terrainOBJ.transform.translate(vec3(-terrain->getData().xLength / 2, 0.0f, -terrain->getData().zLength / 2));
+	terrainOBJ.transform.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -212,14 +240,15 @@ int main(int argc, char *argv[]) {
 			// Update Function
 			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
-			
+			tree.transform.calculateModelMatrix();
 
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			glRenderer.renderObject(cube.getComponent<Shape>(), cube.transform, cube.getComponent<Material>());
-			glRenderer.renderObject(skyBox.getComponent<Shape>(), skyBox.transform, skyBox.getComponent<Material>());
-			glRenderer.renderObject(model.getComponent<Shape>(), model.transform, model.getComponent<Material>());
+			glRenderer.renderObject(&cube);
+			glRenderer.renderObject(&skyBox);
+			glRenderer.renderObject(&tree);
+			glRenderer.renderObject(&terrainOBJ);
 			
 			// End of Render
 

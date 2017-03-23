@@ -3,7 +3,7 @@
 
 void Model::createMesh()
 {
-	Shape::meshes = AssimpLoader::loadModel(modelLocation);
+	Shape::meshes = AssimpLoader::loadModel(modelLocation, material);
 	Shape::numberOfMeshs = meshes.size();
 }
 

@@ -177,6 +177,9 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files\OpenGL\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Behaviours.cpp">
@@ -350,6 +353,15 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="skyboxVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shader1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="modelVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="modelFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

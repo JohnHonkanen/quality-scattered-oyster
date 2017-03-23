@@ -14,8 +14,16 @@ void GLRenderer::init()
 }
 
 float hueshift = 0.0f;
-void GLRenderer::renderObject(Shape *shape, Transform transform, Material *material)
+void GLRenderer::renderObject(GameObject *obj)
 {
+	Material *material = obj->getComponent<Material>();
+	Shape *shape = obj->getComponent<Shape>();
+	vector<Material> modelMats;
+	if (obj->getComponent<Model>()) {
+		modelMats = obj->getComponent<Model>()->material;
+	}
+
+
 	if (material->isCubMap) {
 		glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
 	}
@@ -95,7 +103,7 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 	}
 
 	mat4 projection = camera->getProjection();
-	model = transform.get();
+	model = obj->transform.get();
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
 
 	// Get matrix's uniform location, get and set matrix
@@ -114,38 +122,28 @@ void GLRenderer::renderObject(Shape *shape, Transform transform, Material *mater
 
 	//glBindTexture call will bind that texture to the currently active texture unit.
 	//By setting them via glUniform1i we make sure each uniform sampler corresponds to the proper texture unit.
-
-	if (material->diffuseMap != "") {
-		//Bind Diffuse map
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->diffuseMap));
-		glUniform1i(glGetUniformLocation(shader.program, "material.diffuse"), POSITION);
+	if (!obj->getComponent<Model>()) {
+		for (int i = 0; i < material->textures.size(); i++) {
+			string type = material->convertTypeToString(material->textures[i].type);
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->textures[i].textureName));
+			glUniform1i(glGetUniformLocation(shader.program, ("material." + type).c_str()), i);
+		}
 	}
 
-	/*if (GLRenderer::material.color != "") {
-		glUniform1i(glGetUniformLocation(shader.program, "material.color"), COLOR);
-	}*/
-
-	if (material->emissionMap != "") {
-
-		//Bind Emission map
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->emissionMap));
-		glUniform1i(glGetUniformLocation(shader.program, "material.emission"), UV);
-	}
-
-	if (material->specularMap != "") {
-
-		//Bind Specular map
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->specularMap));
-		glUniform1i(glGetUniformLocation(shader.program, "material.specular"), NORMAL);
-	}
-	
 	for (int i = 0; i < numberOfMeshs; i++) {
 		//Draw Prefabs
 		glBindVertexArray(mesh[i]->getVAO());
 
+		if (obj->getComponent<Model>()) {
+			for (int j = 0; j < modelMats[i].textures.size(); j++) {
+				string type = material->convertTypeToString(modelMats[i].textures[j].type);
+				string number = std::to_string(modelMats[i].textures[j].number);
+				glActiveTexture(GL_TEXTURE0+j);
+				glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(modelMats[i].textures[j].textureName));
+				glUniform1i(glGetUniformLocation(shader.program, ("material." + type).c_str()), j);
+			}
+		}
 		if (material->isCubMap) {
 			if (material->cubeMaps[0] != "") {
 				glActiveTexture(GL_TEXTURE0);

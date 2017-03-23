@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-
+#include "Material.h"
 #include "Shape.h"
 
 
@@ -14,5 +14,6 @@ private:
 public:
 	Model(string name, string modelLocation);
 	virtual ~Model();
+	vector<Material> material;
 };
 

@@ -14,8 +14,9 @@
 #include "Camera.h"
 #include "MeshGenerator.h"
 #include "Mesh.h"
-#include "Shape.h"
 #include "Material.h"
+#include "Shape.h"
+#include "Model.h"
 
 class GLRenderer : public Renderer
 {
@@ -24,7 +25,7 @@ public:
 	virtual ~GLRenderer();
 
 	void init();
-	void renderObject(Shape *shape, Transform transform, Material *material);
+	void renderObject(GameObject *obj);
 	
 
 };
