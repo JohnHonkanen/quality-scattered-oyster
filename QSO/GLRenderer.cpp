@@ -40,11 +40,11 @@ void GLRenderer::renderObject(GameObject *obj)
 	Transform sunPos;
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
-	lampPos.calculateModelMatrix();
+	//lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
+	//lampPos.calculateModelMatrix();
 
-	sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
-	sunPos.calculateModelMatrix();
+	/*sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
+	sunPos.calculateModelMatrix();*/
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(shader.program, "objectColor");
@@ -115,9 +115,9 @@ void GLRenderer::renderObject(GameObject *obj)
 	
 	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
 	// These values are distance: 50
-	glUniform1f(lightConstantPos, 1.0f); 
-	glUniform1f(lightLinearPos, 0.022f);
-	glUniform1f(lightQuadraticPos, 0.0019f);
+	//glUniform1f(lightConstantPos, 1.0f); 
+	//glUniform1f(lightLinearPos, 0.022f);
+	//glUniform1f(lightQuadraticPos, 0.0019f);
 
 	// Set HSV Properties
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
@@ -126,10 +126,10 @@ void GLRenderer::renderObject(GameObject *obj)
 	hueshift += 0.0005f;
 
 	// Set Spotlight Properties
-	glUniform3f(lightSpotLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	/*glUniform3f(lightSpotLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 	glUniform3f(lightSpotdirLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
 	glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
-	glUniform1f(lightSpotOuterCutOffLoc, glm::cos(glm::radians(17.5f)));
+	glUniform1f(lightSpotOuterCutOffLoc, glm::cos(glm::radians(17.5f)));*/
 
 	// Set Directional Light Properties for multi-light
 	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
@@ -142,19 +142,21 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(diffusePointLightLoc, 0.5f, 0.5f, 0.5f);
 	glUniform3f(specularPointLightLoc, 0.5f, 0.5f, 0.5f);
 	glUniform1f(constantPointLightLoc, 1.0f);
-	glUniform1f(linearPointLightLoc, 0.022f);
-	glUniform1f(quadraticPointLightLoc, 0.0019f);
+	glUniform1f(linearPointLightLoc, 0.045f);
+	glUniform1f(quadraticPointLightLoc, 0.0075f);
 	// Set Spot Light Properties for multi-light
 	glUniform3f(spotLightPositionLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	printf("camera location %f, %f, %f \n", camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 	glUniform3f(spotLightDirectionLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
-	glUniform3f(ambientSpotLightLoc, 0.2f, 0.2f, 0.2f);
-	glUniform3f(diffuseSpotLightLoc, 0.5f, 0.5f, 0.5f);
+	printf("camera front %f, %f, %f \n", camera->getFront().x, camera->getFront().y, camera->getFront().z);
+	glUniform3f(ambientSpotLightLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(diffuseSpotLightLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(specularSpotLightLoc, 0.5f, 0.5f, 0.5f);
 	glUniform1f(constantSpotLightLoc, 1.0f);
-	glUniform1f(linearSpotLightLoc, 0.022f);
-	glUniform1f(quadraticSpotLightLoc, 0.0019f);
+	glUniform1f(linearSpotLightLoc, 0.0014f);
+	glUniform1f(quadraticSpotLightLoc, 0.000007f);
 	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f)));
-	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f)));
+	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 2)));
 
 
 

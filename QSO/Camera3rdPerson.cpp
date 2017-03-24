@@ -52,6 +52,10 @@ void Camera3rdPerson::move()
 	float horizontalDistance = calculateHorizontalDistance();
 	float verticalDistance = calculateVerticalDistance();
 	calculateCameraPosition(horizontalDistance, verticalDistance);
+	Camera3rdPerson::yaw = 180 - (gameObject->transform.getRotation().y + angleAroundPlayer);
+	front.x = cos(radians(yaw)) * cos(radians(pitch));
+	front.y = sin(radians(pitch));
+	front.z = sin(radians(yaw)) * cos(radians(pitch));
 
 }
 
@@ -79,7 +83,7 @@ void Camera3rdPerson::calculateAngleAroundPlayer()
 	
 	if (mouse->getButtonPressed(1)) {
 		float angleChange = mouse->getOffset().x;
-		angleAroundPlayer -= angleChange * angleRotationSpeed;
+		angleAroundPlayer += angleChange * angleRotationSpeed;
 	}
 }
 
@@ -128,5 +132,5 @@ mat4 Camera3rdPerson::getProjection()
 
 vec3 Camera3rdPerson::getFront()
 {
-	return normalize(gameObject->transform.getPosition() + atAdjustment);
+	return normalize(vec3(getView() * vec4(0.0f, 0.0f, -1.0f, 0.0f))); //  normalize(front)
 }

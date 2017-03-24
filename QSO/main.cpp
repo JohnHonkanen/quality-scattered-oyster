@@ -156,8 +156,8 @@ int main(int argc, char *argv[]) {
 	Skybox *skyBoxCube = new Skybox("skyBox");
 	Terrain *terrain = new Terrain("terrain", 100, 100, 1.0f);
 	Model *treeModel1 = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
-	Material *material = new Material("BaseMaterial", multiShadingProgram); // ShaderProgram
-	Material *multiMaterial = new Material("multiMaterial", multiShadingProgram);
+	Material *material = new Material("BaseMaterial", modelShader); // ShaderProgram
+	Material *multiMaterial = new Material("multiMaterial", modelShader);
 	material->addTexture("container2.png", DIFFUSE);
 	material->addTexture("container2_specular.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
