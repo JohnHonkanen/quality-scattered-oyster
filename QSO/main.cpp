@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
 	Cube *cube1 = new Cube("Cube");
 	Skybox *skyBoxCube = new Skybox("skyBox");
 	Terrain *terrain = new Terrain("terrain", 100, 100, 1.0f);
-	Model *treeModel1 = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
+	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", modelShader); // ShaderProgram
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
 	material->addTexture("container2.png", DIFFUSE);
@@ -199,15 +199,15 @@ int main(int argc, char *argv[]) {
 	skyBox.addComponent(skyBoxCube);
 	skyBox.addComponent(skyboxMaterial);
 
-	GameObject tree("tree1");
-	tree.addComponent(treeModel1);
-	tree.addComponent(modelMat);
+	GameObject playerModel("playerModel");
+	playerModel.addComponent(nanosuite);
+	playerModel.addComponent(modelMat);
 
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);
 	terrainOBJ.addComponent(material);
 
-	playerCamera.setObject(&tree);
+	playerCamera.setObject(&playerModel);
 
 	// Create Polygons
 	
@@ -237,7 +237,7 @@ int main(int argc, char *argv[]) {
 	*/
 
 
-	tree.transform.translate(vec3(10.0f, 0.0f, 0.0f));
+	playerModel.transform.translate(vec3(10.0f, 0.0f, 0.0f));
 
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
 	cube.transform.scale(vec3(1));
@@ -276,13 +276,13 @@ int main(int argc, char *argv[]) {
 			cube.transform.calculateModelMatrix();
 			//tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
 			//tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
-			tree.transform.calculateModelMatrix();
+			playerModel.transform.calculateModelMatrix();
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
 			glRenderer.renderObject(&cube);
 			glRenderer.renderObject(&skyBox);
-			glRenderer.renderObject(&tree);
+			glRenderer.renderObject(&playerModel);
 			glRenderer.renderObject(&terrainOBJ);
 			
 			// End of Render

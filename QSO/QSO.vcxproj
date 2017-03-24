@@ -173,8 +173,10 @@
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MouseInput.h" />
+    <ClInclude Include="Movement.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="openGLHandler.h" />
+    <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
@@ -209,8 +211,10 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MouseInput.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="openGLHandler.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
