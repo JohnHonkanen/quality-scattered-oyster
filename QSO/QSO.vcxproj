@@ -224,33 +224,18 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="attenuatedLightingFrag.shader" />
-    <None Include="attenuatedLightingVert.shader" />
-    <None Include="directionalLightingFrag.shader" />
-    <None Include="directionalLightingVert.shader" />
     <None Include="modelFrag.shader" />
     <None Include="modelVert.shader" />
     <None Include="multiLightFrag.shader" />
     <None Include="multiLightVert.shader" />
-    <None Include="shader1.bin" />
     <None Include="skyboxFrag.shader" />
     <None Include="skyboxVert.shader" />
-    <None Include="spotlightFrag.shader" />
-    <None Include="spotlightVert.shader" />
     <None Include="HSVFrag.shader" />
     <None Include="HSVVert.shader" />
     <None Include="lampFrag.shader" />
     <None Include="lampVert.shader" />
     <None Include="lightingMapFrag.shader" />
     <None Include="lightingMapVert.shader" />
-    <None Include="matLightingFrag.shader" />
-    <None Include="matLightingVert.shader" />
-    <None Include="minFrag.shader" />
-    <None Include="minLightingFrag.shader" />
-    <None Include="minLightingVert.shader" />
-    <None Include="minVert.shader" />
-    <None Include="simpleLightingMapFrag.shader" />
-    <None Include="simpleLightingMapVert.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

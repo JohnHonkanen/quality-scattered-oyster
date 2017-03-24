@@ -78,7 +78,6 @@ void Camera3rdPerson::calculateAngleAroundPlayer()
 	MouseInput *mouse = inputHandler->getMouse();
 	
 	if (mouse->getButtonPressed(1)) {
-		printf("rightmouse press %i \n", mouse->getButtonPressed(1));
 		float angleChange = mouse->getOffset().x;
 		angleAroundPlayer -= angleChange * angleRotationSpeed;
 	}
@@ -98,7 +97,6 @@ void Camera3rdPerson::calculateCameraPosition(float horizontalDistance, float ve
 {
 	vec3 objectRotation = gameObject->transform.getRotation();
 	float theta = (objectRotation.y + radians(angleAroundPlayer));
-	printf("in camera y rotation: %f \n", angleAroundPlayer);
 	float offSetX = horizontalDistance * sin(theta);
 	float offSetZ = horizontalDistance * cos(theta);
 
@@ -126,4 +124,9 @@ mat4 Camera3rdPerson::getView()
 mat4 Camera3rdPerson::getProjection()
 {
 	return projection;
+}
+
+vec3 Camera3rdPerson::getFront()
+{
+	return normalize(gameObject->transform.getPosition() + atAdjustment);
 }

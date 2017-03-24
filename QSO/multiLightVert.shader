@@ -14,7 +14,7 @@ uniform mat3 normalMatrix;
 
 void main()
 {
-	gl_Position = projection * view *  model * vec4(position, 1.0f);
+	gl_Position = projection * view * model * vec4(position, 1.0f);
 	FragPos = vec3(model * vec4(position, 1.0f));
 	// the transpose of the inverse of the upper-left corner of the model matrix : 
 	// see http://www.lighthouse3d.com/tutorials/glsl-12-tutorial/the-normal-matrix/ // <- try to do in CPU instead. Less expensive

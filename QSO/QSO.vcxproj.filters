@@ -289,21 +289,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="minFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="attenuatedLightingFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="attenuatedLightingVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="directionalLightingFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="directionalLightingVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="HSVFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
@@ -322,46 +307,16 @@
     <None Include="lightingMapVert.shader">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="matLightingFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="matLightingVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="minLightingFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="minLightingVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="minVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="multiLightFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="multiLightVert.shader">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="simpleLightingMapFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="simpleLightingMapVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="spotlightFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="spotlightVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="skyboxFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="skyboxVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="shader1.bin">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="modelVert.shader">

@@ -20,6 +20,7 @@ public:
 	virtual glm::vec3 getPosition() = 0;
 	virtual void setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar) = 0;
 	virtual void setOrthoProjection(glm::vec3 min, glm::vec3 max) = 0; // Set Ortho Camera in World Coordinates
+	virtual glm::vec3 getFront() = 0;
 
 };
 

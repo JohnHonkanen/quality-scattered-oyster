@@ -145,6 +145,7 @@ int main(int argc, char *argv[]) {
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
 	Shader ShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
+	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader");
 	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader");
 	Shader modelShader("modelVert.shader", "modelFrag.shader");
 	//Mesh Objects
@@ -155,19 +156,24 @@ int main(int argc, char *argv[]) {
 	Skybox *skyBoxCube = new Skybox("skyBox");
 	Terrain *terrain = new Terrain("terrain", 100, 100, 1.0f);
 	Model *treeModel1 = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
-	Material *material = new Material("BaseMaterial", ShaderProgram);
+	Material *material = new Material("BaseMaterial", multiShadingProgram); // ShaderProgram
+	Material *multiMaterial = new Material("multiMaterial", multiShadingProgram);
 	material->addTexture("container2.png", DIFFUSE);
 	material->addTexture("container2_specular.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
 	
+	multiMaterial->addTexture("container2.png", DIFFUSE);
+	multiMaterial->addTexture("container2_specular.png", SPECULAR);
+	multiMaterial->addTexture("lava.jpg", EMISSION);
+
 	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
 	skyboxMaterial->isCubMap = true;
-	/*skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_rt.tga");
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_rt.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_lf.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_up.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_dn.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_bk.tga");
-	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_ft.tga");*/
+	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_ft.tga");
 
 	/*skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_rt.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_lf.tga");
@@ -176,20 +182,18 @@ int main(int argc, char *argv[]) {
 	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_bk.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_ft.tga");*/
 
-	skyboxMaterial->cubeMaps.push_back("right.jpg");
-	skyboxMaterial->cubeMaps.push_back("left.jpg");
-	skyboxMaterial->cubeMaps.push_back("top.jpg");
-	skyboxMaterial->cubeMaps.push_back("bottom.jpg");
-	skyboxMaterial->cubeMaps.push_back("back.jpg");
-	skyboxMaterial->cubeMaps.push_back("front.jpg");
-	
+	//skyboxMaterial->cubeMaps.push_back("right.jpg");
+	//skyboxMaterial->cubeMaps.push_back("left.jpg");
+	//skyboxMaterial->cubeMaps.push_back("top.jpg");
+	//skyboxMaterial->cubeMaps.push_back("bottom.jpg");
+	//skyboxMaterial->cubeMaps.push_back("back.jpg");
+	//skyboxMaterial->cubeMaps.push_back("front.jpg");
+	//
 	Material *modelMat = new Material("modelMat", modelShader);
-	
-	
 	
 	GameObject cube("cube");
 	cube.addComponent(cube1);
-	cube.addComponent(material);
+	cube.addComponent(multiMaterial);
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);
@@ -232,6 +236,9 @@ int main(int argc, char *argv[]) {
 
 	*/
 
+
+	tree.transform.translate(vec3(10.0f, 0.0f, 0.0f));
+
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
 	cube.transform.scale(vec3(1));
 
@@ -268,8 +275,7 @@ int main(int argc, char *argv[]) {
 			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
 			//tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
-			tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
-			printf("out camera y rotation: %f \n", tree.transform.getRotation().y);
+			//tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
 			tree.transform.calculateModelMatrix();
 			graphicsHandler.start();  // Sets up Rendering Loop
 			

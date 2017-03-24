@@ -40,7 +40,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	Transform sunPos;
 
 	mat4 model;
-	lampPos.translate(vec3(0.0f, 25.0f, 0.0f));
+	lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	lampPos.calculateModelMatrix();
 
 	sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
@@ -66,7 +66,36 @@ void GLRenderer::renderObject(GameObject *obj)
 	GLint ourImageLoc = glGetUniformLocation(shader.program, "ourImage"); 
 	GLint hueShiftLoc = glGetUniformLocation(shader.program, "hueShift");
 	GLint satBoostLoc = glGetUniformLocation(shader.program, "satBoost");
-	
+	GLint lightSpotLoc = glGetUniformLocation(shader.program, "light.spotPosition");
+	GLint lightSpotdirLoc = glGetUniformLocation(shader.program, "light.spotDirection");
+	GLint lightSpotCutOffLoc = glGetUniformLocation(shader.program, "light.cutOff");
+	GLint lightSpotOuterCutOffLoc = glGetUniformLocation(shader.program, "light.outerCutOff");
+
+	// Multi-light - dirLight
+	GLint dirLightLoc = glGetUniformLocation(shader.program, "dirLight.direction");
+	GLint ambientDirLightLoc = glGetUniformLocation(shader.program, "dirLight.ambient");
+	GLint diffuseDirLightLoc = glGetUniformLocation(shader.program, "dirLight.diffuse");
+	GLint specularDirLightLoc = glGetUniformLocation(shader.program, "dirLight.specular");
+	// Multi-light - pointLight
+	GLint pointLightLoc = glGetUniformLocation(shader.program, "pointLight.direction");
+	GLint ambientPointLightLoc = glGetUniformLocation(shader.program, "pointLight.ambient");
+	GLint diffusePointLightLoc = glGetUniformLocation(shader.program, "pointLight.diffuse");
+	GLint specularPointLightLoc = glGetUniformLocation(shader.program, "pointLight.specular");
+	GLint constantPointLightLoc = glGetUniformLocation(shader.program, "pointLight.constant");
+	GLint linearPointLightLoc = glGetUniformLocation(shader.program, "pointLight.linear");
+	GLint quadraticPointLightLoc = glGetUniformLocation(shader.program, "pointLight.quadratic");
+	// Multi-light - spotLight
+	GLint spotLightPositionLoc = glGetUniformLocation(shader.program, "spotLight.position");
+	GLint spotLightDirectionLoc = glGetUniformLocation(shader.program, "spotLight.direction");
+	GLint ambientSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.ambient");
+	GLint diffuseSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.diffuse");
+	GLint specularSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.specular");
+	GLint constantSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.constant");
+	GLint linearSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.linear");
+	GLint quadraticSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.quadratic");
+	GLint cutOffSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.cutOff");
+	GLint outerCutOffSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.outerCutOff");
+
 
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
@@ -83,16 +112,49 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(lightDirPos, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	glUniform3f(lightPositionLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
+	
 	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
-	glUniform1f(lightConstantPos, 1.0f);
-	glUniform1f(lightLinearPos, 0.09f);
-	glUniform1f(lightQuadraticPos, 0.032f);
-	// Set HSV properties
+	// These values are distance: 50
+	glUniform1f(lightConstantPos, 1.0f); 
+	glUniform1f(lightLinearPos, 0.022f);
+	glUniform1f(lightQuadraticPos, 0.0019f);
+
+	// Set HSV Properties
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
 	glUniform1f(hueShiftLoc, hueshift);
 	glUniform1f(satBoostLoc, 1.0f);
-
 	hueshift += 0.0005f;
+
+	// Set Spotlight Properties
+	glUniform3f(lightSpotLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	glUniform3f(lightSpotdirLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
+	glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
+	glUniform1f(lightSpotOuterCutOffLoc, glm::cos(glm::radians(17.5f)));
+
+	// Set Directional Light Properties for multi-light
+	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
+	glUniform3f(ambientDirLightLoc, 0.0f, 0.0f, 0.0f);
+	glUniform3f(diffuseDirLightLoc, 0.0f, 0.0f, 0.0f); // Darken the light a bit to fit the scene
+	glUniform3f(specularDirLightLoc, 1.0f, 1.0f, 1.0f);
+	// Set Point Light Properties for multi-light
+	glUniform3f(pointLightLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
+	glUniform3f(ambientPointLightLoc, 0.2f, 0.2f, 0.2f);
+	glUniform3f(diffusePointLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform3f(specularPointLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform1f(constantPointLightLoc, 1.0f);
+	glUniform1f(linearPointLightLoc, 0.022f);
+	glUniform1f(quadraticPointLightLoc, 0.0019f);
+	// Set Spot Light Properties for multi-light
+	glUniform3f(spotLightPositionLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	glUniform3f(spotLightDirectionLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
+	glUniform3f(ambientSpotLightLoc, 0.2f, 0.2f, 0.2f);
+	glUniform3f(diffuseSpotLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform3f(specularSpotLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform1f(constantSpotLightLoc, 1.0f);
+	glUniform1f(linearSpotLightLoc, 0.022f);
+	glUniform1f(quadraticSpotLightLoc, 0.0019f);
+	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f)));
+	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f)));
 
 
 
@@ -128,6 +190,8 @@ void GLRenderer::renderObject(GameObject *obj)
 			glActiveTexture(GL_TEXTURE0 + i);
 			glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->textures[i].textureName));
 			glUniform1i(glGetUniformLocation(shader.program, ("material." + type).c_str()), i);
+
+
 		}
 	}
 

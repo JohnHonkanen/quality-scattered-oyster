@@ -55,5 +55,6 @@ public:
 	void setOrthoProjection(glm::vec3 min, glm::vec3 max); // Set Ortho Camera in World Coordinates
 	mat4 getView();
 	mat4 getProjection();
+	vec3 getFront();
 };
 
