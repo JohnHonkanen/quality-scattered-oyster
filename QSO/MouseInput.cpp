@@ -1,9 +1,11 @@
 #include "MouseInput.h"
-
+#include <iostream>
 
 
 MouseInput::MouseInput()
 {
+	buttonPressed[0] = false;
+	buttonPressed[1] = false;
 }
 
 
@@ -59,4 +61,20 @@ vec2 MouseInput::getScrollOffset()
 vec2 MouseInput::getLastScrollOffset()
 {
 	return MouseInput::lastScrollOffset;
+}
+
+bool MouseInput::getButtonPressed(int button)
+{
+	//if (button != 1 || button != 0) {
+	//	return false;
+	//}
+
+	return buttonPressed[button];
+}
+
+void MouseInput::setButtonPressed(int button, bool pressed)
+{
+	buttonPressed[button] = pressed;
+	printf("mouse button result %i \n", buttonPressed[button]);
+	printf("mouse button function result %i \n", getButtonPressed(button));
 }

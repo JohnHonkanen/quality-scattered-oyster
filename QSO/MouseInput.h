@@ -12,6 +12,8 @@ private:
 	vec2 offSet;
 	vec2 scrollOffset;
 	vec2 lastScrollOffset;
+	bool buttonPressed[2]; // 0 = left, 1 = right
+
 public:
 	MouseInput();
 	~MouseInput();
@@ -26,6 +28,7 @@ public:
 	void setLastScrollOffset(vec2 scrollOffset);
 	vec2 getScrollOffset();
 	vec2 getLastScrollOffset();
-
+	bool getButtonPressed(int button);
+	void setButtonPressed(int button, bool pressed);
 };
 

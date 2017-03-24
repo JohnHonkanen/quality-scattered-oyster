@@ -25,10 +25,13 @@ public:
 	mat4 calculateModelMatrix();
 	mat4 get();
 	vec3 getPosition();
+	vec3 getRotation();
 	void reset();
 private:
 	mat4 model;
 	mat4 translationMatrix;
 	mat4 rotationMatrix;
 	mat4 scaleMatrix;
+
+	vec3 rotation;
 };

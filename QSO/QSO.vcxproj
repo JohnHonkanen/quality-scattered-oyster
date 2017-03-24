@@ -156,6 +156,7 @@
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="Behaviours.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Camera3rdPerson.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Cube.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="Behaviours.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Camera3rdPerson.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cube.cpp" />

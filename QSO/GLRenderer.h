@@ -17,6 +17,7 @@
 #include "Material.h"
 #include "Shape.h"
 #include "Model.h"
+#include "TextureManager.h"
 
 class GLRenderer : public Renderer
 {

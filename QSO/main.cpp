@@ -19,6 +19,7 @@
 #include "GameObject.h"
 #include "Skybox.h"
 #include "Model.h"
+#include "Camera3rdPerson.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ glfwInputHandler inputHandler;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 	MouseInput* mouse = inputHandler.getMouse();
@@ -81,6 +83,34 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 	mouse->setPosition(vec2(xpos, ypos));
 }
 
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	MouseInput* mouse = inputHandler.getMouse();
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT) {
+		if (action == GLFW_PRESS) {
+			mouse->setButtonPressed(0, true);
+			printf("mouse click 0: \n");
+		}
+		else {
+			mouse->setButtonPressed(0, false);
+			printf("mouse release 0: \n");
+		}
+	}
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+		if (action == GLFW_PRESS) {
+			mouse->setButtonPressed(1, true);
+			printf("mouse click 1: \n");
+		}
+		else {
+			mouse->setButtonPressed(1, false);
+			printf("mouse release 1: \n");
+		}
+	}
+}
+
 int main(int argc, char *argv[]) {
 
 	glfwWindow *window = new glfwWindow(800, 600);
@@ -94,15 +124,15 @@ int main(int argc, char *argv[]) {
 	glfwSetKeyCallback(window->getWindow(), key_callback);
 	glfwSetCursorPosCallback(window->getWindow(), mouse_callback);
 	glfwSetScrollCallback(window->getWindow(), scroll_callback);
+	glfwSetMouseButtonCallback(window->getWindow(), mouse_button_callback);
 
 	//GLFW Options
 	glfwSetInputMode(window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Setup Camera
 
-	Camera playerCamera (vec3(0,0,10.0f), vec3(0,1,0), 0.0f, 0.0f);
+	Camera3rdPerson playerCamera ("camera", &inputHandler);
 	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 200.0f);
-	playerCamera.setView(vec3(0.0f, 0.0f, -10.0f)); // Adjust our Camera back by changing Z value
 	
 	// Testing Texture Manager
 	TextureManager *textureManager = TextureManager::instance();
@@ -173,6 +203,8 @@ int main(int argc, char *argv[]) {
 	terrainOBJ.addComponent(terrain);
 	terrainOBJ.addComponent(material);
 
+	playerCamera.setObject(&tree);
+
 	// Create Polygons
 	
 	// Set Frame Rate
@@ -203,8 +235,6 @@ int main(int argc, char *argv[]) {
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
 	cube.transform.scale(vec3(1));
 
-	//tree.transform.rotate(-90.0f, vec3(1.0f, 0.0f, 0.0f), false);
-
 	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength / 2, 0.0f, terrain->getData().zLength / 2));
 	terrainOBJ.transform.calculateModelMatrix();
 
@@ -227,11 +257,6 @@ int main(int argc, char *argv[]) {
 
 			// Process Inputs & Camera controls
 
-			playerCamera.processMouseScroll(*inputHandler.getMouse(), dt);
-			playerCamera.processCameraMouseMovement(*inputHandler.getMouse(), dt);
-			playerCamera.processKeyBoard(*inputHandler.getKeyboard(), dt);
-			
-			playerCamera.GetViewMatrix();
 			inputHandler.getMouse()->setLastPosition(inputHandler.getMouse()->getPosition());
 			inputHandler.getMouse()->setLastScrollOffset(inputHandler.getMouse()->getScrollOffset());
 
@@ -239,9 +264,10 @@ int main(int argc, char *argv[]) {
 
 			// Update Function
 
-			playerCamera.At = tree.transform.getPosition();
+			playerCamera.move();
 			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
+			tree.transform.rotate(-5.0f, vec3(0.0f, 1.0f, 0.0f), false);
 			tree.transform.calculateModelMatrix();
 
 			graphicsHandler.start();  // Sets up Rendering Loop

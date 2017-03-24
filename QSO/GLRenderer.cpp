@@ -1,5 +1,5 @@
 #include "GLRenderer.h"
-#include "TextureManager.h"
+
 GLRenderer::GLRenderer()
 {
 }
@@ -71,7 +71,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
-	glUniform3f(viewPosLoc, camera->Position.x, camera->Position.y, camera->Position.z);
+	glUniform3f(viewPosLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 	// Set Material Properties
 	glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(matDiffuseLoc, 1.0f, 0.5f, 0.31f);
