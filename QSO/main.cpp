@@ -20,6 +20,7 @@
 #include "Skybox.h"
 #include "Model.h"
 #include "Camera3rdPerson.h"
+#include "PlayerMovement.h"
 
 using namespace std;
 
@@ -202,6 +203,8 @@ int main(int argc, char *argv[]) {
 	GameObject playerModel("playerModel");
 	playerModel.addComponent(nanosuite);
 	playerModel.addComponent(modelMat);
+	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
+	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);
@@ -258,6 +261,7 @@ int main(int argc, char *argv[]) {
 		previousTime = currentTime;
 		currentTime = clock.getMilliseconds();
 		double dt = (currentTime - previousTime) * 0.01f; //Convert DT to seconds
+		playerModel.getComponent<Movement>()->pollInputs(dt);
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {

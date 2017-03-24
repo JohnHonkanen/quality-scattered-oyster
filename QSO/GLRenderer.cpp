@@ -146,9 +146,9 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(quadraticPointLightLoc, 0.0075f);
 	// Set Spot Light Properties for multi-light
 	glUniform3f(spotLightPositionLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
-	printf("camera location %f, %f, %f \n", camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	//printf("camera location %f, %f, %f \n", camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 	glUniform3f(spotLightDirectionLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
-	printf("camera front %f, %f, %f \n", camera->getFront().x, camera->getFront().y, camera->getFront().z);
+	//printf("camera front %f, %f, %f \n", camera->getFront().x, camera->getFront().y, camera->getFront().z);
 	glUniform3f(ambientSpotLightLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(diffuseSpotLightLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(specularSpotLightLoc, 0.5f, 0.5f, 0.5f);

@@ -85,6 +85,9 @@ void Camera3rdPerson::calculateAngleAroundPlayer()
 		float angleChange = mouse->getOffset().x;
 		angleAroundPlayer += angleChange * angleRotationSpeed;
 	}
+	else {
+		angleAroundPlayer = gameObject->transform.getRotation().y;
+	}
 }
 
 float Camera3rdPerson::calculateHorizontalDistance()
