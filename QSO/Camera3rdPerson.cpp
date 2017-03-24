@@ -29,6 +29,11 @@ float Camera3rdPerson::getYaw()
 	return yaw;
 }
 
+void Camera3rdPerson::setAngleToObject()
+{
+	angleAroundPlayer = gameObject->transform.getRotation().y;
+}
+
 vec3 Camera3rdPerson::getPosition()
 {
 	return position;
@@ -66,8 +71,6 @@ void Camera3rdPerson::calculatePitch()
 		pitch -= pitchChange * pitchSpeed;
 		pitch = clamp(pitch, pitchClamp.x, pitchClamp.y);
 	}
-
-	
 }
 
 void Camera3rdPerson::calculateAngleAroundPlayer()
@@ -94,9 +97,10 @@ float Camera3rdPerson::calculateVerticalDistance()
 void Camera3rdPerson::calculateCameraPosition(float horizontalDistance, float verticalDistance)
 {
 	vec3 objectRotation = gameObject->transform.getRotation();
-	float theta = objectRotation.y + angleAroundPlayer;
-	float offSetX = horizontalDistance * sin(radians(theta));
-	float offSetZ = horizontalDistance * cos(radians(theta));
+	float theta = (objectRotation.y + radians(angleAroundPlayer));
+	printf("in camera y rotation: %f \n", angleAroundPlayer);
+	float offSetX = horizontalDistance * sin(theta);
+	float offSetZ = horizontalDistance * cos(theta);
 
 	position = vec3(-offSetX, verticalDistance, -offSetZ);
 }

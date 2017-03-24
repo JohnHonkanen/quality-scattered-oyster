@@ -44,7 +44,8 @@ public:
 	float getAngleAroundPlayer();
 	float getPitch();
 	float getYaw();
-	
+	void setAngleToObject();
+
 	vec3 getPosition();
 
 	void setObject(GameObject *gameObject);
