@@ -17,7 +17,7 @@ private:
 	const float angleRotationSpeed = 0.3f;
 	const vec2 distanceClamp = vec2(10.0f, 50.0f);
 	const vec2 pitchClamp = vec2(5.0f, 85.0f);
-	const vec3 atAdjustment = vec3(0.0f, 0.0f, 0.0f);
+	const vec3 atAdjustment = vec3(0.0f, 15.0f, 0.0f);
 	float distanceToObject = 50;
 	float angleAroundPlayer = 0;
 	float pitch = 20;
