@@ -79,6 +79,9 @@
     <Filter Include="Header Files\OpenGL\Shapes\Terrain">
       <UniqueIdentifier>{d11805a8-016c-43d6-b8cb-c19f35bf48d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Assimp">
+      <UniqueIdentifier>{8e684aca-9b0a-4612-9abb-75e3e91ca24c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -171,17 +174,14 @@
     <ClInclude Include="Skybox.h">
       <Filter>Header Files\OpenGL\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="AssimpLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\OpenGL\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera3rdPerson.h">
       <Filter>Header Files\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpLoader.h">
+      <Filter>Header Files\Assimp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
