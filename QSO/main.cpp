@@ -267,7 +267,8 @@ int main(int argc, char *argv[]) {
 			playerCamera.move();
 			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
-			tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
+			//tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
+			tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
 			printf("out camera y rotation: %f \n", tree.transform.getRotation().y);
 			tree.transform.calculateModelMatrix();
 			graphicsHandler.start();  // Sets up Rendering Loop

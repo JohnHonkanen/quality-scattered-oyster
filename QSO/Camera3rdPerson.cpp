@@ -102,7 +102,7 @@ void Camera3rdPerson::calculateCameraPosition(float horizontalDistance, float ve
 	float offSetX = horizontalDistance * sin(theta);
 	float offSetZ = horizontalDistance * cos(theta);
 
-	position = vec3(-offSetX, verticalDistance, -offSetZ);
+	position = gameObject->transform.getPosition() + vec3(-offSetX, verticalDistance, -offSetZ);
 }
 
 void Camera3rdPerson::setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar)
