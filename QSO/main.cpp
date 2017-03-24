@@ -263,6 +263,15 @@ int main(int argc, char *argv[]) {
 		double dt = (currentTime - previousTime) * 0.01f; //Convert DT to seconds
 		playerModel.getComponent<Movement>()->pollInputs(dt);
 
+		if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_L)) {
+			playerCamera.setObject(&cube);
+			playerModel.getComponent<Movement>()->attachGameObject(&cube);
+		}
+		else if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_K)){
+			playerCamera.setObject(&playerModel);
+			playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
+		}
+
 		//End of DeltaTime
 		if (frameClock.alarm()) {
 
