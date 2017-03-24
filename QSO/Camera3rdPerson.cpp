@@ -86,7 +86,7 @@ void Camera3rdPerson::calculateAngleAroundPlayer()
 		angleAroundPlayer += angleChange * angleRotationSpeed;
 	}
 	else {
-		angleAroundPlayer = gameObject->transform.getRotation().y;
+		angleAroundPlayer = (1.0f - lerpAmount) * angleAroundPlayer + lerpAmount * gameObject->transform.getRotation().y;
 	}
 }
 
