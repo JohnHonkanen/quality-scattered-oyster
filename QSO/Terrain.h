@@ -5,6 +5,7 @@
 #include <map>
 #include <iostream>
 #include "Shape.h"
+#include "simplex\SimplexNoise.h"
 
 using namespace glm;
 

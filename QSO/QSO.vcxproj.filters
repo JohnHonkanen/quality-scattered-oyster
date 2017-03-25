@@ -82,6 +82,9 @@
     <Filter Include="Header Files\Assimp">
       <UniqueIdentifier>{8e684aca-9b0a-4612-9abb-75e3e91ca24c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OpenGL\Shapes\Terrain\Simplex">
+      <UniqueIdentifier>{df21f5a4-5313-4a25-a806-6f6735493c5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="PlayerMovement.h">
       <Filter>Header Files\OpenGL\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="simplex\SimplexNoise.h">
+      <Filter>Header Files\OpenGL\Shapes\Terrain\Simplex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +303,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simplex\SimplexNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

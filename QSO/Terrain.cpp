@@ -66,13 +66,16 @@ void Terrain::buildVertices()
 	
 	float textureU = Terrain::map.zLength * 0.1f;
 	float textureV = Terrain::map.xLength * 0.1f;
+	float frequency = 0.03f;
+	float weight = 2.0f;
 
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
 			float scaleU = float(z) / float(Terrain::map.zLength - 1);
 			float scaleV = float(x) / float(Terrain::map.xLength - 1);
-			map.vertices[vertex] = vec3(x * Terrain::gridSize, 0, -z* Terrain::gridSize); // Y is reserved for heightmap  rand()%2-1
+			float height = SimplexNoise::noise(x * frequency, z * frequency) * weight;
+			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, -z* Terrain::gridSize); // Y is reserved for heightmap 
 			map.uv[vertex] = vec2(textureU * scaleU, textureV * scaleV);
 			vertex++;
 			
@@ -172,10 +175,10 @@ void Terrain::buildIndices()
 	int offset = 0;
 	for (int z = 0; z < Terrain::map.zLength-1; z++) {
 		if (z > 0) {
-			//Degenerate begin: Repeat the first Vertex, and increment
-			Terrain::map.indices[offset++] = z * Terrain::map.zLength + (Terrain::map.xLength - 1);
+			//Degenerate begin: Repeat the last Vertex, and increment
+			Terrain::map.indices[offset++] = (z) * Terrain::map.zLength + (Terrain::map.xLength -1);
 		}
-		for (int x = Terrain::map.xLength - 1; x > 0; x--) {
+		for (int x = Terrain::map.xLength - 1; x > -1; x--) {
 			//Add a part of our strip
 			Terrain::map.indices[offset++] = (z*Terrain::map.zLength) + x;
 			Terrain::map.indices[offset++] = ((z + 1)*Terrain::map.zLength) + x;
@@ -183,8 +186,8 @@ void Terrain::buildIndices()
 		}
 
 		if (z < Terrain::map.zLength - 2) {
-			// Degenerate end: repeat last vertex
-			Terrain::map.indices[offset++] = ((z+1) * Terrain::map.zLength);
+			// Degenerate end: repeat first vertex
+			Terrain::map.indices[offset++] = ((z + 1) * Terrain::map.zLength); // 
 		}
 	}
 }
