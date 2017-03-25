@@ -60,13 +60,22 @@ void Terrain::createMesh()
 void Terrain::buildVertices()
 {
 	Terrain::map.vertexCount = Terrain::map.zLength*Terrain::map.zLength;
-	//Preallocate vertices for normals
+	//Preallocate vertices for normal
 	Terrain::map.vertices = new vec3[Terrain::map.vertexCount]();
+	Terrain::map.uv = new vec2[Terrain::map.vertexCount]();
+	
+	float textureU = Terrain::map.zLength * 0.1f;
+	float textureV = Terrain::map.xLength * 0.1f;
+
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
-			map.vertices[vertex] = vec3(x * Terrain::gridSize, 0, -z* Terrain::gridSize); //Y is reserved for heightmap  rand()%2-1
+			float scaleU = float(z) / float(Terrain::map.zLength - 1);
+			float scaleV = float(x) / float(Terrain::map.xLength - 1);
+			map.vertices[vertex] = vec3(x * Terrain::gridSize, 0, -z* Terrain::gridSize); // Y is reserved for heightmap  rand()%2-1
+			map.uv[vertex] = vec2(textureU * scaleU, textureV * scaleV);
 			vertex++;
+			
 		}
 	}
 }
@@ -169,7 +178,8 @@ void Terrain::buildIndices()
 		for (int x = 0; x < Terrain::map.zLength; x++) {
 			//Add a part of our strip
 			Terrain::map.indices[offset++] = (z*Terrain::map.zLength) + x;
-			Terrain::map.indices[offset++] = ((z+1)*Terrain::map.zLength) + x;
+			Terrain::map.indices[offset++] = ((z + 1)*Terrain::map.zLength) + x;
+			
 		}
 
 		if (z < Terrain::map.zLength - 2) {

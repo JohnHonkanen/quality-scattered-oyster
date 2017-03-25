@@ -11,7 +11,7 @@ using namespace glm;
 struct mapData {
 	vec3 *vertices;
 	vec3 *normals;
-	vec3 *uv;
+	vec2 *uv;
 	GLuint *indices;
 
 	int zLength;

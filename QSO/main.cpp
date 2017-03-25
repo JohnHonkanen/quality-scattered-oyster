@@ -159,10 +159,13 @@ int main(int argc, char *argv[]) {
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", modelShader); // ShaderProgram
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
+	
+	// UV's for Terrain
 	material->addTexture("container2.png", DIFFUSE);
 	material->addTexture("container2_specular.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
 	
+	// UV's for Models
 	multiMaterial->addTexture("container2.png", DIFFUSE);
 	multiMaterial->addTexture("container2_specular.png", SPECULAR);
 	multiMaterial->addTexture("lava.jpg", EMISSION);
