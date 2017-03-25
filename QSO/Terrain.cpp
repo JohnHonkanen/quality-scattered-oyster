@@ -40,6 +40,11 @@ void Terrain::destroy()
 	delete this;
 }
 
+float Terrain::getGridSize()
+{
+	return gridSize;
+}
+
 void Terrain::createMesh()
 {
 	init();
@@ -64,17 +69,17 @@ void Terrain::buildVertices()
 	Terrain::map.vertices = new vec3[Terrain::map.vertexCount]();
 	Terrain::map.uv = new vec2[Terrain::map.vertexCount]();
 	
-	float textureU = Terrain::map.zLength * 0.1f;
-	float textureV = Terrain::map.xLength * 0.1f;
-	float frequency = 0.03f;
-	float weight = 2.0f;
+	float textureU = Terrain::map.zLength * 1.0f;
+	float textureV = Terrain::map.xLength * 1.0f;
+	float frequency = 0.005f;
+	float weight = 15.0f;
 
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
 			float scaleU = float(z) / float(Terrain::map.zLength - 1);
 			float scaleV = float(x) / float(Terrain::map.xLength - 1);
-			float height = SimplexNoise::noise(x * frequency, z * frequency) * weight;
+			float height = SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight;
 			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, -z* Terrain::gridSize); // Y is reserved for heightmap 
 			map.uv[vertex] = vec2(textureU * scaleU, textureV * scaleV);
 			vertex++;

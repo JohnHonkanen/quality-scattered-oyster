@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
 
 	Cube *cube1 = new Cube("Cube");
 	Skybox *skyBoxCube = new Skybox("skyBox");
-	Terrain *terrain = new Terrain("terrain", 100, 100, 1.0f);
+	Terrain *terrain = new Terrain("terrain", 500, 500, 20.0f);
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", modelShader); // ShaderProgram
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
@@ -248,7 +248,7 @@ int main(int argc, char *argv[]) {
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
 	cube.transform.scale(vec3(1));
 
-	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength / 2, 0.0f, terrain->getData().zLength / 2));
+	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize()));
 	terrainOBJ.transform.calculateModelMatrix();
 
 	// Game Loop

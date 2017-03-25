@@ -43,6 +43,8 @@ private:
 	void calculateNormals();
 	void buildIndices();
 
+	float gridSize;
+
 	mapData map;
 public:
 	Terrain(std::string name, int xLength, int zLength, float gridSize);
@@ -51,7 +53,7 @@ public:
 	const mapData getData();
 	void destroy();
 
-	float gridSize;
+	float getGridSize();
 	vec3 position;
 };
 
