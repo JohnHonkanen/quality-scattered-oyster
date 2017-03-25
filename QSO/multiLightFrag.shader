@@ -42,6 +42,15 @@ struct SpotLight {
 	vec3 specular;
 };
 
+struct TerrainTexture {
+	sampler2D backgroundTexture;
+	sampler2D rTexture;
+	sampler2D gTexture;
+	sampler2D bTexture;
+	sampler2D blendMap;
+
+};
+
 in vec3 FragPos;
 in vec3 Normal;
 in vec2 UV;
@@ -53,6 +62,7 @@ uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
 uniform Material material;
+uniform TerrainTexture terrainTexture;
 
 uniform float hueShift;
 uniform float satBoost;
@@ -88,7 +98,6 @@ void main() {
 	// Look up the corresponding HSV value
 	vec3 hsv = rgb2hsv(rgb);
 
-
 	// Manipulate hue and saturation
 	hsv.x = fract(hsv.x + hueShift);
 	hsv.y *= satBoost;
@@ -98,7 +107,25 @@ void main() {
 
 	vec3 emission = finalEmission;
 
-	result += result + emission;
+	result += emission;
+
+	// Phase 5: Blendmap
+
+	vec4 blendMapColor = texture(terrainTexture.blendMap, UV);
+
+	// Background Texture : amount to render
+	float backTextureAmount = 1 - (blendMapColor.r, blendMapColor.g, blendMapColor.b);
+	
+	vec2 tiledCoords = UV; // * 40.0f
+
+	vec4 backgroundTextureColor = texture(terrainTexture.backgroundTexture, tiledCoords) * backTextureAmount;
+	vec4 rTextureColor = texture(terrainTexture.rTexture, UV) * blendMapColor.r;
+	vec4 gTextureColor = texture(terrainTexture.gTexture, UV) * blendMapColor.g;
+	vec4 bTextureColor = texture(terrainTexture.bTexture, UV) * blendMapColor.b;
+
+	vec4 totalTerrainColor = backgroundTextureColor + rTextureColor + gTextureColor + bTextureColor;
+
+	result += totalTerrainColor.xyz;
 
 	// Each light type adds it's contribution to the resulting output color until all light sources are processed.
 	// The resulting color contains the color impact of all the light sources in the scene combined. 

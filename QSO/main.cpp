@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
 
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
-	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader"); // Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
+	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader"); // For terrain: Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
 	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader"); // Basic shader for skybox, applies texture to cubemap. No lighting.
 	Shader modelShader("modelVert.shader", "modelFrag.shader"); // Shader with multiLight (Dir/Point/Spot light) on models
 	Shader HSVShader("HSVVert.shader", "HSVFrag.shader"); // Applies HSV 
