@@ -173,9 +173,9 @@ void Terrain::buildIndices()
 	for (int z = 0; z < Terrain::map.zLength-1; z++) {
 		if (z > 0) {
 			//Degenerate begin: Repeat the first Vertex, and increment
-			Terrain::map.indices[offset++] = z * Terrain::map.zLength;
+			Terrain::map.indices[offset++] = z * Terrain::map.zLength + (Terrain::map.xLength - 1);
 		}
-		for (int x = 0; x < Terrain::map.zLength; x++) {
+		for (int x = Terrain::map.xLength - 1; x > 0; x--) {
 			//Add a part of our strip
 			Terrain::map.indices[offset++] = (z*Terrain::map.zLength) + x;
 			Terrain::map.indices[offset++] = ((z + 1)*Terrain::map.zLength) + x;
@@ -184,7 +184,7 @@ void Terrain::buildIndices()
 
 		if (z < Terrain::map.zLength - 2) {
 			// Degenerate end: repeat last vertex
-			Terrain::map.indices[offset++] = ((z+1) * Terrain::map.zLength) + (Terrain::map.xLength - 1);
+			Terrain::map.indices[offset++] = ((z+1) * Terrain::map.zLength);
 		}
 	}
 }
