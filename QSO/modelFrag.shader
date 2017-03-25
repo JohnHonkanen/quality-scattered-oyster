@@ -82,8 +82,6 @@ void main() {
 	// Each light type adds it's contribution to the resulting output color until all light sources are processed.
 	// The resulting color contains the color impact of all the light sources in the scene combined. 
 	color = vec4(result, 1.0f);
-
-	//color = vec4(texture(material.specular, UV).rgb, 1.0f);
 }
 
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir) {

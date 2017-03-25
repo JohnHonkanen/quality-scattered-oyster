@@ -143,27 +143,34 @@ int main(int argc, char *argv[]) {
 	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader"); // Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
 	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader"); // Basic shader for skybox, applies texture to cubemap. No lighting.
 	Shader modelShader("modelVert.shader", "modelFrag.shader"); // Shader with multiLight (Dir/Point/Spot light) on models
+	Shader HSVShader("HSVVert.shader", "HSVFrag.shader"); // Applies HSV 
 
 	//Mesh Objects
 	GLRenderer glRenderer;
 	glRenderer.setCamera(&playerCamera);
 
-	Cube *cube1 = new Cube("Cube");
+	Model *modelTree = new Model("Tree1", "models/LowPolyTree/lowpolytree.obj");
 	Skybox *skyBoxCube = new Skybox("skyBox");
 	Terrain *terrain = new Terrain("terrain", 500, 500, 20.0f);
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", multiShadingProgram);
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
+	Material *multiMaterial2 = new Material("multiMaterial2", HSVShader);
 	
 	// UV's for Terrain
 	material->addTexture("container2.png", DIFFUSE);
 	material->addTexture("container2_specular.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
 	
-	// UV's for Models
+	// UV's for Model (playerModel)
 	multiMaterial->addTexture("container2.png", DIFFUSE);
 	multiMaterial->addTexture("container2_specular.png", SPECULAR);
 	multiMaterial->addTexture("lava.jpg", EMISSION);
+
+	// UV's for Model (Tree1)
+	multiMaterial2->addTexture("container2.png", DIFFUSE);
+	multiMaterial2->addTexture("container2_specular.png", SPECULAR);
+	multiMaterial2->addTexture("lava.jpg", EMISSION);
 
 	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
 	skyboxMaterial->isCubMap = true;
@@ -183,9 +190,9 @@ int main(int argc, char *argv[]) {
 	//
 	Material *modelMat = new Material("modelMat", modelShader);
 	
-	GameObject cube("cube");
-	cube.addComponent(cube1);
-	cube.addComponent(multiMaterial);
+	GameObject modelTree1("Tree1");
+	modelTree1.addComponent(modelTree);
+	modelTree1.addComponent(multiMaterial2);
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);
@@ -233,8 +240,8 @@ int main(int argc, char *argv[]) {
 
 	playerModel.transform.translate(vec3(10.0f, 0.0f, 0.0f));
 
-	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
-	cube.transform.scale(vec3(1));
+	modelTree1.transform.translate(vec3(0.0f, 10.0f, 0.0f));
+	modelTree1.transform.scale(vec3(3));
 
 	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize()));
 	terrainOBJ.transform.calculateModelMatrix();
@@ -255,8 +262,8 @@ int main(int argc, char *argv[]) {
 		playerModel.getComponent<Movement>()->pollInputs(dt);
 
 		if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_L)) {
-			playerCamera.setObject(&cube);
-			playerModel.getComponent<Movement>()->attachGameObject(&cube);
+			playerCamera.setObject(&modelTree1);
+			playerModel.getComponent<Movement>()->attachGameObject(&modelTree1);
 		}
 		else if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_K)){
 			playerCamera.setObject(&playerModel);
@@ -277,14 +284,14 @@ int main(int argc, char *argv[]) {
 
 			playerCamera.move();
 			skyBox.transform.calculateModelMatrix();
-			cube.transform.calculateModelMatrix();
+			modelTree1.transform.calculateModelMatrix();
 			//tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
 			//tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
 			playerModel.transform.calculateModelMatrix();
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			glRenderer.renderObject(&cube);
+			glRenderer.renderObject(&modelTree1);
 			glRenderer.renderObject(&skyBox);
 			glRenderer.renderObject(&playerModel);
 			glRenderer.renderObject(&terrainOBJ);
@@ -295,9 +302,14 @@ int main(int argc, char *argv[]) {
 			frameClock.resetClock(); // Once frame is done reset to 0
 		}
 	}
+
+	// De-allocate Memory
 	MeshGenerator::destroy();
 	TextureManager::instance()->destroy();
-	cube.destroy();
+	modelTree1.destroy();
+	playerModel.destroy();
+	skyBox.destroy();
+	terrainOBJ.destroy();
 	graphicsHandler.destroy();
 
 	return 0;

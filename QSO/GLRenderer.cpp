@@ -126,10 +126,6 @@ void GLRenderer::renderObject(GameObject *obj)
 	hueshift += 0.0005f;
 
 	// Set Spotlight Properties
-	/*glUniform3f(lightSpotLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
-	glUniform3f(lightSpotdirLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
-	glUniform1f(lightSpotCutOffLoc, glm::cos(glm::radians(12.5f)));
-	glUniform1f(lightSpotOuterCutOffLoc, glm::cos(glm::radians(17.5f)));*/
 
 	// Set Directional Light Properties for multi-light
 	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
@@ -161,8 +157,6 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(quadraticSpotLightLoc, 0.000007f);
 	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f * 1.2f)));
 	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 1.2f)));
-
-
 
 	// Create camera transformations
 	mat4 view = camera->getView();
