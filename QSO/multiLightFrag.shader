@@ -115,18 +115,18 @@ void main() {
 	vec4 blendMapColor = texture(material.terrainTexture.blendMap, UV);
 
 	// Background Texture : amount to render
-	float backTextureAmount = 1 - (blendMapColor.r, blendMapColor.g, blendMapColor.b);
+	float backTextureAmount = 1 - (blendMapColor.r + blendMapColor.g + blendMapColor.b);
 	
-	vec2 tiledCoords = UV; // * 40.0f
+	vec2 tiledCoords = UV * 40.0f;
 
 	vec4 backgroundTextureColor = texture(material.terrainTexture.backgroundTexture, tiledCoords) * backTextureAmount;
-	vec4 rTextureColor = texture(material.terrainTexture.rTexture, UV) * blendMapColor.r;
-	vec4 gTextureColor = texture(material.terrainTexture.gTexture, UV) * blendMapColor.g;
-	vec4 bTextureColor = texture(material.terrainTexture.bTexture, UV) * blendMapColor.b;
+	vec4 rTextureColor = texture(material.terrainTexture.rTexture, tiledCoords) * blendMapColor.r;
+	vec4 gTextureColor = texture(material.terrainTexture.gTexture, tiledCoords) * blendMapColor.g;
+	vec4 bTextureColor = texture(material.terrainTexture.bTexture, tiledCoords) * blendMapColor.b;
 
 	vec4 totalTerrainColor = backgroundTextureColor + rTextureColor + gTextureColor + bTextureColor;
 
-	result += totalTerrainColor.xyz;
+	result *= totalTerrainColor.xyz;
 
 	// Each light type adds it's contribution to the resulting output color until all light sources are processed.
 	// The resulting color contains the color impact of all the light sources in the scene combined. 

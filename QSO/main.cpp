@@ -151,18 +151,22 @@ int main(int argc, char *argv[]) {
 
 	Model *modelTree = new Model("Tree1", "models/LowPolyTree/lowpolytree.obj");
 	Skybox *skyBoxCube = new Skybox("skyBox");
-	Terrain *terrain = new Terrain("terrain", 500, 500, 20.0f);
+	Terrain *terrain = new Terrain("terrain", 100, 100, 20.48f);
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", multiShadingProgram);
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
 	Material *multiMaterial2 = new Material("multiMaterial2", HSVShader);
 	
 	// UV's for Terrain
-	material->addTexture("container2.png", DIFFUSE);
-	material->addTexture("container2_specular.png", SPECULAR);
-	material->addTexture("lava.jpg", EMISSION);
+	//material->addTexture("container2.png", DIFFUSE);
+	//material->addTexture("container2_specular.png", SPECULAR);
+	//material->addTexture("lava.jpg", EMISSION);
 
-	// Add terrain material texture above.
+	material->addTexture("texture/grassy2.png", BACKGROUND_TEXTURE);
+	material->addTexture("texture/mud.png", R_TEXTURE);
+	material->addTexture("texture/grassFlower.png", G_TEXTURE);
+	material->addTexture("texture/path.png", B_TEXTURE);
+	material->addTexture("texture/blendMap.png", BLEND_MAP);
 	
 	// UV's for Model (playerModel)
 	multiMaterial->addTexture("container2.png", DIFFUSE);

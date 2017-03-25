@@ -123,7 +123,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
 	glUniform1f(hueShiftLoc, hueshift);
 	glUniform1f(satBoostLoc, 1.0f);
-	hueshift += 0.0005f;
+	hueshift += 0.0000f; //5
 
 	// Set Spotlight Properties
 
@@ -153,7 +153,7 @@ void GLRenderer::renderObject(GameObject *obj)
 
 	// Spot light values (attenuation, innerCutOff and outerCutOff of spotlight). Range currently set at: 3250
 	glUniform1f(constantSpotLightLoc, 1.0f);
-	glUniform1f(linearSpotLightLoc,0.0014f);
+	glUniform1f(linearSpotLightLoc, 0.0014f);
 	glUniform1f(quadraticSpotLightLoc, 0.000007f);
 	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f * 1.2f)));
 	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 1.2f)));
@@ -190,8 +190,6 @@ void GLRenderer::renderObject(GameObject *obj)
 			glActiveTexture(GL_TEXTURE0 + i);
 			glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->textures[i].textureName));
 			glUniform1i(glGetUniformLocation(shader.program, ("material." + type).c_str()), i);
-
-
 		}
 	}
 

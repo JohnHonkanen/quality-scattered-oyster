@@ -27,19 +27,6 @@ void Material::addTexture(string textureName, TEXTURE_TYPE type, int number)
 string Material::convertTypeToString(TEXTURE_TYPE enumType)
 {
 	string type = "";
-	switch (enumType) {
-	case DIFFUSE:
-		type = "diffuse";
-		break;
-	case SPECULAR:
-		type = "specular";
-		break;
-	case EMISSION:
-		type = "emission";
-		break;
-
-	}
-
 	switch (enumType)
 	{
 	case DIFFUSE:

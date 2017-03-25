@@ -69,8 +69,8 @@ void Terrain::buildVertices()
 	Terrain::map.vertices = new vec3[Terrain::map.vertexCount]();
 	Terrain::map.uv = new vec2[Terrain::map.vertexCount]();
 	
-	float textureU = Terrain::map.zLength * 1.0f;
-	float textureV = Terrain::map.xLength * 1.0f;
+	float textureU = 1.0f; //Terrain::map.zLength * 1.0f;
+	float textureV = 1.0f; //Terrain::map.xLength * 1.0f;
 	float frequency = 0.005f;
 	float weight = 15.0f;
 
