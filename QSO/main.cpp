@@ -1,26 +1,9 @@
 #include <iostream>
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
-#include "Shader.h"
-#include "Window.h"
-#include "glfwWindow.h"
-#include "openGLHandler.h"
-#include "Clock.h"
-#include "TextureManager.h"
-#include "Camera.h"
-#include "GLRenderer.h"
-#include "glfwInputHandler.h"
-#include "Terrain.h"
-#include "Mesh.h"
-#include "Polygon.h"
-#include "Cube.h"
-#include "GameObject.h"
-#include "Skybox.h"
-#include "Model.h"
-#include "Camera3rdPerson.h"
-#include "PlayerMovement.h"
+#include "Core.h"
+#include "ShapeComponents.h"
+#include "Physics.h"
+
 
 using namespace std;
 
@@ -114,6 +97,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 int main(int argc, char *argv[]) {
 
+	PhysicsWorld _world; //Initialize Physics
 	glfwWindow *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
 
@@ -207,6 +191,8 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(nanosuite);
 	playerModel.addComponent(modelMat);
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
+	playerModel.addComponent(new RigidBody("playerBody", 1, vec3(0,10,0)));
+	playerModel.addComponent(new Collider("playerCollider", BOX));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 
 	GameObject terrainOBJ("terrain");
@@ -309,7 +295,7 @@ int main(int argc, char *argv[]) {
 	}
 	MeshGenerator::destroy();
 	TextureManager::instance()->destroy();
-	cube.destroy();
+	GameObject::cleanUpObjects();
 	graphicsHandler.destroy();
 
 	return 0;

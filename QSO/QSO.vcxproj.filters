@@ -91,6 +91,9 @@
     <Filter Include="Header Files\Physics\CollisionShapes">
       <UniqueIdentifier>{33f78b43-a1a0-41aa-8751-805054140baf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Includes">
+      <UniqueIdentifier>{5f1ecefd-7089-45b6-b641-5346c5fd31ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -209,6 +212,15 @@
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Header Files\Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files\Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeComponents.h">
+      <Filter>Header Files\Includes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

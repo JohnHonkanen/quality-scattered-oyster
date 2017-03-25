@@ -10,6 +10,7 @@ PhysicsWorld::PhysicsWorld()
 	btGImpactCollisionAlgorithm::registerAlgorithm(_dispatcher);
 	_solver = new btSequentialImpulseConstraintSolver;
 	_dynamicsWorld = new btDiscreteDynamicsWorld(_dispatcher, _broadphase, _solver, _collisionConfiguration);
+	_dynamicsWorld->setGravity(btVector3(0, -10, 0));
 }
 
 
@@ -19,7 +20,7 @@ PhysicsWorld::~PhysicsWorld()
 
 void PhysicsWorld::setGravity(vec3 gravity)
 {
-	gravity = gravity;
+	PhysicsWorld::gravity = gravity;
 	_dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 }
 

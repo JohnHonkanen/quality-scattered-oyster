@@ -12,3 +12,12 @@ Component::Component(std::string name)
 Component::~Component()
 {
 }
+
+void Component::init()
+{
+}
+
+void Component::setGameObject(GameObject * gameObject)
+{
+	Component::gameObject = gameObject;
+}

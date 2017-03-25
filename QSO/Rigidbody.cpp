@@ -7,10 +7,23 @@ btVector3 RigidBody::convertTobtVector3(vec3 vec)
 	return btVector3(btScalar(vec.x), btScalar(vec.y), (btScalar(vec.z)));
 }
 
+vec3 RigidBody::convertToVec3(btVector3 vec)
+{
+	return vec3(vec.x(),vec.y(), vec.z());
+}
+
 RigidBody::RigidBody() :Component("Rigidbody")
 {
 	RigidBody::mass = 0;
 	RigidBody::inertia = btVector3(0, 0, 0);
+}
+
+RigidBody::RigidBody(string name, float mass, vec3 cmass, bool hasInertia):Component(name)
+{
+	setMass(mass);
+	addMotionState(cmass);
+	if (hasInertia)
+		calculateLocalInertia();
 }
 
 
@@ -27,14 +40,9 @@ void RigidBody::init()
 	RigidBody::rigidbody = new btRigidBody(constructionInfo);
 }
 
-void RigidBody::addGameObject(GameObject * gameObject)
+void RigidBody::addMotionState(vec3 cmass)
 {
-	RigidBody::gameObject = gameObject;
-}
-
-void RigidBody::addMotionState(btMotionState * state)
-{
-	RigidBody::state = state;
+	RigidBody::state = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(cmass.x, cmass.y, cmass.z)));
 }
 
 void RigidBody::setMass(float mass)
@@ -66,6 +74,12 @@ vec3 RigidBody::getMotionState()
 	rigidbody->getMotionState()->getWorldTransform(btTrans);
 	printf(" Y Loc: %f\n", btTrans.getOrigin().getY());
 	return vec3(btTrans.getOrigin().getX(), btTrans.getOrigin().getY(), btTrans.getOrigin().getZ());
+}
+
+void RigidBody::updateStep()
+{
+	vec3 motion = getMotionState();
+	gameObject->transform.translate(motion);
 }
 
 void RigidBody::destroy()

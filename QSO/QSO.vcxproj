@@ -160,6 +160,7 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Core.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="openGLHandler.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicsWorld.h" />
     <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="Polygon.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapeComponents.h" />
     <ClInclude Include="simplex\SimplexNoise.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Terrain.h" />

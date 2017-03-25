@@ -22,6 +22,7 @@ private:
 	btCollisionShape *colliderShape;
 public:
 	Collider();
+	Collider(string name, ColliderShape shape, float param1 = 1.0f, float param2 = 1.0f, float param3 = 1.0f);
 	~Collider();
 	void setShape(ColliderShape shape, float param1 = 1.0f, float param2 = 1.0f, float param3 = 1.0f);
 	btCollisionShape *getShape();

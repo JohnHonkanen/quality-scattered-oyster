@@ -15,6 +15,7 @@ public:
 	GameObject(std::string name);
 	virtual ~GameObject();
 	void broadcastMessage(GameBehaviour::BehaviorFuncs func);
+	void init();
 	template<class T>
 	T *getComponent();
 	void addComponent(Component* component);
@@ -23,6 +24,7 @@ public:
 
 	static std::vector<GameObject*> gameObjects;
 	static GameObject *find(std::string name);
+	static void cleanUpObjects();
 };
 
 template<class T>
