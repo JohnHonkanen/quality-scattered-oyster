@@ -149,7 +149,7 @@ int main(int argc, char *argv[]) {
 	GLRenderer glRenderer;
 	glRenderer.setCamera(&playerCamera);
 
-	Model *modelTree = new Model("Tree1", "models/LowPolyTree/lowpolytree.obj");
+	Model *modelTree = new Model("Tree1", "models/tree/lowpolytree.obj");
 	Skybox *skyBoxCube = new Skybox("skyBox");
 	Terrain *terrain = new Terrain("terrain", 100, 100, 20.48f);
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
@@ -158,8 +158,8 @@ int main(int argc, char *argv[]) {
 	Material *multiMaterial2 = new Material("multiMaterial2", HSVShader);
 	
 	// UV's for Terrain
-	material->addTexture("mud.png", DIFFUSE);
-	material->addTexture("white.png", SPECULAR);
+	material->addTexture("texture/mud.png", DIFFUSE);
+	material->addTexture("texture/white.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
 
 	material->addTexture("texture/grassy.png", BACKGROUND_TEXTURE);
