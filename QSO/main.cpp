@@ -137,11 +137,6 @@ int main(int argc, char *argv[]) {
 	
 	// Testing Texture Manager
 	TextureManager *textureManager = TextureManager::instance();
-	//textureManager.saveTexture("container.jpg", "container_1");
-	//textureManager.saveTexture("awesomeface.png", "awesomeface");
-	//textureManager.saveTextureMap("container2.png", "container_2"); // For diffusion Map
-	//textureManager.saveTextureMap("container2_specular.png", "container_specular"); // For specular Map
-	//textureManager.saveTextureMap("lava.jpg", "lava_2"); // For emission Map
 
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
@@ -178,13 +173,6 @@ int main(int argc, char *argv[]) {
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_dn.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_bk.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_ft.tga");
-
-	/*skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_rt.tga");
-	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_lf.tga");
-	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_up.tga");
-	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_dn.tga");
-	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_bk.tga");
-	skyboxMaterial->cubeMaps.push_back("skybox/mnight/mnight_ft.tga");*/
 
 	//skyboxMaterial->cubeMaps.push_back("right.jpg");
 	//skyboxMaterial->cubeMaps.push_back("left.jpg");

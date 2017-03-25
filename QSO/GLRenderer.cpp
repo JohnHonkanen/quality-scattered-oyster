@@ -114,7 +114,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(lightPositionLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	
 	// Set Light attenuation properties <- See for value reference: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=-Point+Light+Attenuation
-	// These values are distance: 50
+	// These values are for attenuation distance: 50
 	//glUniform1f(lightConstantPos, 1.0f); 
 	//glUniform1f(lightLinearPos, 0.022f);
 	//glUniform1f(lightQuadraticPos, 0.0019f);
@@ -136,6 +136,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(ambientDirLightLoc, 0.0f, 0.0f, 0.0f);
 	glUniform3f(diffuseDirLightLoc, 0.0f, 0.0f, 0.0f); // Darken the light a bit to fit the scene
 	glUniform3f(specularDirLightLoc, 1.0f, 1.0f, 1.0f);
+
 	// Set Point Light Properties for multi-light
 	glUniform3f(pointLightLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
 	glUniform3f(ambientPointLightLoc, 0.2f, 0.2f, 0.2f);
@@ -144,6 +145,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(constantPointLightLoc, 1.0f);
 	glUniform1f(linearPointLightLoc, 0.045f);
 	glUniform1f(quadraticPointLightLoc, 0.0075f);
+
 	// Set Spot Light Properties for multi-light
 	glUniform3f(spotLightPositionLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 	//printf("camera location %f, %f, %f \n", camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
@@ -152,11 +154,13 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(ambientSpotLightLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(diffuseSpotLightLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(specularSpotLightLoc, 0.5f, 0.5f, 0.5f);
+
+	// Spot light values (attenuation, innerCutOff and outerCutOff of spotlight). Range currently set at: 3250
 	glUniform1f(constantSpotLightLoc, 1.0f);
-	glUniform1f(linearSpotLightLoc, 0.0014f);
+	glUniform1f(linearSpotLightLoc,0.0014f);
 	glUniform1f(quadraticSpotLightLoc, 0.000007f);
-	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f)));
-	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 2)));
+	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f * 1.2f)));
+	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 1.2f)));
 
 
 
