@@ -27,6 +27,7 @@ void PhysicsWorld::setGravity(vec3 gravity)
 void PhysicsWorld::addRigidBody(RigidBody * body)
 {
 	_dynamicsWorld->addRigidBody(body->rigidbody);
+	bodies.push_back(body);
 }
 
 void PhysicsWorld::removeRigidBody(RigidBody * body)
@@ -38,14 +39,16 @@ void PhysicsWorld::stepSimulation(float deltaTime, int maxSubSteps)
 {
 	//printf("Stepping Sim %f \n", deltaTime);
 	_dynamicsWorld->stepSimulation(btScalar(deltaTime), maxSubSteps);
+	for (int i = 0; i < bodies.size(); i++) {
+		bodies[i]->updateStep();
+	}
 }
 
 void PhysicsWorld::destroy()
 {
+	delete _dynamicsWorld;
 	delete _broadphase;
 	delete _collisionConfiguration;
 	delete _dispatcher;
 	delete _solver;
-	delete _dynamicsWorld;
-	delete this;
 }

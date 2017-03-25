@@ -29,6 +29,7 @@ void Collider::setShape(ColliderShape shape, float param1, float param2, float p
 	case HEIGHTFIELD_TERRAIN:
 		break;
 	case STATIC_PLANE:
+		colliderShape = new btStaticPlaneShape(btVector3(param1, param2, param3), 1);
 		break;
 	default:
 		break;

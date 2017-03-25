@@ -1,6 +1,7 @@
 #pragma once
 #include <BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h>
 #include <glm\glm.hpp>
+#include <vector>
 #include "btBulletDynamicsCommon.h"
 #include "RigidBody.h"
 
@@ -15,6 +16,7 @@ private:
 	btSequentialImpulseConstraintSolver* _solver;
 	btDiscreteDynamicsWorld* _dynamicsWorld;
 	vec3 gravity;
+	std::vector<RigidBody*> bodies;
 public:
 	PhysicsWorld();
 	~PhysicsWorld();

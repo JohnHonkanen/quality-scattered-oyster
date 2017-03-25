@@ -1,6 +1,7 @@
 #include "RigidBody.h"
 #include "Collider.h"
-
+#include "PhysicsWorld.h"
+#include <glm\gtc\type_ptr.hpp>
 
 btVector3 RigidBody::convertTobtVector3(vec3 vec)
 {
@@ -18,12 +19,13 @@ RigidBody::RigidBody() :Component("Rigidbody")
 	RigidBody::inertia = btVector3(0, 0, 0);
 }
 
-RigidBody::RigidBody(string name, float mass, vec3 cmass, bool hasInertia):Component(name)
+RigidBody::RigidBody(string name, PhysicsWorld *world, float mass, vec3 cmass, bool hasInertia):Component(name)
 {
 	setMass(mass);
 	addMotionState(cmass);
-	if (hasInertia)
-		calculateLocalInertia();
+	RigidBody::hasInertia = hasInertia;
+
+	RigidBody::world = world;
 }
 
 
@@ -34,10 +36,16 @@ RigidBody::~RigidBody()
 void RigidBody::init()
 {
 	btCollisionShape * shape = gameObject->getComponent<Collider>()->getShape();
+	if (shape != nullptr) {
+		if (hasInertia)
+			calculateLocalInertia();
+	}
+	
 	btRigidBody::btRigidBodyConstructionInfo
 		constructionInfo(RigidBody::mass, RigidBody::state, shape, RigidBody::inertia);
 
 	RigidBody::rigidbody = new btRigidBody(constructionInfo);
+	RigidBody::world->addRigidBody(this);
 }
 
 void RigidBody::addMotionState(vec3 cmass)
@@ -68,18 +76,18 @@ void RigidBody::applyCentralImpulse(vec3 force)
 	RigidBody::rigidbody->applyCentralImpulse(convertTobtVector3(force));
 }
 
-vec3 RigidBody::getMotionState()
+btTransform RigidBody::getMotionState()
 {
 	btTransform btTrans;
 	rigidbody->getMotionState()->getWorldTransform(btTrans);
-	printf(" Y Loc: %f\n", btTrans.getOrigin().getY());
-	return vec3(btTrans.getOrigin().getX(), btTrans.getOrigin().getY(), btTrans.getOrigin().getZ());
+	return btTrans;
 }
 
 void RigidBody::updateStep()
 {
-	vec3 motion = getMotionState();
-	gameObject->transform.translate(motion);
+	mat4 motion;
+	getMotionState().getOpenGLMatrix(value_ptr(motion));
+	gameObject->transform.setPosition(motion[3]);
 }
 
 void RigidBody::destroy()

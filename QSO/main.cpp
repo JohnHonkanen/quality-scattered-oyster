@@ -98,6 +98,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 int main(int argc, char *argv[]) {
 
 	PhysicsWorld _world; //Initialize Physics
+	_world.setGravity(vec3(0, -2, 0));
 	glfwWindow *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
 
@@ -191,13 +192,22 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(nanosuite);
 	playerModel.addComponent(modelMat);
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
-	playerModel.addComponent(new RigidBody("playerBody", 1, vec3(0,10,0)));
+	playerModel.addComponent(new RigidBody("playerBody", &_world, 1, vec3(0,100,0), true));
 	playerModel.addComponent(new Collider("playerCollider", BOX));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
+	playerModel.init();
 
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);
 	terrainOBJ.addComponent(material);
+	vec3 defaultState = vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize());
+	terrainOBJ.addComponent(new RigidBody("terrainBody", &_world, 0, vec3(defaultState.x, defaultState.y, defaultState.z)));
+	terrainOBJ.addComponent(new Collider("terrainCollider", STATIC_PLANE, 0, 1, 0));
+	terrainOBJ.init();
+
+	//Sets Terrian to center
+	terrainOBJ.getComponent<RigidBody>()->updateStep();
+	terrainOBJ.transform.calculateModelMatrix();
 
 	playerCamera.setObject(&playerModel);
 
@@ -212,6 +222,7 @@ int main(int argc, char *argv[]) {
 	double currentTime = 0.0f;
 
 	// Testing Clock
+	terrain->transform.translate(defaultState);
 
 	Clock clock;
 	clock.startClock();
@@ -228,14 +239,8 @@ int main(int argc, char *argv[]) {
 
 	*/
 
-
-	playerModel.transform.translate(vec3(10.0f, 0.0f, 0.0f));
-
 	cube.transform.translate(vec3(0.0f, 6.0f, 0.0f));
 	cube.transform.scale(vec3(1));
-
-	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize()));
-	terrainOBJ.transform.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -260,6 +265,8 @@ int main(int argc, char *argv[]) {
 			playerCamera.setObject(&playerModel);
 			playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 		}
+
+		_world.stepSimulation(dt, 10);
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {
@@ -297,6 +304,7 @@ int main(int argc, char *argv[]) {
 	TextureManager::instance()->destroy();
 	GameObject::cleanUpObjects();
 	graphicsHandler.destroy();
+	_world.destroy();
 
 	return 0;
 }

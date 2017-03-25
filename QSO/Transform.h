@@ -22,6 +22,8 @@ public:
 	void scale(float scaleX, float scaleY, float scaleZ);
 	void scale(vec3 scale);
 	void setTransform(mat4 matrix);
+	void setTranslationMatrix(mat4 matrix);
+	void addTranslationMatrix(mat4 matrix);
 	mat4 calculateModelMatrix();
 	mat4 get();
 	vec3 getPosition();
