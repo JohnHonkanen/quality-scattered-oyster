@@ -174,8 +174,8 @@ int main(int argc, char *argv[]) {
 	multiMaterial->addTexture("lava.jpg", EMISSION);
 
 	// UV's for Model (Tree1)
-	multiMaterial2->addTexture("container2.png", DIFFUSE);
-	multiMaterial2->addTexture("container2_specular.png", SPECULAR);
+	//multiMaterial2->addTexture("container2.png", DIFFUSE);
+	//multiMaterial2->addTexture("container2_specular.png", SPECULAR);
 	multiMaterial2->addTexture("lava.jpg", EMISSION);
 
 	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
@@ -247,7 +247,7 @@ int main(int argc, char *argv[]) {
 	playerModel.transform.translate(vec3(10.0f, 0.0f, 0.0f));
 
 	modelTree1.transform.translate(vec3(0.0f, 10.0f, 0.0f));
-	modelTree1.transform.scale(vec3(3));
+	modelTree1.transform.scale(vec3(3.0f));
 
 	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize()));
 	terrainOBJ.transform.calculateModelMatrix();
