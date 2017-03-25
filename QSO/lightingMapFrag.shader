@@ -69,7 +69,7 @@ void main()
 	//Emission
 
 	// Sample the image
-	vec3 rgb = vec3(texture(material.emission, UV));//texture2D(ourImage, UV).rgb; 
+	vec3 rgb = vec3(texture(material.emission, UV));
 
 	// Look up the corresponding HSV value
 	vec3 hsv = rgb2hsv(rgb);

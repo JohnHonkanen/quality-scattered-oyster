@@ -145,10 +145,10 @@ int main(int argc, char *argv[]) {
 
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
-	Shader ShaderProgram("lightingMapVert.shader", "lightingMapFrag.shader");
-	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader");
-	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader");
-	Shader modelShader("modelVert.shader", "modelFrag.shader");
+	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader"); // Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
+	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader"); // Basic shader for skybox, applies texture to cubemap. No lighting.
+	Shader modelShader("modelVert.shader", "modelFrag.shader"); // Shader with multiLight (Dir/Point/Spot light) on models
+
 	//Mesh Objects
 	GLRenderer glRenderer;
 	glRenderer.setCamera(&playerCamera);
@@ -157,7 +157,7 @@ int main(int argc, char *argv[]) {
 	Skybox *skyBoxCube = new Skybox("skyBox");
 	Terrain *terrain = new Terrain("terrain", 500, 500, 20.0f);
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
-	Material *material = new Material("BaseMaterial", modelShader); // ShaderProgram
+	Material *material = new Material("BaseMaterial", multiShadingProgram);
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
 	
 	// UV's for Terrain

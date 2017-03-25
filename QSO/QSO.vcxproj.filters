@@ -16,23 +16,11 @@
     <Filter Include="Header Files\OpenGL">
       <UniqueIdentifier>{8b39ed52-2819-43d1-ac4d-b64b3624ecd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\OpenGL">
-      <UniqueIdentifier>{7cf9b03e-6818-4178-a0c1-17e9d5735509}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Renderer">
-      <UniqueIdentifier>{01f87a1d-6626-4d1c-a55b-6dc5b6734b8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Renderer\GLFW">
-      <UniqueIdentifier>{5685494a-4e5b-43f0-9013-b4a542f4298a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{4bdd93ca-15ee-4018-b3d9-372106c73ee9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Clock">
       <UniqueIdentifier>{e9196779-9197-4163-b5f3-f6338978de2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Clock">
-      <UniqueIdentifier>{8db435dc-a548-400b-9c01-a1247bb50532}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\OpenGL\Texture">
       <UniqueIdentifier>{92740a97-ac01-40b5-bc13-7c6e0275a896}</UniqueIdentifier>
@@ -221,26 +209,11 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="glfwWindow.cpp">
-      <Filter>Source Files\Renderer\GLFW</Filter>
-    </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\Clock</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsHandler.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="openGLHandler.cpp">
-      <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="TextureGenerator.cpp">
       <Filter>Source Files</Filter>
@@ -308,6 +281,21 @@
     <ClCompile Include="simplex\SimplexNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="glfwWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="openGLHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="HSVFrag.shader">
@@ -344,6 +332,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="modelFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ClassDiagram.cd">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -3,6 +3,7 @@
 struct Material {
 	sampler2D diffuse;
 	sampler2D specular;
+	sampler2D emission;
 	float shininess;
 };
 
@@ -53,14 +54,15 @@ uniform PointLight pointLight;
 uniform SpotLight spotLight;
 uniform Material material;
 
-
-// uniform SpotLight spotLight;
+uniform float hueShift;
+uniform float satBoost;
 
 // Function prototypes
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir);
 vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
-
+vec3 rgb2hsv(vec3 rgbColor);
+vec3 hsv2rgb(vec3 hsvColor);
 
 void main() {
 
@@ -77,6 +79,26 @@ void main() {
 	// Phase 3: Spot light
 	 
 	result += calcSpotLight(spotLight, norm, FragPos, viewDir);
+
+	// Phase 4: Emission + HSV
+
+	// Sample the image
+	vec3 rgb = vec3(texture(material.emission, UV));
+
+	// Look up the corresponding HSV value
+	vec3 hsv = rgb2hsv(rgb);
+
+
+	// Manipulate hue and saturation
+	hsv.x = fract(hsv.x + hueShift);
+	hsv.y *= satBoost;
+
+	// Look up the corresponding RGB value
+	vec3 finalEmission = vec3(hsv2rgb(hsv));
+
+	vec3 emission = finalEmission;
+
+	result += result + emission;
 
 	// Each light type adds it's contribution to the resulting output color until all light sources are processed.
 	// The resulting color contains the color impact of all the light sources in the scene combined. 
@@ -162,3 +184,22 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
 
 	return (ambient + diffuse + specular);
 }
+
+vec3 rgb2hsv(vec3 rgbColor)
+{
+	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+	vec4 p = mix(vec4(rgbColor.bg, K.wz), vec4(rgbColor.gb, K.xy), step(rgbColor.b, rgbColor.g));
+	vec4 q = mix(vec4(p.xyw, rgbColor.r), vec4(rgbColor.r, p.yzx), step(p.x, rgbColor.r));
+
+	float d = q.x - min(q.w, q.y);
+	float e = 1.0e-10;
+	return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+vec3 hsv2rgb(vec3 hsvColor)
+{
+	vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 p = abs(fract(hsvColor.xxx + K.xyz) * 6.0 - K.www);
+	return hsvColor.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), hsvColor.y);
+}
+
