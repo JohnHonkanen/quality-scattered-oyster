@@ -37,6 +37,40 @@ string Material::convertTypeToString(TEXTURE_TYPE enumType)
 	case EMISSION:
 		type = "emission";
 		break;
+
+	}
+
+	switch (enumType)
+	{
+	case DIFFUSE:
+		type = "diffuse";
+		break;
+	case SPECULAR:
+		type = "specular";
+		break;
+	case EMISSION:
+		type = "emission";
+		break;
+	case BACKGROUND_TEXTURE:
+		type = "terrainTexture.backgroundTexture";
+		break;
+	case R_TEXTURE:
+		type = "terrainTexture.rTexture";
+		break;
+	case G_TEXTURE:
+		type = "terrainTexture.gTexture";
+		break;
+	case B_TEXTURE:
+		type = "terrainTexture.bTexture";
+		break;
+	case BLEND_MAP:
+		type = "terrainTexture.blendMap";
+		break;
+	case NO_TEXTURE_TYPE:
+		type = "none";
+		break;
+	default:
+		break;
 	}
 	return type;
 }

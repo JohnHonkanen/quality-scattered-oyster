@@ -1,10 +1,20 @@
 #version 330 core
 
+struct TerrainTexture {
+	sampler2D backgroundTexture;
+	sampler2D rTexture;
+	sampler2D gTexture;
+	sampler2D bTexture;
+	sampler2D blendMap;
+
+};
+
 struct Material {
 	sampler2D diffuse;
 	sampler2D specular;
 	sampler2D emission;
 	float shininess;
+	TerrainTexture terrainTexture;
 };
 
 struct DirLight {
@@ -42,14 +52,6 @@ struct SpotLight {
 	vec3 specular;
 };
 
-struct TerrainTexture {
-	sampler2D backgroundTexture;
-	sampler2D rTexture;
-	sampler2D gTexture;
-	sampler2D bTexture;
-	sampler2D blendMap;
-
-};
 
 in vec3 FragPos;
 in vec3 Normal;
@@ -62,7 +64,6 @@ uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
 uniform Material material;
-uniform TerrainTexture terrainTexture;
 
 uniform float hueShift;
 uniform float satBoost;
@@ -111,17 +112,17 @@ void main() {
 
 	// Phase 5: Blendmap
 
-	vec4 blendMapColor = texture(terrainTexture.blendMap, UV);
+	vec4 blendMapColor = texture(material.terrainTexture.blendMap, UV);
 
 	// Background Texture : amount to render
 	float backTextureAmount = 1 - (blendMapColor.r, blendMapColor.g, blendMapColor.b);
 	
 	vec2 tiledCoords = UV; // * 40.0f
 
-	vec4 backgroundTextureColor = texture(terrainTexture.backgroundTexture, tiledCoords) * backTextureAmount;
-	vec4 rTextureColor = texture(terrainTexture.rTexture, UV) * blendMapColor.r;
-	vec4 gTextureColor = texture(terrainTexture.gTexture, UV) * blendMapColor.g;
-	vec4 bTextureColor = texture(terrainTexture.bTexture, UV) * blendMapColor.b;
+	vec4 backgroundTextureColor = texture(material.terrainTexture.backgroundTexture, tiledCoords) * backTextureAmount;
+	vec4 rTextureColor = texture(material.terrainTexture.rTexture, UV) * blendMapColor.r;
+	vec4 gTextureColor = texture(material.terrainTexture.gTexture, UV) * blendMapColor.g;
+	vec4 bTextureColor = texture(material.terrainTexture.bTexture, UV) * blendMapColor.b;
 
 	vec4 totalTerrainColor = backgroundTextureColor + rTextureColor + gTextureColor + bTextureColor;
 

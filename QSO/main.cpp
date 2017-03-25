@@ -161,6 +161,8 @@ int main(int argc, char *argv[]) {
 	material->addTexture("container2.png", DIFFUSE);
 	material->addTexture("container2_specular.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
+
+	// Add terrain material texture above.
 	
 	// UV's for Model (playerModel)
 	multiMaterial->addTexture("container2.png", DIFFUSE);
