@@ -96,7 +96,6 @@ void GLRenderer::renderObject(GameObject *obj)
 	GLint cutOffSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.cutOff");
 	GLint outerCutOffSpotLightLoc = glGetUniformLocation(shader.program, "spotLight.outerCutOff");
 
-
 	//glUniform3f(objectColorLoc, color.x, color.y, color.z);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f); // Also set light's color (white)
 	glUniform3f(lightPosLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
