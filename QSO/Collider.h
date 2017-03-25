@@ -1,6 +1,7 @@
 #pragma once
+#include <btBulletDynamicsCommon.h>
 #include "Component.h"
-#include "btBulletDynamicsCommon.h"
+
 
 enum ColliderShape {
 	SPHERE = 1,
@@ -22,6 +23,7 @@ private:
 public:
 	Collider();
 	~Collider();
-
-	void setShape(btCollisionShape * shape);
+	void setShape(ColliderShape shape, float param1 = 1.0f, float param2 = 1.0f, float param3 = 1.0f);
+	btCollisionShape *getShape();
+	void destroy();
 };

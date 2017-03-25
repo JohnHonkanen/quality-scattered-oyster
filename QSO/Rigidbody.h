@@ -1,11 +1,11 @@
 #pragma once
+#include <btBulletDynamicsCommon.h>
 #include "Component.h"
-#include "Collider.h"
-#include "btBulletDynamicsCommon.h"
+#include "GameObject.h"
 class RigidBody : public Component
 {
 private:
-	btCollisionShape *collider;
+	GameObject *gameObject;
 	btMotionState *state;
 	btScalar mass;
 	btVector3 inertia;
@@ -17,7 +17,7 @@ public:
 	RigidBody();
 	~RigidBody();
 	void init();
-	void addCollider(btCollisionShape *collider);
+	void addGameObject(GameObject *gameObject);
 	void addMotionState(btMotionState *state);
 	void setMass(float mass);
 	void calculateLocalInertia();

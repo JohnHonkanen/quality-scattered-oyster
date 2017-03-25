@@ -85,6 +85,12 @@
     <Filter Include="Header Files\OpenGL\Shapes\Terrain\Simplex">
       <UniqueIdentifier>{df21f5a4-5313-4a25-a806-6f6735493c5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{ac7765ae-c347-485e-a405-9e0858c299f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics\CollisionShapes">
+      <UniqueIdentifier>{33f78b43-a1a0-41aa-8751-805054140baf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -194,6 +200,15 @@
     </ClInclude>
     <ClInclude Include="simplex\SimplexNoise.h">
       <Filter>Header Files\OpenGL\Shapes\Terrain\Simplex</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsWorld.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +321,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="simplex\SimplexNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsWorld.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -77,6 +77,7 @@ void GameObject::destroy()
 	//Clear Components
 	for (int i = 0; i < components.size(); i++) {
 		components[i]->destroy();
+		delete components[i];
 	}
 }
 

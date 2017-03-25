@@ -1,5 +1,5 @@
 #include "RigidBody.h"
-
+#include "Collider.h"
 
 
 btVector3 RigidBody::convertTobtVector3(vec3 vec)
@@ -20,14 +20,16 @@ RigidBody::~RigidBody()
 
 void RigidBody::init()
 {
+	btCollisionShape * shape = gameObject->getComponent<Collider>()->getShape();
 	btRigidBody::btRigidBodyConstructionInfo
-		constructionInfo(RigidBody::mass, RigidBody::state, RigidBody::collider, RigidBody::inertia);
+		constructionInfo(RigidBody::mass, RigidBody::state, shape, RigidBody::inertia);
 
 	RigidBody::rigidbody = new btRigidBody(constructionInfo);
 }
 
-void RigidBody::addCollider(btCollisionShape * collider) {
-	RigidBody::collider = collider;
+void RigidBody::addGameObject(GameObject * gameObject)
+{
+	RigidBody::gameObject = gameObject;
 }
 
 void RigidBody::addMotionState(btMotionState * state)
@@ -42,8 +44,10 @@ void RigidBody::setMass(float mass)
 
 void RigidBody::calculateLocalInertia()
 {
-	collider->calculateLocalInertia(btScalar(RigidBody::mass), RigidBody::inertia);
-	printf("Inertia X Loc: %f, Y Loc: %f, Z Loc: %f\n", inertia.getX(), inertia.getY(), inertia.getZ());
+	btCollisionShape * shape = gameObject->getComponent<Collider>()->getShape();
+	if (shape != nullptr) {
+		shape->calculateLocalInertia(btScalar(RigidBody::mass), RigidBody::inertia);
+	}
 }
 
 void RigidBody::applyCentralForce(vec3 force)
@@ -66,7 +70,5 @@ vec3 RigidBody::getMotionState()
 
 void RigidBody::destroy()
 {
-	delete collider;
 	delete rigidbody;
-	delete this;
 }
