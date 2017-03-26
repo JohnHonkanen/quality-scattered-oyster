@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 	// Setup Camera
 
 	Camera3rdPerson playerCamera ("camera", &inputHandler);
-	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 200.0f);
+	playerCamera.setPerspectiveProjection(glm::radians(45.0f), float(Window::screenWIDTH) / float(Window::screenHEIGHT), 0.1f, 1000.0f);
 	
 	// Testing Texture Manager
 	TextureManager *textureManager = TextureManager::instance();

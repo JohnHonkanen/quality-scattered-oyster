@@ -71,8 +71,8 @@ void Terrain::buildVertices()
 	
 	float textureU = 1.0f; //Terrain::map.zLength * 1.0f;
 	float textureV = 1.0f; //Terrain::map.xLength * 1.0f;
-	float frequency = 0.005f;
-	float weight = 10.0f;
+	float frequency = 0.0003f;
+	float weight = 150.0f;
 
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
@@ -80,6 +80,7 @@ void Terrain::buildVertices()
 			float scaleU = float(z) / float(Terrain::map.zLength - 1);
 			float scaleV = float(x) / float(Terrain::map.xLength - 1);
 			float height = (SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight);
+			height += (SimplexNoise::noise(x * frequency * 10 * gridSize, z * frequency * 10 * gridSize) * 10.0f);
 			if (height > map.maxHeight) {
 				map.maxHeight = height;
 			}
