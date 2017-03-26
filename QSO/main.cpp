@@ -158,8 +158,8 @@ int main(int argc, char *argv[]) {
 	Material *multiMaterial2 = new Material("multiMaterial2", HSVShader);
 	
 	// UV's for Terrain
-	material->addTexture("texture/mud.png", DIFFUSE);
-	material->addTexture("texture/white.png", SPECULAR);
+	material->addTexture("texture/dirt.png", DIFFUSE);
+	material->addTexture("texture/path.png", SPECULAR);
 	material->addTexture("lava.jpg", EMISSION);
 
 	material->addTexture("texture/grassy.png", BACKGROUND_TEXTURE);
