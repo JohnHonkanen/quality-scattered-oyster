@@ -45,6 +45,7 @@ void RigidBody::init()
 		constructionInfo(RigidBody::mass, RigidBody::state, shape, RigidBody::inertia);
 
 	RigidBody::rigidbody = new btRigidBody(constructionInfo);
+	rigidbody->setAngularFactor(btVector3(0,0,0));
 	RigidBody::world->addRigidBody(this);
 }
 
@@ -76,6 +77,16 @@ void RigidBody::applyCentralImpulse(vec3 force)
 	RigidBody::rigidbody->applyCentralImpulse(convertTobtVector3(force));
 }
 
+void RigidBody::setLinearVelocity(vec3 force)
+{
+	rigidbody->setLinearVelocity(convertTobtVector3(force));
+}
+
+vec3 RigidBody::getLinearVelocity()
+{
+	return convertToVec3(rigidbody->getLinearVelocity());
+}
+
 btTransform RigidBody::getMotionState()
 {
 	btTransform btTrans;
@@ -85,9 +96,10 @@ btTransform RigidBody::getMotionState()
 
 void RigidBody::updateStep()
 {
+	btTransform trans = getMotionState();
 	mat4 motion;
-	getMotionState().getOpenGLMatrix(value_ptr(motion));
-	gameObject->transform.setPosition(motion[3]);
+	trans.getOpenGLMatrix(value_ptr(motion));
+	gameObject->transform.physics = motion;
 }
 
 void RigidBody::destroy()

@@ -1,5 +1,5 @@
 #include "Camera3rdPerson.h"
-
+#include "Rigidbody.h"
 Camera3rdPerson::Camera3rdPerson(string name, glfwInputHandler * inputHandler) : Camera(name)
 {
 	Camera3rdPerson::inputHandler = inputHandler;
@@ -31,7 +31,9 @@ float Camera3rdPerson::getYaw()
 
 void Camera3rdPerson::setAngleToObject()
 {
+
 	angleAroundPlayer = gameObject->transform.getRotation().y;
+
 }
 
 vec3 Camera3rdPerson::getPosition()
@@ -86,7 +88,9 @@ void Camera3rdPerson::calculateAngleAroundPlayer()
 		angleAroundPlayer += angleChange * angleRotationSpeed;
 	}
 	else {
+	
 		angleAroundPlayer = (1.0f - lerpAmount) * angleAroundPlayer + lerpAmount * gameObject->transform.getRotation().y;
+
 	}
 }
 
@@ -102,12 +106,38 @@ float Camera3rdPerson::calculateVerticalDistance()
 
 void Camera3rdPerson::calculateCameraPosition(float horizontalDistance, float verticalDistance)
 {
+	RigidBody *rigidbody = gameObject->getComponent<RigidBody>();
+	btTransform transform = rigidbody->rigidbody->getWorldTransform();
+	btQuaternion orientation = transform.getRotation();
+
 	vec3 objectRotation = gameObject->transform.getRotation();
 	float theta = (objectRotation.y + radians(angleAroundPlayer));
 	float offSetX = horizontalDistance * sin(theta);
 	float offSetZ = horizontalDistance * cos(theta);
 
 	position = gameObject->transform.getPosition() + vec3(-offSetX, verticalDistance, -offSetZ);
+
+	/*if (rigidbody == nullptr)
+	{
+		float yRot = gameObject->transform.getRotation().y;
+		float theta = (yRot + radians(angleAroundPlayer));
+		float offSetX = horizontalDistance * sin(theta);
+		float offSetZ = horizontalDistance * cos(theta);
+
+		position = gameObject->transform.getPosition() + vec3(-offSetX, verticalDistance, -offSetZ);
+	}
+	else {
+		btMatrix3x3 transform = rigidbody->rigidbody->getWorldTransform().getBasis();
+		float yaw, pitch, roll;
+		transform.getEulerZYX(yaw, pitch, roll);
+
+		float yRot = pitch;
+		float theta = (yRot + radians(angleAroundPlayer));
+		float offSetX = horizontalDistance * sin(theta);
+		float offSetZ = horizontalDistance * cos(theta);
+
+		position = gameObject->transform.getPosition() + vec3(-offSetX, verticalDistance, -offSetZ);
+	}*/
 }
 
 void Camera3rdPerson::setPerspectiveProjection(float FOV, float aspectRatio, float zNear, float zFar)

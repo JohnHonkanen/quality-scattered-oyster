@@ -29,6 +29,8 @@ public:
 	vec3 getPosition();
 	vec3 getRotation();
 	void reset();
+
+	mat4 physics;
 private:
 	mat4 model;
 	mat4 translationMatrix;

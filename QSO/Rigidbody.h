@@ -13,10 +13,6 @@ private:
 	btVector3 inertia;
 	btTransform transform;
 	PhysicsWorld* world;
-
-	//Helper Functions
-	btVector3 convertTobtVector3(vec3 vec);
-	vec3 convertToVec3(btVector3 vec);
 public:
 	RigidBody();
 	RigidBody(string name, PhysicsWorld *world, float mass, vec3 cmass, bool hasInertia = false);
@@ -27,9 +23,15 @@ public:
 	void calculateLocalInertia();
 	void applyCentralForce(vec3 force);
 	void applyCentralImpulse(vec3 force);
+	void setLinearVelocity(vec3 force);
+	vec3 getLinearVelocity();
 	btTransform getMotionState();
 	void updateStep();
 	void destroy();
 
 	btRigidBody *rigidbody;
+
+	//Helper Functions
+	btVector3 convertTobtVector3(vec3 vec);
+	vec3 convertToVec3(btVector3 vec);
 };

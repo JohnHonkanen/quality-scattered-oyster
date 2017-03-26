@@ -126,7 +126,8 @@ void Transform::addTranslationMatrix(mat4 matrix)
 }
 mat4 Transform::calculateModelMatrix()
 {
-	Transform::model = Transform::translationMatrix * Transform::rotationMatrix * Transform::scaleMatrix;
+	//Transform::model = Transform::translationMatrix * Transform::rotationMatrix * Transform::scaleMatrix;
+	Transform::model = physics;
 	return Transform::model;
 }
 /*
@@ -138,7 +139,7 @@ mat4 Transform::get()
 }
 vec3 Transform::getPosition()
 {
-	return Transform::translationMatrix[3];
+	return Transform::physics[3];
 }
 vec3 Transform::getRotation()
 {
