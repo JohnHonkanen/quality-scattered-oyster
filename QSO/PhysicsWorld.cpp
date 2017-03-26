@@ -46,9 +46,13 @@ void PhysicsWorld::stepSimulation(float deltaTime, int maxSubSteps)
 
 void PhysicsWorld::destroy()
 {
+	for (int i = 0; i < bodies.size(); i++) {
+		_dynamicsWorld->removeRigidBody(bodies[i]->rigidbody);
+	}
 	delete _dynamicsWorld;
-	delete _broadphase;
+	delete _solver;
 	delete _collisionConfiguration;
 	delete _dispatcher;
-	delete _solver;
+	delete _broadphase;
+	
 }

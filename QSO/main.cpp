@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
 	Model *modelTree = new Model("Tree1", "models/tree/lowpolytree.obj");
 	Skybox *skyBoxCube = new Skybox("skyBox");
 
-	Terrain *terrain = new Terrain("terrain", 100, 100, 20.48f);
+	Terrain *terrain = new Terrain("terrain", 100, 100, 20.0f);
 
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", multiShadingProgram);
@@ -186,6 +186,9 @@ int main(int argc, char *argv[]) {
 	GameObject modelTree1("Tree1");
 	modelTree1.addComponent(modelTree);
 	modelTree1.addComponent(multiMaterial2);
+	modelTree1.addComponent(new RigidBody("treeBody", &_world, 0, vec3(0, 0, 0), true));
+	modelTree1.addComponent(new Collider("treeColkuder", SPHERE));
+	modelTree1.init();
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);
@@ -196,7 +199,7 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(modelMat);
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
 	playerModel.addComponent(new RigidBody("playerBody", &_world, 1, vec3(0,50,0), true));
-	playerModel.addComponent(new Collider("playerCollider", BOX));
+	playerModel.addComponent(new Collider("playerCollider", SPHERE));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 	playerModel.init();
 
@@ -300,11 +303,12 @@ int main(int argc, char *argv[]) {
 	}
 
 	// De-allocate Memory
+	_world.destroy();
 	MeshGenerator::destroy();
 	TextureManager::instance()->destroy();
 	GameObject::cleanUpObjects();
 	graphicsHandler.destroy();
-	_world.destroy();
+	
 
 	return 0;
 }
