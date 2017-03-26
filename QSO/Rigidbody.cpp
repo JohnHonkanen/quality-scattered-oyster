@@ -36,11 +36,19 @@ RigidBody::~RigidBody()
 
 void RigidBody::init()
 {
-	btCollisionShape * shape = gameObject->getComponent<Collider>()->getShape();
-	if (shape != nullptr) {
-		if (hasInertia)
-			calculateLocalInertia();
+	btCollisionShape * shape;
+	Collider *collider = gameObject->getComponent<Collider>();
+	if (collider == nullptr) {
+		shape = new btEmptyShape();
 	}
+	else {
+		shape = collider->getShape();
+		if (shape != nullptr) {
+			if (hasInertia)
+				calculateLocalInertia();
+		}
+	}
+	
 	
 	btRigidBody::btRigidBodyConstructionInfo
 		constructionInfo(RigidBody::mass, RigidBody::state, shape, RigidBody::inertia);
@@ -100,12 +108,12 @@ void RigidBody::updateStep()
 	btTransform trans = getMotionState();
 	mat4 motion;
 	trans.getOpenGLMatrix(value_ptr(motion));
-	/*vec3 pos = motion[3];
+	vec3 pos = motion[3];
 	GameObject *terrain = GameObject::find("terrain");
 	Terrain *terrainShape = terrain->getComponent<Terrain>();
 	mapData data = terrainShape->getData();
 	float terrainX = pos.x - terrain->transform.physics[3].x;
-	float terrainZ = pos.z - terrain->transform.physics[3].y;
+	float terrainZ = pos.z - terrain->transform.physics[3].z;
 	int gridX = (int)floor(terrainX / terrainShape->getGridSize());
 	int gridZ = (int)floor(terrainZ / terrainShape->getGridSize());
 	if (gridX >= terrainShape->getData().xLength - 1 || gridZ >= terrainShape->getData().zLength - 1 || gridX < 0 || gridZ < 0) {
@@ -115,16 +123,16 @@ void RigidBody::updateStep()
 		float zCoord = ((int)terrainZ % (int)terrainShape->getGridSize() / (float) terrainShape->getGridSize());
 		float trianglePos;
 		if (xCoord <= (1 - zCoord)) {
-			trianglePos = barryCentric(vec3(0, data.heightmap[gridX][gridZ], 0),vec3(1, data.heightmap[gridX + 1][gridZ], 0), vec3(0, data.heightmap[gridX][gridZ + 1], 1), vec2(xCoord, zCoord));
+			trianglePos = barryCentric(vec3(0, data.heightmap[gridZ][gridX], 0),vec3(1, data.heightmap[gridZ][gridX+1], 0), vec3(0, data.heightmap[gridZ+1][gridX], 1), vec2(xCoord, zCoord));
 		}
 		else {
-			trianglePos = barryCentric(vec3(1, data.heightmap[gridX + 1][gridZ], 0), vec3(1,data.heightmap[gridX + 1][gridZ + 1], 1), vec3(0,data.heightmap[gridX][gridZ + 1], 1), vec2(xCoord, zCoord));
+			trianglePos = barryCentric(vec3(1, data.heightmap[gridZ][gridX+1], 0), vec3(1,data.heightmap[gridZ + 1][gridX + 1], 1), vec3(0,data.heightmap[gridZ+1][gridX], 1), vec2(xCoord, zCoord));
 		}
-		printf("Terrain thing %i, %i Height: %f \n", gridX, gridZ, data.heightmap[gridX][gridZ]);
+		printf("Terrain thing %i, %i Height: %f \n", gridX, gridZ, trianglePos);
 		if (pos.y < trianglePos) {
 				motion[3].y = trianglePos;
 		}
-	}*/
+	}
 	gameObject->transform.physics = motion;
 
 }

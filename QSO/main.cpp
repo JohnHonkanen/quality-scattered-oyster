@@ -98,7 +98,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 int main(int argc, char *argv[]) {
 
 	PhysicsWorld _world; //Initialize Physics
-	_world.setGravity(vec3(0, -2, 0));
+	_world.setGravity(vec3(0, -15, 0));
 	glfwWindow *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
 
@@ -200,13 +200,8 @@ int main(int argc, char *argv[]) {
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);
 	terrainOBJ.addComponent(material);
-	vec3 defaultState = vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize());
+	vec3 defaultState = vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, -terrain->getData().zLength * 0.5f * terrain->getGridSize());
 	terrainOBJ.addComponent(new RigidBody("terrainBody", &_world, 0, vec3(defaultState.x, defaultState.y, defaultState.z)));
-	terrainOBJ.addComponent(new Collider());
-	mapData data = terrain->getData();
-	btHeightfieldTerrainShape *terrainHeight = new btHeightfieldTerrainShape(data.xLength, data.zLength , data.heightmap, 1, 2.0f, 5.0f, 1, PHY_FLOAT, false);
-	terrainHeight->setLocalScaling(btVector3(data.xLength, 0, data.zLength));
-	terrainOBJ.getComponent<Collider>()->setShape(terrainHeight);
 	terrainOBJ.init();
 	//Sets Terrian to center
 	terrainOBJ.getComponent<RigidBody>()->updateStep();

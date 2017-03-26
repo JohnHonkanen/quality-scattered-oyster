@@ -59,10 +59,8 @@ void PlayerMovement::pollInputs(double dt)
 			vec3 front = -normalize(camera->getPosition() - gameObject->transform.getPosition()) * 10.0f;
 			front.y = gameObject->transform.getPosition().y;
 			vec3 moveForward = front;
-			moveForward.y = 0;
+			moveForward.y = velocity.y();
 			rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveForward));
-				
-
 		}
 
 
@@ -71,6 +69,11 @@ void PlayerMovement::pollInputs(double dt)
 			front.y = gameObject->transform.getPosition().y;
 			vec3 moveBackwards= -front;
 			rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveBackwards));
+		}
+
+		if (!keyboard->keyPressed(GLFW_KEY_S) && !keyboard->keyPressed(GLFW_KEY_W)) {
+			btVector3 linearVelocity = btVector3(0, velocity.y(), 0);
+			rigidbody->rigidbody->setLinearVelocity(linearVelocity);
 		}
 
 
