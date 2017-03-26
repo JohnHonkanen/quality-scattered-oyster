@@ -1,5 +1,6 @@
 #pragma once
 #include <btBulletDynamicsCommon.h>
+#include <BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h>
 #include "Component.h"
 
 
@@ -26,5 +27,6 @@ public:
 	~Collider();
 	void setShape(ColliderShape shape, float param1 = 1.0f, float param2 = 1.0f, float param3 = 1.0f);
 	btCollisionShape *getShape();
+	void setShape(btCollisionShape *shape);
 	void destroy();
 };

@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
 
 	Cube *cube1 = new Cube("Cube");
 	Skybox *skyBoxCube = new Skybox("skyBox");
-	Terrain *terrain = new Terrain("terrain", 500, 500, 20.0f);
+	Terrain *terrain = new Terrain("terrainShape", 500, 500, 20.0f);
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", modelShader); // ShaderProgram
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
@@ -192,7 +192,7 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(nanosuite);
 	playerModel.addComponent(modelMat);
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
-	playerModel.addComponent(new RigidBody("playerBody", &_world, 1, vec3(0,100,0), true));
+	playerModel.addComponent(new RigidBody("playerBody", &_world, 1, vec3(0,-0,0), true));
 	playerModel.addComponent(new Collider("playerCollider", BOX));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 	playerModel.init();
@@ -200,11 +200,10 @@ int main(int argc, char *argv[]) {
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);
 	terrainOBJ.addComponent(material);
-	vec3 defaultState = vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize());
+	vec3 defaultState = vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 2.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize());
 	terrainOBJ.addComponent(new RigidBody("terrainBody", &_world, 0, vec3(defaultState.x, defaultState.y, defaultState.z)));
-	terrainOBJ.addComponent(new Collider("terrainCollider", STATIC_PLANE, 0, 1, 0));
+	terrainOBJ.addComponent(new Collider("terrainCollider", STATIC_PLANE, 0, 1.0f, 0));
 	terrainOBJ.init();
-
 	//Sets Terrian to center
 	terrainOBJ.getComponent<RigidBody>()->updateStep();
 	terrainOBJ.transform.calculateModelMatrix();
@@ -222,7 +221,7 @@ int main(int argc, char *argv[]) {
 	double currentTime = 0.0f;
 
 	// Testing Clock
-	terrain->transform.translate(defaultState);
+
 
 	Clock clock;
 	clock.startClock();
@@ -283,6 +282,8 @@ int main(int argc, char *argv[]) {
 			playerCamera.move();
 			skyBox.transform.calculateModelMatrix();
 			cube.transform.calculateModelMatrix();
+			//tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
+			//tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
 			playerModel.transform.calculateModelMatrix();
 			graphicsHandler.start();  // Sets up Rendering Loop
 			

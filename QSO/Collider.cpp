@@ -41,6 +41,11 @@ btCollisionShape * Collider::getShape()
 	return colliderShape;
 }
 
+void Collider::setShape(btCollisionShape * shape)
+{
+	colliderShape = shape;
+}
+
 void Collider::destroy()
 {
 	delete colliderShape;

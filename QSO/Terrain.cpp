@@ -9,9 +9,9 @@ Terrain::Terrain(std::string name, const int xLength, const int zLength, float g
 	const int x = xLength;
 	const int z = zLength;
 	//Creating 2d array for heightmap and preallocate memory
-	Terrain::map.heightmap = new float*[z]();
-	for (int i = 0; i < z; i++) {
-		Terrain::map.heightmap[i] = new float[x];
+	Terrain::map.heightmap = new float*[x]();
+	for (int i = 0; i < x; i++) {
+		Terrain::map.heightmap[i] = new float[z];
 	}
 
 	createMesh();
@@ -72,14 +72,15 @@ void Terrain::buildVertices()
 	float textureU = Terrain::map.zLength * 1.0f;
 	float textureV = Terrain::map.xLength * 1.0f;
 	float frequency = 0.005f;
-	float weight = 15.0f;
+	float weight = 5.0f;
 
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
 			float scaleU = float(z) / float(Terrain::map.zLength - 1);
 			float scaleV = float(x) / float(Terrain::map.xLength - 1);
-			float height = SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight;
+			float height = (SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight)+2.0f;
+			map.heightmap[x][z] = height;
 			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, -z* Terrain::gridSize); // Y is reserved for heightmap 
 			map.uv[vertex] = vec2(textureU * scaleU, textureV * scaleV);
 			vertex++;

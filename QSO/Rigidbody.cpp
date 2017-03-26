@@ -2,6 +2,7 @@
 #include "Collider.h"
 #include "PhysicsWorld.h"
 #include <glm\gtc\type_ptr.hpp>
+#include "Terrain.h";
 
 btVector3 RigidBody::convertTobtVector3(vec3 vec)
 {
@@ -99,7 +100,33 @@ void RigidBody::updateStep()
 	btTransform trans = getMotionState();
 	mat4 motion;
 	trans.getOpenGLMatrix(value_ptr(motion));
+	vec3 pos = motion[3];
+	GameObject *terrain = GameObject::find("terrain");
+	Terrain *terrainShape = terrain->getComponent<Terrain>();
+	mapData data = terrainShape->getData();
+	float terrainX = pos.x - terrain->transform.physics[3].x;
+	float terrainZ = pos.z - terrain->transform.physics[3].y;
+	int gridX = (int)floor(terrainX / terrainShape->getGridSize());
+	int gridZ = (int)floor(terrainZ / terrainShape->getGridSize());
+	if (gridX >= terrainShape->getData().xLength - 1 || gridZ >= terrainShape->getData().zLength - 1 || gridX < 0 || gridZ < 0) {
+	}
+	else {
+		float xCoord = ((int)terrainX % (int)terrainShape->getGridSize())/ (float) terrainShape->getGridSize();
+		float zCoord = ((int)terrainZ % (int)terrainShape->getGridSize() / (float) terrainShape->getGridSize());
+		float trianglePos;
+		if (xCoord <= (1 - zCoord)) {
+			trianglePos = barryCentric(vec3(0, data.heightmap[gridX][gridZ], 0),vec3(1, data.heightmap[gridX + 1][gridZ], 0), vec3(0, data.heightmap[gridX][gridZ + 1], 1), vec2(xCoord, zCoord));
+		}
+		else {
+			trianglePos = barryCentric(vec3(1, data.heightmap[gridX + 1][gridZ], 0), vec3(1,data.heightmap[gridX + 1][gridZ + 1], 1), vec3(0,data.heightmap[gridX][gridZ + 1], 1), vec2(xCoord, zCoord));
+		}
+		printf("Terrain thing %i, %i Height: %f \n", gridX, gridZ, data.heightmap[gridX][gridZ]);
+		if (pos.y < trianglePos) {
+				motion[3].y = trianglePos;
+		}
+	}
 	gameObject->transform.physics = motion;
+
 }
 
 void RigidBody::destroy()
