@@ -100,7 +100,7 @@ void RigidBody::updateStep()
 	btTransform trans = getMotionState();
 	mat4 motion;
 	trans.getOpenGLMatrix(value_ptr(motion));
-	vec3 pos = motion[3];
+	/*vec3 pos = motion[3];
 	GameObject *terrain = GameObject::find("terrain");
 	Terrain *terrainShape = terrain->getComponent<Terrain>();
 	mapData data = terrainShape->getData();
@@ -124,7 +124,7 @@ void RigidBody::updateStep()
 		if (pos.y < trianglePos) {
 				motion[3].y = trianglePos;
 		}
-	}
+	}*/
 	gameObject->transform.physics = motion;
 
 }
