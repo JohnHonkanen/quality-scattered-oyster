@@ -46,8 +46,16 @@ void GameObject::broadcastMessage(GameBehaviour::BehaviorFuncs func)
 	}
 }
 
+void GameObject::init()
+{
+	for (int i = 0; i < components.size(); i++) {
+		components[i]->init();
+	}
+}
+
 void GameObject::addComponent(Component * component)
 {
+	component->setGameObject(this);
 	GameObject::components.push_back(component);
 }
 
@@ -100,4 +108,12 @@ GameObject *GameObject::find(std::string name)
 			found = true;
 	}
 	return obj;
+}
+
+void GameObject::cleanUpObjects()
+{
+	for (int i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->destroy();
+		//delete gameObjects[i];
+	}
 }

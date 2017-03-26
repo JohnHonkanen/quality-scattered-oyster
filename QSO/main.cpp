@@ -1,26 +1,9 @@
 #include <iostream>
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
-#include "Shader.h"
-#include "Window.h"
-#include "glfwWindow.h"
-#include "openGLHandler.h"
-#include "Clock.h"
-#include "TextureManager.h"
-#include "Camera.h"
-#include "GLRenderer.h"
-#include "glfwInputHandler.h"
-#include "Terrain.h"
-#include "Mesh.h"
-#include "Polygon.h"
-#include "Cube.h"
-#include "GameObject.h"
-#include "Skybox.h"
-#include "Model.h"
-#include "Camera3rdPerson.h"
-#include "PlayerMovement.h"
+#include "Core.h"
+#include "ShapeComponents.h"
+#include "Physics.h"
+
 
 using namespace std;
 
@@ -114,6 +97,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 int main(int argc, char *argv[]) {
 
+	PhysicsWorld _world; //Initialize Physics
+	_world.setGravity(vec3(0, -15, 0));
 	glfwWindow *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
 
@@ -151,7 +136,9 @@ int main(int argc, char *argv[]) {
 
 	Model *modelTree = new Model("Tree1", "models/tree/lowpolytree.obj");
 	Skybox *skyBoxCube = new Skybox("skyBox");
+
 	Terrain *terrain = new Terrain("terrain", 100, 100, 20.48f);
+
 	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
 	Material *material = new Material("BaseMaterial", multiShadingProgram);
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
@@ -208,11 +195,20 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(nanosuite);
 	playerModel.addComponent(modelMat);
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
+	playerModel.addComponent(new RigidBody("playerBody", &_world, 1, vec3(0,50,0), true));
+	playerModel.addComponent(new Collider("playerCollider", BOX));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
+	playerModel.init();
 
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);
 	terrainOBJ.addComponent(material);
+	vec3 defaultState = vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, -terrain->getData().zLength * 0.5f * terrain->getGridSize());
+	terrainOBJ.addComponent(new RigidBody("terrainBody", &_world, 0, vec3(defaultState.x, defaultState.y, defaultState.z)));
+	terrainOBJ.init();
+	//Sets Terrian to center
+	terrainOBJ.getComponent<RigidBody>()->updateStep();
+	terrainOBJ.transform.calculateModelMatrix();
 
 	playerCamera.setObject(&playerModel);
 
@@ -228,6 +224,7 @@ int main(int argc, char *argv[]) {
 
 	// Testing Clock
 
+
 	Clock clock;
 	clock.startClock();
 
@@ -242,15 +239,6 @@ int main(int argc, char *argv[]) {
 	printf("%f,%f,%f\n", position.x, position.y, position.z);
 
 	*/
-
-
-	playerModel.transform.translate(vec3(10.0f, 0.0f, 0.0f));
-
-	modelTree1.transform.translate(vec3(0.0f, 10.0f, 0.0f));
-	modelTree1.transform.scale(vec3(3.0f));
-
-	terrainOBJ.transform.translate(vec3(-terrain->getData().xLength * 0.5f * terrain->getGridSize(), 0.0f, terrain->getData().zLength * 0.5f * terrain->getGridSize()));
-	terrainOBJ.transform.calculateModelMatrix();
 
 	// Game Loop
 	while (!inputHandler.quitApplication()) {
@@ -275,6 +263,8 @@ int main(int argc, char *argv[]) {
 			playerCamera.setObject(&playerModel);
 			playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 		}
+
+		_world.stepSimulation(dt, 10);
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {
@@ -312,11 +302,9 @@ int main(int argc, char *argv[]) {
 	// De-allocate Memory
 	MeshGenerator::destroy();
 	TextureManager::instance()->destroy();
-	modelTree1.destroy();
-	playerModel.destroy();
-	skyBox.destroy();
-	terrainOBJ.destroy();
+	GameObject::cleanUpObjects();
 	graphicsHandler.destroy();
+	_world.destroy();
 
 	return 0;
 }

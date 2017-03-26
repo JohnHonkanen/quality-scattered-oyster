@@ -72,15 +72,23 @@ void Terrain::buildVertices()
 	float textureU = 1.0f; //Terrain::map.zLength * 1.0f;
 	float textureV = 1.0f; //Terrain::map.xLength * 1.0f;
 	float frequency = 0.005f;
-	float weight = 15.0f;
+	float weight = 10.0f;
 
 	int vertex = 0;
 	for (int z = 0; z < Terrain::map.zLength; z++) {
 		for (int x = 0; x < Terrain::map.zLength; x++) {
 			float scaleU = float(z) / float(Terrain::map.zLength - 1);
 			float scaleV = float(x) / float(Terrain::map.xLength - 1);
-			float height = SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight;
-			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, -z* Terrain::gridSize); // Y is reserved for heightmap 
+			float height = (SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight);
+			if (height > map.maxHeight) {
+				map.maxHeight = height;
+			}
+			if (height < map.minHeight) {
+				map.minHeight = height;
+			}
+
+			map.heightmap[z][x] = height;
+			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, z* Terrain::gridSize); // Y is reserved for heightmap 
 			map.uv[vertex] = vec2(textureU * scaleU, textureV * scaleV);
 			vertex++;
 			
@@ -178,21 +186,21 @@ void Terrain::buildIndices()
 	Terrain::map.indexCount = (verticesPerStrip*numberOfStrips) + numberOfDegens;
 	Terrain::map.indices = new GLuint[Terrain::map.indexCount]();
 	int offset = 0;
-	for (int z = 0; z < Terrain::map.zLength-1; z++) {
+	for (int z = 0; z < Terrain::map.zLength - 1; z++) {
 		if (z > 0) {
-			//Degenerate begin: Repeat the last Vertex, and increment
-			Terrain::map.indices[offset++] = (z) * Terrain::map.zLength + (Terrain::map.xLength -1);
+			//Degenerate begin: Repeat the first Vertex, and increment
+			Terrain::map.indices[offset++] = z * Terrain::map.zLength;
 		}
-		for (int x = Terrain::map.xLength - 1; x > -1; x--) {
+		for (int x = 0; x < Terrain::map.zLength; x++) {
 			//Add a part of our strip
 			Terrain::map.indices[offset++] = (z*Terrain::map.zLength) + x;
 			Terrain::map.indices[offset++] = ((z + 1)*Terrain::map.zLength) + x;
-			
+
 		}
 
 		if (z < Terrain::map.zLength - 2) {
-			// Degenerate end: repeat first vertex
-			Terrain::map.indices[offset++] = ((z + 1) * Terrain::map.zLength); // 
+			// Degenerate end: repeat last vertex
+			Terrain::map.indices[offset++] = ((z + 1) * Terrain::map.zLength) + (Terrain::map.xLength - 1);
 		}
 	}
 }

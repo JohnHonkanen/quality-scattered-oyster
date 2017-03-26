@@ -43,8 +43,8 @@ void GLRenderer::renderObject(GameObject *obj)
 	//lampPos.translate(vec3(0.0f, 10.0f, 0.0f));
 	//lampPos.calculateModelMatrix();
 
-	/*sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
-	sunPos.calculateModelMatrix();*/
+	sunPos.translate(vec3(0.0f, 100.0f, 0.0f));
+	sunPos.calculateModelMatrix();
 
 	// Don't forget to 'use' the corresponding shader program first (to set the uniform)
 	GLint objectColorLoc = glGetUniformLocation(shader.program, "objectColor");
@@ -128,8 +128,8 @@ void GLRenderer::renderObject(GameObject *obj)
 
 	// Set Directional Light Properties for multi-light
 	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
-	glUniform3f(ambientDirLightLoc, 0.0f, 0.0f, 0.0f);
-	glUniform3f(diffuseDirLightLoc, 0.0f, 0.0f, 0.0f); // Darken the light a bit to fit the scene
+	glUniform3f(ambientDirLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform3f(diffuseDirLightLoc, 0.5f, 0.5f, 0.5f); // Darken the light a bit to fit the scene
 	glUniform3f(specularDirLightLoc, 1.0f, 1.0f, 1.0f);
 
 	// Set Point Light Properties for multi-light

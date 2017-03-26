@@ -10,4 +10,6 @@ public:
 	virtual ~Component();
 	GameObject *gameObject;
 	Transform transform;
+	virtual void init();
+	void setGameObject(GameObject *gameObject);
 };

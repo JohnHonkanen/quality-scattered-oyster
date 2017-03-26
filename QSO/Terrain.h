@@ -20,6 +20,8 @@ struct mapData {
 	int vertexCount;
 	int indexCount;
 	float **heightmap;
+	float maxHeight = 0;
+	float minHeight = 0;
 
 	virtual void destroy() {
 		//Deallocates Memory

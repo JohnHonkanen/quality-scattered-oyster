@@ -18,7 +18,7 @@ Sets the position to a specified amount
 void Transform::setPosition(vec3 position)
 {
 
-	Transform::model[3] = vec4(position, 1.0f);
+	Transform::translationMatrix[3] = vec4(position, 1.0f);
 }
 /*
 Translates our Matrix
@@ -116,9 +116,18 @@ void Transform::setTransform(mat4 matrix)
 {
 	Transform::model = matrix;
 }
+void Transform::setTranslationMatrix(mat4 matrix)
+{
+	translationMatrix = matrix;
+}
+void Transform::addTranslationMatrix(mat4 matrix)
+{
+	translationMatrix += matrix;
+}
 mat4 Transform::calculateModelMatrix()
 {
-	Transform::model = Transform::translationMatrix * Transform::rotationMatrix * Transform::scaleMatrix;
+	//Transform::model = Transform::translationMatrix * Transform::rotationMatrix * Transform::scaleMatrix;
+	Transform::model = physics;
 	return Transform::model;
 }
 /*
@@ -130,7 +139,7 @@ mat4 Transform::get()
 }
 vec3 Transform::getPosition()
 {
-	return Transform::translationMatrix[3];
+	return Transform::physics[3];
 }
 vec3 Transform::getRotation()
 {
