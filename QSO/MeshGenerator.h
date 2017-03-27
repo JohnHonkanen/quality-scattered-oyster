@@ -11,6 +11,8 @@
 #define STORED_UV           2
 #define STORED_NORMAL		3
 #define STORED_INDEX		4
+#define STORED_TANGENT		5
+#define STORED_BITANGENT	6
 
 using namespace std;
 

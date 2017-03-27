@@ -144,7 +144,6 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(quadraticPointLightLoc, 0.0075f);
 
 	// Set Spot Light Properties for multi-light
-	vec3 pos(0,10,0);
 	glUniform3f(spotLightPositionLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 	vec3 dirToModel = GameObject::find("playerModel")->transform.getPosition() - camera->getPosition();
 	//printf("camera location %f, %f, %f \n", camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
@@ -194,7 +193,6 @@ void GLRenderer::renderObject(GameObject *obj)
 			glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->textures[i].textureName));
 			glUniform1i(glGetUniformLocation(shader.program, ("material." + type).c_str()), i);
 
-			// Need to activate, bind normal map and set uniform location : glUniform1i(glGetUniformLocation(shader.program, "normalMap", texture#). Done above.
 		}
 	}
 

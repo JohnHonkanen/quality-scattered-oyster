@@ -110,6 +110,9 @@
                 </extra>
               </texture>
             </specular>
+            <bump>
+                <texture texture="file2-sampler" texcoord="CHANNEL0">
+            </bump>
             <shininess>
               <float sid="shininess">43.076923</float>
             </shininess>

@@ -53,6 +53,9 @@ string Material::convertTypeToString(TEXTURE_TYPE enumType)
 	case BLEND_MAP:
 		type = "terrainTexture.blendMap";
 		break;
+	case NORMAL_MAP:
+		type = "normalMap";
+		break;
 	case NO_TEXTURE_TYPE:
 		type = "none";
 		break;

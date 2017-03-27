@@ -28,7 +28,7 @@ void main()
 
 	mat3 normalMatrix = transpose(inverse(mat3(model)));
 	// TBN matrix = tangent, bitangent, and normal vector 
-	
+
 	// Trick : Gram/Schmidt process we can orthogolize the TBN vectors so that each vector is again perpendicular to the other vectors. 
 	// See : https://www.youtube.com/watch?v=4FaWLgsctqY
 	vec3 T = normalize(vec3(model * vec4(tangent, 0.0)));
@@ -39,4 +39,8 @@ void main()
 	vec3 B = cross(N, T);
 
 	mat3 TBN = mat3(T, B, N);
+
+	TangentLightPos = TBN;
+	TangentViewPos = TBN;
+	TangentFragPos = TBN * FragPos;
 }

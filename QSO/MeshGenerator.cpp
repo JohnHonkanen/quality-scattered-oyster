@@ -39,6 +39,8 @@ void MeshGenerator::destroy()
 		glDeleteBuffers(1, &it->second[STORED_UV]);
 		glDeleteBuffers(1, &it->second[STORED_NORMAL]);
 		glDeleteBuffers(1, &it->second[STORED_INDEX]);
+		glDeleteBuffers(1, &it->second[STORED_TANGENT]);
+		glDeleteBuffers(1, &it->second[STORED_BITANGENT]);
 
 	}
 }
@@ -46,8 +48,8 @@ void MeshGenerator::destroy()
 GLuint MeshGenerator::createMesh(MeshData data)
 {
 	GLuint VAO;
-	GLuint vertexBuffer, colorBuffer, uvBuffer, normalBuffer, elementBuffer;
-	GLuint* meshBuffers = new GLuint[5];
+	GLuint vertexBuffer, colorBuffer, uvBuffer, normalBuffer, elementBuffer, tangentBuffer, bitangentBuffer;
+	GLuint* meshBuffers = new GLuint[7];
 
 	//VBO = Vertex Buffer Object
 	//VAO = Vertex Array Object
@@ -104,6 +106,26 @@ GLuint MeshGenerator::createMesh(MeshData data)
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0); //3 * sizeof(GLfloat)
 		glEnableVertexAttribArray(3); // Set location in shader
 		meshBuffers[STORED_NORMAL] = normalBuffer;
+	}
+
+	// Tangent attribute
+	if (data.tangents != nullptr) {
+		glGenBuffers(1, &tangentBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, tangentBuffer);
+		glBufferData(GL_ARRAY_BUFFER, 3 * data.vertexCount*sizeof(GLfloat), data.tangents, GL_STATIC_DRAW);
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0); //3 * sizeof(GLfloat)
+		glEnableVertexAttribArray(4); // Set location in shader
+		meshBuffers[STORED_TANGENT] = tangentBuffer;
+	}
+
+	// Bitangent attribute
+	if (data.bitangents != nullptr) {
+		glGenBuffers(1, &bitangentBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, bitangentBuffer);
+		glBufferData(GL_ARRAY_BUFFER, 3 * data.vertexCount*sizeof(GLfloat), data.bitangents, GL_STATIC_DRAW);
+		glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0); //3 * sizeof(GLfloat)
+		glEnableVertexAttribArray(5); // Set location in shader
+		meshBuffers[STORED_BITANGENT] = bitangentBuffer;
 	}
 	
 	

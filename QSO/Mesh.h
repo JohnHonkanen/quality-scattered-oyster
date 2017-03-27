@@ -13,6 +13,8 @@ struct MeshData {
 	GLfloat *color;
 	GLfloat *uv;
 	GLuint *indices;
+	GLfloat *tangents;
+	GLfloat *bitangents;
 
 	GLuint vertexCount;
 	GLuint indexCount;

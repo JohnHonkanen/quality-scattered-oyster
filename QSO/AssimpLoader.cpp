@@ -55,6 +55,8 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 	GLfloat* normals = new GLfloat[3 * numVerts];
 	GLfloat* postition = new GLfloat[3 * numVerts];
 	GLfloat* texCoords = new GLfloat[2 * numVerts];
+	GLfloat* tangents = new GLfloat[3 * numVerts];
+	GLfloat* bitangents = new GLfloat[3 * numVerts];
 
 	vector<GLuint>indices;
 	//vector<Texture> textures;
@@ -75,6 +77,16 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 		normals[i + 1] = mesh->mNormals[aiIndex].y;
 		normals[i + 2] = mesh->mNormals[aiIndex].z;
 		//vertex.Normal = vector;
+
+		//Tangents
+		tangents[i] = mesh->mTangents[aiIndex].x;
+		tangents[i+1] = mesh->mTangents[aiIndex].y;
+		tangents[i+2] = mesh->mTangents[aiIndex].z;
+
+		//Bitangents
+		bitangents[i] = mesh->mBitangents[aiIndex].x;
+		bitangents[i + 1] = mesh->mBitangents[aiIndex].y;
+		bitangents[i + 2] = mesh->mBitangents[aiIndex].z;
 
 	}
 
@@ -130,7 +142,8 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 		vector<Texture> specularMaps = AssimpLoader::loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		// 3. Normal maps
-		vector<Texture> normalMaps = AssimpLoader::loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		vector<Texture> normalMaps = AssimpLoader::loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 	}
 	//Load the Bones
 	for (int i = 0; i < mesh->mNumBones; i++){
@@ -155,6 +168,8 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 	meshData->data.vertices = postition;
 	meshData->data.indices = tIndices;
 	meshData->data.uv = texCoords;
+	meshData->data.tangents = tangents;
+	meshData->data.bitangents = bitangents;
 	meshData->data.indexCount = indices.size();
 	meshData->data.vertexCount = numVerts;
 	meshData->setupMesh();
@@ -208,6 +223,12 @@ TEXTURE_TYPE AssimpLoader::convertFromTypeAssimp(aiTextureType type)
 		break;
 	case aiTextureType_SPECULAR:
 		tType = SPECULAR;
+		break;
+	case aiTextureType_NORMALS:
+		tType = NORMAL_MAP;
+		break;
+	case aiTextureType_HEIGHT:
+		tType = NORMAL_MAP;
 		break;
 	default:
 		tType = NO_TEXTURE_TYPE;
