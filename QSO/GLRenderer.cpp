@@ -14,6 +14,8 @@ void GLRenderer::init()
 }
 
 float hueshift = 0.0f;
+float distance = 15.0f;
+float angle = 0.0f;
 void GLRenderer::renderObject(GameObject *obj)
 {
 	Material *material = obj->getComponent<Material>();
@@ -142,9 +144,11 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(quadraticPointLightLoc, 0.0075f);
 
 	// Set Spot Light Properties for multi-light
+	vec3 pos(0,10,0);
 	glUniform3f(spotLightPositionLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	vec3 dirToModel = GameObject::find("playerModel")->transform.getPosition() - camera->getPosition();
 	//printf("camera location %f, %f, %f \n", camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
-	glUniform3f(spotLightDirectionLoc, camera->getFront().x, camera->getFront().y, camera->getFront().z);
+	glUniform3f(spotLightDirectionLoc, dirToModel.x, dirToModel.y, dirToModel.z);
 	//printf("camera front %f, %f, %f \n", camera->getFront().x, camera->getFront().y, camera->getFront().z);
 	glUniform3f(ambientSpotLightLoc, 1.0f, 1.0f, 1.0f);
 	glUniform3f(diffuseSpotLightLoc, 1.0f, 1.0f, 1.0f);

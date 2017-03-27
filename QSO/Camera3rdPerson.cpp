@@ -165,5 +165,6 @@ mat4 Camera3rdPerson::getProjection()
 
 vec3 Camera3rdPerson::getFront()
 {
+	printf("%f \n", normalize(vec3(getView() * vec4(0.0f, 0.0f, -1.0f, 0.0f))).y);
 	return normalize(vec3(getView() * vec4(0.0f, 0.0f, -1.0f, 0.0f))); //  normalize(front)
 }
