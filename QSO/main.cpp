@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
 
 	Terrain *terrain = new Terrain("terrain", 100, 100, 20.0f);
 
-	Model *nanosuite = new Model("nanoSuit", "models/nanosuit/nanosuit.obj");
+	Model *nanosuite = new Model("nanoSuit", "models/arissa/Arissa.dae");
 	Material *material = new Material("BaseMaterial", multiShadingProgram);
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
 	Material *multiMaterial2 = new Material("multiMaterial2", HSVShader);
@@ -202,6 +202,7 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(new Collider("playerCollider", SPHERE));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 	playerModel.init();
+	playerModel.transform.scale(0.1f);
 
 	GameObject terrainOBJ("terrain");
 	terrainOBJ.addComponent(terrain);

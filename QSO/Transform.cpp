@@ -126,8 +126,8 @@ void Transform::addTranslationMatrix(mat4 matrix)
 }
 mat4 Transform::calculateModelMatrix()
 {
-	//Transform::model = Transform::translationMatrix * Transform::rotationMatrix * Transform::scaleMatrix;
-	Transform::model = physics;
+	//Transform::model = Transform::translationMatrix * Transform::rotationMatrix ;
+	Transform::model = physics * Transform::scaleMatrix;
 	return Transform::model;
 }
 /*
