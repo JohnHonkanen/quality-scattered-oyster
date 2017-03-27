@@ -129,6 +129,8 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 		// 2. Specular maps
 		vector<Texture> specularMaps = AssimpLoader::loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		// 3. Normal maps
+		vector<Texture> normalMaps = AssimpLoader::loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
 	}
 	//Load the Bones
 	for (int i = 0; i < mesh->mNumBones; i++){
