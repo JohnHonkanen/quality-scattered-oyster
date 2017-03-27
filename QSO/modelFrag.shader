@@ -43,8 +43,11 @@ struct SpotLight {
 };
 
 in vec3 FragPos;
-in vec3 Normal;
+//in vec3 Normal;
 in vec2 UV;
+in vec3 TangentLightPos;
+in vec3 TangentViewPos;
+vec3 TangentFragPos;
 
 out vec4 color;
 
@@ -54,8 +57,7 @@ uniform PointLight pointLight;
 uniform SpotLight spotLight;
 uniform Material material;
 
-
-// uniform SpotLight spotLight;
+uniform bool normalMapping; // Check if normal mapping
 
 // Function prototypes
 vec3 calcDirLight(DirLight dirLight, vec3 normal, vec3 viewDir);
@@ -66,8 +68,13 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 void main() {
 
 	// Properties
-	vec3 norm = normalize(Normal);
-	vec3 viewDir = normalize(viewPos - FragPos);
+	// We obtain the normal from the normal map in a range [0, 1]
+	vec3 norm = texture(normalMap, UV).rgb;
+	// Then tranform normal vector to range [-1 , 1]. Note: This normal is in the tangent space.
+	normal = normalize(normal * 2.0 - 1.0); 
+
+	//vec3 viewDir = normalize(viewPos - FragPos);
+	vec3 viewDir = normalize(TangentViewPos - TangentFragPos);
 
 	// Phase 1: Directional Lighting
 	vec3 result = calcDirLight(dirLight, norm, viewDir);

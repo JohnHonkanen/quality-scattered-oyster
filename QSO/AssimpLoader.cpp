@@ -132,7 +132,7 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 	//Load the Bones
 	for (int i = 0; i < mesh->mNumBones; i++){
 		aiBone *aibone = mesh->mBones[i];
-		aibone->mOffsetMatrix.
+		//aibone->mOffsetMatrix.
 		printf("Found Bone: %s \n", aibone->mName.C_Str());
 		//Find associating Bone, Parent and Child
 	}

@@ -225,6 +225,9 @@
     <ClInclude Include="SkeletalBones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Behaviours.cpp">
@@ -348,6 +351,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SkeletalBones.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
