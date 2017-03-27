@@ -103,13 +103,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\dev\assimp-3.3.1\include;C:\dev\glew-2.0.0\include;C:\dev\glm-0.9.8.3\glm;C:\dev\glfw-3.2.1.bin.WIN64\include\GLFW;C:\dev\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\bullet3-2.86.1\src;C:\dev\assimp-3.3.1\include;C:\dev\glew-2.0.0\include;C:\dev\glm-0.9.8.3\glm;C:\dev\glfw-3.2.1.bin.WIN64\include\GLFW;C:\dev\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\assimp-3.3.1\libs;C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\dev\bullet3-2.86.1\libs\Debug;C:\dev\assimp-3.3.1\libs;C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;assimp-vc140-mt.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,8 +147,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\assimp-3.3.1\libs;C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\dev\assimp-3.3.1\libs;C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;C:\dev\bullet3-2.86.1\libs\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;assimp-vc140-mt.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -158,7 +158,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Camera3rdPerson.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Core.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
@@ -176,12 +178,18 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="openGLHandler.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicsWorld.h" />
     <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapeComponents.h" />
     <ClInclude Include="simplex\SimplexNoise.h" />
+    <ClInclude Include="SkeletalBones.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextureGenerator.h" />
@@ -196,6 +204,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Camera3rdPerson.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GameBehaviour.cpp" />
@@ -215,12 +224,16 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="openGLHandler.cpp" />
+    <ClCompile Include="PhysicsWorld.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="simplex\SimplexNoise.cpp" />
+    <ClCompile Include="SkeletalBones.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextureGenerator.cpp" />

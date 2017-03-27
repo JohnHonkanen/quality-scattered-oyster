@@ -188,6 +188,7 @@
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeComponents.h" />
     <ClInclude Include="simplex\SimplexNoise.h" />
+    <ClInclude Include="SkeletalBones.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextureGenerator.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="simplex\SimplexNoise.cpp" />
+    <ClCompile Include="SkeletalBones.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextureGenerator.cpp" />

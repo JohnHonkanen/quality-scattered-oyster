@@ -1,0 +1,40 @@
+#include "SkeletalBones.h"
+
+
+
+SkeletalBones::SkeletalBones()
+{
+}
+
+
+SkeletalBones::~SkeletalBones()
+{
+}
+
+void SkeletalBones::setOffsetMatrix(aiMatrix4x4 aiMat)
+{
+	offsetMatrix = mat4(aiMat.a1, aiMat.b1, aiMat.c1, aiMat.d1, 
+						aiMat.a2, aiMat.b2, aiMat.c2, aiMat.d2,
+						aiMat.a3, aiMat.b3, aiMat.c3, aiMat.d3,
+						aiMat.a4, aiMat.b4, aiMat.c4, aiMat.d4);
+}
+
+void SkeletalBones::setVertexIds(vector<int> vertexIds)
+{
+	SkeletalBones::vertexIds = vertexIds;
+}
+
+void SkeletalBones::setNumWeights(int numWeights)
+{
+	SkeletalBones::numWeights = numWeights;
+}
+
+void SkeletalBones::setName(const char* name)
+{
+	SkeletalBones::name = name;
+}
+
+void SkeletalBones::setAnimated(bool animated)
+{
+	SkeletalBones::animated = animated;
+}

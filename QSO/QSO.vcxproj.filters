@@ -222,6 +222,9 @@
     <ClInclude Include="ShapeComponents.h">
       <Filter>Header Files\Includes</Filter>
     </ClInclude>
+    <ClInclude Include="SkeletalBones.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Behaviours.cpp">
@@ -344,6 +347,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkeletalBones.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="HSVFrag.shader">
@@ -382,5 +388,6 @@
     <None Include="modelFrag.shader">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

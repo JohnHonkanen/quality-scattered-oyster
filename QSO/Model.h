@@ -6,6 +6,10 @@
 
 using namespace std;
 
+struct VertexBoneData {
+
+};
+
 class Model : public Shape
 {
 private:

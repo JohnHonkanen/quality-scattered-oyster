@@ -19,6 +19,7 @@ vector<Mesh*> AssimpLoader::loadModel(string path, vector<Material> &material)
 		cout << "ERROR::ASSIMP::" << import.GetErrorString() << endl;	// Output an error.
 		return vector<Mesh*>();
 	}
+
 	AssimpLoader::directory = path.substr(0, path.find_last_of('/'));
 
 	return AssimpLoader::processNode(scene->mRootNode, scene, material);
@@ -27,6 +28,7 @@ vector<Mesh*> AssimpLoader::loadModel(string path, vector<Material> &material)
 vector<Mesh*> AssimpLoader::processNode(aiNode * node, const aiScene * scene, vector<Material> &material)
 {
 	// Process all the node's meshes (if any)
+
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* meshes = scene->mMeshes[node->mMeshes[i]];
@@ -42,49 +44,48 @@ vector<Mesh*> AssimpLoader::processNode(aiNode * node, const aiScene * scene, ve
 	return AssimpLoader::meshes;
 }
 
-Mesh* AssimpLoader::processMesh(aiMesh* meshes, const aiScene* scene, vector<Material> &material)
+Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Material> &material)
 {
 	int meshType = 3;
 	//Vertex vertices;
 	vector<Texture> textures;
-	int numVerts = meshes->mNumVertices;
-	int numIndices = meshes->mNumFaces;
-	GLfloat* normals = new GLfloat[3*numVerts];
-	GLfloat* postition = new GLfloat[3*numVerts];
-	GLfloat* texCoords = new GLfloat[2*numVerts];
-	
+	int numVerts = mesh->mNumVertices;
+	int numIndices = mesh->mNumFaces;
+	GLfloat* normals = new GLfloat[3 * numVerts];
+	GLfloat* postition = new GLfloat[3 * numVerts];
+	GLfloat* texCoords = new GLfloat[2 * numVerts];
+
 	vector<GLuint>indices;
 	//vector<Texture> textures;
-
 	float divedThree = 1 / 3.0f;
 	for (GLuint i = 0; i < 3 * numVerts; i += 3)
 	{
-		int aiIndex = (int)((i+2)*divedThree);
+		int aiIndex = (int)((i + 2)*divedThree);
 		//Vertex vertex;
 		// Process vertex positions, normals and texture coordinates:
 		//Vertex Positions:
 		//GLfloat vector[3];
-		postition[i] = meshes->mVertices[aiIndex].x;
-		postition[i+1] = meshes->mVertices[aiIndex].y;
-		postition[i+2] = meshes->mVertices[aiIndex].z;
+		postition[i] = mesh->mVertices[aiIndex].x;
+		postition[i + 1] = mesh->mVertices[aiIndex].y;
+		postition[i + 2] = mesh->mVertices[aiIndex].z;
 		//vertex.Position = vector;
 		//Vertex Normals:
-		normals[i] = meshes->mNormals[aiIndex].x;
-		normals[i+1] = meshes->mNormals[aiIndex].y;
-		normals[i+2] = meshes->mNormals[aiIndex].z;
+		normals[i] = mesh->mNormals[aiIndex].x;
+		normals[i + 1] = mesh->mNormals[aiIndex].y;
+		normals[i + 2] = mesh->mNormals[aiIndex].z;
 		//vertex.Normal = vector;
-		
+
 	}
 
 	for (GLuint i = 0; i < 2 * numVerts; i += 2)
 	{
 		int aiIndex = (int)((i + 1)*0.5f);
 		//Texture Coordinates:
-		if (meshes->mTextureCoords[0]) //Check for texture coordinates.
+		if (mesh->mTextureCoords[0]) //Check for texture coordinates.
 		{
 			GLfloat vec[2];
-			texCoords[i] = meshes->mTextureCoords[0][aiIndex].x;
-			texCoords[i+1] = meshes->mTextureCoords[0][aiIndex].y;
+			texCoords[i] = mesh->mTextureCoords[0][aiIndex].x;
+			texCoords[i + 1] = mesh->mTextureCoords[0][aiIndex].y;
 			//vertex.TexCoords = vec;
 		}
 		else
@@ -98,22 +99,22 @@ Mesh* AssimpLoader::processMesh(aiMesh* meshes, const aiScene* scene, vector<Mat
 	// Process indices
 	for (GLuint i = 0; i < numIndices; i++)
 	{
-		aiFace face = meshes->mFaces[i];
-	
+		aiFace face = mesh->mFaces[i];
+
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 			indices.push_back(face.mIndices[j]);
 	}
-	
+
 	GLuint *tIndices = new GLuint[indices.size()];
-	
+
 	for (int i = 0; i < indices.size(); i++) {
 		tIndices[i] = indices[i];
 	}
 
 	// Process materials
-	if (meshes->mMaterialIndex >= 0)
+	if (mesh->mMaterialIndex >= 0)
 	{
-		aiMaterial* material = scene->mMaterials[meshes->mMaterialIndex];
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		// We assume a convention for sampler names in the shaders. Each diffuse texture should be named
 		// as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER. 
 		// Same applies to other texture as the following list summarizes:
@@ -128,22 +129,34 @@ Mesh* AssimpLoader::processMesh(aiMesh* meshes, const aiScene* scene, vector<Mat
 		vector<Texture> specularMaps = AssimpLoader::loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
+	//Load the Bones
+	for (int i = 0; i < mesh->mNumBones; i++){
+		aiBone *aibone = mesh->mBones[i];
+		aibone->mOffsetMatrix.
+		printf("Found Bone: %s \n", aibone->mName.C_Str());
+		//Find associating Bone, Parent and Child
+	}
+
+	for (int i = 0; i < scene->mNumAnimations; i++) {
+		aiAnimation * animation = scene->mAnimations[i];
+		printf("Found Animation: %s \n", animation->mName.C_Str());
+	}
 
 	Material mat;
 	mat.textures = textures;
 	material.push_back(mat);
 
-	Mesh *mesh = new Mesh("assimpModel");
+	Mesh *meshData = new Mesh("assimpModel");
 
-	mesh->data.normals = normals;
-	mesh->data.vertices = postition;
-	mesh->data.indices = tIndices;
-	mesh->data.uv = texCoords;
-	mesh->data.indexCount = indices.size();
-	mesh->data.vertexCount = numVerts;
-	mesh->setupMesh();
+	meshData->data.normals = normals;
+	meshData->data.vertices = postition;
+	meshData->data.indices = tIndices;
+	meshData->data.uv = texCoords;
+	meshData->data.indexCount = indices.size();
+	meshData->data.vertexCount = numVerts;
+	meshData->setupMesh();
 
-	return mesh;
+	return meshData;
 }
 
 vector<Texture> AssimpLoader::loadMaterialTextures(aiMaterial * mat, aiTextureType type, string typeName)
