@@ -3,6 +3,7 @@
 struct Material {
 	sampler2D diffuse;
 	sampler2D specular;
+	sampler2D normalMap;
 	float shininess;
 };
 
@@ -69,9 +70,9 @@ void main() {
 
 	// Properties
 	// We obtain the normal from the normal map in a range [0, 1]
-	vec3 norm = texture(normalMap, UV).rgb;
+	vec3 norm = texture(material.normalMap, UV).rgb;
 	// Then tranform normal vector to range [-1 , 1]. Note: This normal is in the tangent space.
-	normal = normalize(normal * 2.0 - 1.0); 
+	norm = normalize(norm * 2.0 - 1.0); 
 
 	//vec3 viewDir = normalize(viewPos - FragPos);
 	vec3 viewDir = normalize(TangentViewPos - TangentFragPos);

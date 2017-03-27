@@ -190,7 +190,7 @@ void GLRenderer::renderObject(GameObject *obj)
 			glBindTexture(GL_TEXTURE_2D, textureManager->getTexture(material->textures[i].textureName));
 			glUniform1i(glGetUniformLocation(shader.program, ("material." + type).c_str()), i);
 
-			// Need to activate, bind normal map and set uniform location : glUniform1i(glGetUniformLocation(shader.program, "normalMap", texture#). 
+			// Need to activate, bind normal map and set uniform location : glUniform1i(glGetUniformLocation(shader.program, "normalMap", texture#). Done above.
 		}
 	}
 

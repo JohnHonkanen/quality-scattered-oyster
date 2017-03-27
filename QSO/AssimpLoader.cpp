@@ -12,7 +12,8 @@ vector<Mesh*> AssimpLoader::loadModel(string path, vector<Material> &material)
 	// Import Assimp
 	Assimp::Importer import;
 
-	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate |aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+	// aiProcess_CalcTangentSpace : calculates smooth tangent and bitangent vectors for each of the loaded vertices
+	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_FlipUVs); // aiProcess_GenSmoothNormals
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)	// Detect if there's a problem
 	{
