@@ -159,6 +159,7 @@ int main(int argc, char *argv[]) {
 	multiMaterial->addTexture("container2.png", DIFFUSE);
 	multiMaterial->addTexture("container2_specular.png", SPECULAR);
 	multiMaterial->addTexture("lava.jpg", EMISSION);
+	multiMaterial->addTexture("", NORMAL_MAP); // Need to include Normal Map from model here.
 
 	// UV's for Model (Tree1)
 	//multiMaterial2->addTexture("container2.png", DIFFUSE);

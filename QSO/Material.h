@@ -16,6 +16,7 @@ enum TEXTURE_TYPE {
 	G_TEXTURE = 5,
 	B_TEXTURE = 6,
 	BLEND_MAP = 7,
+	NORMAL_MAP = 8, // Bump Map
 	NO_TEXTURE_TYPE = -1
 };
 
