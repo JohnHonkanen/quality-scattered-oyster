@@ -16,9 +16,10 @@ private:
 public:
 	RigidBody();
 	RigidBody(string name, PhysicsWorld *world, float mass, vec3 cmass, bool hasInertia = false);
+	RigidBody(string name, PhysicsWorld *world, float mass, vec3 cmass, btQuaternion orientation, bool hasInertia = false);
 	~RigidBody();
 	void init();
-	void addMotionState(vec3 cmass);
+	void addMotionState(vec3 cmass, btQuaternion orientation = btQuaternion(0.0f, 0.0f, 0.0f, 1.0f));
 	void setMass(float mass);
 	void calculateLocalInertia();
 	void applyCentralForce(vec3 force);

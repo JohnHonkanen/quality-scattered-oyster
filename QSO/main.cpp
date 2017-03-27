@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
 	GLRenderer glRenderer;
 	glRenderer.setCamera(&playerCamera);
 
-	Model *modelTree = new Model("Tree1", "models/tree/lowpolytree.obj");
+	Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
 	Skybox *skyBoxCube = new Skybox("skyBox");
 
 	Terrain *terrain = new Terrain("terrain", 100, 100, 20.0f);
@@ -187,9 +187,12 @@ int main(int argc, char *argv[]) {
 	GameObject modelTree1("Tree1");
 	modelTree1.addComponent(modelTree);
 	modelTree1.addComponent(multiMaterial2);
-	modelTree1.addComponent(new RigidBody("treeBody", &_world, 0, vec3(0, 0, 0), true));
+	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
+	modelTree1.addComponent(new RigidBody("treeBody", &_world, 1, vec3(0, 0, 0), quat, true));
 	modelTree1.addComponent(new Collider("treeColkuder", SPHERE));
 	modelTree1.init();
+	modelTree1.transform.scale(1.0f);
+	
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);

@@ -29,6 +29,15 @@ RigidBody::RigidBody(string name, PhysicsWorld *world, float mass, vec3 cmass, b
 	RigidBody::world = world;
 }
 
+RigidBody::RigidBody(string name, PhysicsWorld * world, float mass, vec3 cmass, btQuaternion orientation, bool hasInertia) : Component(name)
+{
+	setMass(mass);
+	addMotionState(cmass, orientation);
+	RigidBody::hasInertia = hasInertia;
+
+	RigidBody::world = world;
+}
+
 
 RigidBody::~RigidBody()
 {
@@ -58,9 +67,9 @@ void RigidBody::init()
 	RigidBody::world->addRigidBody(this);
 }
 
-void RigidBody::addMotionState(vec3 cmass)
+void RigidBody::addMotionState(vec3 cmass, btQuaternion o)
 {
-	RigidBody::state = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(cmass.x, cmass.y, cmass.z)));
+	RigidBody::state = new btDefaultMotionState(btTransform(o, btVector3(cmass.x, cmass.y, cmass.z)));
 }
 
 void RigidBody::setMass(float mass)
@@ -134,7 +143,7 @@ void RigidBody::updateStep()
 		}
 	}
 	gameObject->transform.physics = motion;
-
+	gameObject->transform.calculateModelMatrix();
 }
 
 void RigidBody::destroy()
