@@ -48,7 +48,7 @@ in vec3 FragPos;
 in vec2 UV;
 in vec3 TangentLightPos;
 in vec3 TangentViewPos;
-vec3 TangentFragPos;
+in vec3 TangentFragPos;
 
 out vec4 color;
 

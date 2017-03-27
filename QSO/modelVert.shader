@@ -15,7 +15,10 @@ out vec3 TangentFragPos;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-uniform mat3 normalMatrix;
+//uniform mat3 normalMatrix;
+
+uniform vec3 viewPosi;
+uniform vec3 lightPosi;
 
 void main()
 {
@@ -40,7 +43,7 @@ void main()
 
 	mat3 TBN = mat3(T, B, N);
 
-	TangentLightPos = TBN;
-	TangentViewPos = TBN;
+	TangentLightPos = TBN * lightPosi;
+	TangentViewPos = TBN * viewPosi;
 	TangentFragPos = TBN * FragPos;
 }

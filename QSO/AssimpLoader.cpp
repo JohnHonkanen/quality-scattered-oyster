@@ -78,15 +78,17 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 		normals[i + 2] = mesh->mNormals[aiIndex].z;
 		//vertex.Normal = vector;
 
-		//Tangents
-		tangents[i] = mesh->mTangents[aiIndex].x;
-		tangents[i+1] = mesh->mTangents[aiIndex].y;
-		tangents[i+2] = mesh->mTangents[aiIndex].z;
+		if (mesh->HasTangentsAndBitangents()) {
+			//Tangents
+			tangents[i] = mesh->mTangents[aiIndex].x;
+			tangents[i + 1] = mesh->mTangents[aiIndex].y;
+			tangents[i + 2] = mesh->mTangents[aiIndex].z;
 
-		//Bitangents
-		bitangents[i] = mesh->mBitangents[aiIndex].x;
-		bitangents[i + 1] = mesh->mBitangents[aiIndex].y;
-		bitangents[i + 2] = mesh->mBitangents[aiIndex].z;
+			//Bitangents
+			bitangents[i] = mesh->mBitangents[aiIndex].x;
+			bitangents[i + 1] = mesh->mBitangents[aiIndex].y;
+			bitangents[i + 2] = mesh->mBitangents[aiIndex].z;
+		}
 
 	}
 

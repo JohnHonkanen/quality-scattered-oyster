@@ -130,8 +130,8 @@ void GLRenderer::renderObject(GameObject *obj)
 
 	// Set Directional Light Properties for multi-light
 	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
-	glUniform3f(ambientDirLightLoc, 0.8f, 0.8f, 0.8f);
-	glUniform3f(diffuseDirLightLoc, 0.8f, 0.8f, 0.8f); // Darken the light a bit to fit the scene
+	glUniform3f(ambientDirLightLoc, 0.1f, 0.1f, 0.1f);
+	glUniform3f(diffuseDirLightLoc, 0.1f, 0.1f, 0.1f); // Darken the light a bit to fit the scene
 	glUniform3f(specularDirLightLoc, 1.0f, 1.0f, 1.0f);
 
 	// Set Point Light Properties for multi-light
@@ -159,6 +159,12 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(quadraticSpotLightLoc, 0.000007f);
 	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f * 1.2f)));
 	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 1.2f)));
+
+	// Normal Maps
+	GLint lightPosiLoc = glGetUniformLocation(shader.program, "lightPosi");
+	GLint viewPosiLoc = glGetUniformLocation(shader.program, "viewPosi");
+	glUniform3f(lightPosiLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+	glUniform3f(viewPosiLoc, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 
 	// Create camera transformations
 	mat4 view = camera->getView();
