@@ -128,7 +128,7 @@ int main(int argc, char *argv[]) {
 	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader"); // For terrain: Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
 	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader"); // Basic shader for skybox, applies texture to cubemap. No lighting.
 	Shader modelShader("modelVert.shader", "modelFrag.shader"); // Shader with multiLight (Dir/Point/Spot light) on models
-	Shader HSVShader("HSVVert.shader", "HSVFrag.shader"); // Applies HSV 
+	Shader HSVShader("HSVVert.shader", "HSVFrag.shader"); // Applies HSV and multiLight (Dir/Point/Spot light) on models/obj. 
 
 	//Mesh Objects
 	GLRenderer glRenderer;
@@ -138,11 +138,14 @@ int main(int argc, char *argv[]) {
 
 	Terrain *terrain = new Terrain("terrain", 100, 100, 20.0f);
 
-	Model *nanosuite = new Model("nanoSuit", "models/arissa/Arissa.dae");
+	Model *arissa = new Model("nanoSuit", "models/arissa/Arissa.dae");
+	
+
 	Material *material = new Material("BaseMaterial", multiShadingProgram);
 	Material *multiMaterial = new Material("multiMaterial", modelShader);
 	Material *multiMaterial2 = new Material("multiMaterial2", HSVShader);
-	
+
+
 	// UV's for Terrain
 	material->addTexture("texture/dirt.png", DIFFUSE);
 	material->addTexture("texture/path.png", SPECULAR);
@@ -187,31 +190,43 @@ int main(int argc, char *argv[]) {
 	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
 	for (int i = 0; i < 20; i++) {
 		int px = rand() % 1000 - 500;
-		int py = rand() % 100000;
+		int py = rand() % 10000;
 		int pz = rand() % 1000 - 500;
 		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
 		Material *multiMaterial3 = new Material("multiMaterial2", HSVShader);
 		mushroom[i] = new GameObject("mushroom" + i);
 		mushroom[i]->addComponent(modelTree);
 		mushroom[i]->addComponent(multiMaterial3);
-		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 1, vec3(px, py, pz), quat, true));
-		mushroom[i]->addComponent(new Collider("treeColkuder", SPHERE));
+		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
 		mushroom[i]->init();
 		mushroom[i]->transform.scale(1.0f);
 	}
 
-	
+	GameObject *mountains[10];
+	int numObstacles = 10;
+	for (int i = 0; i < numObstacles; i++) {
+		int px = 50 + 5;
+		int py = 0;
+		int pz = 50;
+		Model *moutain = new Model("mountain", "models/Rock1/Rock1.dae");
+		Material *mountainMaterial = new Material("mountainMaterial", multiShadingProgram);
+		mountains[i]->addComponent(moutain + i);
+		mountains[i]->addComponent(mountainMaterial);
+		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 0, vec3(px, py, pz), true));
+		mountains[i]->init();
+		mountains[i]->transform.scale(10.0f);
+	}
+
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);
 	skyBox.addComponent(skyboxMaterial);
 
 	GameObject playerModel("playerModel");
-	playerModel.addComponent(nanosuite);
+	playerModel.addComponent(arissa);
 	playerModel.addComponent(modelMat);
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
-	playerModel.addComponent(new RigidBody("playerBody", &_world, 1, vec3(0,50,0), true));
-	playerModel.addComponent(new Collider("playerCollider", SPHERE));
+	playerModel.addComponent(new RigidBody("playerBody", &_world, 100, vec3(0,50,0), true));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 	playerModel.init();
 	playerModel.transform.scale(0.1f);
@@ -303,6 +318,10 @@ int main(int argc, char *argv[]) {
 			// Render Function
 			for (int i = 0; i < 20; i++) {
 				glRenderer.renderObject(mushroom[i]);
+			}
+
+			for (int i = 0; i < numObstacles; i++) {
+				glRenderer.renderObject(mountains[i]);
 			}
 			glRenderer.renderObject(&skyBox);
 			glRenderer.renderObject(&playerModel);

@@ -138,8 +138,14 @@ void RigidBody::updateStep()
 			trianglePos = barryCentric(vec3(1, data.heightmap[gridZ][gridX+1], 0), vec3(1,data.heightmap[gridZ + 1][gridX + 1], 1), vec3(0,data.heightmap[gridZ+1][gridX], 1), vec2(xCoord, zCoord));
 		}
 		//printf("Terrain thing %i, %i Height: %f \n", gridX, gridZ, trianglePos);
-		if (pos.y < trianglePos) {
-				motion[3].y = trianglePos;
+		GameObject *player = GameObject::find("playerModel");
+		if (player == gameObject) {
+			motion[3].y = trianglePos;
+		}
+		else {
+			if (pos.y < trianglePos) {
+				motion[3].y = trianglePos - 5.0f;
+			}
 		}
 	}
 	gameObject->transform.physics = motion;

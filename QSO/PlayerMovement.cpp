@@ -60,7 +60,14 @@ void PlayerMovement::pollInputs(double dt)
 			front.y = gameObject->transform.getPosition().y;
 			vec3 moveForward = front;
 			moveForward.y = velocity.y();
-			rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveForward));
+
+			if (gameObject->transform.getPosition().x <= 100.0f) {
+				rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveForward));
+			}
+			else {
+				vec3 moveBackwards = -front;
+				rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveBackwards));
+			}
 		}
 
 
