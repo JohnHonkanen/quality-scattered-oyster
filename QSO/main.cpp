@@ -203,16 +203,17 @@ int main(int argc, char *argv[]) {
 	}
 
 	GameObject *mountains[10];
-	int numObstacles = 10;
+	int numObstacles = 10; // Should be based on terrain boundary size. 
 	for (int i = 0; i < numObstacles; i++) {
-		int px = 50 + 5;
+		int px = 50 + (25 * i);
 		int py = 0;
 		int pz = 50;
-		Model *moutain = new Model("mountain", "models/Rock1/Rock1.dae");
+		Model *moutain = new Model("obstacle", "models/Rock1/Rock1.dae");
 		Material *mountainMaterial = new Material("mountainMaterial", multiShadingProgram);
-		mountains[i]->addComponent(moutain + i);
+		mountains[i] = new GameObject("rocks" + i);
+		mountains[i]->addComponent(moutain);
 		mountains[i]->addComponent(mountainMaterial);
-		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 0, vec3(px, py, pz), true));
+		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 1, vec3(px, py, pz), true));
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}

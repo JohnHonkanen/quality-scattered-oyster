@@ -121,11 +121,13 @@ void RigidBody::updateStep()
 	GameObject *terrain = GameObject::find("terrain");
 	Terrain *terrainShape = terrain->getComponent<Terrain>();
 	mapData data = terrainShape->getData();
+	GameObject *player = GameObject::find("playerModel");
 	float terrainX = pos.x - terrain->transform.physics[3].x;
 	float terrainZ = pos.z - terrain->transform.physics[3].z;
 	int gridX = (int)floor(terrainX / terrainShape->getGridSize());
 	int gridZ = (int)floor(terrainZ / terrainShape->getGridSize());
 	if (gridX >= terrainShape->getData().xLength - 1 || gridZ >= terrainShape->getData().zLength - 1 || gridX < 0 || gridZ < 0) {
+		printf("outside Terrain: ");
 	}
 	else {
 		float xCoord = ((int)terrainX % (int)terrainShape->getGridSize())/ (float) terrainShape->getGridSize();
@@ -138,7 +140,7 @@ void RigidBody::updateStep()
 			trianglePos = barryCentric(vec3(1, data.heightmap[gridZ][gridX+1], 0), vec3(1,data.heightmap[gridZ + 1][gridX + 1], 1), vec3(0,data.heightmap[gridZ+1][gridX], 1), vec2(xCoord, zCoord));
 		}
 		//printf("Terrain thing %i, %i Height: %f \n", gridX, gridZ, trianglePos);
-		GameObject *player = GameObject::find("playerModel");
+		
 		if (player == gameObject) {
 			motion[3].y = trianglePos;
 		}
