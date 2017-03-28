@@ -14,7 +14,10 @@ Shape::~Shape()
 void Shape::destroy()
 {
 	for (int i = 0; i < numberOfMeshs; i++) {
-		meshes[i]->destroy();
+		if (meshes[i] != nullptr) {
+			meshes[i]->destroy();
+			meshes[i] = nullptr;
+		}
 	}
 }
 

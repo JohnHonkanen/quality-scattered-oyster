@@ -98,7 +98,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 int main(int argc, char *argv[]) {
 
 	PhysicsWorld _world; //Initialize Physics
-	_world.setGravity(vec3(0, -15, 0));
+	_world.setGravity(vec3(0, -0.5, 0));
 	glfwWindow *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
 
@@ -134,7 +134,6 @@ int main(int argc, char *argv[]) {
 	GLRenderer glRenderer;
 	glRenderer.setCamera(&playerCamera);
 
-	Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
 	Skybox *skyBoxCube = new Skybox("skyBox");
 
 	Terrain *terrain = new Terrain("terrain", 100, 100, 20.0f);
@@ -181,17 +180,26 @@ int main(int argc, char *argv[]) {
 	//skyboxMaterial->cubeMaps.push_back("bottom.jpg");
 	//skyboxMaterial->cubeMaps.push_back("back.jpg");
 	//skyboxMaterial->cubeMaps.push_back("front.jpg");
-	//
+
 	Material *modelMat = new Material("modelMat", modelShader);
-	
-	GameObject modelTree1("Tree1");
-	modelTree1.addComponent(modelTree);
-	modelTree1.addComponent(multiMaterial2);
+	GameObject *mushroom[20];
+
 	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
-	modelTree1.addComponent(new RigidBody("treeBody", &_world, 1, vec3(0, 0, 0), quat, true));
-	modelTree1.addComponent(new Collider("treeColkuder", SPHERE));
-	modelTree1.init();
-	modelTree1.transform.scale(1.0f);
+	for (int i = 0; i < 20; i++) {
+		int px = rand() % 1000 - 500;
+		int py = rand() % 100000;
+		int pz = rand() % 1000 - 500;
+		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
+		Material *multiMaterial3 = new Material("multiMaterial2", HSVShader);
+		mushroom[i] = new GameObject("mushroom" + i);
+		mushroom[i]->addComponent(modelTree);
+		mushroom[i]->addComponent(multiMaterial3);
+		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 1, vec3(px, py, pz), quat, true));
+		mushroom[i]->addComponent(new Collider("treeColkuder", SPHERE));
+		mushroom[i]->init();
+		mushroom[i]->transform.scale(1.0f);
+	}
+
 	
 
 	GameObject skyBox("skyBox");
@@ -263,14 +271,14 @@ int main(int argc, char *argv[]) {
 		double dt = (currentTime - previousTime) * 0.01f; //Convert DT to seconds
 		playerModel.getComponent<Movement>()->pollInputs(dt);
 
-		if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_L)) {
-			playerCamera.setObject(&modelTree1);
-			playerModel.getComponent<Movement>()->attachGameObject(&modelTree1);
-		}
-		else if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_K)){
-			playerCamera.setObject(&playerModel);
-			playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
-		}
+		//if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_L)) {
+		//	playerCamera.setObject(&modelTree1);
+		//	playerModel.getComponent<Movement>()->attachGameObject(&modelTree1);
+		//}
+		//else if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_K)){
+		//	playerCamera.setObject(&playerModel);
+		//	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
+		//}
 
 		_world.stepSimulation(dt, 10);
 
@@ -288,14 +296,14 @@ int main(int argc, char *argv[]) {
 
 			playerCamera.move();
 			skyBox.transform.calculateModelMatrix();
-			modelTree1.transform.calculateModelMatrix();
-			//tree.transform.rotate(-0.5f, vec3(0.0f, 1.0f, 0.0f), false);
-			//tree.transform.translate(vec3(0.5f, 0.0f, 0.0f));
+
 			playerModel.transform.calculateModelMatrix();
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			glRenderer.renderObject(&modelTree1);
+			for (int i = 0; i < 20; i++) {
+				glRenderer.renderObject(mushroom[i]);
+			}
 			glRenderer.renderObject(&skyBox);
 			glRenderer.renderObject(&playerModel);
 			glRenderer.renderObject(&terrainOBJ);

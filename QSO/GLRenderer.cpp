@@ -124,7 +124,7 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform3f(ourImageLoc, 1.0f, 1.0f, 0.0f);
 	glUniform1f(hueShiftLoc, hueshift);
 	glUniform1f(satBoostLoc, 1.0f);
-	hueshift += 0.0005f; //5
+	hueshift += 0.0005f; 
 
 	// Set Spotlight Properties
 
