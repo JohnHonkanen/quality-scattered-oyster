@@ -24,9 +24,7 @@ Terrain::~Terrain()
 
 void Terrain::init()
 {
-	Terrain::buildVertices();
-	Terrain::buildIndices();
-	Terrain::calculateNormals();
+
 }
 
 const mapData Terrain::getData()
@@ -47,7 +45,10 @@ float Terrain::getGridSize()
 
 void Terrain::createMesh()
 {
-	init();
+
+	Terrain::buildVertices();
+	Terrain::buildIndices();
+	Terrain::calculateNormals();
 
 	Mesh *mesh = new Mesh("terrainMesh");
 	mesh->data.normals = (GLfloat *) map.normals;
@@ -94,7 +95,6 @@ void Terrain::buildVertices()
 					map.minHeight = height;
 				}
 			}
-			
 
 			map.heightmap[z][x] = height;
 			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, z* Terrain::gridSize); // Y is reserved for heightmap 
