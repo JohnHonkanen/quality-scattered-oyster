@@ -202,7 +202,7 @@ int main(int argc, char *argv[]) {
 		mushroom[i]->transform.scale(1.0f);
 	}
 
-	GameObject *mountains[10];
+	GameObject *mountains[14];
 	int numObstacles = 10; // Should be based on terrain boundary size. 
 	for (int i = 0; i < numObstacles; i++) {
 		int px = 50 + (25 * i);
@@ -218,6 +218,14 @@ int main(int argc, char *argv[]) {
 		mountains[i]->transform.scale(10.0f);
 	}
 
+	Model *borderObs = new Model("borderObstacle", "models/Rock1/Rock1.dae");
+	Material *mountainMaterial = new Material("borderObstacleMat", multiShadingProgram);
+	GameObject obstacle("rockObs");
+	obstacle.addComponent(borderObs);
+	obstacle.addComponent(mountainMaterial);
+	obstacle.addComponent(new RigidBody("rigidObs", &_world, 1, vec3(-10.0f, 0.0f, 900.0f), true));
+	obstacle.init();
+	obstacle.transform.scale(1000.0f, 25.0f, 10.0f);
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);
@@ -327,6 +335,7 @@ int main(int argc, char *argv[]) {
 			glRenderer.renderObject(&skyBox);
 			glRenderer.renderObject(&playerModel);
 			glRenderer.renderObject(&terrainOBJ);
+			glRenderer.renderObject(&obstacle);
 			
 			// End of Render
 

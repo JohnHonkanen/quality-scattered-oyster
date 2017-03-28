@@ -79,14 +79,22 @@ void Terrain::buildVertices()
 		for (int x = 0; x < Terrain::map.zLength; x++) {
 			float scaleU = float(z) / float(Terrain::map.zLength - 1);
 			float scaleV = float(x) / float(Terrain::map.xLength - 1);
-			float height = (SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight);
-			height += (SimplexNoise::noise(x * frequency * 10 * gridSize, z * frequency * 10 * gridSize) * 10.0f);
-			if (height > map.maxHeight) {
-				map.maxHeight = height;
+			float height;
+			if (x <= 5 || x >= Terrain::map.xLength - 6 || z <= 5 || z >= Terrain::map.zLength - 6) {
+
+				height = 0.0f;
 			}
-			if (height < map.minHeight) {
-				map.minHeight = height;
+			else {
+				height = (SimplexNoise::noise(x * frequency * gridSize, z * frequency * gridSize) * weight);
+				height += (SimplexNoise::noise(x * frequency * 10 * gridSize, z * frequency * 10 * gridSize) * 10.0f);
+				if (height > map.maxHeight) {
+					map.maxHeight = height;
+				}
+				if (height < map.minHeight) {
+					map.minHeight = height;
+				}
 			}
+			
 
 			map.heightmap[z][x] = height;
 			map.vertices[vertex] = vec3(x * Terrain::gridSize, height, z* Terrain::gridSize); // Y is reserved for heightmap 
