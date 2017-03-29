@@ -2,11 +2,10 @@
 #include "PlayerMovement.h"
 #include "Rigidbody.h"
 
-
-
 PlayerMovement::PlayerMovement(string name, glfwInputHandler *inputHandler, Camera3rdPerson *camera) : Movement(name, inputHandler)
 {
 	PlayerMovement::camera = camera;
+	audioComponent = new AudioComponent2D("PlayerMovementAudio");
 }
 
 
@@ -22,6 +21,8 @@ void PlayerMovement::setMaxSpeed(float speed)
 void PlayerMovement::pollInputs(double dt)
 {
 	
+	bool playAudio = false;
+
 		KeyboardInput* keyboard = inputHandler->getKeyboard();
 		RigidBody *rigidbody = gameObject->getComponent<RigidBody>();
 		if (rigidbody == nullptr) {
@@ -170,6 +171,8 @@ void PlayerMovement::pollInputs(double dt)
 				moveForward.y = velocity.y();
 				rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveForward));
 
+				playAudio = true;
+
 			}
 
 
@@ -178,6 +181,8 @@ void PlayerMovement::pollInputs(double dt)
 				front.y = gameObject->transform.getPosition().y;
 				vec3 moveBackwards = -front;
 				rigidbody->rigidbody->setLinearVelocity(rigidbody->convertTobtVector3(moveBackwards));
+
+				playAudio = true;
 			}
 
 			if (!keyboard->keyPressed(GLFW_KEY_S) && !keyboard->keyPressed(GLFW_KEY_W)) {
@@ -192,6 +197,7 @@ void PlayerMovement::pollInputs(double dt)
 				orientation *= btMatrix3x3(btQuaternion(btVector3(0, 1, 0), radians(10.0f) *dt));
 				rigidbody->rigidbody->getWorldTransform().setBasis(orientation);
 
+				playAudio = true;
 			}
 
 
@@ -200,6 +206,8 @@ void PlayerMovement::pollInputs(double dt)
 				btMatrix3x3 orientation = rigidbody->rigidbody->getWorldTransform().getBasis();
 				orientation *= btMatrix3x3(btQuaternion(btVector3(0, 1, 0), radians(-10.0f) *dt));
 				rigidbody->rigidbody->getWorldTransform().setBasis(orientation);
+
+				playAudio = true;
 			}
 
 			if (keyboard->keyPressed(GLFW_KEY_SPACE)) {
@@ -207,6 +215,14 @@ void PlayerMovement::pollInputs(double dt)
 			}
 		}
 	}
+
+	if (playAudio) {
+		audioComponent->playMusic("audio/sfx/footstep.wav");
+	}
+	else {
+		audioComponent->stopSound();
+	}
+
 }
 
 void PlayerMovement::update()
