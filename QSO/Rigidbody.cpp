@@ -108,6 +108,7 @@ vec3 RigidBody::getLinearVelocity()
 
 btTransform RigidBody::getMotionState()
 {
+	
 	btTransform btTrans;
 	rigidbody->getMotionState()->getWorldTransform(btTrans);
 	return btTrans;
@@ -128,7 +129,7 @@ void RigidBody::updateStep()
 	int gridX = (int)floor(terrainX / terrainShape->getGridSize());
 	int gridZ = (int)floor(terrainZ / terrainShape->getGridSize());
 	if (gridX >= terrainShape->getData().xLength - 1 || gridZ >= terrainShape->getData().zLength - 1 || gridX < 0 || gridZ < 0) {
-		printf("outside Terrain: ");
+		//printf("outside Terrain: ");
 	}
 	else {
 		float xCoord = ((int)terrainX % (int)terrainShape->getGridSize())/ (float) terrainShape->getGridSize();
@@ -152,15 +153,6 @@ void RigidBody::updateStep()
 		}
 	}
 
-	CollisionObject *colObj = gameObject->getComponent<CollisionObject>();
-	if (colObj) {
-		if (colObj->colliding) {
-			vec3 norm = colObj->contactNormal;
-
-			printf("Name: %s, Normal (%f,%f,%f) \n", gameObject->getName(), norm.x, norm.y, norm.z);
-		}
-	}
-	
 	gameObject->transform.physics = motion;
 	gameObject->transform.calculateModelMatrix();
 }

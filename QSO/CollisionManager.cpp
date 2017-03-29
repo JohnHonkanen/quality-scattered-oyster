@@ -1,5 +1,7 @@
 #include "CollisionManager.h"
 #include "CollisionObject.h"
+#include "Utils.h"
+#include "Rigidbody.h"
 
 CollisionManager *CollisionManager::manager = nullptr;
 
@@ -51,34 +53,35 @@ void CollisionManager::handleCollision(CollisionObject *a, CollisionObject *b)
 	vec3 box2Min = b->position - b->halfExtents;
 	vec3 box2Max = b->position + b->halfExtents;
 
-	vec3 normal = vec3(0);
-	//Collision in X direction
-	if (box1Min.x <= box2Max.x) {
-		//1
-		normal.x = -1.0f;
-	}
-	else {
-		//-1
-		normal.x = 1.0f;
-	}
-
-	//Collision in Y direction
-	if (box1Min.y <= box2Max.y) {
-		normal.y = 1.0f;
-	}
-	else {
-		normal.y = 0.0f;
-		//Collision in Z direction
-		if (box1Min.z <= box2Max.z) {
-			normal.z = 1.0f;
-		}
-		else {
-			normal.z = 0.0f;
-		}
-	}
-
+	vec3 normal = Utils::getAABBFaceNormal(a->position, b);
+	
 	a->contactNormal = normal;
 	b->contactNormal = -normal;
+	a->collidingObject = b;
+	b->collidingObject = a;
+
+	RigidBody *aRigidbody = a->gameObject->getComponent<RigidBody>();
+	RigidBody *bRigidbody = b->gameObject->getComponent<RigidBody>();
+	
+	vec3 norm = normal;
+	btVector3 velocity = aRigidbody->rigidbody->getLinearVelocity();
+
+	if (norm.x > 0 || norm.x < 0) {
+		velocity.setX(norm.x);
+	}
+
+	if (norm.y > 0 || norm.y < 0) {
+		velocity.setY(norm.y);
+	}
+
+	if (norm.z > 0 || norm.z < 0) {
+		velocity.setZ(norm.z);
+	}
+
+	if(!a->isStatic)
+		aRigidbody->rigidbody->setLinearVelocity(velocity);
+	if(!b->isStatic)
+		bRigidbody->rigidbody->setLinearVelocity(-velocity);
 }
 
 void CollisionManager::update()
@@ -88,7 +91,8 @@ void CollisionManager::update()
 		GameObject *object = iObjs->gameObject;
 
 		iObjs->colliding = false;
-		iObjs->position = object->transform.physics[3];
+		iObjs->position = vec3(object->transform.physics[3]) + iObjs->offset;
+
 	}
 
 	//To Be filled in

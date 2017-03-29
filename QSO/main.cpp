@@ -184,13 +184,13 @@ int main(int argc, char *argv[]) {
 	//skyboxMaterial->cubeMaps.push_back("front.jpg");
 
 	Material *modelMat = new Material("modelMat", modelShader);
-	const int numMush = 1;
+	const int numMush = 20;
 	GameObject *mushroom[numMush];
 
 	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
 	for (int i = 0; i < numMush; i++) {
 		int px = rand() % 1000 - 500;
-		int py = 10;//rand() % 10000;
+		int py = rand() % 10000;
 		int pz = rand() % 1000 - 500;
 		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
 		Material *multiMaterial3 = new Material("multiMaterial2", HSVShader);
@@ -198,7 +198,7 @@ int main(int argc, char *argv[]) {
 		mushroom[i]->addComponent(modelTree);
 		mushroom[i]->addComponent(multiMaterial3);
 		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
-		mushroom[i]->addComponent(new CollisionObject(vec3(25.0f)));
+		mushroom[i]->addComponent(new CollisionObject(vec3(15.0f,5.0f,15.0f), true));
 		mushroom[i]->init();
 		mushroom[i]->transform.scale(1.0f);
 	}
@@ -215,7 +215,7 @@ int main(int argc, char *argv[]) {
 		mountains[i]->addComponent(moutain);
 		mountains[i]->addComponent(mountainMaterial);
 		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 1, vec3(px, py, pz), true));
-		//mountains[i]->addComponent(new CollisionObject(vec3(25.0f)));
+		mountains[i]->addComponent(new CollisionObject(vec3(15.0f, 5.0f, 15.0f), false, vec3(0.0f, 5.0f, 0.0f)));
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}
@@ -239,7 +239,7 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
 	playerModel.addComponent(new RigidBody("playerBody", &_world, 100, vec3(0,50,0), true));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
-	playerModel.addComponent(new CollisionObject(vec3(25.0f)));
+	playerModel.addComponent(new CollisionObject(vec3(8.0f)));
 	playerModel.init();
 	playerModel.transform.scale(0.1f);
 
