@@ -61,6 +61,14 @@ void PlayerMovement::pollInputs(double dt)
 			mapData data = terrainShape->getData();
 			GameObject *player = GameObject::find("playerModel");
 			vec3 pos = player->transform.getPosition();
+			float playerPosiX = pos.x;
+			float playerPosiZ = pos.z;
+			GameObject *obstacle = GameObject::find("rocks");
+			vec3 obsPos = obstacle->transform.getPosition();
+			float obsPosiX = obsPos.x;
+			float obsPosiZ = obsPos.z;
+			float distanceToPLayerX = obsPosiX - playerPosiX; 
+			float distanceToPlayerZ = obsPosiZ - playerPosiZ;
 			float terrainX = pos.x - terrain->transform.physics[3].x;
 			float terrainZ = pos.z - terrain->transform.physics[3].z;
 			int gridX = (int)floor(terrainX / terrainShape->getGridSize());
@@ -72,7 +80,18 @@ void PlayerMovement::pollInputs(double dt)
 			btVector3 linearVelocity = btVector3(0, velocity.y(), 0);
 			rigidbody->rigidbody->setLinearVelocity(linearVelocity);
 
-			if (gridX >= terrainShape->getData().xLength - 7 || gridZ >= terrainShape->getData().zLength - 7 || gridX < 6 || gridZ < 6) {
+			if (distanceToPLayerX <= 15 && distanceToPLayerX >= -15 && distanceToPlayerZ <= 15 && distanceToPlayerZ >= -15) {
+				printf("!!!X %f \n", distanceToPLayerX);
+				printf("!!!Z %f \n", distanceToPlayerZ);
+			}
+			//printf("distanceX %f \n", distanceToPLayerX);
+
+		/*	if (distanceToPlayerZ <= 10) {
+				printf("distanceZ %f \n", distanceToPlayerZ);
+			}
+*/
+
+			if (gridX >= terrainShape->getData().xLength - 7 || gridZ >= terrainShape->getData().zLength - 7 || gridX < 6 || gridZ < 6 ) {
 				printf("outside Terrain: \n");
 
 				if (keyboard->keyPressed(GLFW_KEY_W)) {
@@ -81,7 +100,7 @@ void PlayerMovement::pollInputs(double dt)
 					vec3 moveForward = front;
 					moveForward.y = velocity.y();
 
-					if (gridX >= terrainShape->getData().xLength - 7) {
+					if (gridX >= terrainShape->getData().xLength - 7 ) {
 						if (moveForward.x > 0) {
 							moveForward.x = 0;
 						}
@@ -99,7 +118,7 @@ void PlayerMovement::pollInputs(double dt)
 						}
 					}
 
-					if (gridZ < 6) {
+					if (gridZ < 6 ) {
 						if (moveForward.z < 0) {
 							moveForward.z = 0;
 						}
