@@ -98,7 +98,6 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 		//Texture Coordinates:
 		if (mesh->mTextureCoords[0]) //Check for texture coordinates.
 		{
-			GLfloat vec[2];
 			texCoords[i] = mesh->mTextureCoords[0][aiIndex].x;
 			texCoords[i + 1] = mesh->mTextureCoords[0][aiIndex].y;
 			//vertex.TexCoords = vec;
