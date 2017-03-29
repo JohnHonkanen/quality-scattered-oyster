@@ -183,7 +183,7 @@ void PlayerMovement::pollInputs(double dt)
 					vec3 moveForward = front;
 					moveForward.y = velocity.y();
 
-					if (moveForward.x > -collisionDistance) {
+					if (moveForward.x >= -collisionDistance) {
 						moveForward.x = 0;
 					}
 
@@ -191,7 +191,7 @@ void PlayerMovement::pollInputs(double dt)
 						moveForward.x = 0;
 					}
 
-					if (moveForward.z > -collisionDistance) {
+					if (moveForward.z >= -collisionDistance) {
 						moveForward.z = 0;
 					}
 
@@ -230,6 +230,27 @@ void PlayerMovement::pollInputs(double dt)
 					front.y = gameObject->transform.getPosition().y;
 					vec3 moveBackwards = -front;
 
+					/*if (moveBackwards.x > -collisionDistance) {
+						moveBackwards.x = 0;
+					}
+
+					if (moveBackwards.x < collisionDistance) {
+						moveBackwards.x = 0;
+					}
+
+					if (moveBackwards.z > -collisionDistance) {
+						moveBackwards.z = 0;
+					}
+
+					if (moveBackwards.z < collisionDistance) {
+						moveBackwards.z = 0;
+					}*/
+
+					if (gridX >= terrainShape->getData().xLength - 7) {
+						if (moveBackwards.x > 0) {
+							moveBackwards.x = 0;
+						}
+					}
 
 					if (gridX >= terrainShape->getData().xLength - 7) {
 						if (moveBackwards.x > 0) {
