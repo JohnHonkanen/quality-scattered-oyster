@@ -4,6 +4,7 @@
 #include "ShapeComponents.h"
 #include "Physics.h"
 
+#include "AudioComponent3D.h"
 
 using namespace std;
 
@@ -197,7 +198,9 @@ int main(int argc, char *argv[]) {
 		mushroom[i]->addComponent(modelTree);
 		mushroom[i]->addComponent(multiMaterial3);
 		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
-		mushroom[i]->init();
+		mushroom[i]->addComponent(new AudioComponent3D("shroomAudio" + i, vec3(px, py, pz)));
+		//mushroom[i]->getComponent<AudioComponent3D> //FIIIIIIX
+		//mushroom[i]->init();
 		mushroom[i]->transform.scale(1.0f);
 	}
 
@@ -314,6 +317,12 @@ int main(int argc, char *argv[]) {
 			inputHandler.getMouse()->setLastScrollOffset(inputHandler.getMouse()->getScrollOffset());
 
 			// End of Process Inputs
+
+			//Audio Update
+			//for (int i = 0; i < 20; i++) {
+				//mushroom[i]->getComponent<AudioComponent3D>()->setSoundPosition(mushroom[i].transform.position)
+				//mushroom[i]->getComponent<AudioComponent3D>()->setListenerPosition(playerModel.transform.position, playerModel.transform.rotation);
+			//}
 
 			// Update Function
 

@@ -103,13 +103,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\dev\bullet3-2.86.1\src;C:\dev\assimp-3.3.1\include;C:\dev\glew-2.0.0\include;C:\dev\glm-0.9.8.3\glm;C:\dev\glfw-3.2.1.bin.WIN64\include\GLFW;C:\dev\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\irrKlang-64bit-1.5.0\include;C:\dev\bullet3-2.86.1\src;C:\dev\assimp-3.3.1\include;C:\dev\glew-2.0.0\include;C:\dev\glm-0.9.8.3\glm;C:\dev\glfw-3.2.1.bin.WIN64\include\GLFW;C:\dev\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\dev\bullet3-2.86.1\libs\Debug;C:\dev\assimp-3.3.1\libs;C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;assimp-vc140-mt.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\dev\irrKlang-64bit-1.5.0\lib\Winx64-visualStudio;C:\dev\bullet3-2.86.1\libs\Debug;C:\dev\assimp-3.3.1\libs;C:\dev\glew-2.0.0\lib\Release\x64;C:\dev\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\dev\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>irrklang.lib;glew32.lib;opengl32.lib;glfw3.lib;DevIL.lib;assimp-vc140-mt.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,6 +154,10 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="AssimpLoader.h" />
+    <ClInclude Include="AudioComponent.h" />
+    <ClInclude Include="AudioComponent2D.h" />
+    <ClInclude Include="AudioComponent3D.h" />
+    <ClInclude Include="BackgroundMusicManager.h" />
     <ClInclude Include="Behaviours.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Camera3rdPerson.h" />
@@ -200,6 +204,10 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
+    <ClCompile Include="AudioComponent.cpp" />
+    <ClCompile Include="AudioComponent2D.cpp" />
+    <ClCompile Include="AudioComponent3D.cpp" />
+    <ClCompile Include="BackgroundMusicManager.cpp" />
     <ClCompile Include="Behaviours.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Camera3rdPerson.cpp" />
