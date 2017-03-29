@@ -14,6 +14,7 @@ public:
 	virtual string toString();
 	//Normal
 	int getInstancedID();
+	string getName();
 	//Statics
 	static void Destroy(Object *obj);
 

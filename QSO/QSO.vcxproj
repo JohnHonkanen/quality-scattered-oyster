@@ -164,6 +164,8 @@
     <ClInclude Include="Camera3rdPerson.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Cube.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="TextureGenerator.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +218,8 @@
     <ClCompile Include="Camera3rdPerson.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GameBehaviour.cpp" />
@@ -249,6 +254,7 @@
     <ClCompile Include="TextureGenerator.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

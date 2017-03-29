@@ -3,6 +3,7 @@
 #include "PhysicsWorld.h"
 #include <glm\gtc\type_ptr.hpp>
 #include "Terrain.h";
+#include "CollisionObject.h"
 
 btVector3 RigidBody::convertTobtVector3(vec3 vec)
 {
@@ -107,6 +108,7 @@ vec3 RigidBody::getLinearVelocity()
 
 btTransform RigidBody::getMotionState()
 {
+	
 	btTransform btTrans;
 	rigidbody->getMotionState()->getWorldTransform(btTrans);
 	return btTrans;
@@ -127,7 +129,7 @@ void RigidBody::updateStep()
 	int gridX = (int)floor(terrainX / terrainShape->getGridSize());
 	int gridZ = (int)floor(terrainZ / terrainShape->getGridSize());
 	if (gridX >= terrainShape->getData().xLength - 1 || gridZ >= terrainShape->getData().zLength - 1 || gridX < 0 || gridZ < 0) {
-		printf("outside Terrain: ");
+		//printf("outside Terrain: ");
 	}
 	else {
 		float xCoord = ((int)terrainX % (int)terrainShape->getGridSize())/ (float) terrainShape->getGridSize();
@@ -150,6 +152,7 @@ void RigidBody::updateStep()
 			}
 		}
 	}
+
 	gameObject->transform.physics = motion;
 	gameObject->transform.calculateModelMatrix();
 }
