@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <time.h>
 #include "Core.h"
 #include "ShapeComponents.h"
 #include "Physics.h"
@@ -97,6 +97,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 int main(int argc, char *argv[]) {
 
+	srand(time(NULL));
+
 	PhysicsWorld _world; //Initialize Physics
 	_world.setGravity(vec3(0, -0.5, 0));
 	glfwWindow *window = new glfwWindow(800, 600);
@@ -136,7 +138,7 @@ int main(int argc, char *argv[]) {
 
 	Skybox *skyBoxCube = new Skybox("skyBox");
 
-	Terrain *terrain = new Terrain("terrain", 100, 100, 20.0f);
+	Terrain *terrain = new Terrain("terrain", 50, 50, 40.0f);
 
 	Model *arissa = new Model("nanoSuit", "models/arissa/Arissa.dae");
 	
@@ -187,29 +189,57 @@ int main(int argc, char *argv[]) {
 	Material *modelMat = new Material("modelMat", modelShader);
 	GameObject *mushroom[20];
 
+	AudioComponent2D background("background");
+	background.setVolume(0.6f);
+	background.playMusic("audio/music/night.wav");
+
 	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
 	for (int i = 0; i < 20; i++) {
-		int px = rand() % 1000 - 500;
-		int py = rand() % 10000;
-		int pz = rand() % 1000 - 500;
+		int px = rand() % 700 - 350;
+		int py = rand() % 100;
+		int pz = rand() % 700 - 350;
 		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
-		Material *multiMaterial3 = new Material("multiMaterial2", HSVShader);
+		Material *multiMaterial3 = new Material("multiMaterial2", modelShader);
 		mushroom[i] = new GameObject("mushroom" + i);
+		mushroom[i]->TerrainOffset = vec3(0, -5, 0);
 		mushroom[i]->addComponent(modelTree);
 		mushroom[i]->addComponent(multiMaterial3);
 		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
-		mushroom[i]->addComponent(new AudioComponent3D("shroomAudio" + i, vec3(px, py, pz)));
 		mushroom[i]->addComponent(new CollisionObject(vec3(15.0f, 5.0f, 15.0f), true));
 		mushroom[i]->init();
-		mushroom[i]->transform.scale(1.0f);
+
+		float scale = (rand() % 100) / 100.0f + 0.5f;
+		float scaleY = (rand() % 100) / 200.0f + 0.5f;
+		mushroom[i]->transform.scale(vec3(1.0f, scaleY, 1.0f));
 	}
 
-	GameObject *mountains[14];
-	int numObstacles = 10; // Should be based on terrain boundary size. 
-	for (int i = 0; i < numObstacles; i++) {
-		int px = 50 + (25 * i);
+	const int rareMushroom = 5;
+	GameObject *rareMusroom[rareMushroom];
+	for (int i = 0; i < rareMushroom; i++) {
+		int px = rand() % 1000 - 500;
 		int py = 0;
-		int pz = 50;
+		int pz = rand() % 1000 - 500;
+		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
+		Material *multiMaterial3 = new Material("multiMaterial2", HSVShader);
+		rareMusroom[i] = new GameObject("mushroom" + i);
+		rareMusroom[i]->TerrainOffset = vec3(0, -1, 0);
+		rareMusroom[i]->addComponent(modelTree);
+		rareMusroom[i]->addComponent(multiMaterial3);
+		rareMusroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
+		rareMusroom[i]->addComponent(new AudioComponentLinear3D("shroomAudio"));
+		rareMusroom[i]->getComponent<AudioComponent>()->playMusic("audio/music/sparkle.wav");
+		rareMusroom[i]->init();
+
+		rareMusroom[i]->transform.scale(0.2f);
+	}
+
+	
+	const int numObstacles = 5; // Should be based on terrain boundary size. 
+	GameObject *mountains[numObstacles];
+	for (int i = 0; i < numObstacles; i++) {
+		int px = rand() % 300 - 150;
+		int py = rand() % 1;
+		int pz = rand() % 300 - 150;
 		Model *moutain = new Model("obstacle", "models/Rock1/Rock1.dae");
 		Material *mountainMaterial = new Material("mountainMaterial", multiShadingProgram);
 		mountains[i] = new GameObject("rocks" + i);
@@ -219,6 +249,29 @@ int main(int argc, char *argv[]) {
 		mountains[i]->addComponent(new CollisionObject(vec3(15.0f, 5.0f, 15.0f), false, vec3(0.0f, 5.0f, 0.0f)));
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
+	}
+	const int numGrass = 10;
+	const int numClump = 3;
+	const int totalGrass = numGrass * numClump;
+	GameObject *grass[totalGrass];
+	for (int i = 0; i < numGrass; i++) {
+		int clumpPx = rand() % 250 - 125;
+		int clumpPy = rand() % 250 - 125;
+		for (int j = 0; j < numClump; j++) {
+			int px = rand() % 60 - 30 + clumpPx;
+			int py = -50;
+			int pz = rand() % 60 - 30 + clumpPy;
+
+			Model *grassModel = new Model("grassModel", "models/boletus/boletus_dae(collada)/boletus.dae");
+			Material *grassMat = new Material("mountainMaterial", modelShader);
+			grass[j] = new GameObject("grass" + to_string(i));
+			grass[j]->TerrainOffset = vec3(0, -1, 0);
+			grass[j]->addComponent(grassModel);
+			grass[j]->addComponent(grassMat);
+			grass[j]->addComponent(new RigidBody("mountainBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
+			grass[j]->init();
+			grass[j]->transform.scale(((rand() % 2) + 1)/10.0f);
+		}
 	}
 
 	//Model *borderObs = new Model("borderObstacle", "models/Rock1/Rock1.dae");
@@ -310,6 +363,11 @@ int main(int argc, char *argv[]) {
 		CollisionManager::getManager()->update();
 		_world.stepSimulation(dt, 10);
 
+		for (int i = 0; i < rareMushroom; i++) {
+			rareMusroom[i]->getComponent<AudioComponentLinear3D>()->setSoundPosition(rareMusroom[i]->transform.calculateModelMatrix()[3]);
+			rareMusroom[i]->getComponent<AudioComponentLinear3D>()->setListenerPosition(playerModel.transform.calculateModelMatrix()[3]);
+		}
+		
 		//End of DeltaTime
 		if (frameClock.alarm()) {
 
@@ -335,17 +393,9 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			for (int i = 0; i < 20; i++) {
-				glRenderer.renderObject(mushroom[i]);
+			for (int i = 0; i < GameObject::gameObjects.size(); i++) {
+				glRenderer.renderObject(GameObject::gameObjects[i]);
 			}
-
-			for (int i = 0; i < numObstacles; i++) {
-				glRenderer.renderObject(mountains[i]);
-			}
-			glRenderer.renderObject(&skyBox);
-			glRenderer.renderObject(&playerModel);
-			glRenderer.renderObject(&terrainOBJ);
-			
 			// End of Render
 
 			graphicsHandler.end(); // Swaps scene buffers

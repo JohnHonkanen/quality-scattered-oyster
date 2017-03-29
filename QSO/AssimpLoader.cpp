@@ -150,13 +150,11 @@ Mesh* AssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene, vector<Mater
 	for (int i = 0; i < mesh->mNumBones; i++){
 		aiBone *aibone = mesh->mBones[i];
 		//aibone->mOffsetMatrix.
-		printf("Found Bone: %s \n", aibone->mName.C_Str());
 		//Find associating Bone, Parent and Child
 	}
 
 	for (int i = 0; i < scene->mNumAnimations; i++) {
 		aiAnimation * animation = scene->mAnimations[i];
-		printf("Found Animation: %s \n", animation->mName.C_Str());
 	}
 
 	Material mat;

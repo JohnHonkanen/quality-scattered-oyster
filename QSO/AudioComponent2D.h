@@ -11,6 +11,7 @@ public:
 	void playSound(char* file); //Plays the sound passed to it. (Accepts .wav files)
 	void playMusic(char* file); //Plays the sound passed to it on a continual loop. (Accepts .ogg files)
 	void stopSound();
+	void setVolume(float vol);
 private:
 	bool active;
 };

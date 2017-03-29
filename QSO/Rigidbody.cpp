@@ -148,7 +148,7 @@ void RigidBody::updateStep()
 		}
 		else {
 			if (pos.y < trianglePos) {
-				motion[3].y = trianglePos - 5.0f;
+				motion[3].y = trianglePos  + gameObject->TerrainOffset.y;
 			}
 		}
 	}

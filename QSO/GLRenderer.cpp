@@ -130,14 +130,14 @@ void GLRenderer::renderObject(GameObject *obj)
 
 	// Set Directional Light Properties for multi-light
 	glUniform3f(dirLightLoc, sunPos.getPosition().x, sunPos.getPosition().y, sunPos.getPosition().z);
-	glUniform3f(ambientDirLightLoc, 0.1f, 0.1f, 0.1f);
-	glUniform3f(diffuseDirLightLoc, 0.1f, 0.1f, 0.1f); // Darken the light a bit to fit the scene
-	glUniform3f(specularDirLightLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(ambientDirLightLoc, 0.05f, 0.05f, 0.05f);
+	glUniform3f(diffuseDirLightLoc, 0.05f, 0.05f, 0.05f); // Darken the light a bit to fit the scene
+	glUniform3f(specularDirLightLoc, 0.1f, 0.1f, 0.1f);
 
 	// Set Point Light Properties for multi-light
 	glUniform3f(pointLightLoc, lampPos.getPosition().x, lampPos.getPosition().y, lampPos.getPosition().z);
-	glUniform3f(ambientPointLightLoc, 0.2f, 0.2f, 0.2f);
-	glUniform3f(diffusePointLightLoc, 0.5f, 0.5f, 0.5f);
+	glUniform3f(ambientPointLightLoc, 0.05f, 0.05f, 0.05f);
+	glUniform3f(diffusePointLightLoc, 0.1f, 0.1f, 0.1f);
 	glUniform3f(specularPointLightLoc, 0.5f, 0.5f, 0.5f);
 	glUniform1f(constantPointLightLoc, 1.0f);
 	glUniform1f(linearPointLightLoc, 0.045f);
@@ -157,8 +157,8 @@ void GLRenderer::renderObject(GameObject *obj)
 	glUniform1f(constantSpotLightLoc, 1.0f);
 	glUniform1f(linearSpotLightLoc, 0.0014f);
 	glUniform1f(quadraticSpotLightLoc, 0.000007f);
-	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(12.5f * 1.2f)));
-	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(17.5f * 1.2f)));
+	glUniform1f(cutOffSpotLightLoc, glm::cos(glm::radians(5.5f * 1.2f))); //12.5
+	glUniform1f(outerCutOffSpotLightLoc, glm::cos(glm::radians(12.5f * 1.2f)));//17.5
 
 	// Normal Maps
 	GLint lightPosiLoc = glGetUniformLocation(shader.program, "lightPosi");

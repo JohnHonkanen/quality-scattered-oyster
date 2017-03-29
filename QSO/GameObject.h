@@ -25,6 +25,8 @@ public:
 	static std::vector<GameObject*> gameObjects;
 	static GameObject *find(std::string name);
 	static void cleanUpObjects();
+
+	vec3 TerrainOffset = vec3(0);
 };
 
 template<class T>

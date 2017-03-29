@@ -20,9 +20,9 @@ private:
 	const vec2 distanceClamp = vec2(10.0f, 1000.0f);
 	const vec2 pitchClamp = vec2(5.0f, 85.0f);
 	const vec3 atAdjustment = vec3(0.0f, 15.0f, 0.0f);
-	float distanceToObject = 50;
+	float distanceToObject = 100;
 	float angleAroundPlayer = 0;
-	float pitch = 20;
+	float pitch = 45;
 	float yaw = 0;
 	vec3 position;
 	vec3 front; 

@@ -6,6 +6,7 @@ PlayerMovement::PlayerMovement(string name, glfwInputHandler *inputHandler, Came
 {
 	PlayerMovement::camera = camera;
 	audioComponent = new AudioComponent2D("PlayerMovementAudio");
+	audioComponent->setVolume(0.1f);
 }
 
 
