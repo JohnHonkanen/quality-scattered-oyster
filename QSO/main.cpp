@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
 	// UV's for Terrain
 	material->addTexture("texture/dirt.png", DIFFUSE);
 	material->addTexture("texture/path.png", SPECULAR);
-	material->addTexture("lava.jpg", EMISSION);
+	material->addTexture("texture/lava.jpg", EMISSION);
 
 	material->addTexture("texture/grassy.png", BACKGROUND_TEXTURE);
 	material->addTexture("texture/dirt.png", R_TEXTURE);
@@ -160,15 +160,15 @@ int main(int argc, char *argv[]) {
 	material->addTexture("texture/blendMap.png", BLEND_MAP);
 	
 	// UV's for Model (playerModel)
-	multiMaterial->addTexture("container2.png", DIFFUSE);
-	multiMaterial->addTexture("container2_specular.png", SPECULAR);
-	multiMaterial->addTexture("lava.jpg", EMISSION);
+	multiMaterial->addTexture("texture/container2.png", DIFFUSE);
+	multiMaterial->addTexture("texture/container2_specular.png", SPECULAR);
+	multiMaterial->addTexture("texture/lava.jpg", EMISSION);
 	multiMaterial->addTexture("", NORMAL_MAP); // Need to include Normal Map from model here.
 
 	// UV's for Model (Tree1)
 	//multiMaterial2->addTexture("container2.png", DIFFUSE);
 	//multiMaterial2->addTexture("container2_specular.png", SPECULAR);
-	multiMaterial2->addTexture("lava.jpg", EMISSION);
+	multiMaterial2->addTexture("texture/lava.jpg", EMISSION);
 
 	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
 	skyboxMaterial->isCubMap = true;
@@ -187,17 +187,18 @@ int main(int argc, char *argv[]) {
 	//skyboxMaterial->cubeMaps.push_back("front.jpg");
 
 	Material *modelMat = new Material("modelMat", modelShader);
-	GameObject *mushroom[20];
+	const int bigMushroom = 60;
+	GameObject *mushroom[bigMushroom];
 
 	AudioComponent2D background("background");
 	background.setVolume(0.6f);
 	background.playMusic("audio/music/night.wav");
 
 	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
-	for (int i = 0; i < 20; i++) {
-		int px = rand() % 700 - 350;
+	for (int i = 0; i < bigMushroom; i++) {
+		int px = rand() % 1500 - 750;
 		int py = rand() % 100;
-		int pz = rand() % 700 - 350;
+		int pz = rand() % 1500 - 750;
 		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
 		Material *multiMaterial3 = new Material("multiMaterial2", modelShader);
 		mushroom[i] = new GameObject("mushroom" + i);
@@ -227,7 +228,6 @@ int main(int argc, char *argv[]) {
 		rareMusroom[i]->addComponent(multiMaterial3);
 		rareMusroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
 		rareMusroom[i]->addComponent(new AudioComponentLinear3D("shroomAudio"));
-		rareMusroom[i]->getComponent<AudioComponent>()->playMusic("audio/music/sparkle.wav");
 		rareMusroom[i]->init();
 
 		rareMusroom[i]->transform.scale(0.2f);
@@ -251,16 +251,16 @@ int main(int argc, char *argv[]) {
 		mountains[i]->transform.scale(10.0f);
 	}
 	const int numGrass = 10;
-	const int numClump = 3;
+	const int numClump = 25;
 	const int totalGrass = numGrass * numClump;
 	GameObject *grass[totalGrass];
 	for (int i = 0; i < numGrass; i++) {
-		int clumpPx = rand() % 250 - 125;
-		int clumpPy = rand() % 250 - 125;
+		int clumpPx = rand() % 1000 - 500;
+		int clumpPy = rand() % 1000 - 500;
 		for (int j = 0; j < numClump; j++) {
-			int px = rand() % 60 - 30 + clumpPx;
+			int px = rand() % 200 - 100 + clumpPx;
 			int py = -50;
-			int pz = rand() % 60 - 30 + clumpPy;
+			int pz = rand() % 200 - 100 + clumpPy;
 
 			Model *grassModel = new Model("grassModel", "models/boletus/boletus_dae(collada)/boletus.dae");
 			Material *grassMat = new Material("mountainMaterial", modelShader);
@@ -338,6 +338,9 @@ int main(int argc, char *argv[]) {
 	*/
 
 	// Game Loop
+	for (int i = 0; i < rareMushroom; i++) {
+		rareMusroom[i]->getComponent<AudioComponent>()->playMusic("audio/music/sparkle.wav");
+	}
 	while (!inputHandler.quitApplication()) {
 
 		//Checks and calls events

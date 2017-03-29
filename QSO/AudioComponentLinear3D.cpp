@@ -80,7 +80,5 @@ void AudioComponentLinear3D::determineVolume()
 	if (musicStream)
 		musicStream->setVolume(linearVolume);
 
-	printf("Volume: %f \n", distanceBetween);
-
 }
 
