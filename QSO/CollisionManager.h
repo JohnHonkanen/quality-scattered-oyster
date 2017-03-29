@@ -16,6 +16,7 @@ public:
 	static CollisionManager* getManager();
 	void addCollisionObjects(CollisionObject *colObject);
 	bool checkCollision(CollisionObject a, CollisionObject b);
+	void handleCollision(CollisionObject *a, CollisionObject *b);
 	void update();
 };
 

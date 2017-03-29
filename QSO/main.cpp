@@ -306,9 +306,9 @@ int main(int argc, char *argv[]) {
 		//	playerCamera.setObject(&playerModel);
 		//	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 		//}
-
-		_world.stepSimulation(dt, 10);
 		CollisionManager::getManager()->update();
+		_world.stepSimulation(dt, 10);
+		
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {

@@ -27,6 +27,11 @@ int Object::getInstancedID()
 	return Object::instance_id;
 }
 
+string Object::getName()
+{
+	return name;
+}
+
 void Object::Destroy(Object * obj)
 {
 	obj->destroy();

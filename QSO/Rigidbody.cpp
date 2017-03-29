@@ -3,6 +3,7 @@
 #include "PhysicsWorld.h"
 #include <glm\gtc\type_ptr.hpp>
 #include "Terrain.h";
+#include "CollisionObject.h"
 
 btVector3 RigidBody::convertTobtVector3(vec3 vec)
 {
@@ -150,6 +151,16 @@ void RigidBody::updateStep()
 			}
 		}
 	}
+
+	CollisionObject *colObj = gameObject->getComponent<CollisionObject>();
+	if (colObj) {
+		if (colObj->colliding) {
+			vec3 norm = colObj->contactNormal;
+
+			printf("Name: %s, Normal (%f,%f,%f) \n", gameObject->getName(), norm.x, norm.y, norm.z);
+		}
+	}
+	
 	gameObject->transform.physics = motion;
 	gameObject->transform.calculateModelMatrix();
 }

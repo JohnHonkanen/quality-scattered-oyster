@@ -23,5 +23,7 @@ public:
 	vec3 position;
 	ContactManifold manifold;
 	vec3 halfExtents;
+	bool colliding = false;
+	vec3 contactNormal;
 };
 
