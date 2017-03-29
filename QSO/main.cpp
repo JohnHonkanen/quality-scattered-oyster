@@ -184,12 +184,13 @@ int main(int argc, char *argv[]) {
 	//skyboxMaterial->cubeMaps.push_back("front.jpg");
 
 	Material *modelMat = new Material("modelMat", modelShader);
-	GameObject *mushroom[20];
+	const int numMush = 1;
+	GameObject *mushroom[numMush];
 
 	btQuaternion quat = btQuaternion(btVector3(1.5f, 1.0f, 1.0f), glm::radians(-90.0f));
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < numMush; i++) {
 		int px = rand() % 1000 - 500;
-		int py = rand() % 10000;
+		int py = 10;//rand() % 10000;
 		int pz = rand() % 1000 - 500;
 		Model *modelTree = new Model("Tree1", "models/boletus/boletus_dae(collada)/boletus.dae");
 		Material *multiMaterial3 = new Material("multiMaterial2", HSVShader);
@@ -197,11 +198,12 @@ int main(int argc, char *argv[]) {
 		mushroom[i]->addComponent(modelTree);
 		mushroom[i]->addComponent(multiMaterial3);
 		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
+		mushroom[i]->addComponent(new CollisionObject(vec3(25.0f)));
 		mushroom[i]->init();
 		mushroom[i]->transform.scale(1.0f);
 	}
 
-	GameObject *mountains[14];
+	GameObject *mountains[10];
 	int numObstacles = 10; // Should be based on terrain boundary size. 
 	for (int i = 0; i < numObstacles; i++) {
 		int px = 50 + (25 * i);
@@ -213,6 +215,7 @@ int main(int argc, char *argv[]) {
 		mountains[i]->addComponent(moutain);
 		mountains[i]->addComponent(mountainMaterial);
 		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 1, vec3(px, py, pz), true));
+		//mountains[i]->addComponent(new CollisionObject(vec3(25.0f)));
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}
@@ -236,6 +239,7 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
 	playerModel.addComponent(new RigidBody("playerBody", &_world, 100, vec3(0,50,0), true));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
+	playerModel.addComponent(new CollisionObject(vec3(25.0f)));
 	playerModel.init();
 	playerModel.transform.scale(0.1f);
 
@@ -304,6 +308,7 @@ int main(int argc, char *argv[]) {
 		//}
 
 		_world.stepSimulation(dt, 10);
+		CollisionManager::getManager()->update();
 
 		//End of DeltaTime
 		if (frameClock.alarm()) {
@@ -324,7 +329,7 @@ int main(int argc, char *argv[]) {
 			graphicsHandler.start();  // Sets up Rendering Loop
 			
 			// Render Function
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < numMush; i++) {
 				glRenderer.renderObject(mushroom[i]);
 			}
 
