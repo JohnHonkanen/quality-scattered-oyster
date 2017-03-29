@@ -209,7 +209,7 @@ int main(int argc, char *argv[]) {
 		int pz = 50;
 		Model *moutain = new Model("obstacle", "models/Rock1/Rock1.dae");
 		Material *mountainMaterial = new Material("mountainMaterial", multiShadingProgram);
-		mountains[i] = new GameObject("rocks" + i);
+		mountains[i] = new GameObject("rocks" + to_string(i));
 		mountains[i]->addComponent(moutain);
 		mountains[i]->addComponent(mountainMaterial);
 		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 1, vec3(px, py, pz), true));
