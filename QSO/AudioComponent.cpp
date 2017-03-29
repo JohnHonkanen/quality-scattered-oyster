@@ -11,11 +11,3 @@ AudioComponent::~AudioComponent()
 void AudioComponent::init()
 {
 }
-
-void AudioComponent::playSound(char * file)
-{
-}
-
-void AudioComponent::playMusic(char * file)
-{
-}

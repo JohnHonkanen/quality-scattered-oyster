@@ -13,9 +13,9 @@ public:
 
 	AudioComponent(std::string name);
 	virtual ~AudioComponent();
-	void init();
-	void playSound(char* file); //Plays the sound passed to it. (Accepts .wav files)
-	void playMusic(char* file); //Plays the sound passed to it on a continual loop. (Accepts .ogg files)
+	virtual void init();
+	virtual void playSound(char* file) = 0; //Plays the sound passed to it. (Accepts .wav files)
+	virtual void playMusic(char* file) = 0; //Plays the sound passed to it on a continual loop. (Accepts .ogg files)
 
 protected:
 

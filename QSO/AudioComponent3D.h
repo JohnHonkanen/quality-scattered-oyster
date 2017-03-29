@@ -14,8 +14,8 @@ public:
 
 	void setSoundPosition(glm::vec3 pos);
 	void setSoundPosition(irrklang::vec3df pos);
-	void setListenerPosition(glm::vec3 pos);
-	void setListenerPosition(irrklang::vec3df pos);
+	void setListenerPosition(glm::vec3 pos, glm::vec3 rot);
+	void setListenerPosition(irrklang::vec3df pos, irrklang::vec3df rot);
 
 	glm::vec3 getSoundPositionVec3()				{ return convertToVec3(soundPosition); }		//Returns the soundPosition as a glm vec3.
 	irrklang::vec3df getSoundPositionVec3df()		{ return soundPosition; }						//Returns the soundPosition as a vec3df.

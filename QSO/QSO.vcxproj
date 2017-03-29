@@ -157,6 +157,7 @@
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="AudioComponent2D.h" />
     <ClInclude Include="AudioComponent3D.h" />
+    <ClInclude Include="AudioComponentLinear3D.h" />
     <ClInclude Include="BackgroundMusicManager.h" />
     <ClInclude Include="Behaviours.h" />
     <ClInclude Include="Camera.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="AudioComponent2D.cpp" />
     <ClCompile Include="AudioComponent3D.cpp" />
+    <ClCompile Include="AudioComponentLinear3D.cpp" />
     <ClCompile Include="BackgroundMusicManager.cpp" />
     <ClCompile Include="Behaviours.cpp" />
     <ClCompile Include="Camera.cpp" />

@@ -15,7 +15,7 @@ void AudioComponent2D::init()
 {
 	// start the sound engine:
 	engine = irrklang::createIrrKlangDevice();
-	engine->setSoundVolume(2.0f);
+	engine->setSoundVolume(0.2f);
 
 	if (!engine) //If the engine failed to startup:
 	{

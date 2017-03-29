@@ -12,3 +12,6 @@
 #include "Skybox.h"
 #include "Camera.h"
 #include "Camera3rdPerson.h"
+#include "AudioComponentLinear3D.h"
+#include "AudioComponent3D.h"
+#include "AudioComponent2D.h"
