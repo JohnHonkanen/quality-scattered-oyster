@@ -26,7 +26,7 @@ void glfwWindow::init() {
 
 	//Resize Window Option
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	window = glfwCreateWindow(800, 600, "Quality Scattered Oysters (QSO)", nullptr, nullptr);
+	window = glfwCreateWindow(screenWIDTH, screenHEIGHT, "Quality Scattered Oysters (QSO)", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
 	if (window == nullptr){

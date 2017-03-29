@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 
 	PhysicsWorld _world; //Initialize Physics
 	_world.setGravity(vec3(0, -0.5, 0));
-	glfwWindow *window = new glfwWindow(1920, 1080);
+	glfwWindow *window = new glfwWindow(800, 600);
 	openGLHandler graphicsHandler(window);
 
 	graphicsHandler.init(); // Initialize Rendering Library
@@ -199,8 +199,8 @@ int main(int argc, char *argv[]) {
 		mushroom[i]->addComponent(multiMaterial3);
 		mushroom[i]->addComponent(new RigidBody("shroomBody" + i, &_world, 10, vec3(px, py, pz), quat, true));
 		mushroom[i]->addComponent(new AudioComponent3D("shroomAudio" + i, vec3(px, py, pz)));
-		//mushroom[i]->getComponent<AudioComponent3D> //FIIIIIIX
-		//mushroom[i]->init();
+		mushroom[i]->addComponent(new CollisionObject(vec3(15.0f, 5.0f, 15.0f), true));
+		mushroom[i]->init();
 		mushroom[i]->transform.scale(1.0f);
 	}
 
@@ -216,6 +216,7 @@ int main(int argc, char *argv[]) {
 		mountains[i]->addComponent(moutain);
 		mountains[i]->addComponent(mountainMaterial);
 		mountains[i]->addComponent(new RigidBody("mountainBody" + i, &_world, 1, vec3(px, py, pz), true));
+		mountains[i]->addComponent(new CollisionObject(vec3(15.0f, 5.0f, 15.0f), false, vec3(0.0f, 5.0f, 0.0f)));
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}
@@ -239,6 +240,7 @@ int main(int argc, char *argv[]) {
 	playerModel.addComponent(new PlayerMovement("playerMovement", &inputHandler, &playerCamera));
 	playerModel.addComponent(new RigidBody("playerBody", &_world, 100, vec3(0,50,0), true));
 	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
+	playerModel.addComponent(new CollisionObject(vec3(8.0f)));
 	playerModel.init();
 	playerModel.transform.scale(0.1f);
 
@@ -305,7 +307,7 @@ int main(int argc, char *argv[]) {
 		//	playerCamera.setObject(&playerModel);
 		//	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
 		//}
-
+		CollisionManager::getManager()->update();
 		_world.stepSimulation(dt, 10);
 
 		//End of DeltaTime
