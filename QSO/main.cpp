@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 
 	PhysicsWorld _world; //Initialize Physics
 	_world.setGravity(vec3(0, -0.5, 0));
-	glfwWindow *window = new glfwWindow(800, 600);
+	glfwWindow *window = new glfwWindow(1920, 1080);
 	openGLHandler graphicsHandler(window);
 
 	graphicsHandler.init(); // Initialize Rendering Library
