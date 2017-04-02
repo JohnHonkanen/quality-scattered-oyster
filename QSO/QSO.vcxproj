@@ -152,14 +152,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="AudioComponent2D.h" />
     <ClInclude Include="AudioComponent3D.h" />
     <ClInclude Include="AudioComponentLinear3D.h" />
     <ClInclude Include="BackgroundMusicManager.h" />
-    <ClInclude Include="Behaviours.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Camera3rdPerson.h" />
     <ClInclude Include="Clock.h" />
@@ -169,7 +167,6 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="GameBehaviour.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="glfwInputHandler.h" />
     <ClInclude Include="glfwWindow.h" />
@@ -206,14 +203,12 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="AudioComponent2D.cpp" />
     <ClCompile Include="AudioComponent3D.cpp" />
     <ClCompile Include="AudioComponentLinear3D.cpp" />
     <ClCompile Include="BackgroundMusicManager.cpp" />
-    <ClCompile Include="Behaviours.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Camera3rdPerson.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -222,7 +217,6 @@
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="GameBehaviour.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glfwInputHandler.cpp" />
     <ClCompile Include="glfwWindow.cpp" />

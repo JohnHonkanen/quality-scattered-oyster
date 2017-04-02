@@ -1,9 +1,8 @@
 #pragma once
 #include <vector>
 #include "Object.h"
-#include "GameBehaviour.h"
+#include "Transform.h"
 //Pre-Definition of Classes
-class Transform;
 class Component;
 
 class GameObject :
@@ -14,7 +13,6 @@ protected:
 public:
 	GameObject(std::string name);
 	virtual ~GameObject();
-	void broadcastMessage(GameBehaviour::BehaviorFuncs func);
 	void init();
 	template<class T>
 	T *getComponent();

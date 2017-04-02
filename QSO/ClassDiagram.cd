@@ -196,32 +196,11 @@
       <FileName>Application.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Behaviours" Collapsed="true">
-    <Position X="31.75" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Behaviours.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Component" Collapsed="true">
     <Position X="21.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAEAAKAAgBAAAAAAAA=</HashCode>
       <FileName>Component.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="GameBehaviour" Collapsed="true">
-    <Position X="31.75" Y="4.75" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="GameBehaviour::BehaviorFuncs" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>GameBehaviour.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>EAQAAAgAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
-      <FileName>GameBehaviour.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Object">

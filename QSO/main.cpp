@@ -127,10 +127,10 @@ int main(int argc, char *argv[]) {
 
 	// Shader Programs <- Initialize program using selected ("vertex", "fragment") shaders
 
-	Shader multiShadingProgram("multiLightVert.shader", "multiLightFrag.shader"); // For terrain: Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
-	Shader skyBoxShader("skyboxVert.shader", "skyboxFrag.shader"); // Basic shader for skybox, applies texture to cubemap. No lighting.
-	Shader modelShader("modelVert.shader", "modelFrag.shader"); // Shader with multiLight (Dir/Point/Spot light) on models
-	Shader HSVShader("HSVVert.shader", "HSVFrag.shader"); // Applies HSV and multiLight (Dir/Point/Spot light) on models/obj. 
+	Shader multiShadingProgram("shaders/multiLightVert.shader", "shaders/multiLightFrag.shader"); // For terrain: Advanced Shader with multiLight (Dir/Point/Spot light + Emission with HSV)
+	Shader skyBoxShader("shaders/skyboxVert.shader", "shaders/skyboxFrag.shader"); // Basic shader for skybox, applies texture to cubemap. No lighting.
+	Shader modelShader("shaders/modelVert.shader", "shaders/modelFrag.shader"); // Shader with multiLight (Dir/Point/Spot light) on models
+	Shader HSVShader("shaders/HSVVert.shader", "shaders/HSVFrag.shader"); // Applies HSV and multiLight (Dir/Point/Spot light) on models/obj. 
 
 	//Mesh Objects
 	GLRenderer glRenderer;
@@ -166,8 +166,6 @@ int main(int argc, char *argv[]) {
 	multiMaterial->addTexture("", NORMAL_MAP); // Need to include Normal Map from model here.
 
 	// UV's for Model (Tree1)
-	//multiMaterial2->addTexture("container2.png", DIFFUSE);
-	//multiMaterial2->addTexture("container2_specular.png", SPECULAR);
 	multiMaterial2->addTexture("texture/lava.jpg", EMISSION);
 
 	Material *skyboxMaterial = new Material("skyBox", skyBoxShader);
@@ -179,15 +177,9 @@ int main(int argc, char *argv[]) {
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_bk.tga");
 	skyboxMaterial->cubeMaps.push_back("skybox/ame_nebula/purplenebula_ft.tga");
 
-	//skyboxMaterial->cubeMaps.push_back("right.jpg");
-	//skyboxMaterial->cubeMaps.push_back("left.jpg");
-	//skyboxMaterial->cubeMaps.push_back("top.jpg");
-	//skyboxMaterial->cubeMaps.push_back("bottom.jpg");
-	//skyboxMaterial->cubeMaps.push_back("back.jpg");
-	//skyboxMaterial->cubeMaps.push_back("front.jpg");
 
 	Material *modelMat = new Material("modelMat", modelShader);
-	const int bigMushroom = 60;
+	const int bigMushroom = 5;
 	GameObject *mushroom[bigMushroom];
 
 	AudioComponent2D background("background");
@@ -250,8 +242,8 @@ int main(int argc, char *argv[]) {
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}
-	const int numGrass = 10;
-	const int numClump = 25;
+	const int numGrass = 5;
+	const int numClump = 5;
 	const int totalGrass = numGrass * numClump;
 	GameObject *grass[totalGrass];
 	for (int i = 0; i < numGrass; i++) {
@@ -273,15 +265,6 @@ int main(int argc, char *argv[]) {
 			grass[j]->transform.scale(((rand() % 2) + 1)/10.0f);
 		}
 	}
-
-	//Model *borderObs = new Model("borderObstacle", "models/Rock1/Rock1.dae");
-	//Material *mountainMaterial = new Material("borderObstacleMat", multiShadingProgram);
-	//GameObject obstacle("rockObs");
-	//obstacle.addComponent(borderObs);
-	//obstacle.addComponent(mountainMaterial);
-	//obstacle.addComponent(new RigidBody("rigidObs", &_world, 1, vec3(-10.0f, 0.0f, 900.0f), true));
-	//obstacle.init();
-	//obstacle.transform.scale(1000.0f, 25.0f, 10.0f);
 
 	GameObject skyBox("skyBox");
 	skyBox.addComponent(skyBoxCube);
@@ -327,15 +310,7 @@ int main(int argc, char *argv[]) {
 
 	KeyboardInput* keyboard = inputHandler.getKeyboard();
 
-	// Initial Polygon Position, size and rotation
 
-	/* 
-	Use to debug position of polygon:
-
-	vec3 position = lampPos.getPosition();
-	printf("%f,%f,%f\n", position.x, position.y, position.z);
-
-	*/
 
 	// Game Loop
 	for (int i = 0; i < rareMushroom; i++) {
@@ -355,14 +330,6 @@ int main(int argc, char *argv[]) {
 		double dt = (currentTime - previousTime) * 0.01f; //Convert DT to seconds
 		playerModel.getComponent<Movement>()->pollInputs(dt);
 
-		//if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_L)) {
-		//	playerCamera.setObject(&modelTree1);
-		//	playerModel.getComponent<Movement>()->attachGameObject(&modelTree1);
-		//}
-		//else if (inputHandler.getKeyboard()->keyPressed(GLFW_KEY_K)){
-		//	playerCamera.setObject(&playerModel);
-		//	playerModel.getComponent<Movement>()->attachGameObject(&playerModel);
-		//}
 		CollisionManager::getManager()->update();
 		_world.stepSimulation(dt, 10);
 
@@ -380,12 +347,6 @@ int main(int argc, char *argv[]) {
 			inputHandler.getMouse()->setLastScrollOffset(inputHandler.getMouse()->getScrollOffset());
 
 			// End of Process Inputs
-
-			//Audio Update
-			//for (int i = 0; i < 20; i++) {
-				//mushroom[i]->getComponent<AudioComponent3D>()->setSoundPosition(mushroom[i].transform.position)
-				//mushroom[i]->getComponent<AudioComponent3D>()->setListenerPosition(playerModel.transform.position, playerModel.transform.rotation);
-			//}
 
 			// Update Function
 
