@@ -179,7 +179,7 @@ int main(int argc, char *argv[]) {
 
 
 	Material *modelMat = new Material("modelMat", modelShader);
-	const int bigMushroom = 60;
+	const int bigMushroom = 25;
 	GameObject *mushroom[bigMushroom];
 
 	AudioComponent2D background("background");
@@ -242,8 +242,8 @@ int main(int argc, char *argv[]) {
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}
-	const int numGrass = 25;
-	const int numClump = 10;
+	const int numGrass = 10;
+	const int numClump = 5;
 	const int totalGrass = numGrass * numClump;
 	GameObject *grass[totalGrass];
 	for (int i = 0; i < numGrass; i++) {

@@ -388,42 +388,30 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HSVFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="HSVVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="lampFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="lampVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="lightingMapFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="lightingMapVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="multiLightFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="multiLightVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skyboxFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skyboxVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="modelVert.shader">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="modelFrag.shader">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="shaders\HSVFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\HSVVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\modelFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\modelVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\multiLightFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\multiLightVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\skyboxFrag.shader">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\skyboxVert.shader">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

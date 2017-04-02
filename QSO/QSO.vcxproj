@@ -253,18 +253,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="modelFrag.shader" />
-    <None Include="modelVert.shader" />
-    <None Include="multiLightFrag.shader" />
-    <None Include="multiLightVert.shader" />
-    <None Include="skyboxFrag.shader" />
-    <None Include="skyboxVert.shader" />
-    <None Include="HSVFrag.shader" />
-    <None Include="HSVVert.shader" />
-    <None Include="lampFrag.shader" />
-    <None Include="lampVert.shader" />
-    <None Include="lightingMapFrag.shader" />
-    <None Include="lightingMapVert.shader" />
+    <None Include="shaders\HSVFrag.shader" />
+    <None Include="shaders\HSVVert.shader" />
+    <None Include="shaders\modelFrag.shader" />
+    <None Include="shaders\modelVert.shader" />
+    <None Include="shaders\multiLightFrag.shader" />
+    <None Include="shaders\multiLightVert.shader" />
+    <None Include="shaders\skyboxFrag.shader" />
+    <None Include="shaders\skyboxVert.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
