@@ -36,7 +36,7 @@ public:
 	btVector3 convertTobtVector3(vec3 vec);
 	vec3 convertToVec3(btVector3 vec);
 };
-
+//Derived from Youtuber(ThinMatrix): https://www.dropbox.com/s/0md240yyc359ik3/code.txt?dl=0
 static float barryCentric(vec3 p1, vec3 p2, vec3 p3, vec2 pos) {
 	float det = (p2.z - p3.z) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.z - p3.z);
 	float l1 = ((p2.z - p3.z) * (pos.x - p3.x) + (p3.x - p2.x) * (pos.y - p3.z)) / det;

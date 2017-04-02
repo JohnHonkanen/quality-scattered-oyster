@@ -179,7 +179,7 @@ int main(int argc, char *argv[]) {
 
 
 	Material *modelMat = new Material("modelMat", modelShader);
-	const int bigMushroom = 5;
+	const int bigMushroom = 60;
 	GameObject *mushroom[bigMushroom];
 
 	AudioComponent2D background("background");
@@ -226,7 +226,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	
-	const int numObstacles = 5; // Should be based on terrain boundary size. 
+	const int numObstacles = 10; // Should be based on terrain boundary size. 
 	GameObject *mountains[numObstacles];
 	for (int i = 0; i < numObstacles; i++) {
 		int px = rand() % 300 - 150;
@@ -242,8 +242,8 @@ int main(int argc, char *argv[]) {
 		mountains[i]->init();
 		mountains[i]->transform.scale(10.0f);
 	}
-	const int numGrass = 5;
-	const int numClump = 5;
+	const int numGrass = 25;
+	const int numClump = 10;
 	const int totalGrass = numGrass * numClump;
 	GameObject *grass[totalGrass];
 	for (int i = 0; i < numGrass; i++) {
