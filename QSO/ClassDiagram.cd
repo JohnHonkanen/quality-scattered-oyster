@@ -1,2 +1,417 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AudioComponent" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAABAAAICAIAAAAAAAQAAAA=</HashCode>
+      <FileName>AudioComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AudioComponent2D" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAgAAAAAAAQAAAAAAAAAIAAIAAAAAoAAAAEA=</HashCode>
+      <FileName>AudioComponent2D.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AudioComponent3D" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAAAABAAgAAAAgAAUACAAACGAAIAAsAAAAAIAAIACA=</HashCode>
+      <FileName>AudioComponent3D.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AudioComponentLinear3D" Collapsed="true">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAFAEEAAEAUACAAAACAAIAAMAAAAAIAAACIA=</HashCode>
+      <FileName>AudioComponentLinear3D.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BackgroundMusicManager" Collapsed="true">
+    <Position X="46.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAEAAAAAAAAAAAAAAAAIAAChAAAACAgAAgAACAA=</HashCode>
+      <FileName>BackgroundMusicManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollisionManager" Collapsed="true">
+    <Position X="50.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAQAAAAAAAAAAEAIEAAAAAAABAAACEAAQ=</HashCode>
+      <FileName>CollisionManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollisionObject" Collapsed="true">
+    <Position X="36.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQiAAAAAAAAAAAAIAAAAIBAAQIAACABAAAAAAAAAAAA=</HashCode>
+      <FileName>CollisionObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkeletalBones" Collapsed="true">
+    <Position X="45" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAEAAAACAAAAEAAgAABAAAgAAAEgBBAAAAAAAAAAAA=</HashCode>
+      <FileName>SkeletalBones.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skeleton" Collapsed="true">
+    <Position X="46.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAACAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Skeleton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Utils" Collapsed="true">
+    <Position X="45" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAABCCAAAAAAAAAQAAABAIAAAAAAAAQkAAgAA=</HashCode>
+      <FileName>Utils.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureGenerator" Collapsed="true">
+    <Position X="48.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAABAAAAAAAAAAAAAAABAIAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TextureGenerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureManager" Collapsed="true">
+    <Position X="50.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAEAAAgAABAAAAEAAVABACAIAAAAAAAAAAAA=</HashCode>
+      <FileName>TextureManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mesh" Collapsed="true">
+    <Position X="34" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgAAAAMAAAAAAAAAAEIAAAAAAAAAAQAQAAAAAAA=</HashCode>
+      <FileName>Mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeshGenerator" Collapsed="true">
+    <Position X="45" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAEAAAAAAAAABAAAAAAACAAA=</HashCode>
+      <FileName>MeshGenerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicsHandler" Collapsed="true">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgAAAAAEAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphicsHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Movement" Collapsed="true">
+    <Position X="11.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAABAAAAAAAAAgEAAAAEQAA=</HashCode>
+      <FileName>Movement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGLHandler" Collapsed="true">
+    <Position X="9" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAAAAACAAAAAAAgAAAAAEAIAAAAAAIIAQAAAAAAAAA=</HashCode>
+      <FileName>openGLHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerMovement" Collapsed="true">
+    <Position X="11.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAgAAAAQAAAAAAAANAAAAAAAAAAAAAAAEEAA=</HashCode>
+      <FileName>PlayerMovement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shader" Collapsed="true">
+    <Position X="50.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cube" Collapsed="true">
+    <Position X="27.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAABAAAAAAAAAAAAAAAAABIBAAAAAAAAAAA=</HashCode>
+      <FileName>Cube.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model" Collapsed="true">
+    <Position X="18.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAgAAABAAAA=</HashCode>
+      <FileName>Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Polygon" Collapsed="true">
+    <Position X="20.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAABAAAACAAAAAAAAAAAAAIAAAAAAAAAACA=</HashCode>
+      <FileName>Polygon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shape" Collapsed="true">
+    <Position X="22.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAABAAAAAQAAAEABAAAAAAACAAAAAAAAAQA=</HashCode>
+      <FileName>Shape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skybox" Collapsed="true">
+    <Position X="22.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAhAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Skybox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Terrain" Collapsed="true">
+    <Position X="25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQEAAAAAABAAAAAIgCIEAAAAAAAAKAAkAAAAAAAAA=</HashCode>
+      <FileName>Terrain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimplexNoise" Collapsed="true">
+    <Position X="43.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAgAAAAAAAAwAAAAAUAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>simplex\SimplexNoise.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Material" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEAAAAAAEEAEAABAAAAAAAAAAAAAAAAAAAAAAAAEAAE=</HashCode>
+      <FileName>Material.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application" Collapsed="true">
+    <Position X="43.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIADAABQAAAAAAAAAAAABCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Behaviours" Collapsed="true">
+    <Position X="31.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Behaviours.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Component" Collapsed="true">
+    <Position X="21.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAEAAKAAgBAAAAAAAA=</HashCode>
+      <FileName>Component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameBehaviour" Collapsed="true">
+    <Position X="31.75" Y="4.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="GameBehaviour::BehaviorFuncs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameBehaviour.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAQAAAgAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>GameBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Object">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAQAAAAAgAAAABEAAAABEAIAAAAAEAAAAAAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transform" Collapsed="true">
+    <Position X="43.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIIgEAAAAAgAAAACQQAQCACQAAAggBAAAAAAIRIA=</HashCode>
+      <FileName>Transform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clock" Collapsed="true">
+    <Position X="48.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAwAIAAAgAAAAAQAAgiAAAAAAAAAEAAEAAAAAIACgA=</HashCode>
+      <FileName>Clock.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAEAAAAAQAAAAQAAAAAAAAEAAAAACAAAAIA=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera3rdPerson" Collapsed="true">
+    <Position X="29.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAIIEAAREABCiIAABEJQoAACAAAEEgIgEiSICAAIA=</HashCode>
+      <FileName>Camera3rdPerson.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputHandler" Collapsed="true">
+    <Position X="6" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAI=</HashCode>
+      <FileName>InputHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="glfwInputHandler" Collapsed="true">
+    <Position X="6" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AggAAIAAABAAAAAAAAAAAAAAAIAAQAoIAEAAiCAAAAA=</HashCode>
+      <FileName>glfwInputHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyboardInput" Collapsed="true">
+    <Position X="43.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAIAAAAAAAAAAAAAAAAAAAAAGAAAAAAQAA=</HashCode>
+      <FileName>KeyboardInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseInput" Collapsed="true">
+    <Position X="46.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAA9gAADAKAIAAAAAAEIAACAAgAAAAAAAAAAABAwAA=</HashCode>
+      <FileName>MouseInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Window" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAQAAAAEAAAQAAAAIAAAAgCAAAAAA=</HashCode>
+      <FileName>Window.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="glfwWindow" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAEAAAAAAAgIIAAAgAABAAAA=</HashCode>
+      <FileName>glfwWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GLRenderer" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAAAAAAgAACAA=</HashCode>
+      <FileName>GLRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renderer" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAgAAAAIAAAAAAAAAAAAAAAAAAACAAAAACAA=</HashCode>
+      <FileName>Renderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AssimpLoader" Collapsed="true">
+    <Position X="45" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAQADgAAACAAAAAAAAAAAASAAAAAAAAAAA=</HashCode>
+      <FileName>AssimpLoader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collider" Collapsed="true">
+    <Position X="38.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAQAAAAAAQAQAA=</HashCode>
+      <FileName>Collider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhysicsWorld" Collapsed="true">
+    <Position X="48.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEAAAQgAABCAAQAAACAAAEQAAAIAAAAIAAAAAgAACAA=</HashCode>
+      <FileName>PhysicsWorld.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RigidBody" Collapsed="true">
+    <Position X="16" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAIEAAACAgAAAAIAAAAQEACAAIEAAMEAAAAEOAECAA=</HashCode>
+      <FileName>Rigidbody.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject">
+    <Position X="40.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAAAAAAAABAAECACAAEAAAQAEAAIACgAAAAIAAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ContactManifold" Collapsed="true">
+    <Position X="45" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CollisionObject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MeshData" Collapsed="true">
+    <Position X="48.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAABCAAQAAAAAAAAAQAAGAAAAAEAAQAgA=</HashCode>
+      <FileName>Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VertexBoneData" Collapsed="true">
+    <Position X="43.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="mapData" Collapsed="true">
+    <Position X="46.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQQAAAAAAAABAAAQAAAEIQAAAQAAEAAAAAAAAAAoA=</HashCode>
+      <FileName>Terrain.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Texture" Collapsed="true">
+    <Position X="50.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAQAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Material.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AssimpTexture" Collapsed="true">
+    <Position X="43.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>AssimpLoader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="layout_Location" Collapsed="true">
+    <Position X="45" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAIAAAAAAAAAAAAAAAAAACAAIAAAAAAAAA=</HashCode>
+      <FileName>Shader.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TEXTURE_TYPE" Collapsed="true">
+    <Position X="46.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAACAAAgALBAAAAAAAAAAAABAAAAAAABAAAgAAAAAA=</HashCode>
+      <FileName>Material.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ColliderShape" Collapsed="true">
+    <Position X="43.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAAAAAEIAIAIAAAAABAAAAAAAAAAAAAQAQACAAAAAA=</HashCode>
+      <FileName>Collider.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
